@@ -61,4 +61,4 @@ Le backend doit avoir `CORS_ORIGINS` incluant `http://localhost:5173` dans son `
 
 Vérifié de bout en bout : suite backend 110/110, `tsc -b` propre, `oxlint src` sans nouvelle violation, suite Playwright+axe 8/8, passe manuelle clavier/zoom sur les écrans clés.
 
-**Phase suivante** (voir le plan) : déploiement réel (Vercel + backend sur un hébergeur gratuit).
+**Déploiement réel (fait)** — en ligne sur `https://tricoach-ten.vercel.app` (Vercel), backend sur `https://tricoach-9ob8.onrender.com` (Render + PostgreSQL managé gratuit ⚠️ expire après 30 jours), dépôt `https://github.com/kroutov/tricoach`. Détail de la config et des pièges rencontrés (dépréciation `NODE_ENV=production` sur Render, `vercel.json` pour le routage SPA, domaine de callback Strava) dans [`tricoach-backend/docs/DEPLOYMENT.md`](../tricoach-backend/docs/DEPLOYMENT.md). Vérifié de bout en bout dans un vrai navigateur contre les deux services réels : inscription → onboarding complet → génération réelle d'un plan 12 semaines → dashboard/calendrier/profil (ICS, Strava, Garmin) tous rendus correctement.

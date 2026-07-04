@@ -4,9 +4,11 @@ Coach d'entraînement adaptatif pour la course à pied, le vélo, la natation, l
 
 **Pivot (après les 5 phases initiales)** : le produit est livré via un **site web** plutôt qu'une app mobile — moins coûteux (pas de compte Apple Developer Program, pas de review App Store) et ça lève les limites de test rencontrées côté iOS (Sign In with Apple qui bloque sur Simulateur, webhook Strava qui a besoin d'une URL publique). Le backend est réutilisé tel quel ; l'app iOS (`TriCoachAI/`) est mise de côté, pas supprimée. Voir le plan de migration dans `.claude/plans` pour le détail complet (le plan des 5 phases initiales y est aussi, pour l'historique).
 
+**En ligne** : [https://tricoach-ten.vercel.app](https://tricoach-ten.vercel.app) (frontend, Vercel) · `https://tricoach-9ob8.onrender.com` (backend, Render).
+
 ## Structure
 
-- [`tricoach-web/`](tricoach-web) — client web (React, Vite, TypeScript) en cours de construction. Voir [`tricoach-web/README.md`](tricoach-web/README.md).
+- [`tricoach-web/`](tricoach-web) — client web (React, Vite, TypeScript), 5 phases complètes, déployé. Voir [`tricoach-web/README.md`](tricoach-web/README.md).
 - [`tricoach-backend/`](tricoach-backend) — API Node.js/Express/PostgreSQL (Prisma), commune aux deux clients. Voir [`tricoach-backend/README.md`](tricoach-backend/README.md).
 - [`TriCoachAI/`](TriCoachAI) — app iOS native (SwiftUI, MVVM), mise de côté suite au pivot web mais fonctionnelle et testée (5 phases complètes). Voir [`TriCoachAI/README.md`](TriCoachAI/README.md).
 
@@ -23,7 +25,7 @@ Coach d'entraînement adaptatif pour la course à pied, le vélo, la natation, l
 | 4 | Gestion des objectifs post-onboarding, historique d'adaptation, dashboard analytique (Swift Charts), drag & drop calendrier + détection de conflit, accessibilité (VoiceOver/Dynamic Type) | ✅ Fait (localisation fr/en différée à la demande, voir note ci-dessous) |
 | 5 | Durcissement (sécurité, perf, tests), préparation App Store (privacy manifest), CI, doc de déploiement | ✅ Fait (déploiement hébergé réel non fait — pas d'hébergeur choisi ; voir notes ci-dessous) |
 
-### Site web (pivot en cours)
+### Site web (pivot terminé, en ligne)
 
 | Phase | Contenu | Statut |
 |---|---|---|
@@ -31,7 +33,7 @@ Coach d'entraînement adaptatif pour la course à pied, le vélo, la natation, l
 | Web 2 | Onboarding + dashboard (résumé) + calendrier (lecture seule) + détail de séance | ✅ Fait — testé de bout en bout dans un vrai navigateur |
 | Web 3 | Objectifs + historique d'adaptation + dashboard analytique (graphiques) + drag & drop calendrier | ✅ Fait — testé de bout en bout dans un vrai navigateur |
 | Web 4 | Intégration Strava (redirection web) + Garmin (accès non-officiel) + flux calendrier ICS | ✅ Fait — testé de bout en bout dans un vrai navigateur |
-| Web 5 | Accessibilité (jsx-a11y, clavier, focus, contraste, E2E axe) + déploiement réel | 🟡 Accessibilité faite, déploiement en cours |
+| Web 5 | Accessibilité (jsx-a11y, clavier, focus, contraste, E2E axe) + déploiement réel | ✅ Fait — en ligne sur Render + Vercel |
 
 **Limites connues de la Phase 3** :
 - **HealthKit fonctionne** avec un simple Apple ID gratuit ("Personal Team", pas d'abonnement à 99$/an) — vérifié en conditions réelles : la vraie feuille d'autorisation HealthKit s'affiche avec la liste complète des données demandées. Voir [`TriCoachAI/README.md`](TriCoachAI/README.md) pour la config de signature (`DEVELOPMENT_TEAM` dans `project.yml`).
@@ -46,7 +48,7 @@ Coach d'entraînement adaptatif pour la course à pied, le vélo, la natation, l
 
 **Limites connues de la Phase 5** :
 - **Pas de déploiement réel** : aucun hébergeur choisi/provisionné — `tricoach-backend/docs/DEPLOYMENT.md` documente la marche à suivre (Railway/Render/Fly + Postgres managé) mais rien n'est en ligne. L'app iOS pointe donc toujours vers `localhost:3000` en Debug ; `APIConfig.baseURL` a un garde-fou (`fatalError` en Release tant que l'URL placeholder n'est pas remplacée) pour éviter qu'une build Release parte silencieusement vers `localhost`.
-- **CI non exécutée** : `.github/workflows/ci.yml` existe (backend + iOS) mais aucun dépôt git n'a encore été initialisé localement — rien n'a donc pu être vérifié en conditions réelles sur des runners GitHub. YAML validé syntaxiquement, logique reprise du setup local qui fonctionne, mais nom du simulateur iOS/version Xcode à réajuster potentiellement au premier run.
+- **CI pas encore vérifiée sur un vrai runner** : `.github/workflows/ci.yml` existe (backend + iOS) et le dépôt est désormais poussé sur `https://github.com/kroutov/tricoach` (Web Phase 5), mais aucun run GitHub Actions n'a encore été observé. YAML validé syntaxiquement, logique reprise du setup local qui fonctionne, mais nom du simulateur iOS/version Xcode à réajuster potentiellement au premier run.
 - **Distribution App Store** : nécessite un compte Apple Developer Program payant (le Personal Team gratuit actuel ne suffit que pour dev/test) + remplir la Privacy Nutrition Label dans App Store Connect (base posée par `PrivacyInfo.xcprivacy`, formulaire à compléter séparément).
 - **Notifications push distantes (APNs)** : toujours non implémentées (nécessite le compte Developer Program payant ci-dessus).
 - **Sécurité** : revue faite sur le périmètre existant (secrets, rate limiting, CORS, Keychain, en-têtes, dépendances) — pas d'audit de pénétration externe, pas de WAF/monitoring d'intrusion (hors scope pour un projet à ce stade).
@@ -56,7 +58,7 @@ Coach d'entraînement adaptatif pour la course à pied, le vélo, la natation, l
 - **Flux ICS calendrier** : événements journée entière (pas d'horaire précis) — choix délibéré, différent de la sync EventKit iOS qui place les séances à une heure précise. Le backend ne connaît pas le fuseau horaire de l'athlète ; un horaire UTC fixe aurait affiché la séance à la mauvaise heure locale pour quiconque hors UTC, alors qu'un événement journée entière reste correct pour tous les fuseaux.
 
 **Limites connues de la Phase Web 5** :
-- **Déploiement réel** : en cours — voir la section Démarrer/Déploiement ci-dessous une fois finalisée. Aucun dépôt git n'existe encore localement pour l'ensemble du projet (ni pour `tricoach-web/` ni pour `tricoach-backend/`) malgré `.github/workflows/ci.yml` déjà présent — la CI n'a donc jamais tourné sur un vrai runner.
+- **Déploiement réel** : fait — backend sur Render (`https://tricoach-9ob8.onrender.com`, PostgreSQL managé gratuit ⚠️ expire après 30 jours), web sur Vercel (`https://tricoach-ten.vercel.app`), dépôt sur `https://github.com/kroutov/tricoach`. Vérifié de bout en bout dans un vrai navigateur contre les deux services réels (inscription → onboarding → génération de plan → dashboard/calendrier/profil). Voir [`tricoach-backend/docs/DEPLOYMENT.md`](tricoach-backend/docs/DEPLOYMENT.md) pour la configuration exacte et les pièges rencontrés (`NODE_ENV=production` qui saute les devDependencies sur Render, casse silencieusement `tsc`/`prisma` sur une version non épinglée ; `vercel.json` nécessaire pour le routage côté client ; domaine Strava "Authorization Callback" à pointer vers le backend, pas le frontend).
 - **Accessibilité** : passe complète faite (voir [`tricoach-web/README.md`](tricoach-web/README.md#statut) pour le détail des bugs trouvés/corrigés — coordinate getter clavier du calendrier, collision dnd-kit incompatible clavier, contraste WCAG en mode clair, landmarks manquants, `lang` incorrect) ; pas d'audit VoiceOver/lecteur d'écran mobile réel (la vérification s'est faite au clavier + axe-core, pas avec un lecteur d'écran physique).
 
 ## Démarrer
