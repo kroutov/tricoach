@@ -1,0 +1,1177 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		02800E6BC8D0A39724A0E1A1 /* TriCoachAITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B049259D87778D144A22FDAF /* TriCoachAITests.swift */; };
+		0919A63ACDAACAFE7255A398 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485AF7112D32E4BD8EF2BF5B /* MainTabView.swift */; };
+		0B29460765FDA6C12F9BEC96 /* RuleBasedPlanStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33ED391E3CFD92CA56A1657 /* RuleBasedPlanStrategy.swift */; };
+		0C533D5EC61C7676300C379D /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E68EC363C247E67C879BA /* Enums.swift */; };
+		138CE53C5D0E5779B9F2D6DA /* NetworkCheckInRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9ADA2B797A78BC30DDCAF90 /* NetworkCheckInRepository.swift */; };
+		17396FE27736A0F1E56BFD97 /* NetworkPlanRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCE9034CF11817AA48F2C44 /* NetworkPlanRepository.swift */; };
+		18D2D271EE1A3BEB7A091F77 /* PillBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2C600B075AB9CD00ABB94B /* PillBadge.swift */; };
+		1BC6A486733CE51F62B23C7B /* LocalRepositories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E52F12C16C23953DABD0C0 /* LocalRepositories.swift */; };
+		1BDEFA1596B5C6D4062329F4 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A4CC693A6BA5DC159C2428 /* AuthView.swift */; };
+		1CF22FED4EDDF6C6D7B22136 /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296578B1C70B1BA6A9AC21C4 /* CalendarViewModel.swift */; };
+		209D5C0860DFA74C67E6F2E3 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9572098613EFCBB5CF20F7 /* HealthKitManager.swift */; };
+		246947A1B02CEC58E614BDA5 /* HealthDataAggregatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93CB52CBB8B26187F941FB7 /* HealthDataAggregatorTests.swift */; };
+		2524176E7BCBB72FDC6EF314 /* AdaptationHistoryUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE66A9418E816BD14117E2E /* AdaptationHistoryUITests.swift */; };
+		2594C111AEA769CC095F59E0 /* HealthMetricsDaily.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238606511711E89EA637A4CF /* HealthMetricsDaily.swift */; };
+		25B39E1E5E1399E47614404D /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8EFAB03BF59AD260357C5B7 /* APIClient.swift */; };
+		26ED4927A984CCC5ECC2432E /* GoalEditorCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90FD4195F663FAB1793EFAA2 /* GoalEditorCard.swift */; };
+		28D156A41CC5326D0407A155 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F30661FA3F66F5B36E8369 /* ProfileView.swift */; };
+		299EAF937EE8993C60FDCDAE /* DashboardAnalyticsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD287F766E22968AF4B46455 /* DashboardAnalyticsUITests.swift */; };
+		2B83FC72FB25B65DAF1C190E /* HealthKitProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320F09A781D045E680F8FD8D /* HealthKitProvider.swift */; };
+		2BC96BF21D9198CA40945694 /* HealthDataAggregator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C894889778453B2541401179 /* HealthDataAggregator.swift */; };
+		2C19A2BF6DCBF547930E44A7 /* NetworkGoalRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821C32684735CD4DE2F34CB1 /* NetworkGoalRepository.swift */; };
+		2E27580A5A885562F5CBF77C /* KeychainTokenStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092EA2D976774B331C717D43 /* KeychainTokenStore.swift */; };
+		312AF9B3BE2A1BAB3E665775 /* MesocycleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2322ED8057CCAE9B26A9371 /* MesocycleBuilder.swift */; };
+		348248C9271EBCABC83F86A2 /* ProgressRingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC089A295F55315458204FE /* ProgressRingView.swift */; };
+		3584F671046BCC2ADC07D288 /* HistoryStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE5C71B5270206025F61768 /* HistoryStepView.swift */; };
+		3695D1A7B497BDD475554965 /* NetworkAdaptationEventRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC31E728E78C0DE86B581BEA /* NetworkAdaptationEventRepository.swift */; };
+		3AC6F7C8E4418AD9BE7073AD /* DashboardAnalyticsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFA660B942B9D3176F1B3BA /* DashboardAnalyticsViewModel.swift */; };
+		3D803206CE786B46C8449E0A /* TriCoachAIUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A9C85C0C6F699DBC9C9B33 /* TriCoachAIUITests.swift */; };
+		3DE865FEDE757753A44CD76D /* GoalsManagementViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773382A51CC6E14162662935 /* GoalsManagementViewModel.swift */; };
+		41347E068B517CCD40F84690 /* TriCoachAIIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E311C96ECFB1537A0DF58E /* TriCoachAIIntegrationTests.swift */; };
+		44025F5E01F0E5E800FAFBF6 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1980883560913339BC2A6A77 /* AuthViewModel.swift */; };
+		46DD9424EEA721DAA87476EE /* DashboardAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = A423B0620C411EB131DCF1DB /* DashboardAnalytics.swift */; };
+		48B49E46CC6AB9D755753F94 /* DependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC300C5512B766EE62C104D1 /* DependencyContainer.swift */; };
+		4945EFFE16AFAA550EC86AAF /* DashboardAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B1617155BE9DD622F5298D6 /* DashboardAPI.swift */; };
+		4C82F3ED5C8DE768A6E490CE /* HealthKitMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123B1E852F6F392016DB6650 /* HealthKitMapperTests.swift */; };
+		4C8575B4C0E853E2717F2496 /* AdaptationEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F1765BD80D9843C89644F7 /* AdaptationEngine.swift */; };
+		4DD187993E96A07E00B1D340 /* Availability.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB6D765C00A9FD5C6A5A616 /* Availability.swift */; };
+		4FE51E5B8BDD899028419B14 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D65461728CA939E459C8DC /* Colors.swift */; };
+		53B52B39D6ABD2E4958E17A4 /* StravaAuthSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487F6D4DBB5F3F0C3E0283D4 /* StravaAuthSession.swift */; };
+		576CF9BA28536149F95A0498 /* IntegrationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EC0D3A432B3175BB767465 /* IntegrationsViewModel.swift */; };
+		5AF6D1CF45F343F4971C4391 /* TrainingPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2888A16343D3A93E8F51F653 /* TrainingPlan.swift */; };
+		5CD81F9D92D501AC66AAF845 /* PeriodizationEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617927E222E99AC3AA585A57 /* PeriodizationEngineTests.swift */; };
+		5D07418F6C147C73474EF4B2 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C50C80204ADCAB2A708631F /* CardView.swift */; };
+		5E0215925CBFE8769DECDA95 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50120390FCC6925578D2EEF /* UserAPI.swift */; };
+		5F9B44600BD723C38E055707 /* ActivityDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CC1B68D69392AF7D7AF6F2 /* ActivityDataProvider.swift */; };
+		680F71E971B9D1EC9865835A /* WorkoutAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8981E799E01F541F16BBF2 /* WorkoutAPI.swift */; };
+		686B540CD466602ADF8E3A5E /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FCCCF548D0013B84D97E91 /* Workout.swift */; };
+		698835D4C20709D9BBEE2A5F /* WorkoutDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141C6964B91152518771A82E /* WorkoutDetailView.swift */; };
+		6BF93ED7C33C7401FD54F6F6 /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7368ED689C0C9634291877B1 /* Goal.swift */; };
+		6C121B96A8CCD32C5AD8C27F /* AdaptationEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4057F7E1746335F8F7F01C /* AdaptationEvent.swift */; };
+		6FBEB9E25A165D91176584CE /* LoadCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3800D60EC94C2E8FDF51653D /* LoadCalculatorTests.swift */; };
+		70889134D0638134FD77E02A /* OnboardingFlowUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6412254EF3A1F02E3C5E1E94 /* OnboardingFlowUITests.swift */; };
+		71A96210C337442BA1A3F1E9 /* MicrocycleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BAC161D9BD23653DC8FA0A /* MicrocycleBuilder.swift */; };
+		73824541766036698B00BEFB /* AdaptationHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA35030F5DDB74C5E80BCB5 /* AdaptationHistoryViewModel.swift */; };
+		75C82A28A3296937853D19E5 /* GoalsManagementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79DB11B1D762D98013CDD0C /* GoalsManagementView.swift */; };
+		7746F0F83A47E4F18DCD4F2A /* ConstraintsStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13816CF3786EC5067C95E876 /* ConstraintsStepView.swift */; };
+		79C4530327397AFEF9226F23 /* ConstraintCheckIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFEB13A78DC8E985B83BF01B /* ConstraintCheckIn.swift */; };
+		7BB3876B87FC371ACC8554A5 /* CalendarDragAndDropUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92A21A65EB50591464DEDBC /* CalendarDragAndDropUITests.swift */; };
+		80374DBA7BC8B0BB64E07EBA /* AuthAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FF2CAE00C6F97D15597D772 /* AuthAPIClient.swift */; };
+		80A16B550013E5E00CA6C00A /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 1B205A10C82D389AF48797D4 /* PrivacyInfo.xcprivacy */; };
+		866EEA0BB879DFC9E93B7E84 /* PlanGenerationStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07E3852992ABDD879444A8C /* PlanGenerationStrategy.swift */; };
+		87E3288D06712236EC4A9454 /* PersistenceContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A97084C6BD8D8463D8517A /* PersistenceContainer.swift */; };
+		9107C2E6DFBFCBB503284179 /* LoadCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140AA0C392C91ABE2D42C211 /* LoadCalculator.swift */; };
+		990FF72B264C788CBF7839AD /* LocalNotificationScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654A5F8319775BD3C729F2B1 /* LocalNotificationScheduler.swift */; };
+		9C326594B672C30A72DCF810 /* DashboardAnalyticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2A246C61E6952A60AF678D /* DashboardAnalyticsView.swift */; };
+		9C6C0835C916A83BFE4E2731 /* OnboardingFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A709596D4A444CC2B1057B5 /* OnboardingFlowView.swift */; };
+		A45DEF377EBCABC177BC487D /* RuleBasedPlanStrategyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFE71A28FA0F8B603623CA7 /* RuleBasedPlanStrategyTests.swift */; };
+		A48FBC234D14F9820E5D007F /* HealthKitSyncAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E9F43785A9175FEFBC8CE1 /* HealthKitSyncAPI.swift */; };
+		AAF79E157DB3B84DC378E0D0 /* RepositoryProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0363B166F335BA0809783067 /* RepositoryProtocols.swift */; };
+		AE3E238DE3C2F3031F47FBBC /* DashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64BC3BE3CFFE5C4539B46C55 /* DashboardViewModel.swift */; };
+		AE92E79B7AEA87730053819B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B40BE5830CAA25F596442AB /* Assets.xcassets */; };
+		AECB215E265A811A85410C36 /* SportLevelStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1112C14E4ECAFA1778BD71 /* SportLevelStepView.swift */; };
+		AFA23BEAE115F1D005A6E8BA /* StravaAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FC55E09DDB5A670F31946E /* StravaAPI.swift */; };
+		B87A4BD362376F189F21FA09 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E96D91A7C785BB780C3DBF6 /* NetworkError.swift */; };
+		BE8B0D6A5EECEE0B96073CC2 /* AthleteProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB7E7AE4D3831FD40654F53 /* AthleteProfile.swift */; };
+		BE9D57DCACB57F08E082124B /* WorkoutRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8D7DF120FA9F594F2BA9C5 /* WorkoutRowView.swift */; };
+		BF36A454A894AD6DD44A1FAA /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FBF716D85CBA41AF2129D3 /* OnboardingViewModel.swift */; };
+		C1F36043B45B8C6B580FCE25 /* CompletedActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0320ED0AA9097FF082C2118A /* CompletedActivity.swift */; };
+		C28FE1543546C245D9D2A499 /* PersonalInfoStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429C3E8C3359E3136D58FAC9 /* PersonalInfoStepView.swift */; };
+		C39F66516DE3428FA1B7EF3D /* PeriodizationEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AB73FCF04FBAEC37E29916 /* PeriodizationEngine.swift */; };
+		C6BEA9C5EE9542505A607E6C /* ZoneBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D07747EE92D0BCB4F814E04 /* ZoneBar.swift */; };
+		C7EA61A3351B9DC140311290 /* JSONCoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB2BA2B200305482E8CC777 /* JSONCoding.swift */; };
+		CC7EE10D7A9B04B88FAF42C9 /* GoalsStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A132923907C4571410F3286D /* GoalsStepView.swift */; };
+		CF9673EDED75397FBDB0C1F6 /* APIConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C8D2ED0730797DA1B718A4 /* APIConfig.swift */; };
+		D10949B4E8B66D7133E72C60 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E26F084EAAEC3B2A9F404AA /* AppState.swift */; };
+		D41E23086F569A9F5AB75053 /* AvailabilityStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B453413EF3EF582B3CE6A01 /* AvailabilityStepView.swift */; };
+		D446D16A598430DE286C5A7B /* NetworkProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0981B9A5AEAD3C91FCB6F25D /* NetworkProfileRepository.swift */; };
+		D4B21DCBADE598D84F5616D5 /* WorkoutDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC40E3A3C0F80F88ACA90A75 /* WorkoutDetailViewModel.swift */; };
+		D5FE421A46F95323F388AA9A /* Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B3F3FFD5A4B57910598BA2 /* Typography.swift */; };
+		D663DD36BC8814578E326D5A /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC01DA95B7C517E342E7AB35 /* CalendarView.swift */; };
+		D88291BCCB1BAD3B49262E95 /* GoalsManagementUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C1D66F71CB04D04B4C535E /* GoalsManagementUITests.swift */; };
+		D96A6FAB759E8159E800D05C /* OnboardingSummaryStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2346FCC12CE23F9D172A94B5 /* OnboardingSummaryStepView.swift */; };
+		D972F28B9850D9B8BBC6EE5D /* AdaptationEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDF069076BD52131EB0855C /* AdaptationEngineTests.swift */; };
+		DB37A046D2E8383B784137FD /* AdaptationHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C23797E1F16318E5C2C9CF /* AdaptationHistoryView.swift */; };
+		E26E924DEE0815DEA0CC5572 /* PersistenceModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89773FE6228C70632C93672 /* PersistenceModels.swift */; };
+		EA4497631C7ABCBD3E7F8F37 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B64DEAE4041FA86C61FEEB4 /* User.swift */; };
+		EAA48822ECC0868636EAC188 /* WorkoutFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2350ACDCF92725117DD663A8 /* WorkoutFactoryTests.swift */; };
+		F69FDDD58775AFD4A7FF149D /* WorkoutFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430BBB2B7E9966E0B9A9AE33 /* WorkoutFactory.swift */; };
+		F7574F0F83DBBA6205229036 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D1A368A98BE160A50BA63D /* DashboardView.swift */; };
+		F80CB6A2881CF56DAC613C4E /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01E767C48D8DF4081C368EF /* RootView.swift */; };
+		F9E07C48AF50FD8BDB4C9830 /* CalendarSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1730EB172DDC992642945C /* CalendarSyncService.swift */; };
+		FC9D76C69A8323368ADADC96 /* TriCoachAIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2FA6E8EB231D816C7FEFC7 /* TriCoachAIApp.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		11DAAE902332695770363B47 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55599D681C6E394329740155 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D88B24405FD0A723435AB14E;
+			remoteInfo = TriCoachAI;
+		};
+		34D1792F0DCFAB3CF083DDAB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55599D681C6E394329740155 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D88B24405FD0A723435AB14E;
+			remoteInfo = TriCoachAI;
+		};
+		B4F8621B6DAE4C7829004EF0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55599D681C6E394329740155 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D88B24405FD0A723435AB14E;
+			remoteInfo = TriCoachAI;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0320ED0AA9097FF082C2118A /* CompletedActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedActivity.swift; sourceTree = "<group>"; };
+		0363B166F335BA0809783067 /* RepositoryProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryProtocols.swift; sourceTree = "<group>"; };
+		092EA2D976774B331C717D43 /* KeychainTokenStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainTokenStore.swift; sourceTree = "<group>"; };
+		0981B9A5AEAD3C91FCB6F25D /* NetworkProfileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProfileRepository.swift; sourceTree = "<group>"; };
+		0B64DEAE4041FA86C61FEEB4 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		0C50C80204ADCAB2A708631F /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		0DCE9034CF11817AA48F2C44 /* NetworkPlanRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkPlanRepository.swift; sourceTree = "<group>"; };
+		0FFA660B942B9D3176F1B3BA /* DashboardAnalyticsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardAnalyticsViewModel.swift; sourceTree = "<group>"; };
+		11C1D66F71CB04D04B4C535E /* GoalsManagementUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsManagementUITests.swift; sourceTree = "<group>"; };
+		11C8D2ED0730797DA1B718A4 /* APIConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConfig.swift; sourceTree = "<group>"; };
+		123B1E852F6F392016DB6650 /* HealthKitMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitMapperTests.swift; sourceTree = "<group>"; };
+		13816CF3786EC5067C95E876 /* ConstraintsStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintsStepView.swift; sourceTree = "<group>"; };
+		140AA0C392C91ABE2D42C211 /* LoadCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadCalculator.swift; sourceTree = "<group>"; };
+		141C6964B91152518771A82E /* WorkoutDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutDetailView.swift; sourceTree = "<group>"; };
+		1980883560913339BC2A6A77 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
+		1AB7E7AE4D3831FD40654F53 /* AthleteProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AthleteProfile.swift; sourceTree = "<group>"; };
+		1B1730EB172DDC992642945C /* CalendarSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarSyncService.swift; sourceTree = "<group>"; };
+		1B205A10C82D389AF48797D4 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		1BE5C71B5270206025F61768 /* HistoryStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryStepView.swift; sourceTree = "<group>"; };
+		1E26F084EAAEC3B2A9F404AA /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		1F1506D8A3A8F4D3D9CD3B38 /* TriCoachAI.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = TriCoachAI.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1FB2BA2B200305482E8CC777 /* JSONCoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONCoding.swift; sourceTree = "<group>"; };
+		21F1765BD80D9843C89644F7 /* AdaptationEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptationEngine.swift; sourceTree = "<group>"; };
+		2346FCC12CE23F9D172A94B5 /* OnboardingSummaryStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSummaryStepView.swift; sourceTree = "<group>"; };
+		2350ACDCF92725117DD663A8 /* WorkoutFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutFactoryTests.swift; sourceTree = "<group>"; };
+		238606511711E89EA637A4CF /* HealthMetricsDaily.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthMetricsDaily.swift; sourceTree = "<group>"; };
+		2888A16343D3A93E8F51F653 /* TrainingPlan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingPlan.swift; sourceTree = "<group>"; };
+		296578B1C70B1BA6A9AC21C4 /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
+		29EC0D3A432B3175BB767465 /* IntegrationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegrationsViewModel.swift; sourceTree = "<group>"; };
+		2E8981E799E01F541F16BBF2 /* WorkoutAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutAPI.swift; sourceTree = "<group>"; };
+		30BAC161D9BD23653DC8FA0A /* MicrocycleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicrocycleBuilder.swift; sourceTree = "<group>"; };
+		320F09A781D045E680F8FD8D /* HealthKitProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitProvider.swift; sourceTree = "<group>"; };
+		33D65461728CA939E459C8DC /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		35C23797E1F16318E5C2C9CF /* AdaptationHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptationHistoryView.swift; sourceTree = "<group>"; };
+		3800D60EC94C2E8FDF51653D /* LoadCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadCalculatorTests.swift; sourceTree = "<group>"; };
+		3A7E68EC363C247E67C879BA /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
+		3E8D7DF120FA9F594F2BA9C5 /* WorkoutRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutRowView.swift; sourceTree = "<group>"; };
+		429C3E8C3359E3136D58FAC9 /* PersonalInfoStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalInfoStepView.swift; sourceTree = "<group>"; };
+		430BBB2B7E9966E0B9A9AE33 /* WorkoutFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutFactory.swift; sourceTree = "<group>"; };
+		45AB73FCF04FBAEC37E29916 /* PeriodizationEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodizationEngine.swift; sourceTree = "<group>"; };
+		47D1A368A98BE160A50BA63D /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
+		485AF7112D32E4BD8EF2BF5B /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		487F6D4DBB5F3F0C3E0283D4 /* StravaAuthSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StravaAuthSession.swift; sourceTree = "<group>"; };
+		4E96D91A7C785BB780C3DBF6 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		5A709596D4A444CC2B1057B5 /* OnboardingFlowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFlowView.swift; sourceTree = "<group>"; };
+		5B2A246C61E6952A60AF678D /* DashboardAnalyticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardAnalyticsView.swift; sourceTree = "<group>"; };
+		5B40BE5830CAA25F596442AB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5FA35030F5DDB74C5E80BCB5 /* AdaptationHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptationHistoryViewModel.swift; sourceTree = "<group>"; };
+		5FF2CAE00C6F97D15597D772 /* AuthAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAPIClient.swift; sourceTree = "<group>"; };
+		617927E222E99AC3AA585A57 /* PeriodizationEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodizationEngineTests.swift; sourceTree = "<group>"; };
+		6412254EF3A1F02E3C5E1E94 /* OnboardingFlowUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFlowUITests.swift; sourceTree = "<group>"; };
+		64BC3BE3CFFE5C4539B46C55 /* DashboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModel.swift; sourceTree = "<group>"; };
+		654A5F8319775BD3C729F2B1 /* LocalNotificationScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationScheduler.swift; sourceTree = "<group>"; };
+		65E311C96ECFB1537A0DF58E /* TriCoachAIIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriCoachAIIntegrationTests.swift; sourceTree = "<group>"; };
+		6B1617155BE9DD622F5298D6 /* DashboardAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardAPI.swift; sourceTree = "<group>"; };
+		6D07747EE92D0BCB4F814E04 /* ZoneBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoneBar.swift; sourceTree = "<group>"; };
+		6DE66A9418E816BD14117E2E /* AdaptationHistoryUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptationHistoryUITests.swift; sourceTree = "<group>"; };
+		6F4057F7E1746335F8F7F01C /* AdaptationEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptationEvent.swift; sourceTree = "<group>"; };
+		6FFE71A28FA0F8B603623CA7 /* RuleBasedPlanStrategyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleBasedPlanStrategyTests.swift; sourceTree = "<group>"; };
+		7368ED689C0C9634291877B1 /* Goal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
+		73E9F43785A9175FEFBC8CE1 /* HealthKitSyncAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitSyncAPI.swift; sourceTree = "<group>"; };
+		74E52F12C16C23953DABD0C0 /* LocalRepositories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalRepositories.swift; sourceTree = "<group>"; };
+		773382A51CC6E14162662935 /* GoalsManagementViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsManagementViewModel.swift; sourceTree = "<group>"; };
+		79FBF716D85CBA41AF2129D3 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
+		7A1112C14E4ECAFA1778BD71 /* SportLevelStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportLevelStepView.swift; sourceTree = "<group>"; };
+		7B9572098613EFCBB5CF20F7 /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
+		821C32684735CD4DE2F34CB1 /* NetworkGoalRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkGoalRepository.swift; sourceTree = "<group>"; };
+		90FD4195F663FAB1793EFAA2 /* GoalEditorCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalEditorCard.swift; sourceTree = "<group>"; };
+		98A4CC693A6BA5DC159C2428 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
+		9B453413EF3EF582B3CE6A01 /* AvailabilityStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailabilityStepView.swift; sourceTree = "<group>"; };
+		A01E767C48D8DF4081C368EF /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		A132923907C4571410F3286D /* GoalsStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsStepView.swift; sourceTree = "<group>"; };
+		A3A97084C6BD8D8463D8517A /* PersistenceContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceContainer.swift; sourceTree = "<group>"; };
+		A423B0620C411EB131DCF1DB /* DashboardAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardAnalytics.swift; sourceTree = "<group>"; };
+		A89773FE6228C70632C93672 /* PersistenceModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceModels.swift; sourceTree = "<group>"; };
+		AC300C5512B766EE62C104D1 /* DependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyContainer.swift; sourceTree = "<group>"; };
+		AC40E3A3C0F80F88ACA90A75 /* WorkoutDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutDetailViewModel.swift; sourceTree = "<group>"; };
+		AEDF069076BD52131EB0855C /* AdaptationEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptationEngineTests.swift; sourceTree = "<group>"; };
+		B049259D87778D144A22FDAF /* TriCoachAITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriCoachAITests.swift; sourceTree = "<group>"; };
+		B07E3852992ABDD879444A8C /* PlanGenerationStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanGenerationStrategy.swift; sourceTree = "<group>"; };
+		B1FC55E09DDB5A670F31946E /* StravaAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StravaAPI.swift; sourceTree = "<group>"; };
+		B3D4D6D79330FC98F441ED82 /* TriCoachAITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = TriCoachAITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3FCCCF548D0013B84D97E91 /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
+		C0CC1B68D69392AF7D7AF6F2 /* ActivityDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDataProvider.swift; sourceTree = "<group>"; };
+		C894889778453B2541401179 /* HealthDataAggregator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthDataAggregator.swift; sourceTree = "<group>"; };
+		CC31E728E78C0DE86B581BEA /* NetworkAdaptationEventRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkAdaptationEventRepository.swift; sourceTree = "<group>"; };
+		CD2FA6E8EB231D816C7FEFC7 /* TriCoachAIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriCoachAIApp.swift; sourceTree = "<group>"; };
+		CFC089A295F55315458204FE /* ProgressRingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressRingView.swift; sourceTree = "<group>"; };
+		D2322ED8057CCAE9B26A9371 /* MesocycleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MesocycleBuilder.swift; sourceTree = "<group>"; };
+		D2A9C85C0C6F699DBC9C9B33 /* TriCoachAIUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriCoachAIUITests.swift; sourceTree = "<group>"; };
+		D4F30661FA3F66F5B36E8369 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		DC01DA95B7C517E342E7AB35 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		E2B3F3FFD5A4B57910598BA2 /* Typography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typography.swift; sourceTree = "<group>"; };
+		E2EB1469878A8AA24DF20C3A /* TriCoachAIIntegrationTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = TriCoachAIIntegrationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E33ED391E3CFD92CA56A1657 /* RuleBasedPlanStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleBasedPlanStrategy.swift; sourceTree = "<group>"; };
+		E50120390FCC6925578D2EEF /* UserAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
+		E692226E0152CEAA43B805DA /* TriCoachAIUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = TriCoachAIUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E79DB11B1D762D98013CDD0C /* GoalsManagementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsManagementView.swift; sourceTree = "<group>"; };
+		E92A21A65EB50591464DEDBC /* CalendarDragAndDropUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDragAndDropUITests.swift; sourceTree = "<group>"; };
+		E93CB52CBB8B26187F941FB7 /* HealthDataAggregatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthDataAggregatorTests.swift; sourceTree = "<group>"; };
+		E9ADA2B797A78BC30DDCAF90 /* NetworkCheckInRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkCheckInRepository.swift; sourceTree = "<group>"; };
+		ECB6D765C00A9FD5C6A5A616 /* Availability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Availability.swift; sourceTree = "<group>"; };
+		EF2C600B075AB9CD00ABB94B /* PillBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PillBadge.swift; sourceTree = "<group>"; };
+		EFEB13A78DC8E985B83BF01B /* ConstraintCheckIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintCheckIn.swift; sourceTree = "<group>"; };
+		F8EFAB03BF59AD260357C5B7 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		FD287F766E22968AF4B46455 /* DashboardAnalyticsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardAnalyticsUITests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		0A523BE61A3B48BAB837472F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				6F4057F7E1746335F8F7F01C /* AdaptationEvent.swift */,
+				1AB7E7AE4D3831FD40654F53 /* AthleteProfile.swift */,
+				ECB6D765C00A9FD5C6A5A616 /* Availability.swift */,
+				0320ED0AA9097FF082C2118A /* CompletedActivity.swift */,
+				EFEB13A78DC8E985B83BF01B /* ConstraintCheckIn.swift */,
+				A423B0620C411EB131DCF1DB /* DashboardAnalytics.swift */,
+				3A7E68EC363C247E67C879BA /* Enums.swift */,
+				7368ED689C0C9634291877B1 /* Goal.swift */,
+				238606511711E89EA637A4CF /* HealthMetricsDaily.swift */,
+				2888A16343D3A93E8F51F653 /* TrainingPlan.swift */,
+				0B64DEAE4041FA86C61FEEB4 /* User.swift */,
+				B3FCCCF548D0013B84D97E91 /* Workout.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		0BE8E1EB0F68C3E644BEF1C7 /* PlanEngine */ = {
+			isa = PBXGroup;
+			children = (
+				21F1765BD80D9843C89644F7 /* AdaptationEngine.swift */,
+				140AA0C392C91ABE2D42C211 /* LoadCalculator.swift */,
+				D2322ED8057CCAE9B26A9371 /* MesocycleBuilder.swift */,
+				30BAC161D9BD23653DC8FA0A /* MicrocycleBuilder.swift */,
+				45AB73FCF04FBAEC37E29916 /* PeriodizationEngine.swift */,
+				B07E3852992ABDD879444A8C /* PlanGenerationStrategy.swift */,
+				E33ED391E3CFD92CA56A1657 /* RuleBasedPlanStrategy.swift */,
+				430BBB2B7E9966E0B9A9AE33 /* WorkoutFactory.swift */,
+			);
+			path = PlanEngine;
+			sourceTree = "<group>";
+		};
+		172571146EB427B985FF3E85 /* TriCoachAIUITests */ = {
+			isa = PBXGroup;
+			children = (
+				6DE66A9418E816BD14117E2E /* AdaptationHistoryUITests.swift */,
+				E92A21A65EB50591464DEDBC /* CalendarDragAndDropUITests.swift */,
+				FD287F766E22968AF4B46455 /* DashboardAnalyticsUITests.swift */,
+				11C1D66F71CB04D04B4C535E /* GoalsManagementUITests.swift */,
+				6412254EF3A1F02E3C5E1E94 /* OnboardingFlowUITests.swift */,
+				D2A9C85C0C6F699DBC9C9B33 /* TriCoachAIUITests.swift */,
+			);
+			path = TriCoachAIUITests;
+			sourceTree = "<group>";
+		};
+		1D9EAD532D80D76E5DCDDD55 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				F8EFAB03BF59AD260357C5B7 /* APIClient.swift */,
+				11C8D2ED0730797DA1B718A4 /* APIConfig.swift */,
+				5FF2CAE00C6F97D15597D772 /* AuthAPIClient.swift */,
+				6B1617155BE9DD622F5298D6 /* DashboardAPI.swift */,
+				73E9F43785A9175FEFBC8CE1 /* HealthKitSyncAPI.swift */,
+				092EA2D976774B331C717D43 /* KeychainTokenStore.swift */,
+				CC31E728E78C0DE86B581BEA /* NetworkAdaptationEventRepository.swift */,
+				E9ADA2B797A78BC30DDCAF90 /* NetworkCheckInRepository.swift */,
+				4E96D91A7C785BB780C3DBF6 /* NetworkError.swift */,
+				821C32684735CD4DE2F34CB1 /* NetworkGoalRepository.swift */,
+				0DCE9034CF11817AA48F2C44 /* NetworkPlanRepository.swift */,
+				0981B9A5AEAD3C91FCB6F25D /* NetworkProfileRepository.swift */,
+				B1FC55E09DDB5A670F31946E /* StravaAPI.swift */,
+				487F6D4DBB5F3F0C3E0283D4 /* StravaAuthSession.swift */,
+				E50120390FCC6925578D2EEF /* UserAPI.swift */,
+				2E8981E799E01F541F16BBF2 /* WorkoutAPI.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		260A626E5A5EB58F9CAE49D3 /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				1FB2BA2B200305482E8CC777 /* JSONCoding.swift */,
+				74E52F12C16C23953DABD0C0 /* LocalRepositories.swift */,
+				A3A97084C6BD8D8463D8517A /* PersistenceContainer.swift */,
+				A89773FE6228C70632C93672 /* PersistenceModels.swift */,
+				0363B166F335BA0809783067 /* RepositoryProtocols.swift */,
+			);
+			path = Persistence;
+			sourceTree = "<group>";
+		};
+		26BE42845A6FA66E7882343E /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				5A709596D4A444CC2B1057B5 /* OnboardingFlowView.swift */,
+				79FBF716D85CBA41AF2129D3 /* OnboardingViewModel.swift */,
+				4B93BC28694B16B803C11163 /* Steps */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		3C91E87FFB055AF7A081B962 /* HealthKit */ = {
+			isa = PBXGroup;
+			children = (
+				C0CC1B68D69392AF7D7AF6F2 /* ActivityDataProvider.swift */,
+				C894889778453B2541401179 /* HealthDataAggregator.swift */,
+				7B9572098613EFCBB5CF20F7 /* HealthKitManager.swift */,
+				320F09A781D045E680F8FD8D /* HealthKitProvider.swift */,
+			);
+			path = HealthKit;
+			sourceTree = "<group>";
+		};
+		3D3D50D645460724018379F2 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				654A5F8319775BD3C729F2B1 /* LocalNotificationScheduler.swift */,
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
+		3EE295418413D80CD62F6710 /* TriCoachAIIntegrationTests */ = {
+			isa = PBXGroup;
+			children = (
+				65E311C96ECFB1537A0DF58E /* TriCoachAIIntegrationTests.swift */,
+			);
+			path = TriCoachAIIntegrationTests;
+			sourceTree = "<group>";
+		};
+		4B93BC28694B16B803C11163 /* Steps */ = {
+			isa = PBXGroup;
+			children = (
+				9B453413EF3EF582B3CE6A01 /* AvailabilityStepView.swift */,
+				13816CF3786EC5067C95E876 /* ConstraintsStepView.swift */,
+				A132923907C4571410F3286D /* GoalsStepView.swift */,
+				1BE5C71B5270206025F61768 /* HistoryStepView.swift */,
+				2346FCC12CE23F9D172A94B5 /* OnboardingSummaryStepView.swift */,
+				429C3E8C3359E3136D58FAC9 /* PersonalInfoStepView.swift */,
+				7A1112C14E4ECAFA1778BD71 /* SportLevelStepView.swift */,
+			);
+			path = Steps;
+			sourceTree = "<group>";
+		};
+		4C839D34A10C557E4D586601 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1F1506D8A3A8F4D3D9CD3B38 /* TriCoachAI.app */,
+				E2EB1469878A8AA24DF20C3A /* TriCoachAIIntegrationTests.xctest */,
+				B3D4D6D79330FC98F441ED82 /* TriCoachAITests.xctest */,
+				E692226E0152CEAA43B805DA /* TriCoachAIUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		56C74B999A498BED081489CC /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				E4F007D27FA1561732E51022 /* Calendar */,
+				AF03E1F34C28C130BB9C07CA /* DesignSystem */,
+				3C91E87FFB055AF7A081B962 /* HealthKit */,
+				1D9EAD532D80D76E5DCDDD55 /* Networking */,
+				3D3D50D645460724018379F2 /* Notifications */,
+				260A626E5A5EB58F9CAE49D3 /* Persistence */,
+				0BE8E1EB0F68C3E644BEF1C7 /* PlanEngine */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		5FDCA6ABA69F56137B327197 = {
+			isa = PBXGroup;
+			children = (
+				855D3CD7BE6D590411E922D3 /* App */,
+				56C74B999A498BED081489CC /* Core */,
+				A21FDE8C59BFBB9B76D94B8E /* Features */,
+				0A523BE61A3B48BAB837472F /* Models */,
+				A534A31E5E2DBB4B70DD4A20 /* Resources */,
+				75EACD8089A628EFEEA285A6 /* Tests */,
+				4C839D34A10C557E4D586601 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		75EACD8089A628EFEEA285A6 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				3EE295418413D80CD62F6710 /* TriCoachAIIntegrationTests */,
+				F07784DD7DC4E30C7C6A3C3E /* TriCoachAITests */,
+				172571146EB427B985FF3E85 /* TriCoachAIUITests */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		855D3CD7BE6D590411E922D3 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				1E26F084EAAEC3B2A9F404AA /* AppState.swift */,
+				AC300C5512B766EE62C104D1 /* DependencyContainer.swift */,
+				485AF7112D32E4BD8EF2BF5B /* MainTabView.swift */,
+				A01E767C48D8DF4081C368EF /* RootView.swift */,
+				CD2FA6E8EB231D816C7FEFC7 /* TriCoachAIApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		875364CCB269D834DFD02D19 /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				5B2A246C61E6952A60AF678D /* DashboardAnalyticsView.swift */,
+				0FFA660B942B9D3176F1B3BA /* DashboardAnalyticsViewModel.swift */,
+				47D1A368A98BE160A50BA63D /* DashboardView.swift */,
+				64BC3BE3CFFE5C4539B46C55 /* DashboardViewModel.swift */,
+			);
+			path = Dashboard;
+			sourceTree = "<group>";
+		};
+		A21FDE8C59BFBB9B76D94B8E /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				E28590EC6F2D00E5112EAF69 /* AdaptationHistory */,
+				EBF5E272C6F38BE56EC478F1 /* Auth */,
+				FFA4DF93E010DA91F266CC6D /* Calendar */,
+				875364CCB269D834DFD02D19 /* Dashboard */,
+				CA2AF17C7738355D471BFFBB /* Goals */,
+				26BE42845A6FA66E7882343E /* Onboarding */,
+				CE89DE751ED3D7143AD22D01 /* Profile */,
+				F9F43DF65264458F8A221960 /* WorkoutDetail */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		A534A31E5E2DBB4B70DD4A20 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				5B40BE5830CAA25F596442AB /* Assets.xcassets */,
+				1B205A10C82D389AF48797D4 /* PrivacyInfo.xcprivacy */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		AF03E1F34C28C130BB9C07CA /* DesignSystem */ = {
+			isa = PBXGroup;
+			children = (
+				0C50C80204ADCAB2A708631F /* CardView.swift */,
+				33D65461728CA939E459C8DC /* Colors.swift */,
+				EF2C600B075AB9CD00ABB94B /* PillBadge.swift */,
+				CFC089A295F55315458204FE /* ProgressRingView.swift */,
+				E2B3F3FFD5A4B57910598BA2 /* Typography.swift */,
+				6D07747EE92D0BCB4F814E04 /* ZoneBar.swift */,
+			);
+			path = DesignSystem;
+			sourceTree = "<group>";
+		};
+		CA2AF17C7738355D471BFFBB /* Goals */ = {
+			isa = PBXGroup;
+			children = (
+				90FD4195F663FAB1793EFAA2 /* GoalEditorCard.swift */,
+				E79DB11B1D762D98013CDD0C /* GoalsManagementView.swift */,
+				773382A51CC6E14162662935 /* GoalsManagementViewModel.swift */,
+			);
+			path = Goals;
+			sourceTree = "<group>";
+		};
+		CE89DE751ED3D7143AD22D01 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				29EC0D3A432B3175BB767465 /* IntegrationsViewModel.swift */,
+				D4F30661FA3F66F5B36E8369 /* ProfileView.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		E28590EC6F2D00E5112EAF69 /* AdaptationHistory */ = {
+			isa = PBXGroup;
+			children = (
+				35C23797E1F16318E5C2C9CF /* AdaptationHistoryView.swift */,
+				5FA35030F5DDB74C5E80BCB5 /* AdaptationHistoryViewModel.swift */,
+			);
+			path = AdaptationHistory;
+			sourceTree = "<group>";
+		};
+		E4F007D27FA1561732E51022 /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				1B1730EB172DDC992642945C /* CalendarSyncService.swift */,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
+		EBF5E272C6F38BE56EC478F1 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				98A4CC693A6BA5DC159C2428 /* AuthView.swift */,
+				1980883560913339BC2A6A77 /* AuthViewModel.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		F07784DD7DC4E30C7C6A3C3E /* TriCoachAITests */ = {
+			isa = PBXGroup;
+			children = (
+				AEDF069076BD52131EB0855C /* AdaptationEngineTests.swift */,
+				E93CB52CBB8B26187F941FB7 /* HealthDataAggregatorTests.swift */,
+				123B1E852F6F392016DB6650 /* HealthKitMapperTests.swift */,
+				3800D60EC94C2E8FDF51653D /* LoadCalculatorTests.swift */,
+				617927E222E99AC3AA585A57 /* PeriodizationEngineTests.swift */,
+				6FFE71A28FA0F8B603623CA7 /* RuleBasedPlanStrategyTests.swift */,
+				B049259D87778D144A22FDAF /* TriCoachAITests.swift */,
+				2350ACDCF92725117DD663A8 /* WorkoutFactoryTests.swift */,
+			);
+			path = TriCoachAITests;
+			sourceTree = "<group>";
+		};
+		F9F43DF65264458F8A221960 /* WorkoutDetail */ = {
+			isa = PBXGroup;
+			children = (
+				141C6964B91152518771A82E /* WorkoutDetailView.swift */,
+				AC40E3A3C0F80F88ACA90A75 /* WorkoutDetailViewModel.swift */,
+			);
+			path = WorkoutDetail;
+			sourceTree = "<group>";
+		};
+		FFA4DF93E010DA91F266CC6D /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				DC01DA95B7C517E342E7AB35 /* CalendarView.swift */,
+				296578B1C70B1BA6A9AC21C4 /* CalendarViewModel.swift */,
+				3E8D7DF120FA9F594F2BA9C5 /* WorkoutRowView.swift */,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		51DF1B5EF68420C11ADF1669 /* TriCoachAITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 608C0E66E127679B28B4E012 /* Build configuration list for PBXNativeTarget "TriCoachAITests" */;
+			buildPhases = (
+				DB24388AB855796317A6DB34 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2A5452FB15A30B84E85BF249 /* PBXTargetDependency */,
+			);
+			name = TriCoachAITests;
+			packageProductDependencies = (
+			);
+			productName = TriCoachAITests;
+			productReference = B3D4D6D79330FC98F441ED82 /* TriCoachAITests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		51FF9C2B4799BCDA5222FCA5 /* TriCoachAIUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 23FD1EA59CD0B11FAEDDD024 /* Build configuration list for PBXNativeTarget "TriCoachAIUITests" */;
+			buildPhases = (
+				2079E09D13DA1633944888E8 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				301AD9F2C4E3EB739FDB4579 /* PBXTargetDependency */,
+			);
+			name = TriCoachAIUITests;
+			packageProductDependencies = (
+			);
+			productName = TriCoachAIUITests;
+			productReference = E692226E0152CEAA43B805DA /* TriCoachAIUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		A869FDAC9F67E7A2C9B550D7 /* TriCoachAIIntegrationTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D00567E02145D563848BA176 /* Build configuration list for PBXNativeTarget "TriCoachAIIntegrationTests" */;
+			buildPhases = (
+				82EF0C6FDD94F97CCE13CFA5 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2048D809651A7D70CB7FCB86 /* PBXTargetDependency */,
+			);
+			name = TriCoachAIIntegrationTests;
+			packageProductDependencies = (
+			);
+			productName = TriCoachAIIntegrationTests;
+			productReference = E2EB1469878A8AA24DF20C3A /* TriCoachAIIntegrationTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		D88B24405FD0A723435AB14E /* TriCoachAI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4F6D3635B4A34ADADCDDD19C /* Build configuration list for PBXNativeTarget "TriCoachAI" */;
+			buildPhases = (
+				4FB718D2A8314A019A9480D0 /* Sources */,
+				0B680E54C4CB1B58590371E8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TriCoachAI;
+			packageProductDependencies = (
+			);
+			productName = TriCoachAI;
+			productReference = 1F1506D8A3A8F4D3D9CD3B38 /* TriCoachAI.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		55599D681C6E394329740155 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					51DF1B5EF68420C11ADF1669 = {
+						DevelopmentTeam = BZHM25XB9A;
+						ProvisioningStyle = Automatic;
+					};
+					51FF9C2B4799BCDA5222FCA5 = {
+						DevelopmentTeam = BZHM25XB9A;
+						ProvisioningStyle = Automatic;
+						TestTargetID = D88B24405FD0A723435AB14E;
+					};
+					A869FDAC9F67E7A2C9B550D7 = {
+						DevelopmentTeam = BZHM25XB9A;
+						ProvisioningStyle = Automatic;
+					};
+					D88B24405FD0A723435AB14E = {
+						DevelopmentTeam = BZHM25XB9A;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = E5785BC777B2D799A9E97D1B /* Build configuration list for PBXProject "TriCoachAI" */;
+			developmentRegion = fr;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				fr,
+			);
+			mainGroup = 5FDCA6ABA69F56137B327197;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 4C839D34A10C557E4D586601 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D88B24405FD0A723435AB14E /* TriCoachAI */,
+				A869FDAC9F67E7A2C9B550D7 /* TriCoachAIIntegrationTests */,
+				51DF1B5EF68420C11ADF1669 /* TriCoachAITests */,
+				51FF9C2B4799BCDA5222FCA5 /* TriCoachAIUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0B680E54C4CB1B58590371E8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AE92E79B7AEA87730053819B /* Assets.xcassets in Resources */,
+				80A16B550013E5E00CA6C00A /* PrivacyInfo.xcprivacy in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2079E09D13DA1633944888E8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2524176E7BCBB72FDC6EF314 /* AdaptationHistoryUITests.swift in Sources */,
+				7BB3876B87FC371ACC8554A5 /* CalendarDragAndDropUITests.swift in Sources */,
+				299EAF937EE8993C60FDCDAE /* DashboardAnalyticsUITests.swift in Sources */,
+				D88291BCCB1BAD3B49262E95 /* GoalsManagementUITests.swift in Sources */,
+				70889134D0638134FD77E02A /* OnboardingFlowUITests.swift in Sources */,
+				3D803206CE786B46C8449E0A /* TriCoachAIUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4FB718D2A8314A019A9480D0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				25B39E1E5E1399E47614404D /* APIClient.swift in Sources */,
+				CF9673EDED75397FBDB0C1F6 /* APIConfig.swift in Sources */,
+				5F9B44600BD723C38E055707 /* ActivityDataProvider.swift in Sources */,
+				4C8575B4C0E853E2717F2496 /* AdaptationEngine.swift in Sources */,
+				6C121B96A8CCD32C5AD8C27F /* AdaptationEvent.swift in Sources */,
+				DB37A046D2E8383B784137FD /* AdaptationHistoryView.swift in Sources */,
+				73824541766036698B00BEFB /* AdaptationHistoryViewModel.swift in Sources */,
+				D10949B4E8B66D7133E72C60 /* AppState.swift in Sources */,
+				BE8B0D6A5EECEE0B96073CC2 /* AthleteProfile.swift in Sources */,
+				80374DBA7BC8B0BB64E07EBA /* AuthAPIClient.swift in Sources */,
+				1BDEFA1596B5C6D4062329F4 /* AuthView.swift in Sources */,
+				44025F5E01F0E5E800FAFBF6 /* AuthViewModel.swift in Sources */,
+				4DD187993E96A07E00B1D340 /* Availability.swift in Sources */,
+				D41E23086F569A9F5AB75053 /* AvailabilityStepView.swift in Sources */,
+				F9E07C48AF50FD8BDB4C9830 /* CalendarSyncService.swift in Sources */,
+				D663DD36BC8814578E326D5A /* CalendarView.swift in Sources */,
+				1CF22FED4EDDF6C6D7B22136 /* CalendarViewModel.swift in Sources */,
+				5D07418F6C147C73474EF4B2 /* CardView.swift in Sources */,
+				4FE51E5B8BDD899028419B14 /* Colors.swift in Sources */,
+				C1F36043B45B8C6B580FCE25 /* CompletedActivity.swift in Sources */,
+				79C4530327397AFEF9226F23 /* ConstraintCheckIn.swift in Sources */,
+				7746F0F83A47E4F18DCD4F2A /* ConstraintsStepView.swift in Sources */,
+				4945EFFE16AFAA550EC86AAF /* DashboardAPI.swift in Sources */,
+				46DD9424EEA721DAA87476EE /* DashboardAnalytics.swift in Sources */,
+				9C326594B672C30A72DCF810 /* DashboardAnalyticsView.swift in Sources */,
+				3AC6F7C8E4418AD9BE7073AD /* DashboardAnalyticsViewModel.swift in Sources */,
+				F7574F0F83DBBA6205229036 /* DashboardView.swift in Sources */,
+				AE3E238DE3C2F3031F47FBBC /* DashboardViewModel.swift in Sources */,
+				48B49E46CC6AB9D755753F94 /* DependencyContainer.swift in Sources */,
+				0C533D5EC61C7676300C379D /* Enums.swift in Sources */,
+				6BF93ED7C33C7401FD54F6F6 /* Goal.swift in Sources */,
+				26ED4927A984CCC5ECC2432E /* GoalEditorCard.swift in Sources */,
+				75C82A28A3296937853D19E5 /* GoalsManagementView.swift in Sources */,
+				3DE865FEDE757753A44CD76D /* GoalsManagementViewModel.swift in Sources */,
+				CC7EE10D7A9B04B88FAF42C9 /* GoalsStepView.swift in Sources */,
+				2BC96BF21D9198CA40945694 /* HealthDataAggregator.swift in Sources */,
+				209D5C0860DFA74C67E6F2E3 /* HealthKitManager.swift in Sources */,
+				2B83FC72FB25B65DAF1C190E /* HealthKitProvider.swift in Sources */,
+				A48FBC234D14F9820E5D007F /* HealthKitSyncAPI.swift in Sources */,
+				2594C111AEA769CC095F59E0 /* HealthMetricsDaily.swift in Sources */,
+				3584F671046BCC2ADC07D288 /* HistoryStepView.swift in Sources */,
+				576CF9BA28536149F95A0498 /* IntegrationsViewModel.swift in Sources */,
+				C7EA61A3351B9DC140311290 /* JSONCoding.swift in Sources */,
+				2E27580A5A885562F5CBF77C /* KeychainTokenStore.swift in Sources */,
+				9107C2E6DFBFCBB503284179 /* LoadCalculator.swift in Sources */,
+				990FF72B264C788CBF7839AD /* LocalNotificationScheduler.swift in Sources */,
+				1BC6A486733CE51F62B23C7B /* LocalRepositories.swift in Sources */,
+				0919A63ACDAACAFE7255A398 /* MainTabView.swift in Sources */,
+				312AF9B3BE2A1BAB3E665775 /* MesocycleBuilder.swift in Sources */,
+				71A96210C337442BA1A3F1E9 /* MicrocycleBuilder.swift in Sources */,
+				3695D1A7B497BDD475554965 /* NetworkAdaptationEventRepository.swift in Sources */,
+				138CE53C5D0E5779B9F2D6DA /* NetworkCheckInRepository.swift in Sources */,
+				B87A4BD362376F189F21FA09 /* NetworkError.swift in Sources */,
+				2C19A2BF6DCBF547930E44A7 /* NetworkGoalRepository.swift in Sources */,
+				17396FE27736A0F1E56BFD97 /* NetworkPlanRepository.swift in Sources */,
+				D446D16A598430DE286C5A7B /* NetworkProfileRepository.swift in Sources */,
+				9C6C0835C916A83BFE4E2731 /* OnboardingFlowView.swift in Sources */,
+				D96A6FAB759E8159E800D05C /* OnboardingSummaryStepView.swift in Sources */,
+				BF36A454A894AD6DD44A1FAA /* OnboardingViewModel.swift in Sources */,
+				C39F66516DE3428FA1B7EF3D /* PeriodizationEngine.swift in Sources */,
+				87E3288D06712236EC4A9454 /* PersistenceContainer.swift in Sources */,
+				E26E924DEE0815DEA0CC5572 /* PersistenceModels.swift in Sources */,
+				C28FE1543546C245D9D2A499 /* PersonalInfoStepView.swift in Sources */,
+				18D2D271EE1A3BEB7A091F77 /* PillBadge.swift in Sources */,
+				866EEA0BB879DFC9E93B7E84 /* PlanGenerationStrategy.swift in Sources */,
+				28D156A41CC5326D0407A155 /* ProfileView.swift in Sources */,
+				348248C9271EBCABC83F86A2 /* ProgressRingView.swift in Sources */,
+				AAF79E157DB3B84DC378E0D0 /* RepositoryProtocols.swift in Sources */,
+				F80CB6A2881CF56DAC613C4E /* RootView.swift in Sources */,
+				0B29460765FDA6C12F9BEC96 /* RuleBasedPlanStrategy.swift in Sources */,
+				AECB215E265A811A85410C36 /* SportLevelStepView.swift in Sources */,
+				AFA23BEAE115F1D005A6E8BA /* StravaAPI.swift in Sources */,
+				53B52B39D6ABD2E4958E17A4 /* StravaAuthSession.swift in Sources */,
+				5AF6D1CF45F343F4971C4391 /* TrainingPlan.swift in Sources */,
+				FC9D76C69A8323368ADADC96 /* TriCoachAIApp.swift in Sources */,
+				D5FE421A46F95323F388AA9A /* Typography.swift in Sources */,
+				EA4497631C7ABCBD3E7F8F37 /* User.swift in Sources */,
+				5E0215925CBFE8769DECDA95 /* UserAPI.swift in Sources */,
+				686B540CD466602ADF8E3A5E /* Workout.swift in Sources */,
+				680F71E971B9D1EC9865835A /* WorkoutAPI.swift in Sources */,
+				698835D4C20709D9BBEE2A5F /* WorkoutDetailView.swift in Sources */,
+				D4B21DCBADE598D84F5616D5 /* WorkoutDetailViewModel.swift in Sources */,
+				F69FDDD58775AFD4A7FF149D /* WorkoutFactory.swift in Sources */,
+				BE9D57DCACB57F08E082124B /* WorkoutRowView.swift in Sources */,
+				C6BEA9C5EE9542505A607E6C /* ZoneBar.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		82EF0C6FDD94F97CCE13CFA5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				41347E068B517CCD40F84690 /* TriCoachAIIntegrationTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DB24388AB855796317A6DB34 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D972F28B9850D9B8BBC6EE5D /* AdaptationEngineTests.swift in Sources */,
+				246947A1B02CEC58E614BDA5 /* HealthDataAggregatorTests.swift in Sources */,
+				4C82F3ED5C8DE768A6E490CE /* HealthKitMapperTests.swift in Sources */,
+				6FBEB9E25A165D91176584CE /* LoadCalculatorTests.swift in Sources */,
+				5CD81F9D92D501AC66AAF845 /* PeriodizationEngineTests.swift in Sources */,
+				A45DEF377EBCABC177BC487D /* RuleBasedPlanStrategyTests.swift in Sources */,
+				02800E6BC8D0A39724A0E1A1 /* TriCoachAITests.swift in Sources */,
+				EAA48822ECC0868636EAC188 /* WorkoutFactoryTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2048D809651A7D70CB7FCB86 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D88B24405FD0A723435AB14E /* TriCoachAI */;
+			targetProxy = 11DAAE902332695770363B47 /* PBXContainerItemProxy */;
+		};
+		2A5452FB15A30B84E85BF249 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D88B24405FD0A723435AB14E /* TriCoachAI */;
+			targetProxy = B4F8621B6DAE4C7829004EF0 /* PBXContainerItemProxy */;
+		};
+		301AD9F2C4E3EB739FDB4579 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D88B24405FD0A723435AB14E /* TriCoachAI */;
+			targetProxy = 34D1792F0DCFAB3CF083DDAB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		1AB8414F2413E9FB92DE0921 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Generated/TriCoachAI.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = Generated/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.tricoach.ai;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		63982E8D3C0399AC75952F56 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.tricoach.TriCoachAIUITests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = TriCoachAI;
+			};
+			name = Debug;
+		};
+		8A15E3D2670CAB1E66AC3C9B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.tricoach.TriCoachAITests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TriCoachAI.app/TriCoachAI";
+			};
+			name = Debug;
+		};
+		91B85AE2D5DB58A03C7B46E4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.tricoach.TriCoachAIUITests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = TriCoachAI;
+			};
+			name = Release;
+		};
+		975FAABA1CD0FF96B3C8A774 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.tricoach.TriCoachAITests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TriCoachAI.app/TriCoachAI";
+			};
+			name = Release;
+		};
+		B0587FFF80D327E378E03F4E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = BZHM25XB9A;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 0.1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		D2796699C5B84F55D6B6927C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.tricoach.TriCoachAIIntegrationTests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TriCoachAI.app/TriCoachAI";
+			};
+			name = Debug;
+		};
+		DF5BD9B5B22E70E7FED675DD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = BZHM25XB9A;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 0.1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		EDF9C1B7A1A0B9B73CE47FBB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Generated/TriCoachAI.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = Generated/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.tricoach.ai;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		F8DAFDE7DAAF5BC34CD6F567 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.tricoach.TriCoachAIIntegrationTests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TriCoachAI.app/TriCoachAI";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		23FD1EA59CD0B11FAEDDD024 /* Build configuration list for PBXNativeTarget "TriCoachAIUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				63982E8D3C0399AC75952F56 /* Debug */,
+				91B85AE2D5DB58A03C7B46E4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		4F6D3635B4A34ADADCDDD19C /* Build configuration list for PBXNativeTarget "TriCoachAI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EDF9C1B7A1A0B9B73CE47FBB /* Debug */,
+				1AB8414F2413E9FB92DE0921 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		608C0E66E127679B28B4E012 /* Build configuration list for PBXNativeTarget "TriCoachAITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8A15E3D2670CAB1E66AC3C9B /* Debug */,
+				975FAABA1CD0FF96B3C8A774 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		D00567E02145D563848BA176 /* Build configuration list for PBXNativeTarget "TriCoachAIIntegrationTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D2796699C5B84F55D6B6927C /* Debug */,
+				F8DAFDE7DAAF5BC34CD6F567 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		E5785BC777B2D799A9E97D1B /* Build configuration list for PBXProject "TriCoachAI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DF5BD9B5B22E70E7FED675DD /* Debug */,
+				B0587FFF80D327E378E03F4E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 55599D681C6E394329740155 /* Project object */;
+}

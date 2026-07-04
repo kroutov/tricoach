@@ -1,0 +1,15 @@
+# macOS
+.DS_Store
+
+# Claude Code local session state (not project code)
+.claude/
+
+# Xcode
+DerivedData/
+xcuserdata/
+*.xcuserstate
+.build/
+
+# Env files (each subproject also has its own, kept here as a root-level backstop)
+.env
+.env.local

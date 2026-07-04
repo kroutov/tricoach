@@ -1,0 +1,384 @@
+// TriCoach AI — PostgreSQL schema (see plan §4)
+// Reference architecture: users -> athlete_profiles/goals/availabilities
+//                         -> training_plans -> macrocycles -> mesocycles -> microcycles -> workouts
+//                         -> completed_activities / health_metrics_daily -> adaptation_events
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum SportType {
+  RUN
+  BIKE
+  SWIM
+  BRICK
+  STRENGTH
+  REST
+}
+
+enum AthleteLevel {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+}
+
+enum GoalType {
+  TRIATHLON_SPRINT
+  TRIATHLON_OLYMPIC
+  DUATHLON
+  RUN_10K
+  HALF_MARATHON
+  MARATHON
+  IRONMAN
+  HALF_IRONMAN
+  IMPROVE_VMA
+  WEIGHT_LOSS
+  GENERAL_ENDURANCE
+}
+
+enum GoalPriority {
+  A
+  B
+  C
+}
+
+enum GoalStatus {
+  ACTIVE
+  ACHIEVED
+  ABANDONED
+}
+
+enum PlanStatus {
+  DRAFT
+  ACTIVE
+  COMPLETED
+  ARCHIVED
+}
+
+enum MacrocyclePhase {
+  BASE
+  BUILD
+  PEAK
+  TAPER
+  TRANSITION
+}
+
+enum WorkoutIntensity {
+  EASY
+  MODERATE
+  HARD
+}
+
+enum WorkoutStatus {
+  PLANNED
+  COMPLETED
+  SKIPPED
+  MODIFIED
+}
+
+enum ActivitySource {
+  HEALTHKIT
+  STRAVA
+  GARMIN
+  MANUAL
+}
+
+enum AdaptationTrigger {
+  MISSED_WORKOUT
+  OVERPERFORMANCE
+  UNDERPERFORMANCE
+  HIGH_FATIGUE
+  INJURY_FLAG
+  LOW_RECOVERY
+  PHYSIOLOGICAL_STRAIN
+}
+
+enum IntegrationProvider {
+  STRAVA
+  HEALTHKIT
+  GARMIN
+}
+
+model User {
+  id                     String   @id @default(uuid())
+  // Nullable: a user authenticates via Apple, email/password, Google, or
+  // some combination — exactly one auth method being required is enforced
+  // in the auth service (src/modules/auth/service.ts), not the DB schema.
+  appleUserId            String?  @unique @map("apple_user_id")
+  passwordHash           String?  @map("password_hash")
+  googleId               String?  @unique @map("google_id")
+  email                  String?  @unique
+  fullName               String?  @map("full_name")
+  hasCompletedOnboarding Boolean  @default(false) @map("has_completed_onboarding")
+  createdAt              DateTime @default(now()) @map("created_at")
+  // Capability token for the read-only ICS calendar feed (GET /me/calendar.ics?token=...)
+  // — looked up by exact value like an API key, not hashed like passwordHash,
+  // since calendar apps must present it verbatim on every fetch.
+  calendarToken          String?  @unique @map("calendar_token")
+
+  profile              AthleteProfile?
+  goals                Goal[]
+  availability         Availability?
+  constraintsLog       ConstraintLog[]
+  trainingPlans        TrainingPlan[]
+  completedActivities  CompletedActivity[]
+  healthMetricsDaily   HealthMetricDaily[]
+  adaptationEvents     AdaptationEvent[]
+  deviceConnections    DeviceConnection[]
+  pushTokens           PushToken[]
+
+  @@map("users")
+}
+
+model AthleteProfile {
+  id                  String       @id @default(uuid())
+  userId              String       @unique @map("user_id")
+  user                User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  age                 Int?
+  sex                 String?
+  heightCm            Float?       @map("height_cm")
+  weightKg            Float?       @map("weight_kg")
+  level               AthleteLevel @default(BEGINNER)
+  yearsPractice       Float?       @map("years_practice")
+  weeklyVolumeAvgMin  Int?         @map("weekly_volume_avg_min")
+  hrMax               Int?         @map("hr_max")
+  hrRest              Int?         @map("hr_rest")
+  ftpWatts            Int?         @map("ftp_watts")
+  thresholdPaceSecKm  Int?         @map("threshold_pace_sec_per_km")
+  cssPaceSec100m      Int?         @map("css_pace_sec_per_100m")
+  updatedAt           DateTime     @updatedAt @map("updated_at")
+
+  @@map("athlete_profiles")
+}
+
+model Goal {
+  id         String       @id @default(uuid())
+  userId     String       @map("user_id")
+  user       User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type       GoalType
+  targetDate DateTime     @map("target_date")
+  priority   GoalPriority @default(B)
+  targetTime Int?         @map("target_time_seconds")
+  status     GoalStatus   @default(ACTIVE)
+  createdAt  DateTime     @default(now()) @map("created_at")
+
+  trainingPlans TrainingPlan[]
+
+  @@index([userId])
+  @@map("goals")
+}
+
+model Availability {
+  id                    String   @id @default(uuid())
+  userId                String   @unique @map("user_id")
+  user                  User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  sessionsPerWeek       Int      @map("sessions_per_week")
+  maxSessionDurationMin Int      @map("max_session_duration_min")
+  availableDays         Json     @map("available_days")
+  preferredTimeSlots    Json     @map("preferred_time_slots")
+  mandatoryRestDays     Json     @map("mandatory_rest_days")
+  updatedAt             DateTime @updatedAt @map("updated_at")
+
+  @@map("availabilities")
+}
+
+model ConstraintLog {
+  id           String   @id @default(uuid())
+  userId       String   @map("user_id")
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  date         DateTime @db.Date
+  injuries     Json?
+  fatigueLevel Int?     @map("fatigue_level")
+  stressLevel  Int?     @map("stress_level")
+  sleepHours   Float?   @map("sleep_hours")
+
+  @@index([userId, date])
+  @@map("constraints_log")
+}
+
+model TrainingPlan {
+  id               String     @id @default(uuid())
+  userId           String     @map("user_id")
+  user             User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  goalId           String     @map("goal_id")
+  goal             Goal       @relation(fields: [goalId], references: [id])
+  startDate        DateTime   @map("start_date") @db.Date
+  endDate          DateTime   @map("end_date") @db.Date
+  durationWeeks    Int        @map("duration_weeks")
+  status           PlanStatus @default(DRAFT)
+  generationVersion String    @map("generation_version")
+  createdAt        DateTime   @default(now()) @map("created_at")
+
+  macrocycles Macrocycle[]
+  adaptationEvents AdaptationEvent[]
+
+  // Every plan/dashboard read starts with `findFirst({ where: { userId, status: 'ACTIVE' } })`
+  // (see plans/routes.ts, dashboard/routes.ts) — Postgres doesn't auto-index
+  // foreign keys, so without this the hottest query in the app was a seq scan.
+  @@index([userId, status])
+  @@map("training_plans")
+}
+
+model Macrocycle {
+  id        String          @id @default(uuid())
+  planId    String          @map("plan_id")
+  plan      TrainingPlan    @relation(fields: [planId], references: [id], onDelete: Cascade)
+  name      String
+  phase     MacrocyclePhase
+  startDate DateTime        @map("start_date") @db.Date
+  endDate   DateTime        @map("end_date") @db.Date
+
+  mesocycles Mesocycle[]
+
+  @@index([planId])
+  @@map("macrocycles")
+}
+
+model Mesocycle {
+  id           String     @id @default(uuid())
+  macrocycleId String     @map("macrocycle_id")
+  macrocycle   Macrocycle @relation(fields: [macrocycleId], references: [id], onDelete: Cascade)
+  name         String
+  focus        String
+  loadTarget   Float?     @map("load_target")
+  startDate    DateTime   @map("start_date") @db.Date
+  endDate      DateTime   @map("end_date") @db.Date
+
+  microcycles Microcycle[]
+
+  @@index([macrocycleId])
+  @@map("mesocycles")
+}
+
+model Microcycle {
+  id              String    @id @default(uuid())
+  mesocycleId     String    @map("mesocycle_id")
+  mesocycle       Mesocycle @relation(fields: [mesocycleId], references: [id], onDelete: Cascade)
+  weekNumber      Int       @map("week_number")
+  startDate       DateTime  @map("start_date") @db.Date
+  endDate         DateTime  @map("end_date") @db.Date
+  isRecoveryWeek  Boolean   @default(false) @map("is_recovery_week")
+  plannedLoad     Float?    @map("planned_load")
+
+  workouts Workout[]
+
+  @@index([mesocycleId])
+  @@map("microcycles")
+}
+
+model Workout {
+  id                String           @id @default(uuid())
+  microcycleId      String           @map("microcycle_id")
+  microcycle        Microcycle       @relation(fields: [microcycleId], references: [id], onDelete: Cascade)
+  date              DateTime         @db.Date
+  sport             SportType
+  title             String
+  description       String
+  structure         Json
+  plannedDurationMin Int             @map("planned_duration_min")
+  plannedDistanceM  Int?             @map("planned_distance_m")
+  estimatedTss      Float?           @map("estimated_tss")
+  estimatedTrimp    Float?           @map("estimated_trimp")
+  rpeTarget         Int?             @map("rpe_target")
+  intensity         WorkoutIntensity
+  status            WorkoutStatus    @default(PLANNED)
+  calendarEventId   String?          @map("calendar_event_id")
+
+  completedActivities CompletedActivity[]
+
+  @@index([microcycleId])
+  @@map("workouts")
+}
+
+model CompletedActivity {
+  id            String         @id @default(uuid())
+  userId        String         @map("user_id")
+  user          User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  workoutId     String?        @map("workout_id")
+  workout       Workout?       @relation(fields: [workoutId], references: [id])
+  source        ActivitySource
+  externalId    String?        @map("external_id")
+  startTime     DateTime       @map("start_time")
+  durationS     Int            @map("duration_s")
+  distanceM     Float?         @map("distance_m")
+  avgHr         Int?           @map("avg_hr")
+  maxHr         Int?           @map("max_hr")
+  avgPower      Int?           @map("avg_power")
+  avgPaceSecKm  Int?           @map("avg_pace_sec_per_km")
+  elevationGainM Float?        @map("elevation_gain_m")
+  rawPayload    Json?          @map("raw_payload")
+  createdAt     DateTime       @default(now()) @map("created_at")
+
+  @@index([userId])
+  @@index([workoutId])
+  @@map("completed_activities")
+}
+
+model HealthMetricDaily {
+  id                  String   @id @default(uuid())
+  userId              String   @map("user_id")
+  user                User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  date                DateTime @db.Date
+  restingHr           Int?     @map("resting_hr")
+  hrvMs               Float?   @map("hrv_ms")
+  vo2max              Float?
+  sleepDurationMin     Int?     @map("sleep_duration_min")
+  sleepQuality        Int?     @map("sleep_quality")
+  trainingLoadAcute   Float?   @map("training_load_acute")
+  trainingLoadChronic Float?   @map("training_load_chronic")
+  formScore           Float?   @map("form_score")
+
+  @@unique([userId, date])
+  @@map("health_metrics_daily")
+}
+
+model AdaptationEvent {
+  id          String            @id @default(uuid())
+  userId      String            @map("user_id")
+  user        User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  planId      String            @map("plan_id")
+  plan        TrainingPlan      @relation(fields: [planId], references: [id], onDelete: Cascade)
+  triggeredBy AdaptationTrigger @map("triggered_by")
+  actionTaken String            @map("action_taken")
+  deltaLoad   Float?            @map("delta_load")
+  createdAt   DateTime          @default(now()) @map("created_at")
+
+  @@index([planId])
+  @@map("adaptation_events")
+}
+
+model DeviceConnection {
+  id                   String              @id @default(uuid())
+  userId               String              @map("user_id")
+  user                 User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  provider             IntegrationProvider
+  /// Provider-side user id (e.g. Strava athlete id) — lets webhook payloads
+  /// (which only carry the provider's id, not ours) be routed to a user.
+  providerUserId       String?             @map("provider_user_id")
+  accessTokenEncrypted String?             @map("access_token_encrypted")
+  refreshTokenEncrypted String?            @map("refresh_token_encrypted")
+  expiresAt            DateTime?           @map("expires_at")
+  scope                String?
+  connectedAt          DateTime            @default(now()) @map("connected_at")
+
+  @@unique([userId, provider])
+  @@unique([provider, providerUserId])
+  @@map("device_connections")
+}
+
+model PushToken {
+  id          String   @id @default(uuid())
+  userId      String   @map("user_id")
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  deviceToken String   @map("device_token")
+  platform    String   @default("ios")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  @@unique([userId, deviceToken])
+  @@map("push_tokens")
+}

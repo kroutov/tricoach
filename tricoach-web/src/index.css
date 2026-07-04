@@ -1,0 +1,109 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens ported from TriCoachAI/Core/DesignSystem/ (Colors.swift,
+ * Typography.swift) — semantic names kept 1:1 with TCColor/TCSpacing/TCRadius
+ * so the two codebases stay conceptually in sync. iOS uses adaptive system
+ * colors for background/text/separator; here that's light/dark CSS variable
+ * pairs instead, exposed to Tailwind via `@theme inline`.
+ */
+:root {
+  --color-background: #ffffff;
+  --color-secondary-background: #f3f4f6;
+  --color-card-background: #f9fafb;
+  --color-primary-text: #111827;
+  --color-secondary-text: #6b7280;
+  --color-separator: #e5e7eb;
+
+  /*
+   * TCColor.brand / intensity* / sport* — darker (700/800-level) shades in
+   * light mode than in dark mode. These colors double as both a PillBadge's
+   * *text* color and (via `color-mix(... 15%, transparent)`) the tint of its
+   * own background, so the same value has to hold up as small bold text
+   * against both a plain light surface AND that badge's own pale tinted
+   * background. The vivid 500-level shades that work well as bright accents
+   * on a near-black dark background fail WCAG AA (as low as 1.9:1) once the
+   * background turns near-white — verified against every actual background/
+   * badge-background pair with a script, not eyeballed.
+   */
+  --color-brand: #0f5c42;
+  --color-intensity-easy: #166534;
+  --color-intensity-moderate: #9a3412;
+  --color-intensity-hard: #b91c1c;
+  --color-sport-run: #9a3412;
+  --color-sport-bike: #1d4ed8;
+  --color-sport-swim: #155e75;
+  --color-sport-brick: #7e22ce;
+  --color-sport-strength: #374151;
+  --color-sport-rest: #4b5563;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background: #0b0f0e;
+    --color-secondary-background: #1f2937;
+    --color-card-background: #171f1d;
+    --color-primary-text: #f9fafb;
+    --color-secondary-text: #9ca3af;
+    --color-separator: #374151;
+
+    /* TCColor.brand — ported from AccentColor.colorset (dark appearance) */
+    --color-brand: #14825c;
+
+    /* TCColor.intensityEasy/Moderate/Hard */
+    --color-intensity-easy: #22c55e;
+    --color-intensity-moderate: #f97316;
+    --color-intensity-hard: #ef4444;
+
+    /* TCColor.sportRun/Bike/Swim/Brick/Strength/Rest */
+    --color-sport-run: #f97316;
+    --color-sport-bike: #3b82f6;
+    --color-sport-swim: #06b6d4;
+    --color-sport-brick: #a855f7;
+    --color-sport-strength: #6b7280;
+    --color-sport-rest: #9ca3af;
+  }
+}
+
+@theme inline {
+  --color-background: var(--color-background);
+  --color-secondary-background: var(--color-secondary-background);
+  --color-card-background: var(--color-card-background);
+  --color-primary-text: var(--color-primary-text);
+  --color-secondary-text: var(--color-secondary-text);
+  --color-separator: var(--color-separator);
+  --color-brand: var(--color-brand);
+  --color-intensity-easy: var(--color-intensity-easy);
+  --color-intensity-moderate: var(--color-intensity-moderate);
+  --color-intensity-hard: var(--color-intensity-hard);
+  --color-sport-run: var(--color-sport-run);
+  --color-sport-bike: var(--color-sport-bike);
+  --color-sport-swim: var(--color-sport-swim);
+  --color-sport-brick: var(--color-sport-brick);
+  --color-sport-strength: var(--color-sport-strength);
+  --color-sport-rest: var(--color-sport-rest);
+
+  /*
+   * TCSpacing (xs/sm/md/lg/xl = 4/8/16/24/32px) is deliberately NOT ported
+   * as named tokens here: Tailwind's keyword scale ("sm"/"md"/"lg"/"xl") is
+   * reused across many unrelated utility families (max-w-sm, text-lg,
+   * shadow-md...), so a custom --spacing-sm collides with and silently
+   * overrides those. Tailwind's default numeric spacing scale (base 4px)
+   * already lines up exactly: p-1/2/4/6/8 = TCSpacing.xs/sm/md/lg/xl.
+   */
+
+  /* TCRadius */
+  --radius-card: 16px;
+  --radius-control: 12px;
+  --radius-pill: 9999px;
+}
+
+body {
+  margin: 0;
+  color: var(--color-primary-text);
+  background: var(--color-background);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

@@ -1,0 +1,2 @@
+-- AlterEnum
+ALTER TYPE "AdaptationTrigger" ADD VALUE 'PHYSIOLOGICAL_STRAIN';
