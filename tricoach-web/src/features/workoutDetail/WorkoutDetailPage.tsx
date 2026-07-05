@@ -83,6 +83,7 @@ export function WorkoutDetailPage() {
     queryClient.invalidateQueries({ queryKey: ['plans', 'active'] });
     queryClient.invalidateQueries({ queryKey: ['dashboard', 'summary'] });
     queryClient.invalidateQueries({ queryKey: ['adaptationEvents'] });
+    queryClient.invalidateQueries({ queryKey: ['activities'] });
   };
 
   const completeMutation = useMutation({

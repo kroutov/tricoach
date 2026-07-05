@@ -124,6 +124,7 @@ export function ProfilePage() {
       setSyncResultMessage(formatSyncResult(result));
       queryClient.invalidateQueries({ queryKey: ['plans', 'active'] });
       queryClient.invalidateQueries({ queryKey: ['dashboard', 'summary'] });
+      queryClient.invalidateQueries({ queryKey: ['activities'] });
     },
   });
 
@@ -154,6 +155,7 @@ export function ProfilePage() {
       setSyncResultMessage(formatSyncResult(result));
       queryClient.invalidateQueries({ queryKey: ['plans', 'active'] });
       queryClient.invalidateQueries({ queryKey: ['dashboard', 'summary'] });
+      queryClient.invalidateQueries({ queryKey: ['activities'] });
     },
   });
 
