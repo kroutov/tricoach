@@ -14,14 +14,14 @@ React + Vite + TypeScript. Remplace l'app iOS (`TriCoachAI/`, mise de côté) co
 
 ## Authentification
 
-Email/mot de passe + Google Sign-In (Sign In with Apple reste dans le backend mais n'est pas utilisé ici). Token JWT stocké en `localStorage` (pas de cookie httpOnly — voir le tradeoff documenté dans le plan de migration). `src/features/auth/AuthContext.tsx` gère la session, `src/features/auth/RequireAuth.tsx` protège les routes.
+Email/mot de passe uniquement (Sign In with Apple reste dans le backend mais n'est pas utilisé ici). Token JWT stocké en `localStorage` (pas de cookie httpOnly — voir le tradeoff documenté dans le plan de migration). `src/features/auth/AuthContext.tsx` gère la session, `src/features/auth/RequireAuth.tsx` protège les routes.
 
-Le bouton Google Sign-In (`GoogleSignInButton.tsx`) ne s'affiche que si `VITE_GOOGLE_CLIENT_ID` est configuré — créer un OAuth Client ID sur [Google Cloud Console](https://console.cloud.google.com/) pour l'activer.
+⚠️ **Google Sign-In retiré** : implémenté puis retiré après des échecs d'intégration persistants en production. Un premier bug (backend, `google-auth-library` qui ne peut vérifier les tokens que via un endpoint legacy désormais bloqué par Google) a été diagnostiqué et corrigé (JWKS fait maison, même pattern que Sign In with Apple), mais la connexion échouait encore ensuite pour une raison non identifiée — retiré plutôt que de continuer à investiguer un fournisseur d'auth secondaire.
 
 ## Démarrer
 
 ```bash
-cp .env.example .env   # ajuster VITE_API_BASE_URL/VITE_GOOGLE_CLIENT_ID si besoin
+cp .env.example .env   # ajuster VITE_API_BASE_URL si besoin
 npm install
 npm run dev             # http://localhost:5173, le backend doit tourner sur :3000
 ```
@@ -62,3 +62,7 @@ Le backend doit avoir `CORS_ORIGINS` incluant `http://localhost:5173` dans son `
 Vérifié de bout en bout : suite backend 110/110, `tsc -b` propre, `oxlint src` sans nouvelle violation, suite Playwright+axe 8/8, passe manuelle clavier/zoom sur les écrans clés.
 
 **Déploiement réel (fait)** — en ligne sur `https://tricoach-ten.vercel.app` (Vercel), backend sur `https://tricoach-9ob8.onrender.com` (Render + PostgreSQL managé gratuit ⚠️ expire après 30 jours), dépôt `https://github.com/kroutov/tricoach`. Détail de la config et des pièges rencontrés (dépréciation `NODE_ENV=production` sur Render, `vercel.json` pour le routage SPA, domaine de callback Strava) dans [`tricoach-backend/docs/DEPLOYMENT.md`](../tricoach-backend/docs/DEPLOYMENT.md). Vérifié de bout en bout dans un vrai navigateur contre les deux services réels : inscription → onboarding complet → génération réelle d'un plan 12 semaines → dashboard/calendrier/profil (ICS, Strava, Garmin) tous rendus correctement.
+
+**Post-lancement (fait)** :
+- **Google Sign-In retiré** — voir avertissement dans la section Authentification ci-dessus. `GoogleSignInButton.tsx` (frontend), `googleAuth.ts`/route `/auth/google`/`issueSessionForGoogle` (backend) supprimés ; colonne `google_id` droppée en base (migration `20260706000000_drop_google_id`, confirmé aucune ligne non-nulle avant suppression).
+- **Calendrier : navigation semaine par semaine sur tout le plan** — auparavant verrouillé sur la semaine contenant la date du jour, sans aucun moyen d'en voir d'autres. Ajout de boutons ‹/› (`CalendarPage.tsx`) qui décalent la semaine affichée de ±7 jours, bornés à la durée réelle du plan (`planDateRange` dans `src/lib/plan.ts`, calculée sur l'ensemble des microcycles) — désactivés au-delà de la première/dernière semaine plutôt que d'afficher une semaine vide. Bouton "Aujourd'hui" pour revenir rapidement à la semaine courante.

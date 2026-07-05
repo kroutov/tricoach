@@ -23,11 +23,6 @@ export const config = {
   jwtSecret: requireEnv('JWT_SECRET'),
   jwtExpiresIn: process.env.JWT_EXPIRES_IN ?? '30d',
   appleBundleId: process.env.APPLE_BUNDLE_ID ?? 'com.tricoach.ai',
-  // Optional, unlike jwtSecret/databaseUrl: Google Sign-In is one auth path
-  // among several (Apple, email/password), not a dependency of the whole
-  // app — an unconfigured client shouldn't crash the entire server, just
-  // that one route (see POST /auth/google's explicit check).
-  googleClientId: process.env.GOOGLE_CLIENT_ID,
   corsOrigins: (process.env.CORS_ORIGINS ?? '').split(',').map((origin) => origin.trim()).filter(Boolean),
   /** Custom URL scheme the iOS app registers to catch OAuth redirects (ASWebAuthenticationSession). */
   appScheme: process.env.APP_SCHEME ?? 'tricoach',

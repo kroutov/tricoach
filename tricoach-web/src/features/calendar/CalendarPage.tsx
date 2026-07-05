@@ -19,7 +19,7 @@ import {
 } from '@dnd-kit/core';
 import { getActivePlan } from '../../api/plans';
 import { rescheduleWorkout } from '../../api/workouts';
-import { currentMicrocycle, findWorkoutWithMicrocycle, workoutsOnDay } from '../../lib/plan';
+import { currentMicrocycle, findWorkoutWithMicrocycle, planDateRange, workoutsOnDay } from '../../lib/plan';
 import { isSameDay, parseApiDate, toDayString } from '../../lib/dateOnly';
 import { sportTypeLabel, workoutIntensityColorVar, workoutIntensityLabel } from '../../lib/enumLabels';
 import { PillBadge } from '../../components/PillBadge';
@@ -245,6 +245,17 @@ export function CalendarPage() {
   const dates = weekDatesFor(selectedDate);
   const dayWorkouts = [...workoutsOnDay(plan, selectedDate)].sort((a, b) => a.date.localeCompare(b.date));
   const microcycle = currentMicrocycle(plan, selectedDate);
+  const range = planDateRange(plan);
+  const canGoPrevious = !range || toDayString(dates[0]) > toDayString(range.start);
+  const canGoNext = !range || toDayString(dates[6]) < toDayString(range.end);
+
+  const shiftWeek = (deltaDays: number) => {
+    setSelectedDate((current) => {
+      const next = new Date(current);
+      next.setDate(current.getDate() + deltaDays);
+      return next;
+    });
+  };
 
   return (
     <DndContext
@@ -255,6 +266,29 @@ export function CalendarPage() {
     >
       <div className="mx-auto max-w-2xl p-4">
         <h1 className="mb-3 text-xl font-bold text-primary-text">Calendrier</h1>
+        <div className="mb-2 flex items-center justify-between">
+          <button
+            type="button"
+            onClick={() => shiftWeek(-7)}
+            disabled={!canGoPrevious}
+            aria-label="Semaine précédente"
+            className="rounded-control px-3 py-1 text-primary-text disabled:opacity-30"
+          >
+            ‹
+          </button>
+          <button type="button" onClick={() => setSelectedDate(new Date())} className="text-sm font-medium text-brand">
+            Aujourd'hui
+          </button>
+          <button
+            type="button"
+            onClick={() => shiftWeek(7)}
+            disabled={!canGoNext}
+            aria-label="Semaine suivante"
+            className="rounded-control px-3 py-1 text-primary-text disabled:opacity-30"
+          >
+            ›
+          </button>
+        </div>
         <div className="flex gap-1.5">
           {dates.map((date) => (
             <DayPill

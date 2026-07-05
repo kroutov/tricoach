@@ -5,7 +5,6 @@ import { z } from 'zod';
 import { Link, useNavigate } from 'react-router-dom';
 import { login } from '../../api/auth';
 import { useAuth } from './AuthContext';
-import { GoogleSignInButton } from './GoogleSignInButton';
 
 const loginSchema = z.object({
   email: z.string().email('Adresse email invalide'),
@@ -98,8 +97,6 @@ export function LoginPage() {
             {isSubmitting ? 'Connexion…' : 'Se connecter'}
           </button>
         </form>
-
-        <GoogleSignInButton />
 
         <p className="text-center text-sm text-secondary-text">
           Pas encore de compte ?{' '}

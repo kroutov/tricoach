@@ -6,7 +6,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { register as registerAccount } from '../../api/auth';
 import { ApiClientError } from '../../api/client';
 import { useAuth } from './AuthContext';
-import { GoogleSignInButton } from './GoogleSignInButton';
 
 const registerSchema = z.object({
   email: z.string().email('Adresse email invalide'),
@@ -116,8 +115,6 @@ export function RegisterPage() {
             {isSubmitting ? 'Création…' : 'Créer mon compte'}
           </button>
         </form>
-
-        <GoogleSignInButton />
 
         <p className="text-center text-sm text-secondary-text">
           Déjà un compte ?{' '}

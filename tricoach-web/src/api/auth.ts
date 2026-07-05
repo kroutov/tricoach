@@ -22,10 +22,6 @@ export function login(email: string, password: string): Promise<AuthResponse> {
   return apiFetch('/auth/login', { method: 'POST', body: { email, password } });
 }
 
-export function loginWithGoogle(idToken: string): Promise<AuthResponse> {
-  return apiFetch('/auth/google', { method: 'POST', body: { idToken } });
-}
-
 export function refresh(): Promise<{ token: string }> {
   return apiFetch('/auth/refresh', { method: 'POST' });
 }

@@ -106,12 +106,11 @@ enum IntegrationProvider {
 
 model User {
   id                     String   @id @default(uuid())
-  // Nullable: a user authenticates via Apple, email/password, Google, or
-  // some combination — exactly one auth method being required is enforced
-  // in the auth service (src/modules/auth/service.ts), not the DB schema.
+  // Nullable: a user authenticates via Apple, email/password, or some
+  // combination — exactly one auth method being required is enforced in
+  // the auth service (src/modules/auth/service.ts), not the DB schema.
   appleUserId            String?  @unique @map("apple_user_id")
   passwordHash           String?  @map("password_hash")
-  googleId               String?  @unique @map("google_id")
   email                  String?  @unique
   fullName               String?  @map("full_name")
   hasCompletedOnboarding Boolean  @default(false) @map("has_completed_onboarding")

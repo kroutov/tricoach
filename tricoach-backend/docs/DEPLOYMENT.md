@@ -27,7 +27,6 @@ Provisionner une instance PostgreSQL managée (Railway/Render/Fly ont toutes une
 | `JWT_SECRET` | **obligatoire.** Secret aléatoire long (`openssl rand -base64 32`) — **jamais** la valeur de `.env.example`/dev. Dérive aussi la clé de chiffrement des tokens Strava (`src/lib/crypto.ts`), donc double impact si compromis ou faible |
 | `JWT_EXPIRES_IN` | ex. `30d` |
 | `APPLE_BUNDLE_ID` | `com.tricoach.ai` (doit correspondre à l'identity token vérifié côté `POST /auth/apple` — dormant côté web) |
-| `GOOGLE_CLIENT_ID` | Optionnel — sans lui, `POST /auth/google` répond 503 `google_oauth_not_configured` (le reste de l'API fonctionne normalement). OAuth Client ID créé sur [Google Cloud Console](https://console.cloud.google.com/) (type "Web application"), même valeur que `VITE_GOOGLE_CLIENT_ID` côté frontend |
 | `CORS_ORIGINS` | Liste d'origines web autorisées, séparées par des virgules (ex. `https://app.tricoach.ai`). Vide par défaut = aucune origine autorisée (le frontend ne pourra pas appeler l'API) |
 | `BACKEND_PUBLIC_URL` | URL publique du backend déployé (ex. `https://api.tricoach.ai`) — sert à construire `strava.redirectUri` |
 | `WEB_PUBLIC_URL` | URL publique du client web déployé (ex. `https://app.tricoach.ai`) — le callback Strava y redirige le navigateur une fois la connexion terminée |
@@ -75,7 +74,6 @@ SPA statique (Vite build → `dist/`) — **Vercel** recommandé (détection zé
 1. `npm run build` produit `dist/` — pas de serveur Node nécessaire côté frontend, tout passe par l'API existante.
 2. Variables d'environnement (build-time, préfixe `VITE_` obligatoire pour être exposées au bundle) :
    - `VITE_API_BASE_URL` — URL du backend déployé + `/api/v1` (ex. `https://api.tricoach.ai/api/v1`).
-   - `VITE_GOOGLE_CLIENT_ID` — même valeur que `GOOGLE_CLIENT_ID` côté backend (l'ID client Google n'est pas un secret, seul le client *secret* l'est, et il n'est jamais utilisé côté web).
 3. `tricoach-web/vercel.json` — règle de réécriture (`/(.*) → /index.html`) indispensable pour React Router : sans elle, un rafraîchissement ou un lien direct vers une route comme `/calendar` renvoie un 404 (aucune route serveur ne correspond, tout doit retomber sur `index.html` pour que le routage côté client prenne le relais).
 4. Une fois l'URL de production connue, ajouter cette origine à `CORS_ORIGINS` sur le backend **avant** de pouvoir tester le frontend déployé — sinon toutes les requêtes échouent silencieusement (bloquées par CORS, pas d'erreur HTTP explicite).
 

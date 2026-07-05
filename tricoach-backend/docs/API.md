@@ -7,7 +7,6 @@ Légende : ✅ implémenté · ⏳ non construit (phase future).
 | Auth | `POST /auth/apple` | Vérifie l'identity token Apple, upsert user, retourne JWT | ✅ (dormant côté web, toujours utilisé si l'app iOS revient) |
 | Auth | `POST /auth/register` | `{ email, password (min 8), fullName? }` → 201 `{ token, user }`. 409 `email_taken` si l'email existe déjà | ✅ (web, Phase web 1) |
 | Auth | `POST /auth/login` | `{ email, password }` → 200 `{ token, user }`. 401 `invalid_credentials` (message générique identique pour email inconnu, mauvais mot de passe, ou compte sans mot de passe — anti-énumération) | ✅ (web, Phase web 1) |
-| Auth | `POST /auth/google` | `{ idToken }` (ID token Google Identity Services) → 200 `{ token, user }`. Lie à un compte existant par email vérifié si trouvé, sinon crée. 503 `google_oauth_not_configured` si `GOOGLE_CLIENT_ID` absent, 401 `invalid_google_token` si le token est invalide | ✅ (web, Phase web 1) |
 | Auth | `POST /auth/dev-login` | Bypass dev-only (non-production), miroir du "mode démo" iOS | ✅ |
 | Auth | `POST /auth/refresh` | Ré-émet un JWT à partir d'un token valide | ✅ |
 | Utilisateur | `GET /me`, `PUT /me` | Enregistrement utilisateur (nom, `hasCompletedOnboarding`) | ✅ |
@@ -43,7 +42,7 @@ Légende : ✅ implémenté · ⏳ non construit (phase future).
 
 Toutes les routes `/me` (sauf `/me/calendar.ics`), `/plans`, `/workouts`, `/dashboard`, `/integrations/healthkit`, `/integrations/strava/*` (sauf `/callback`), `/integrations/garmin/*` exigent un header `Authorization: Bearer <jwt>` (middleware `requireAuth`). `/integrations/strava/callback`, `/webhooks/strava` et `/me/calendar.ics` n'ont pas de bearer token (appelés directement par le navigateur/Strava/un client calendrier tiers) et s'authentifient différemment (`state` signé, `hub.verify_token`/`owner_id`, `?token=` en query).
 
-**Rate limiting** (Phase 5, `src/middleware/rateLimit.ts`) : `POST /auth/apple`, `/auth/refresh`, `/auth/register`, `/auth/login`, `/auth/google` partagent le même limiteur (`authRateLimit`, 20 requêtes/15 min **par IP, tous champs confondus** — pas 20 par route) — ce sont des routes de vérification cryptographique (JWKS, bcrypt, signature JWT), peu coûteuses à spammer sans limite. `POST /webhooks/strava` (public, sans auth) est limité à 200/15 min.
+**Rate limiting** (Phase 5, `src/middleware/rateLimit.ts`) : `POST /auth/apple`, `/auth/refresh`, `/auth/register`, `/auth/login` partagent le même limiteur (`authRateLimit`, 20 requêtes/15 min **par IP, tous champs confondus** — pas 20 par route) — ce sont des routes de vérification cryptographique (JWKS, bcrypt, signature JWT), peu coûteuses à spammer sans limite. `POST /webhooks/strava` (public, sans auth) est limité à 200/15 min.
 
 **CORS** (Phase web 1, `src/app.ts`) : allowlist explicite via `CORS_ORIGINS` (liste d'origines séparées par des virgules), pas de wildcard `*`. `credentials: false` — le client web garde son JWT en `localStorage`, pas de cookie de session.
 

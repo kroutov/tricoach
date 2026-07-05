@@ -31,3 +31,12 @@ export function currentMicrocycle(plan: TrainingPlan, now: Date = new Date()): M
     return now >= start && now <= end;
   });
 }
+
+/** Full date span of the plan, across every microcycle — used to bound calendar week navigation. */
+export function planDateRange(plan: TrainingPlan): { start: Date; end: Date } | undefined {
+  const microcycles = allMicrocycles(plan);
+  if (microcycles.length === 0) return undefined;
+  const starts = microcycles.map((mic) => parseApiDate(mic.startDate).getTime());
+  const ends = microcycles.map((mic) => parseApiDate(mic.endDate).getTime());
+  return { start: new Date(Math.min(...starts)), end: new Date(Math.max(...ends)) };
+}

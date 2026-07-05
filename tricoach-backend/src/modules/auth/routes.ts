@@ -4,7 +4,6 @@ import { config } from '../../config';
 import { requireAuth } from '../../middleware/requireAuth';
 import { authRateLimit } from '../../middleware/rateLimit';
 import { verifyAppleIdentityToken } from './appleAuth';
-import { verifyGoogleIdToken } from './googleAuth';
 import { signSession } from './jwt';
 import { authService } from './service';
 
@@ -92,25 +91,6 @@ router.post('/login', authRateLimit, async (req, res, next) => {
   try {
     const body = loginSchema.parse(req.body);
     const result = await authService.loginWithPassword(body.email, body.password);
-    res.status(200).json(result);
-  } catch (err) {
-    if (err instanceof z.ZodError) {
-      res.status(400).json({ error: 'invalid_request', details: err.issues });
-      return;
-    }
-    next(err);
-  }
-});
-
-const googleSignInSchema = z.object({
-  idToken: z.string().min(1),
-});
-
-router.post('/google', authRateLimit, async (req, res, next) => {
-  try {
-    const body = googleSignInSchema.parse(req.body);
-    const identity = await verifyGoogleIdToken(body.idToken);
-    const result = await authService.issueSessionForGoogle(identity.googleId, identity.email, identity.fullName);
     res.status(200).json(result);
   } catch (err) {
     if (err instanceof z.ZodError) {

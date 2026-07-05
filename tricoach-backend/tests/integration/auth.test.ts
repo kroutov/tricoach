@@ -4,13 +4,6 @@ import { prisma } from '../../src/db/client';
 import { resetDb } from '../helpers/db';
 import { devLogin } from '../helpers/auth';
 
-jest.mock('../../src/modules/auth/googleAuth', () => ({
-  verifyGoogleIdToken: jest.fn(),
-}));
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const { verifyGoogleIdToken } = require('../../src/modules/auth/googleAuth');
-const mockVerifyGoogleIdToken = verifyGoogleIdToken as jest.Mock;
-
 const app = createApp();
 
 afterEach(resetDb);
@@ -108,37 +101,6 @@ describe('POST /auth/login', () => {
 
     expect(res.status).toBe(401);
     expect(res.body.error).toBe('invalid_credentials');
-  });
-});
-
-describe('POST /auth/google', () => {
-  afterEach(() => mockVerifyGoogleIdToken.mockReset());
-
-  it('creates a new user from a verified Google identity', async () => {
-    mockVerifyGoogleIdToken.mockResolvedValue({ googleId: 'google-123', email: 'googleuser@example.com', fullName: 'Google User' });
-    const res = await request(app).post('/api/v1/auth/google').send({ idToken: 'valid-token' });
-
-    expect(res.status).toBe(200);
-    expect(res.body.user.email).toBe('googleuser@example.com');
-  });
-
-  it('links to an existing account by verified email rather than duplicating it', async () => {
-    await request(app).post('/api/v1/auth/register').send({ email: 'linked@example.com', password: 'somepassword' });
-    mockVerifyGoogleIdToken.mockResolvedValue({ googleId: 'google-456', email: 'linked@example.com' });
-
-    const res = await request(app).post('/api/v1/auth/google').send({ idToken: 'valid-token' });
-    expect(res.status).toBe(200);
-
-    const count = await prisma.user.count({ where: { email: 'linked@example.com' } });
-    expect(count).toBe(1);
-  });
-
-  it('propagates the underlying verification error (e.g. unconfigured client) as-is', async () => {
-    const { ApiError } = require('../../src/middleware/errorHandler');
-    mockVerifyGoogleIdToken.mockRejectedValue(new ApiError(503, 'google_oauth_not_configured'));
-
-    const res = await request(app).post('/api/v1/auth/google').send({ idToken: 'whatever' });
-    expect(res.status).toBe(503);
   });
 });
 
