@@ -11,6 +11,7 @@ import { WorkoutDetailPage } from './features/workoutDetail/WorkoutDetailPage';
 import { ProfilePage } from './features/profile/ProfilePage';
 import { GoalsPage } from './features/goals/GoalsPage';
 import { AdaptationHistoryPage } from './features/adaptationHistory/AdaptationHistoryPage';
+import { ActivityHistoryPage } from './features/activityHistory/ActivityHistoryPage';
 import { AnalyticsPage } from './features/analytics/AnalyticsPage';
 import { AppLayout } from './components/AppLayout';
 
@@ -29,6 +30,7 @@ function App() {
               <Route path="/workouts/:id" element={<WorkoutDetailPage />} />
               <Route path="/goals" element={<GoalsPage />} />
               <Route path="/adaptation-history" element={<AdaptationHistoryPage />} />
+              <Route path="/activities" element={<ActivityHistoryPage />} />
               <Route path="/analytics" element={<AnalyticsPage />} />
               <Route path="/profile" element={<ProfilePage />} />
             </Route>

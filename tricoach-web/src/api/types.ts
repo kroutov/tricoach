@@ -9,6 +9,7 @@ import type {
   SportType,
   AdaptationTrigger,
   MacrocyclePhase,
+  ActivitySource,
 } from '../lib/enumLabels';
 
 // Shapes mirror tricoach-backend/src/modules/*/serializers.ts and persistence.ts exactly.
@@ -158,6 +159,21 @@ export interface AdaptationEvent {
   actionTaken: string;
   deltaLoadPercent: number | null;
   createdAt: string;
+}
+
+export interface CompletedActivity {
+  id: string;
+  workoutId: string | null;
+  source: ActivitySource;
+  sport: SportType | null;
+  startTime: string;
+  durationS: number;
+  distanceM: number | null;
+  avgHr: number | null;
+  maxHr: number | null;
+  avgPowerWatts: number | null;
+  avgPaceSecPerKm: number | null;
+  elevationGainM: number | null;
 }
 
 export interface DashboardSummary {

@@ -53,6 +53,12 @@ test.describe('authenticated pages', () => {
     await expectNoViolations(page);
   });
 
+  test('activity history has no accessibility violations', async ({ page }) => {
+    await page.goto('/activities');
+    await expect(page.getByRole('heading', { name: 'Activités' })).toBeVisible();
+    await expectNoViolations(page);
+  });
+
   test('adaptation history has no accessibility violations', async ({ page }) => {
     await page.goto('/adaptation-history');
     await expect(page.getByRole('heading', { name: "Historique d'adaptation" })).toBeVisible();

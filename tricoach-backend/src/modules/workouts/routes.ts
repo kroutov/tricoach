@@ -38,6 +38,7 @@ router.post('/:id/complete', async (req, res, next) => {
           userId: req.userId!,
           workoutId: workout.id,
           source: 'MANUAL',
+          sport: workout.sport,
           startTime: workout.date,
           durationS: body.actualDurationMin * 60,
         },

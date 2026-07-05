@@ -112,6 +112,14 @@ export const sportTypeLabel: Record<SportType, string> = {
   strength: 'Renforcement',
   rest: 'Repos',
 };
+export const sportTypeColorVar: Record<SportType, string> = {
+  run: 'var(--color-sport-run)',
+  bike: 'var(--color-sport-bike)',
+  swim: 'var(--color-sport-swim)',
+  brick: 'var(--color-sport-brick)',
+  strength: 'var(--color-sport-strength)',
+  rest: 'var(--color-sport-rest)',
+};
 
 export type AdaptationTrigger =
   | 'missedWorkout'
@@ -130,6 +138,14 @@ export const adaptationTriggerLabel: Record<AdaptationTrigger, string> = {
   injuryFlag: 'Alerte blessure',
   lowRecovery: 'Récupération faible',
   physiologicalStrain: 'Dérive cardiaque',
+};
+
+export type ActivitySource = 'healthKit' | 'strava' | 'garmin' | 'manual';
+export const activitySourceLabel: Record<ActivitySource, string> = {
+  healthKit: 'Apple Santé',
+  strava: 'Strava',
+  garmin: 'Garmin',
+  manual: 'Manuel',
 };
 
 export type MacrocyclePhase = 'base' | 'build' | 'peak' | 'taper' | 'transition';

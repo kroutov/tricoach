@@ -23,11 +23,16 @@ export interface IngestionResult {
   adaptationEvents: AdaptationEvent[];
 }
 
+/** Same session synced from two different providers rarely shares a timestamp exactly. */
+const CROSS_SOURCE_DEDUP_WINDOW_MS = 5 * 60 * 1000;
+
 /**
  * Shared by HealthKit sync, Strava manual sync and Strava webhooks: skips
- * activities already ingested (by source+externalId), matches each new one
- * to a same-day/same-sport planned workout (marking it completed), and
- * re-runs the adaptation engine for every plan touched by a match plus any
+ * activities already ingested (by source+externalId) or already covered by
+ * a different source (same sport within a 5-minute window — see
+ * `CROSS_SOURCE_DEDUP_WINDOW_MS` above), matches each new one to a
+ * same-day/same-sport planned workout (marking it completed), and re-runs
+ * the adaptation engine for every plan touched by a match plus any
  * `extraPlanIds` the caller wants re-evaluated (e.g. the active plan after a
  * HealthKit wellness-only sync with no matching activity).
  */
@@ -47,6 +52,18 @@ export async function ingestActivities(
       if (existing) continue;
     }
 
+    const crossSourceDuplicate = await prisma.completedActivity.findFirst({
+      where: {
+        userId,
+        sport: sportTypeMap.toDb(activity.sport),
+        startTime: {
+          gte: new Date(activity.startTime.getTime() - CROSS_SOURCE_DEDUP_WINDOW_MS),
+          lte: new Date(activity.startTime.getTime() + CROSS_SOURCE_DEDUP_WINDOW_MS),
+        },
+      },
+    });
+    if (crossSourceDuplicate) continue;
+
     const matchedWorkout = await prisma.workout.findFirst({
       where: {
         date: toDateOnly(activity.startTime),
@@ -63,6 +80,7 @@ export async function ingestActivities(
         workoutId: matchedWorkout?.id ?? null,
         source: activitySourceMap.toDb(activity.source),
         externalId: activity.externalId ?? null,
+        sport: sportTypeMap.toDb(activity.sport),
         startTime: activity.startTime,
         durationS: activity.durationS,
         distanceM: activity.distanceM ?? null,

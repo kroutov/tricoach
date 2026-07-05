@@ -14,6 +14,7 @@ Légende : ✅ implémenté · ⏳ non construit (phase future).
 | Disponibilités | `GET/PUT /me/availability` | Séances/semaine, durée max, jours, repos obligatoires | ✅ |
 | Objectifs | `GET/POST/PUT/DELETE /me/goals[/:id]` | Objectifs sportifs multiples avec date/priorité/temps visé | ✅ |
 | Contraintes | `GET/POST /me/constraints` | Check-in (blessures, fatigue, stress, sommeil) + historique récent | ✅ |
+| Activités | `GET /me/activities` | Historique de toutes les activités synchronisées (Strava/Garmin/HealthKit/manuel), plus récentes en premier. Les doublons inter-sources (même sport à ±5 min entre deux fournisseurs) sont déjà filtrés à l'ingestion, pas ici — voir `ingestActivities` dans `src/modules/integrations/activityIngestion.ts` | ✅ (web, post-lancement) |
 | Plans | `POST /plans/generate` | Génère un plan périodisé depuis un objectif (moteur TS, voir `src/modules/plans/engine/`) | ✅ |
 | Plans | `GET /plans`, `GET /plans/:id` | Liste / détail plan complet (macro→méso→micro→séances) | ✅ |
 | Plans | `GET /plans/:id/adaptation-events` | Historique des adaptations du plan | ✅ |

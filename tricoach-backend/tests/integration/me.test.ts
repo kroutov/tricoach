@@ -88,3 +88,29 @@ describe('constraints', () => {
     expect(get.body[0].injuries).toEqual(['genou']);
   });
 });
+
+describe('activity history', () => {
+  it('returns an empty list before anything is synced', async () => {
+    const { token } = await devLogin(app);
+    const res = await request(app).get('/api/v1/me/activities').set('Authorization', `Bearer ${token}`);
+    expect(res.status).toBe(200);
+    expect(res.body).toEqual([]);
+  });
+
+  it('lists completed activities most-recent-first with sport and source', async () => {
+    const { token, user } = await devLogin(app);
+    await prisma.completedActivity.create({
+      data: { userId: user.id, source: 'STRAVA', sport: 'RUN', startTime: new Date('2026-07-01T08:00:00Z'), durationS: 1800 },
+    });
+    await prisma.completedActivity.create({
+      data: { userId: user.id, source: 'STRAVA', sport: 'BIKE', startTime: new Date('2026-07-03T08:00:00Z'), durationS: 3600 },
+    });
+
+    const res = await request(app).get('/api/v1/me/activities').set('Authorization', `Bearer ${token}`);
+    expect(res.status).toBe(200);
+    expect(res.body).toHaveLength(2);
+    expect(res.body[0].sport).toBe('bike');
+    expect(res.body[0].source).toBe('strava');
+    expect(res.body[1].sport).toBe('run');
+  });
+});

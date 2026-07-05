@@ -302,6 +302,7 @@ model CompletedActivity {
   workout       Workout?       @relation(fields: [workoutId], references: [id])
   source        ActivitySource
   externalId    String?        @map("external_id")
+  sport         SportType?
   startTime     DateTime       @map("start_time")
   durationS     Int            @map("duration_s")
   distanceM     Float?         @map("distance_m")

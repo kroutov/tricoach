@@ -1,5 +1,5 @@
-import { AthleteProfile, Availability, ConstraintLog, Goal, User } from '@prisma/client';
-import { athleteLevelMap, goalPriorityMap, goalStatusMap, goalTypeMap } from '../../lib/enumMapping';
+import { AthleteProfile, Availability, CompletedActivity, ConstraintLog, Goal, User } from '@prisma/client';
+import { activitySourceMap, athleteLevelMap, goalPriorityMap, goalStatusMap, goalTypeMap, sportTypeMap } from '../../lib/enumMapping';
 
 export function serializeUser(user: User) {
   return {
@@ -63,6 +63,23 @@ export function serializeGoal(goal: Goal) {
     targetTimeSeconds: goal.targetTime,
     status: goalStatusMap.toApi(goal.status),
     createdAt: goal.createdAt,
+  };
+}
+
+export function serializeActivity(activity: CompletedActivity) {
+  return {
+    id: activity.id,
+    workoutId: activity.workoutId,
+    source: activitySourceMap.toApi(activity.source),
+    sport: activity.sport ? sportTypeMap.toApi(activity.sport) : null,
+    startTime: activity.startTime,
+    durationS: activity.durationS,
+    distanceM: activity.distanceM,
+    avgHr: activity.avgHr,
+    maxHr: activity.maxHr,
+    avgPowerWatts: activity.avgPower,
+    avgPaceSecPerKm: activity.avgPaceSecKm,
+    elevationGainM: activity.elevationGainM,
   };
 }
 

@@ -1,5 +1,5 @@
 import { apiFetch } from './client';
-import type { AthleteProfile, Availability, Goal, CheckIn } from './types';
+import type { AthleteProfile, Availability, Goal, CheckIn, CompletedActivity } from './types';
 import type { User } from './auth';
 
 export function getProfile(): Promise<AthleteProfile> {
@@ -92,4 +92,8 @@ export function getCalendarToken(): Promise<CalendarTokenResponse> {
 
 export function rotateCalendarToken(): Promise<CalendarTokenResponse> {
   return apiFetch('/me/calendar-token/rotate', { method: 'POST' });
+}
+
+export function getActivities(): Promise<CompletedActivity[]> {
+  return apiFetch('/me/activities');
 }

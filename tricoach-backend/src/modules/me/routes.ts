@@ -6,7 +6,7 @@ import { prisma } from '../../db/client';
 import { toDateOnly } from '../../lib/dateOnly';
 import { athleteLevelMap, goalPriorityMap, goalStatusMap, goalTypeMap } from '../../lib/enumMapping';
 import { ApiError } from '../../middleware/errorHandler';
-import { serializeAvailability, serializeCheckIn, serializeGoal, serializeProfile, serializeUser } from './serializers';
+import { serializeActivity, serializeAvailability, serializeCheckIn, serializeGoal, serializeProfile, serializeUser } from './serializers';
 
 const router = Router();
 
@@ -243,6 +243,22 @@ router.post('/constraints', async (req, res, next) => {
     }
     next(err);
   }
+});
+
+// ---- Activity history ----
+
+/**
+ * All synced/completed activities, most recent first — regardless of
+ * source (Strava today, Garmin/HealthKit once viable). Cross-source
+ * duplicates are already filtered out at ingestion time, not here (see
+ * `ingestActivities` in src/modules/integrations/activityIngestion.ts).
+ */
+router.get('/activities', async (req, res) => {
+  const activities = await prisma.completedActivity.findMany({
+    where: { userId: req.userId },
+    orderBy: { startTime: 'desc' },
+  });
+  res.json(activities.map(serializeActivity));
 });
 
 // ---- Calendar feed token ----
