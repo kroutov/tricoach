@@ -70,22 +70,44 @@ function dayKey(date: Date): string {
   return date.toISOString().slice(0, 10);
 }
 
+/** Truncates to UTC midnight — the instant `dayKey` would key it under, regardless of time-of-day. */
+function dateOnly(date: Date): Date {
+  return new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()));
+}
+
 /**
  * Chronic/Acute Training Load + form ("CTL/ATL/forme", TrainingPeaks-style
  * exponentially-weighted moving averages of daily completed TSS) over
  * `[from, to]` inclusive. `dailyLoads` keys are `yyyy-mm-dd`.
+ *
+ * `from`/`to` are normalized to UTC midnight before use: callers may pass a
+ * real-time `Date.now()` as `to` (see dashboard routes), and comparing that
+ * directly against a UTC-midnight `@db.Date` value made `totalDays` a
+ * fraction of a day — rounding to 0 or 1 depending purely on what time of
+ * day the request happened to land, and sometimes excluding "today"
+ * entirely. `to` is also widened to cover the latest day present in
+ * `dailyLoads`, so a completed workout is never dropped just because its
+ * scheduled day falls after the nominal `to` (e.g. the plan's day-of-week
+ * scheduling can place a session after today even in the plan's first week).
  */
 export function computeLoadForm(dailyLoads: Map<string, number>, from: Date, to: Date): LoadFormPoint[] {
   const ctlAlpha = 1 - Math.exp(-1 / CTL_DAYS);
   const atlAlpha = 1 - Math.exp(-1 / ATL_DAYS);
 
+  const fromDay = dateOnly(from);
+  let toDay = dateOnly(to);
+  for (const key of dailyLoads.keys()) {
+    const keyDate = new Date(`${key}T00:00:00.000Z`);
+    if (keyDate > toDay) toDay = keyDate;
+  }
+
   const points: LoadFormPoint[] = [];
   let ctl = 0;
   let atl = 0;
 
-  const totalDays = Math.round((to.getTime() - from.getTime()) / MS_PER_DAY);
+  const totalDays = Math.max(0, Math.round((toDay.getTime() - fromDay.getTime()) / MS_PER_DAY));
   for (let offset = 0; offset <= totalDays; offset++) {
-    const date = new Date(from.getTime() + offset * MS_PER_DAY);
+    const date = new Date(fromDay.getTime() + offset * MS_PER_DAY);
     const load = dailyLoads.get(dayKey(date)) ?? 0;
     ctl += (load - ctl) * ctlAlpha;
     atl += (load - atl) * atlAlpha;
