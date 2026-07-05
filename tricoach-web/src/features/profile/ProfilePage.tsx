@@ -126,6 +126,7 @@ export function ProfilePage() {
       queryClient.invalidateQueries({ queryKey: ['dashboard', 'summary'] });
       queryClient.invalidateQueries({ queryKey: ['activities'] });
     },
+    onError: (err) => setSyncResultMessage(formatSyncError(err)),
   });
 
   const connectGarminMutation = useMutation({
@@ -157,6 +158,7 @@ export function ProfilePage() {
       queryClient.invalidateQueries({ queryKey: ['dashboard', 'summary'] });
       queryClient.invalidateQueries({ queryKey: ['activities'] });
     },
+    onError: (err) => setSyncResultMessage(formatSyncError(err)),
   });
 
   const rotateCalendarTokenMutation = useMutation({
@@ -306,4 +308,15 @@ function formatSyncResult(result: { activitiesIngested: number; adaptationEvents
     parts.push(...result.adaptationEvents.map((event) => `${adaptationTriggerLabel[event.triggeredBy]} : ${event.actionTaken}`));
   }
   return parts.join('\n\n');
+}
+
+/** Sync used to fail with no visible feedback at all — this at least shows something went wrong, and what. */
+function formatSyncError(err: unknown): string {
+  if (err instanceof ApiClientError) {
+    if (err.code === 'strava_not_connected' || err.code === 'garmin_not_connected') {
+      return 'La connexion a expiré ou a été révoquée — déconnecte puis reconnecte le service.';
+    }
+    return `Échec de la synchronisation (${err.code}).`;
+  }
+  return 'Échec de la synchronisation — vérifie ta connexion internet et réessaie.';
 }
