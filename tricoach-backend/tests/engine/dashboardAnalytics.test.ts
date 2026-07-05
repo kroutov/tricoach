@@ -95,4 +95,32 @@ describe('computeLoadForm', () => {
     expect(points).toHaveLength(1);
     expect(points[0]).toEqual({ date: from, ctl: 0, atl: 0, tsb: 0 });
   });
+
+  it('includes a completed workout even when `to` is a same-day timestamp that predates it', () => {
+    // Regression: `to` is real wall-clock time (e.g. `new Date()`), not a UTC-midnight
+    // `@db.Date` value like `from`. A few hours into `from`'s calendar day, `to - from`
+    // is a fraction of a day that rounds down to 0 — and if the plan's day-of-week
+    // scheduling placed the completed workout on the following day, that day was never
+    // visited at all, so its load silently vanished from the form.
+    const from = new Date('2026-01-01T00:00:00.000Z');
+    const to = new Date('2026-01-01T03:00:00.000Z');
+    const dailyLoads = new Map([['2026-01-02', 50]]);
+
+    const points = computeLoadForm(dailyLoads, from, to);
+    expect(points.length).toBeGreaterThan(1);
+    expect(points[points.length - 1]!.ctl).toBeGreaterThan(0);
+  });
+
+  it('is unaffected by what time of day `to` falls at, for a fixed calendar-day span', () => {
+    const from = new Date('2026-01-01T00:00:00.000Z');
+    const dailyLoads = new Map([['2026-01-01', 50]]);
+
+    const morning = computeLoadForm(dailyLoads, from, new Date('2026-01-01T00:05:00.000Z'));
+    const evening = computeLoadForm(dailyLoads, from, new Date('2026-01-01T23:50:00.000Z'));
+
+    expect(morning).toHaveLength(1);
+    expect(evening).toHaveLength(1);
+    expect(morning[0]!.ctl).toEqual(evening[0]!.ctl);
+    expect(morning[0]!.ctl).toBeGreaterThan(0);
+  });
 });
