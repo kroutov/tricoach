@@ -28,11 +28,17 @@ import type { Workout } from '../../api/types';
 
 const narrowWeekdayFormatter = new Intl.DateTimeFormat('fr-FR', { weekday: 'narrow' });
 const fullDateFormatter = new Intl.DateTimeFormat('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' });
+const monthYearFormatter = new Intl.DateTimeFormat('fr-FR', { month: 'long', year: 'numeric' });
+
+function capitalize(text: string): string {
+  return text.charAt(0).toUpperCase() + text.slice(1);
+}
 
 const screenReaderInstructions: ScreenReaderInstructions = {
   draggable: `
     Pour saisir une séance, appuyez sur la barre d'espace.
-    Utilisez les flèches gauche et droite pour la déplacer vers un autre jour de la semaine.
+    Utilisez les flèches pour la déplacer vers un autre jour du calendrier —
+    gauche/droite pour un jour, haut/bas pour changer de semaine.
     Appuyez de nouveau sur espace pour la déposer, ou sur Échap pour annuler.
     Un chemin sans glisser-déposer existe aussi : ouvrez la séance puis "Déplacer cette séance".
   `,
@@ -51,35 +57,59 @@ const dragAnnouncements: Announcements = {
  * *keyboard*-driven drag, so it never reports a collision there and the
  * drop silently no-ops. Falling back to `rectIntersection` — dnd-kit's own
  * documented pattern for combining strategies — covers the keyboard case,
- * where the coordinate getter above already jumps to a day pill's exact rect.
+ * where the coordinate getter above already jumps to a day cell's exact rect.
  */
 const collisionDetection: CollisionDetection = (args) => {
   const pointerCollisions = pointerWithin(args);
   return pointerCollisions.length > 0 ? pointerCollisions : rectIntersection(args);
 };
 
-/** Monday-first week (matches the "jours disponibles" ordering used throughout onboarding). */
-function weekDatesFor(date: Date): Date[] {
-  const day = date.getDay();
-  const diffToMonday = day === 0 ? -6 : 1 - day;
-  const monday = new Date(date);
-  monday.setDate(date.getDate() + diffToMonday);
-  return Array.from({ length: 7 }, (_, i) => {
-    const d = new Date(monday);
-    d.setDate(monday.getDate() + i);
-    return d;
-  });
+function startOfMonth(date: Date): Date {
+  return new Date(date.getFullYear(), date.getMonth(), 1);
 }
 
-/** Drop target for drag & drop rescheduling — also the existing day-select button. */
-function DayPill({
+function mondayOnOrBefore(date: Date): Date {
+  const day = date.getDay();
+  const diff = day === 0 ? -6 : 1 - day;
+  const d = new Date(date);
+  d.setDate(date.getDate() + diff);
+  return d;
+}
+
+function sundayOnOrAfter(date: Date): Date {
+  const day = date.getDay();
+  const diff = day === 0 ? 0 : 7 - day;
+  const d = new Date(date);
+  d.setDate(date.getDate() + diff);
+  return d;
+}
+
+/** Full weeks (Monday-first) spanning the whole calendar month — 4 to 6 rows of 7 depending on the month. */
+function monthGridFor(month: Date): Date[] {
+  const start = mondayOnOrBefore(startOfMonth(month));
+  const end = sundayOnOrAfter(new Date(month.getFullYear(), month.getMonth() + 1, 0));
+  const days: Date[] = [];
+  const cursor = new Date(start);
+  while (cursor <= end) {
+    days.push(new Date(cursor));
+    cursor.setDate(cursor.getDate() + 1);
+  }
+  return days;
+}
+
+/** Grid cell — also the drop target for drag & drop rescheduling. */
+function MonthDayCell({
   date,
   isSelected,
+  isToday,
+  isCurrentMonth,
   hasWorkout,
   onSelect,
 }: {
   date: Date;
   isSelected: boolean;
+  isToday: boolean;
+  isCurrentMonth: boolean;
   hasWorkout: boolean;
   onSelect: () => void;
 }) {
@@ -92,14 +122,17 @@ function DayPill({
       onClick={onSelect}
       aria-current={isSelected ? 'date' : undefined}
       aria-label={label}
-      className={`flex flex-1 flex-col items-center gap-1 rounded-control py-2 ${
-        isOver ? 'bg-brand/30 text-brand' : isSelected ? 'bg-brand/15 text-brand' : 'text-primary-text'
-      }`}
+      className={`flex aspect-square flex-col items-center justify-center gap-1 rounded-control ${
+        isOver
+          ? 'bg-brand/30 text-brand'
+          : isSelected
+            ? 'bg-brand/15 text-brand'
+            : isCurrentMonth
+              ? 'text-primary-text'
+              : 'text-secondary-text/40'
+      } ${isToday && !isSelected ? 'ring-1 ring-inset ring-brand/50' : ''}`}
     >
-      <span aria-hidden="true" className="text-xs">
-        {narrowWeekdayFormatter.format(date)}
-      </span>
-      <span aria-hidden="true" className="font-semibold">
+      <span aria-hidden="true" className="text-sm font-medium">
         {date.getDate()}
       </span>
       <span aria-hidden="true" className={`h-1.5 w-1.5 rounded-full ${hasWorkout ? 'bg-brand' : 'bg-transparent'}`} />
@@ -146,30 +179,35 @@ function DraggableWorkoutRow({ workout }: { workout: Workout }) {
 
 export function CalendarPage() {
   const queryClient = useQueryClient();
-  const [selectedDate, setSelectedDate] = useState(() => new Date());
+  const today = new Date();
+  const [selectedDate, setSelectedDate] = useState(today);
+  const [displayedMonth, setDisplayedMonth] = useState(() => startOfMonth(today));
   const { data: plan, isLoading } = useQuery({ queryKey: ['plans', 'active'], queryFn: getActivePlan });
   const [conflictMessage, setConflictMessage] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   /**
-   * Jumps to the next/previous day pill's exact position instead of the
-   * default fixed-pixel nudge — with only 7 fixed drop targets in a row, a
+   * Jumps to the exact position of the target grid cell instead of the
+   * default fixed-pixel nudge — with fixed drop targets in a grid, a
    * fixed-distance step would need a variable, hard-to-predict number of
-   * presses to land on a given day, and could stop between two pills.
+   * presses to land on a given day, and could stop between two cells.
+   * Left/Right move by one day, Up/Down by one week (±7 cells), matching
+   * the grid's row-major layout (rects sorted by row then column).
    *
-   * `currentCoordinates` only matches a day pill's own position from the
+   * `currentCoordinates` only matches a cell's own position from the
    * *second* keypress onward — the very first press still reflects the
    * dragged workout row's own position (a full-width card well below and
-   * left of the pill row), which isn't close to any pill. That first press
+   * left of the grid), which isn't close to any cell. That first press
    * falls back to the workout's actual scheduled day instead of whichever
-   * pill happens to be geometrically nearest an unrelated position.
+   * cell happens to be geometrically nearest an unrelated position.
    */
-  const dayRowCoordinateGetter: KeyboardCoordinateGetter = (event, { context, currentCoordinates, active }) => {
-    if (event.code !== 'ArrowRight' && event.code !== 'ArrowLeft') return undefined;
+  const dayGridCoordinateGetter: KeyboardCoordinateGetter = (event, { context, currentCoordinates, active }) => {
+    const delta = { ArrowRight: 1, ArrowLeft: -1, ArrowDown: 7, ArrowUp: -7 }[event.code];
+    if (delta === undefined) return undefined;
 
     const rects = Array.from(context.droppableRects.entries())
       .map(([id, rect]) => ({ id: String(id), rect }))
-      .sort((a, b) => a.rect.left - b.rect.left);
+      .sort((a, b) => a.rect.top - b.rect.top || a.rect.left - b.rect.left);
     if (rects.length === 0) return undefined;
 
     let index = -1;
@@ -191,7 +229,7 @@ export function CalendarPage() {
       if (matchIndex !== -1) index = matchIndex;
     }
 
-    index = event.code === 'ArrowRight' ? Math.min(rects.length - 1, index + 1) : Math.max(0, index - 1);
+    index = Math.min(rects.length - 1, Math.max(0, index + delta));
 
     event.preventDefault();
     return { x: rects[index].rect.left, y: rects[index].rect.top };
@@ -199,7 +237,7 @@ export function CalendarPage() {
 
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 8 } }),
-    useSensor(KeyboardSensor, { coordinateGetter: dayRowCoordinateGetter })
+    useSensor(KeyboardSensor, { coordinateGetter: dayGridCoordinateGetter })
   );
 
   const rescheduleMutation = useMutation({
@@ -242,19 +280,28 @@ export function CalendarPage() {
     );
   }
 
-  const dates = weekDatesFor(selectedDate);
+  const gridDays = monthGridFor(displayedMonth);
   const dayWorkouts = [...workoutsOnDay(plan, selectedDate)].sort((a, b) => a.date.localeCompare(b.date));
   const microcycle = currentMicrocycle(plan, selectedDate);
   const range = planDateRange(plan);
-  const canGoPrevious = !range || toDayString(dates[0]) > toDayString(range.start);
-  const canGoNext = !range || toDayString(dates[6]) < toDayString(range.end);
+  const monthKey = (d: Date) => d.getFullYear() * 12 + d.getMonth();
+  const canGoPrevious = !range || monthKey(displayedMonth) > monthKey(range.start);
+  const canGoNext = !range || monthKey(displayedMonth) < monthKey(range.end);
 
-  const shiftWeek = (deltaDays: number) => {
-    setSelectedDate((current) => {
-      const next = new Date(current);
-      next.setDate(current.getDate() + deltaDays);
-      return next;
-    });
+  const shiftMonth = (deltaMonths: number) => {
+    setDisplayedMonth((current) => new Date(current.getFullYear(), current.getMonth() + deltaMonths, 1));
+  };
+
+  const goToToday = () => {
+    setSelectedDate(today);
+    setDisplayedMonth(startOfMonth(today));
+  };
+
+  const selectDay = (date: Date) => {
+    setSelectedDate(date);
+    if (monthKey(date) !== monthKey(displayedMonth)) {
+      setDisplayedMonth(startOfMonth(date));
+    }
   };
 
   return (
@@ -269,34 +316,47 @@ export function CalendarPage() {
         <div className="mb-2 flex items-center justify-between">
           <button
             type="button"
-            onClick={() => shiftWeek(-7)}
+            onClick={() => shiftMonth(-1)}
             disabled={!canGoPrevious}
-            aria-label="Semaine précédente"
+            aria-label="Mois précédent"
             className="rounded-control px-3 py-1 text-primary-text disabled:opacity-30"
           >
             ‹
           </button>
-          <button type="button" onClick={() => setSelectedDate(new Date())} className="text-sm font-medium text-brand">
-            Aujourd'hui
-          </button>
+          <div className="text-center">
+            <p className="font-medium text-primary-text">{capitalize(monthYearFormatter.format(displayedMonth))}</p>
+            <button type="button" onClick={goToToday} className="text-xs font-medium text-brand">
+              Aujourd'hui
+            </button>
+          </div>
           <button
             type="button"
-            onClick={() => shiftWeek(7)}
+            onClick={() => shiftMonth(1)}
             disabled={!canGoNext}
-            aria-label="Semaine suivante"
+            aria-label="Mois suivant"
             className="rounded-control px-3 py-1 text-primary-text disabled:opacity-30"
           >
             ›
           </button>
         </div>
-        <div className="flex gap-1.5">
-          {dates.map((date) => (
-            <DayPill
+
+        <div className="grid grid-cols-7 gap-1 text-center text-xs text-secondary-text">
+          {gridDays.slice(0, 7).map((date) => (
+            <span key={date.toISOString()} aria-hidden="true">
+              {narrowWeekdayFormatter.format(date)}
+            </span>
+          ))}
+        </div>
+        <div className="mt-1 grid grid-cols-7 gap-1">
+          {gridDays.map((date) => (
+            <MonthDayCell
               key={date.toISOString()}
               date={date}
               isSelected={isSameDay(date, selectedDate)}
+              isToday={isSameDay(date, today)}
+              isCurrentMonth={date.getMonth() === displayedMonth.getMonth()}
               hasWorkout={workoutsOnDay(plan, date).length > 0}
-              onSelect={() => setSelectedDate(date)}
+              onSelect={() => selectDay(date)}
             />
           ))}
         </div>
