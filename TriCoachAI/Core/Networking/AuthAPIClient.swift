@@ -16,6 +16,17 @@ private struct DevLoginRequest: Codable {
     let fullName: String?
 }
 
+private struct RegisterRequest: Codable {
+    let email: String
+    let password: String
+    let fullName: String?
+}
+
+private struct LoginRequest: Codable {
+    let email: String
+    let password: String
+}
+
 /// Handles the pre-session auth exchange only — everything after login goes
 /// through the authenticated `APIClient` (Bearer token from Keychain).
 final class AuthAPIClient {
@@ -33,6 +44,14 @@ final class AuthAPIClient {
     /// through the real server without a configured Apple Developer Team.
     func devLogin(appleUserId: String, email: String?, fullName: String?) async throws -> AuthResponse {
         try await client.send(.post, "auth/dev-login", body: DevLoginRequest(appleUserId: appleUserId, email: email, fullName: fullName))
+    }
+
+    func register(email: String, password: String, fullName: String?) async throws -> AuthResponse {
+        try await client.send(.post, "auth/register", body: RegisterRequest(email: email, password: password, fullName: fullName))
+    }
+
+    func login(email: String, password: String) async throws -> AuthResponse {
+        try await client.send(.post, "auth/login", body: LoginRequest(email: email, password: password))
     }
 
     func refresh() async throws -> String {

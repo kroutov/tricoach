@@ -10,10 +10,10 @@ import SwiftData
 @Model
 final class UserRecord {
     @Attribute(.unique) var id: UUID
-    var appleUserId: String
+    var appleUserId: String?
     var payload: Data
 
-    init(id: UUID, appleUserId: String, payload: Data) {
+    init(id: UUID, appleUserId: String?, payload: Data) {
         self.id = id
         self.appleUserId = appleUserId
         self.payload = payload

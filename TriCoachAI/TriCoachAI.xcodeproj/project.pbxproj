@@ -16,6 +16,7 @@
 		18D2D271EE1A3BEB7A091F77 /* PillBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2C600B075AB9CD00ABB94B /* PillBadge.swift */; };
 		1BC6A486733CE51F62B23C7B /* LocalRepositories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E52F12C16C23953DABD0C0 /* LocalRepositories.swift */; };
 		1BDEFA1596B5C6D4062329F4 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A4CC693A6BA5DC159C2428 /* AuthView.swift */; };
+		1C704244B76EFCD6785CDD4C /* AuthCredentialsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9174FFC97C9B737CB109E323 /* AuthCredentialsUITests.swift */; };
 		1CF22FED4EDDF6C6D7B22136 /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296578B1C70B1BA6A9AC21C4 /* CalendarViewModel.swift */; };
 		209D5C0860DFA74C67E6F2E3 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9572098613EFCBB5CF20F7 /* HealthKitManager.swift */; };
 		246947A1B02CEC58E614BDA5 /* HealthDataAggregatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93CB52CBB8B26187F941FB7 /* HealthDataAggregatorTests.swift */; };
@@ -204,6 +205,7 @@
 		7B9572098613EFCBB5CF20F7 /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 		821C32684735CD4DE2F34CB1 /* NetworkGoalRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkGoalRepository.swift; sourceTree = "<group>"; };
 		90FD4195F663FAB1793EFAA2 /* GoalEditorCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalEditorCard.swift; sourceTree = "<group>"; };
+		9174FFC97C9B737CB109E323 /* AuthCredentialsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCredentialsUITests.swift; sourceTree = "<group>"; };
 		98A4CC693A6BA5DC159C2428 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
 		9B453413EF3EF582B3CE6A01 /* AvailabilityStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailabilityStepView.swift; sourceTree = "<group>"; };
 		A01E767C48D8DF4081C368EF /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
@@ -283,6 +285,7 @@
 			isa = PBXGroup;
 			children = (
 				6DE66A9418E816BD14117E2E /* AdaptationHistoryUITests.swift */,
+				9174FFC97C9B737CB109E323 /* AuthCredentialsUITests.swift */,
 				E92A21A65EB50591464DEDBC /* CalendarDragAndDropUITests.swift */,
 				FD287F766E22968AF4B46455 /* DashboardAnalyticsUITests.swift */,
 				11C1D66F71CB04D04B4C535E /* GoalsManagementUITests.swift */,
@@ -708,6 +711,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2524176E7BCBB72FDC6EF314 /* AdaptationHistoryUITests.swift in Sources */,
+				1C704244B76EFCD6785CDD4C /* AuthCredentialsUITests.swift in Sources */,
 				7BB3876B87FC371ACC8554A5 /* CalendarDragAndDropUITests.swift in Sources */,
 				299EAF937EE8993C60FDCDAE /* DashboardAnalyticsUITests.swift in Sources */,
 				D88291BCCB1BAD3B49262E95 /* GoalsManagementUITests.swift in Sources */,
