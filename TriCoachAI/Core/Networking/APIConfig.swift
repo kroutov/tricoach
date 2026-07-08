@@ -1,24 +1,19 @@
 import Foundation
 
 enum APIConfig {
-    /// `localhost` is exempt from App Transport Security by default, so
-    /// Debug builds (Simulator, or a device on the same network as the Mac
-    /// running `npm run dev`) talk to it with no Info.plist exceptions.
-    ///
-    /// A Release/Archive build must not silently point at `localhost` —
-    /// replace the string below with the real deployed backend URL from
-    /// `tricoach-backend/docs/DEPLOYMENT.md` before shipping. Left as an
-    /// obvious placeholder rather than a working default so that shipping
-    /// without updating it fails at first launch instead of failing subtly.
+    /// Branches on simulator-vs-device rather than Debug-vs-Release:
+    /// `localhost` is exempt from App Transport Security and, in the
+    /// Simulator, resolves to the Mac itself (sharing its network stack),
+    /// so it reaches `npm run dev` with no Info.plist exceptions. On a real
+    /// device — even a Debug build, which is Xcode's default "Run"
+    /// configuration — `localhost` would resolve to the device's own
+    /// loopback instead and silently fail to reach anything, so devices
+    /// always use the deployed backend.
     static let baseURL: URL = {
-        #if DEBUG
+        #if targetEnvironment(simulator)
         return URL(string: "http://localhost:3000/api/v1")!
         #else
-        let releaseBaseURLString = "https://REPLACE_ME_BEFORE_SHIPPING.example.com/api/v1"
-        guard let url = URL(string: releaseBaseURLString), !releaseBaseURLString.contains("REPLACE_ME") else {
-            fatalError("APIConfig.baseURL still points at the placeholder Release URL — set it to the deployed backend before archiving.")
-        }
-        return url
+        return URL(string: "https://tricoach-9ob8.onrender.com/api/v1")!
         #endif
     }()
 }
