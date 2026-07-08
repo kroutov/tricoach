@@ -109,15 +109,54 @@ jobs:
         working-directory: TriCoachAI
         run: xcodegen generate
 
-      # Adjust the simulator name if this stops matching what the pinned
-      # Xcode version ships — GitHub's macOS images update periodically.
+      # A hardcoded destination name (even a pinned Xcode version) has broken
+      # this job twice before: some runner instances ship an Xcode with zero
+      # pre-created simulator devices at all — xcodebuild then lists only
+      # placeholder destinations, regardless of what name is requested.
+      # Create our own simulator from whatever runtime + device type this
+      # Xcode install actually ships (always present, unlike pre-instantiated
+      # devices) instead of hoping one already exists under a specific name.
+      - name: Select or create an iOS Simulator
+        run: |
+          UDID=$(xcrun simctl list devices available -j | python3 -c '
+          import json, sys
+          data = json.load(sys.stdin)
+          for runtime, devices in data["devices"].items():
+              if "iOS" not in runtime:
+                  continue
+              for d in devices:
+                  if "iPhone" in d["name"]:
+                      print(d["udid"])
+                      sys.exit(0)
+          ')
+
+          if [ -z "$UDID" ]; then
+            echo "No existing iPhone simulator found — creating one."
+            RUNTIME_ID=$(xcrun simctl list runtimes available -j | python3 -c '
+          import json, sys
+          data = json.load(sys.stdin)
+          runtimes = [r["identifier"] for r in data["runtimes"] if r["platform"] == "iOS"]
+          print(runtimes[-1])
+          ')
+            DEVICE_TYPE_ID=$(xcrun simctl list devicetypes -j | python3 -c '
+          import json, sys
+          data = json.load(sys.stdin)
+          types = [d["identifier"] for d in data["devicetypes"] if "iPhone" in d["name"]]
+          print(types[-1])
+          ')
+            UDID=$(xcrun simctl create "CI-iPhone" "$DEVICE_TYPE_ID" "$RUNTIME_ID")
+          fi
+
+          echo "Using simulator UDID: $UDID"
+          echo "SIMULATOR_UDID=$UDID" >> "$GITHUB_ENV"
+
       - name: Run iOS test suite
         working-directory: TriCoachAI
         run: |
           xcodebuild test \
             -project TriCoachAI.xcodeproj \
             -scheme TriCoachAI \
-            -destination 'platform=iOS Simulator,name=iPhone 16 Pro' \
+            -destination "id=$SIMULATOR_UDID" \
             -resultBundlePath TestResults
 
       - name: Upload test results on failure
