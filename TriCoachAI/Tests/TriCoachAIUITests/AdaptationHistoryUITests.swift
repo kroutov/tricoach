@@ -17,9 +17,12 @@ final class AdaptationHistoryUITests: XCTestCase {
         demoButton.tap()
 
         // personalInfo -> sportLevel -> history -> goals
-        for _ in 0..<4 {
+        // The first "Suivant" depends on the demo-login network round trip
+        // completing, which can be slow on a cold CI backend (fresh
+        // ts-node-dev process, first-ever request) — give it more slack.
+        for index in 0..<4 {
             let nextButton = app.buttons["Suivant"]
-            XCTAssertTrue(nextButton.waitForExistence(timeout: 5))
+            XCTAssertTrue(nextButton.waitForExistence(timeout: index == 0 ? 20 : 5))
             nextButton.tap()
         }
 
@@ -30,6 +33,10 @@ final class AdaptationHistoryUITests: XCTestCase {
         for label in ["Mercredi", "Vendredi", "Dimanche"] {
             app.buttons.matching(NSPredicate(format: "label == %@", label)).firstMatch.tap()
         }
+        // Sunday is a mandatory rest day by default (separate chip grid, same
+        // labels) and the plan engine excludes mandatory rest days regardless
+        // of `availableDays` — clear it so every day actually gets scheduled.
+        app.buttons.matching(NSPredicate(format: "label == %@", "Dimanche")).element(boundBy: 1).tap()
         let sessionsStepper = app.steppers.element(boundBy: 0)
         for _ in 0..<3 {
             sessionsStepper.buttons.element(boundBy: 1).tap()
