@@ -1,5 +1,6 @@
 import { prisma } from '../../db/client';
 import { adaptationTriggerMap } from '../../lib/enumMapping';
+import { toDateOnly } from '../../lib/dateOnly';
 import { applyDeltaLoad, evaluateAdaptation, WorkoutOutcome } from './engine/adaptationEngine';
 import { AdaptationEvent, HealthMetric } from './engine/types';
 import { dbMicrocycleToEngine, dbWorkoutToEngine } from '../workouts/persistence';
@@ -24,11 +25,19 @@ export async function runAdaptation(planId: string, userId: string, now: Date = 
   const windowEnd = new Date(now);
   windowEnd.setDate(windowEnd.getDate() + 10);
 
+  // Workout dates are day-only (UTC midnight, see toDateOnly), while `now` is
+  // a precise timestamp — comparing them directly makes *today's* not-yet-
+  // touched workout look "in the past" for the rest of the day. Untouched
+  // workouts are only swept into the window once their day has fully
+  // elapsed; a same-day workout still counts immediately once explicitly
+  // completed/skipped, via the second clause below.
+  const today = toDateOnly(now);
+
   const recentWorkouts = await prisma.workout.findMany({
     where: {
       microcycle: { mesocycle: { macrocycle: { planId } } },
       OR: [
-        { date: { gte: windowStart, lte: now } },
+        { date: { gte: windowStart, lt: today } },
         { status: { in: ['COMPLETED', 'SKIPPED'] }, date: { gte: windowStart, lte: windowEnd } },
       ],
     },
