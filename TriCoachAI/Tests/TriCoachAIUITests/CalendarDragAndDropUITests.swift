@@ -68,7 +68,14 @@ final class CalendarDragAndDropUITests: XCTestCase {
         let targetDayCell = app.buttons[targetDayIdentifier]
         XCTAssertTrue(targetDayCell.waitForExistence(timeout: 5))
 
-        sourceRow.press(forDuration: 0.6, thenDragTo: targetDayCell)
+        // A plain press(forDuration:thenDragTo:) intermittently fails to
+        // register as a drag with SwiftUI's Transferable-based
+        // .draggable/.dropDestination — confirmed via the CI backend log
+        // showing zero PATCH /workouts/:id calls on failure runs, i.e. the
+        // drop never fired at all. The velocity+hold variant gives the drop
+        // target time to accept the item before release, which is the
+        // documented mitigation for this class of flake.
+        sourceRow.press(forDuration: 1.0, thenDragTo: targetDayCell, withVelocity: .slow, thenHoldForDuration: 0.5)
 
         XCTAssertTrue(app.alerts["Conflit détecté"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.alerts["Conflit détecté"].staticTexts.matching(NSPredicate(format: "label CONTAINS %@", "Une autre séance est déjà prévue")).firstMatch.exists)
