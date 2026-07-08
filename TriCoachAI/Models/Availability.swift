@@ -16,6 +16,9 @@ enum Weekday: Int, Codable, CaseIterable, Identifiable {
         }
     }
 
+    /// Single-letter form for the calendar's weekday header row.
+    var narrowLabel: String { String(label.prefix(1)) }
+
     /// Ordered Monday-first, more natural for a training week than Calendar's Sunday-first.
     static let orderedWeek: [Weekday] = [.monday, .tuesday, .wednesday, .thursday, .friday, .saturday, .sunday]
 }

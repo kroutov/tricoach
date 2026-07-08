@@ -18,8 +18,10 @@ struct CalendarView: View {
 
     var body: some View {
         NavigationStack {
-            VStack(spacing: 0) {
-                weekStrip
+            VStack(spacing: TCSpacing.sm) {
+                monthHeader
+                weekdayHeaderRow
+                monthGrid
 
                 if let microcycle = viewModel.microcycle(containing: viewModel.selectedDate) {
                     MicrocycleBanner(microcycle: microcycle)
@@ -70,34 +72,69 @@ struct CalendarView: View {
         Binding(get: { viewModel.rescheduleErrorMessage != nil }, set: { if !$0 { viewModel.rescheduleErrorMessage = nil } })
     }
 
-    private var weekStrip: some View {
-        HStack(spacing: 6) {
-            ForEach(viewModel.weekDates, id: \.self) { date in
-                let isSelected = Calendar.current.isDate(date, inSameDayAs: viewModel.selectedDate)
-                let hasWorkout = !viewModel.workouts(on: date).isEmpty
-                let isDropTarget = dropTargetDate.map { Calendar.current.isDate($0, inSameDayAs: date) } ?? false
-                Button {
-                    viewModel.selectedDate = date
-                } label: {
-                    VStack(spacing: 4) {
-                        Text(date.formatted(.dateTime.weekday(.narrow)))
-                            .font(TCFont.caption)
-                        Text(date.formatted(.dateTime.day()))
-                            .font(TCFont.subheadline.weight(.semibold))
-                        Circle()
-                            .fill(hasWorkout ? TCColor.brand : .clear)
-                            .frame(width: 5, height: 5)
-                    }
+    private var monthHeader: some View {
+        HStack {
+            Button {
+                viewModel.goToPreviousMonth()
+            } label: {
+                Image(systemName: "chevron.left")
+                    .frame(width: 32, height: 32)
+            }
+            .disabled(!viewModel.canGoToPreviousMonth)
+            .accessibilityLabel("Mois précédent")
+
+            Spacer()
+
+            VStack(spacing: 2) {
+                Text(viewModel.displayedMonth.formatted(.dateTime.month(.wide).year()))
+                    .font(TCFont.headline)
+                Button("Aujourd'hui") { viewModel.goToToday() }
+                    .font(TCFont.caption.weight(.medium))
+            }
+
+            Spacer()
+
+            Button {
+                viewModel.goToNextMonth()
+            } label: {
+                Image(systemName: "chevron.right")
+                    .frame(width: 32, height: 32)
+            }
+            .disabled(!viewModel.canGoToNextMonth)
+            .accessibilityLabel("Mois suivant")
+        }
+        .padding(.horizontal, TCSpacing.md)
+        .padding(.top, TCSpacing.xs)
+    }
+
+    private var weekdayHeaderRow: some View {
+        HStack(spacing: 4) {
+            ForEach(Weekday.orderedWeek) { weekday in
+                Text(weekday.narrowLabel)
+                    .font(TCFont.caption)
+                    .foregroundStyle(TCColor.secondaryText)
                     .frame(maxWidth: .infinity)
-                    .padding(.vertical, TCSpacing.xs)
-                    .background(isDropTarget ? TCColor.brand.opacity(0.3) : (isSelected ? TCColor.brand.opacity(0.15) : Color.clear))
-                    .clipShape(RoundedRectangle(cornerRadius: TCRadius.control, style: .continuous))
-                }
-                .buttonStyle(.plain)
-                .foregroundStyle(isSelected ? TCColor.brand : TCColor.primaryText)
+            }
+        }
+        .padding(.horizontal, TCSpacing.sm)
+    }
+
+    private var monthGrid: some View {
+        let columns = Array(repeating: GridItem(.flexible(), spacing: 4), count: 7)
+        return LazyVGrid(columns: columns, spacing: 4) {
+            ForEach(viewModel.monthGridDates, id: \.self) { date in
+                let hasWorkout = !viewModel.workouts(on: date).isEmpty
+                MonthDayCell(
+                    date: date,
+                    isSelected: Calendar.current.isDate(date, inSameDayAs: viewModel.selectedDate),
+                    isToday: Calendar.current.isDateInToday(date),
+                    isCurrentMonth: Calendar.current.isDate(date, equalTo: viewModel.displayedMonth, toGranularity: .month),
+                    hasWorkout: hasWorkout,
+                    isDropTarget: dropTargetDate.map { Calendar.current.isDate($0, inSameDayAs: date) } ?? false,
+                    onSelect: { viewModel.selectDay(date) }
+                )
                 .accessibilityIdentifier("calendarDay.\(calendarDayKeyFormatter.string(from: date))")
                 .accessibilityLabel(dayAccessibilityLabel(date: date, hasWorkout: hasWorkout))
-                .accessibilityAddTraits(isSelected ? .isSelected : [])
                 .dropDestination(for: String.self) { items, _ in
                     guard let idString = items.first, let workoutId = UUID(uuidString: idString),
                           let workout = viewModel.plan?.allWorkouts.first(where: { $0.id == workoutId }) else { return false }
@@ -109,12 +146,55 @@ struct CalendarView: View {
             }
         }
         .padding(.horizontal, TCSpacing.sm)
-        .padding(.top, TCSpacing.xs)
     }
 
     private func dayAccessibilityLabel(date: Date, hasWorkout: Bool) -> String {
         let dateText = date.formatted(.dateTime.weekday(.wide).day().month(.wide))
         return hasWorkout ? "\(dateText), séance prévue" : "\(dateText), journée de repos"
+    }
+}
+
+private struct MonthDayCell: View {
+    let date: Date
+    let isSelected: Bool
+    let isToday: Bool
+    let isCurrentMonth: Bool
+    let hasWorkout: Bool
+    let isDropTarget: Bool
+    let onSelect: () -> Void
+
+    var body: some View {
+        Button(action: onSelect) {
+            VStack(spacing: 4) {
+                Text(date.formatted(.dateTime.day()))
+                    .font(TCFont.subheadline.weight(.medium))
+                Circle()
+                    .fill(hasWorkout ? TCColor.brand : .clear)
+                    .frame(width: 5, height: 5)
+            }
+            .frame(maxWidth: .infinity)
+            .aspectRatio(1, contentMode: .fit)
+            .background(backgroundColor)
+            .clipShape(RoundedRectangle(cornerRadius: TCRadius.control, style: .continuous))
+            .overlay(
+                RoundedRectangle(cornerRadius: TCRadius.control, style: .continuous)
+                    .strokeBorder(isToday && !isSelected ? TCColor.brand.opacity(0.5) : .clear, lineWidth: 1)
+            )
+        }
+        .buttonStyle(.plain)
+        .foregroundStyle(foregroundColor)
+        .accessibilityAddTraits(isSelected ? .isSelected : [])
+    }
+
+    private var backgroundColor: Color {
+        if isDropTarget { return TCColor.brand.opacity(0.3) }
+        if isSelected { return TCColor.brand.opacity(0.15) }
+        return .clear
+    }
+
+    private var foregroundColor: Color {
+        if isSelected { return TCColor.brand }
+        return isCurrentMonth ? TCColor.primaryText : TCColor.secondaryText.opacity(0.4)
     }
 }
 
