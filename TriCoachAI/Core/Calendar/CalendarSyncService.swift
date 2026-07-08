@@ -7,7 +7,7 @@ enum CalendarSyncError: Error, LocalizedError {
     var errorDescription: String? {
         switch self {
         case .accessDenied:
-            return "Accès au calendrier refusé. Activez-le dans Réglages > TriCoach AI > Calendriers."
+            return "Accès au calendrier refusé. Activez-le dans Réglages > Drinking Sporting Coach > Calendriers."
         }
     }
 }

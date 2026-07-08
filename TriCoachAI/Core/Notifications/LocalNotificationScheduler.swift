@@ -5,7 +5,7 @@ enum NotificationError: Error, LocalizedError {
     case denied
 
     var errorDescription: String? {
-        "Notifications refusées. Activez-les dans Réglages > TriCoach AI > Notifications."
+        "Notifications refusées. Activez-les dans Réglages > Drinking Sporting Coach > Notifications."
     }
 }
 

@@ -8,7 +8,7 @@ enum HealthKitError: Error, LocalizedError {
     var errorDescription: String? {
         switch self {
         case .unavailable: return "Santé n'est pas disponible sur cet appareil."
-        case .authorizationDenied: return "Accès à Santé refusé. Activez-le dans Réglages > Confidentialité > Santé > TriCoach AI."
+        case .authorizationDenied: return "Accès à Santé refusé. Activez-le dans Réglages > Confidentialité > Santé > Drinking Sporting Coach."
         }
     }
 }

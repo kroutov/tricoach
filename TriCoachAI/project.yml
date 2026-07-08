@@ -41,14 +41,14 @@ targets:
     info:
       path: Generated/Info.plist
       properties:
-        CFBundleDisplayName: TriCoach AI
+        CFBundleDisplayName: DS Coach
         UILaunchScreen: {}
         UISupportedInterfaceOrientations:
           - UIInterfaceOrientationPortrait
-        NSHealthShareUsageDescription: "TriCoach AI lit vos données Santé (séances, fréquence cardiaque, sommeil, VO2 max, HRV) pour construire et adapter votre plan d'entraînement."
-        NSHealthUpdateUsageDescription: "TriCoach AI peut enregistrer dans Santé les séances que vous complétez depuis l'app."
-        NSCalendarsUsageDescription: "TriCoach AI ajoute vos séances planifiées à votre calendrier iOS."
-        NSCalendarsFullAccessUsageDescription: "TriCoach AI ajoute vos séances planifiées à votre calendrier iOS."
+        NSHealthShareUsageDescription: "Drinking Sporting Coach lit vos données Santé (séances, fréquence cardiaque, sommeil, VO2 max, HRV) pour construire et adapter votre plan d'entraînement."
+        NSHealthUpdateUsageDescription: "Drinking Sporting Coach peut enregistrer dans Santé les séances que vous complétez depuis l'app."
+        NSCalendarsUsageDescription: "Drinking Sporting Coach ajoute vos séances planifiées à votre calendrier iOS."
+        NSCalendarsFullAccessUsageDescription: "Drinking Sporting Coach ajoute vos séances planifiées à votre calendrier iOS."
         CFBundleURLTypes:
           - CFBundleURLName: com.tricoach.ai.oauth
             CFBundleURLSchemes:

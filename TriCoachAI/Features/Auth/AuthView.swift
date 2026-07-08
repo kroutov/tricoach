@@ -21,7 +21,7 @@ struct AuthView: View {
                 Image(systemName: "figure.run")
                     .font(.system(size: 56))
                     .foregroundStyle(TCColor.brand)
-                Text("TriCoach AI")
+                Text("Drinking Sporting Coach")
                     .font(TCFont.largeTitle)
                 Text("Votre coach adaptatif pour la course, le vélo, la natation et le triathlon.")
                     .font(TCFont.subheadline)
