@@ -104,6 +104,16 @@ jobs:
         run: |
           nohup npm run dev > backend.log 2>&1 &
           for i in $(seq 1 30); do curl -sf http://localhost:3000/health && break; sleep 1; done
+          # /health is a static route handled before ts-node-dev has JIT-
+          # compiled the rest of the app or Prisma has opened its connection
+          # pool, so it responding doesn't mean the backend is actually warm.
+          # UI tests' first network call (dev-login, on a 5s XCUITest
+          # timeout) was intermittently landing before that warm-up
+          # finished — make one real request here instead so it's not on
+          # the critical path of a test's timeout budget.
+          curl -sf -X POST http://localhost:3000/api/v1/auth/dev-login \
+            -H "Content-Type: application/json" \
+            -d '{"appleUserId":"ci-warmup-user"}' > /dev/null || true
 
       - name: Generate Xcode project
         working-directory: TriCoachAI
