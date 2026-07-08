@@ -7,36 +7,63 @@ import HealthKit
 /// built in-memory — construction doesn't require HealthKit authorization,
 /// only querying the real store does.
 enum HealthKitMapper {
+    /// `SportType` only has 6 cases (shared verbatim with the backend's Prisma
+    /// enum and the web frontend's TS type — adding a 7th would mean a
+    /// three-way migration, out of scope here), so anything genuinely
+    /// cross-training (rowing, elliptical, HIIT, yoga...) falls back to
+    /// `.strength` rather than the old default of `.run` — silently
+    /// attributing an elliptical session to running would pollute
+    /// run-specific pace/threshold calculations.
     static func sportType(for activityType: HKWorkoutActivityType) -> SportType {
         switch activityType {
-        case .running, .walking, .hiking: return .run
+        case .running, .walking, .hiking, .trackAndField: return .run
         case .cycling, .handCycling: return .bike
         case .swimming: return .swim
-        case .traditionalStrengthTraining, .functionalStrengthTraining, .coreTraining: return .strength
-        default: return .run
+        case .swimBikeRun: return .brick
+        default: return .strength
         }
     }
 
     static func completedActivity(from workout: HKWorkout) -> CompletedActivity {
+        let sport = sportType(for: workout.workoutActivityType)
+
         let avgHr = workout.statistics(for: HKQuantityType(.heartRate))?
             .averageQuantity()?
             .doubleValue(for: HKUnit.count().unitDivided(by: .minute()))
-        let avgPower = workout.statistics(for: HKQuantityType(.cyclingPower))?
-            .averageQuantity()?
-            .doubleValue(for: .watt())
+        let maxHr = workout.statistics(for: HKQuantityType(.heartRate))?
+            .maximumQuantity()?
+            .doubleValue(for: HKUnit.count().unitDivided(by: .minute()))
+
+        // Cycling and running power come from different HealthKit quantity
+        // types, and only one is ever meaningful per workout — pick by sport
+        // rather than checking both, since a run would never have cycling
+        // power statistics attached (and vice versa).
+        let powerType: HKQuantityTypeIdentifier? = sport == .bike ? .cyclingPower : (sport == .run ? .runningPower : nil)
+        let avgPower = powerType.flatMap { workout.statistics(for: HKQuantityType($0))?.averageQuantity()?.doubleValue(for: .watt()) }
+
+        let distanceM = workout.totalDistance?.doubleValue(for: .meter())
+        // Only meaningful for running — bike pace is normally expressed as
+        // speed, and swim pace as time/100m, neither of which this
+        // sec-per-km field represents.
+        let avgPaceSecPerKm: Int? = {
+            guard sport == .run, let distanceM, distanceM > 0 else { return nil }
+            return Int(workout.duration / (distanceM / 1000))
+        }()
+
+        let elevationGainM = (workout.metadata?[HKMetadataKeyElevationAscended] as? HKQuantity)?.doubleValue(for: .meter())
 
         return CompletedActivity(
             source: .healthKit,
             externalId: workout.uuid.uuidString,
             startTime: workout.startDate,
             durationS: Int(workout.duration),
-            distanceM: workout.totalDistance?.doubleValue(for: .meter()),
+            distanceM: distanceM,
             avgHr: avgHr.map(Int.init),
-            maxHr: nil,
+            maxHr: maxHr.map(Int.init),
             avgPowerWatts: avgPower.map(Int.init),
-            avgPaceSecPerKm: nil,
-            elevationGainM: nil,
-            sport: sportType(for: workout.workoutActivityType)
+            avgPaceSecPerKm: avgPaceSecPerKm,
+            elevationGainM: elevationGainM,
+            sport: sport
         )
     }
 
@@ -66,7 +93,9 @@ struct HealthKitProvider: ActivityDataProvider, HealthMetricsProvider {
     }
 
     func fetchRecentActivities(since: Date) async throws -> [CompletedActivity] {
-        try await manager.fetchRecentWorkouts(since: since).map(HealthKitMapper.completedActivity)
+        // See IntegrationsViewModel.pushHealthKitData for why 500 rather than
+        // the manager's own default of 50 or a fully unbounded query.
+        try await manager.fetchRecentWorkouts(since: since, limit: 500).map(HealthKitMapper.completedActivity)
     }
 
     func fetchRecentHealthMetrics(since: Date) async throws -> [HealthMetricsDaily] {

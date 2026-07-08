@@ -14,6 +14,18 @@ final class HealthKitMapperTests: XCTestCase {
         XCTAssertEqual(HealthKitMapper.sportType(for: .traditionalStrengthTraining), .strength)
     }
 
+    func testSportTypeMapsTriathlonToBrick() {
+        XCTAssertEqual(HealthKitMapper.sportType(for: .swimBikeRun), .brick)
+    }
+
+    /// Cross-training types with no natural home in the 6-case `SportType`
+    /// enum used to silently default to `.run`, polluting run-specific pace
+    /// analytics — `.strength` is the safer fallback.
+    func testSportTypeDefaultsUnrecognizedTypesToStrengthNotRun() {
+        XCTAssertEqual(HealthKitMapper.sportType(for: .rowing), .strength)
+        XCTAssertEqual(HealthKitMapper.sportType(for: .yoga), .strength)
+    }
+
     func testCompletedActivityMapsCoreFields() {
         let start = Date(timeIntervalSince1970: 1_700_000_000)
         let end = start.addingTimeInterval(3600)
@@ -35,6 +47,32 @@ final class HealthKitMapperTests: XCTestCase {
         XCTAssertEqual(activity.distanceM, 10_000)
         XCTAssertEqual(activity.startTime, start)
         XCTAssertEqual(activity.externalId, workout.uuid.uuidString)
+    }
+
+    func testComputesPaceForRunningWorkoutsOnly() {
+        let start = Date(timeIntervalSince1970: 1_700_000_000)
+        let run = HKWorkout(
+            activityType: .running, start: start, end: start.addingTimeInterval(1800), duration: 1800,
+            totalEnergyBurned: nil, totalDistance: HKQuantity(unit: .meter(), doubleValue: 5_000), metadata: nil
+        )
+        // 1800s / 5km = 360s/km (6:00/km)
+        XCTAssertEqual(HealthKitMapper.completedActivity(from: run).avgPaceSecPerKm, 360)
+
+        let ride = HKWorkout(
+            activityType: .cycling, start: start, end: start.addingTimeInterval(3600), duration: 3600,
+            totalEnergyBurned: nil, totalDistance: HKQuantity(unit: .meter(), doubleValue: 30_000), metadata: nil
+        )
+        XCTAssertNil(HealthKitMapper.completedActivity(from: ride).avgPaceSecPerKm)
+    }
+
+    func testMapsElevationGainFromWorkoutMetadata() {
+        let start = Date(timeIntervalSince1970: 1_700_000_000)
+        let workout = HKWorkout(
+            activityType: .running, start: start, end: start.addingTimeInterval(3600), duration: 3600,
+            totalEnergyBurned: nil, totalDistance: HKQuantity(unit: .meter(), doubleValue: 10_000),
+            metadata: [HKMetadataKeyElevationAscended: HKQuantity(unit: .meter(), doubleValue: 250)]
+        )
+        XCTAssertEqual(HealthKitMapper.completedActivity(from: workout).elevationGainM, 250)
     }
 
     func testSleepDurationSumsOnlyAsleepSamples() {

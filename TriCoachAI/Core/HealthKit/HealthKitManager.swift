@@ -34,6 +34,9 @@ final class HealthKitManager {
         if let cyclingPower = HKObjectType.quantityType(forIdentifier: .cyclingPower) {
             types.insert(cyclingPower)
         }
+        if let runningPower = HKObjectType.quantityType(forIdentifier: .runningPower) {
+            types.insert(runningPower)
+        }
         return types
     }()
 

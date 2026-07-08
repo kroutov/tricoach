@@ -58,9 +58,13 @@ struct ProfileView: View {
                         status: integrationsViewModel.healthKitStatus,
                         error: integrationsViewModel.healthKitError,
                         isLoading: integrationsViewModel.isRequestingHealthKit,
-                        actionTitle: "Connecter"
+                        actionTitle: integrationsViewModel.isHealthKitConnected ? "Resynchroniser" : "Connecter"
                     ) {
-                        await integrationsViewModel.connectHealthKit()
+                        if integrationsViewModel.isHealthKitConnected {
+                            await integrationsViewModel.syncHealthKit()
+                        } else {
+                            await integrationsViewModel.connectHealthKit()
+                        }
                     }
 
                     IntegrationRow(

@@ -11,6 +11,7 @@ final class IntegrationsViewModel {
     var healthKitStatus: String = "Non connecté"
     var isRequestingHealthKit = false
     var healthKitError: String?
+    var isHealthKitConnected = false
 
     var isStravaConnected = false
     var stravaStatus: String = "Non connecté"
@@ -109,15 +110,16 @@ final class IntegrationsViewModel {
 
     // MARK: - HealthKit
 
-    /// Requests authorization, then immediately pulls the last 30 days of
-    /// workouts/health metrics and pushes them to the backend so a
-    /// just-connected athlete's history feeds the plan right away.
+    /// Requests authorization, then immediately pulls history and pushes it
+    /// to the backend so a just-connected athlete's data feeds the plan
+    /// right away.
     func connectHealthKit() async {
         isRequestingHealthKit = true
         healthKitError = nil
         defer { isRequestingHealthKit = false }
         do {
             try await healthKitManager.requestAuthorization()
+            isHealthKitConnected = true
             healthKitStatus = "Synchronisation en cours…"
             try await pushHealthKitData()
         } catch {
@@ -125,8 +127,31 @@ final class IntegrationsViewModel {
         }
     }
 
+    /// Re-pulls after the initial connect (new workouts since last time) —
+    /// unlike Strava/Garmin this hits no external API and isn't rate
+    /// limited, so it re-scans the same window rather than tracking a
+    /// "last synced" cursor; the backend already dedupes by the workout's
+    /// stable HealthKit UUID (`externalId`), so re-sending old activities
+    /// is a no-op, not a duplicate.
+    func syncHealthKit() async {
+        isRequestingHealthKit = true
+        healthKitError = nil
+        defer { isRequestingHealthKit = false }
+        do {
+            try await pushHealthKitData()
+        } catch {
+            healthKitError = error.localizedDescription
+        }
+    }
+
+    /// Unlike Strava/Garmin, HealthKit has no API rate limit to protect —
+    /// it's a local on-device query — so there's no reason to cap this to a
+    /// recent window the way the other sources are. Bounded to 2 years /
+    /// 500 workouts rather than left fully unbounded so a first sync on an
+    /// athlete with a decade of history doesn't turn into an enormous single
+    /// payload.
     private func pushHealthKitData() async throws {
-        let since = Calendar.current.date(byAdding: .day, value: -30, to: .now) ?? .now
+        let since = Calendar.current.date(byAdding: .year, value: -2, to: .now) ?? .distantPast
         let activities = try await healthKitProvider.fetchRecentActivities(since: since)
         let metrics = try await healthKitProvider.fetchRecentHealthMetrics(since: since)
         let response = try await healthKitSyncAPI.sync(activities: activities, healthMetrics: metrics)
