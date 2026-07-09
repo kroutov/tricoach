@@ -81,13 +81,20 @@ router.get('/analytics', async (req, res, next) => {
     const zoneDistribution = computeZoneDistribution(allWorkouts);
 
     const dailyLoads = new Map<string, number>();
+    // Tracked separately from `now` below: a workout can be completed ahead
+    // of its own scheduled `date` (e.g. an athlete moves a session earlier),
+    // which would otherwise put its load outside `[plan.startDate, now]` and
+    // silently vanish from the CTL/ATL chart until that date actually arrives.
+    let latestCompletedDate: Date | null = null;
     for (const w of allWorkouts) {
       if (w.status !== 'COMPLETED') continue;
       const key = w.date.toISOString().slice(0, 10);
       dailyLoads.set(key, (dailyLoads.get(key) ?? 0) + (w.estimatedTss ?? 0));
+      if (!latestCompletedDate || w.date > latestCompletedDate) latestCompletedDate = w.date;
     }
     const now = new Date();
-    const loadForm = computeLoadForm(dailyLoads, plan.startDate, now < plan.endDate ? now : plan.endDate);
+    const loadUpperBound = latestCompletedDate && latestCompletedDate > now ? latestCompletedDate : now;
+    const loadForm = computeLoadForm(dailyLoads, plan.startDate, loadUpperBound < plan.endDate ? loadUpperBound : plan.endDate);
 
     const vo2maxRows = await prisma.healthMetricDaily.findMany({
       where: { userId: req.userId, vo2max: { not: null } },

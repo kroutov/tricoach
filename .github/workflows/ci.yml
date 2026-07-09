@@ -114,6 +114,15 @@ jobs:
           curl -sf -X POST http://localhost:3000/api/v1/auth/dev-login \
             -H "Content-Type: application/json" \
             -d '{"appleUserId":"ci-warmup-user"}' > /dev/null || true
+          # Same reasoning, but for the email/password path specifically:
+          # bcrypt is a native addon, so its very first hash/compare call in
+          # the process pays a one-time native-binding load cost that the
+          # dev-login warm-up above never touches (dev-login has no password).
+          # AuthCredentialsUITests hit this as an intermittent 10s timeout
+          # with the request still in flight.
+          curl -sf -X POST http://localhost:3000/api/v1/auth/register \
+            -H "Content-Type: application/json" \
+            -d '{"email":"ci-warmup@example.com","password":"warmupPassword123"}' > /dev/null || true
 
       - name: Generate Xcode project
         working-directory: TriCoachAI

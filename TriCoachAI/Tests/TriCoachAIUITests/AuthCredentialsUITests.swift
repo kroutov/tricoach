@@ -53,6 +53,7 @@ final class AuthCredentialsUITests: XCTestCase {
         emailField.typeText("nobody-\(UUID().uuidString.prefix(8))@example.com")
 
         let passwordField = app.secureTextFields["Mot de passe"]
+        XCTAssertTrue(passwordField.waitForExistence(timeout: 5))
         passwordField.tap()
         Thread.sleep(forTimeInterval: 0.3)
         passwordField.typeText("wrongpassword")
@@ -61,6 +62,11 @@ final class AuthCredentialsUITests: XCTestCase {
         XCTAssertTrue(submitButton.isEnabled)
         submitButton.tap()
 
-        XCTAssertTrue(app.staticTexts["Email ou mot de passe incorrect."].waitForExistence(timeout: 10))
+        // Bumped from 10s to 20s: seen timing out on CI with the submit
+        // button still disabled and its loading spinner still visible (i.e.
+        // the request itself was still in flight, not a client-side bug) —
+        // same cold-CI-runner tolerance already applied to other first/early
+        // network calls in this suite (see AdaptationHistoryUITests).
+        XCTAssertTrue(app.staticTexts["Email ou mot de passe incorrect."].waitForExistence(timeout: 20))
     }
 }
