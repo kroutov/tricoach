@@ -104,6 +104,63 @@ enum IntegrationProvider {
   GARMIN
 }
 
+enum MealType {
+  BREAKFAST
+  LUNCH
+  DINNER
+  SNACK
+}
+
+enum DietaryTag {
+  VEGETARIAN
+  CHICKEN_ONLY
+  PESCATARIAN
+  OMNIVORE
+}
+
+enum EffortProfile {
+  CARB_LOAD
+  RECOVERY
+  LIGHT
+  BALANCED
+}
+
+// Mirrors the "Catégorie(s)" multi-select of the user's Notion "Recettes"
+// database 1:1 (plan §1/§2), so the import script needs no remapping table.
+enum RecipeCategory {
+  DIPS
+  COOKIES
+  BAKED
+  STEW
+  SANDWICH
+  DESSERT
+  TOAST
+  SALAD
+  PIE
+  VEGETARIAN
+  CAKE
+  PASTA
+  SOUP
+}
+
+enum PrepTimeBucket {
+  UNDER_15
+  MIN_15_30
+  MIN_30_45
+  MIN_45_60
+  OVER_60
+}
+
+enum GroceryAisle {
+  BUTCHER
+  BAKERY
+  GROCERY
+  PRODUCE
+  FISHMONGER
+  FRESH
+  FROZEN
+}
+
 model User {
   id                     String   @id @default(uuid())
   // Nullable: a user authenticates via Apple, email/password, or some
@@ -130,6 +187,7 @@ model User {
   adaptationEvents     AdaptationEvent[]
   deviceConnections    DeviceConnection[]
   pushTokens           PushToken[]
+  menuSelections       MenuSelection[]
 
   @@map("users")
 }
@@ -150,6 +208,7 @@ model AthleteProfile {
   ftpWatts            Int?         @map("ftp_watts")
   thresholdPaceSecKm  Int?         @map("threshold_pace_sec_per_km")
   cssPaceSec100m      Int?         @map("css_pace_sec_per_100m")
+  dietaryPreference   DietaryTag?  @map("dietary_preference")
   updatedAt           DateTime     @updatedAt @map("updated_at")
 
   @@map("athlete_profiles")
@@ -381,4 +440,51 @@ model PushToken {
 
   @@unique([userId, deviceToken])
   @@map("push_tokens")
+}
+
+model Recipe {
+  id           String           @id @default(uuid())
+  title        String
+  mealTypes    MealType[]       @map("meal_types")
+  categories   RecipeCategory[]
+  dietaryTags  DietaryTag[]     @map("dietary_tags")
+  effortProfile EffortProfile   @map("effort_profile")
+  prepTime     PrepTimeBucket   @map("prep_time")
+  servings     Int              @default(2)
+  instructions String
+  // Lets a recipe be retired from the catalog without breaking historical
+  // MenuSelection rows that already reference it.
+  isActive     Boolean          @default(true) @map("is_active")
+  createdAt    DateTime         @default(now()) @map("created_at")
+
+  ingredients    RecipeIngredient[]
+  menuSelections MenuSelection[]
+
+  @@map("recipes")
+}
+
+model RecipeIngredient {
+  id       String        @id @default(uuid())
+  recipeId String        @map("recipe_id")
+  recipe   Recipe        @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  name     String
+  amount   Float?
+  unit     String?
+  aisle    GroceryAisle?
+
+  @@index([recipeId])
+  @@map("recipe_ingredients")
+}
+
+model MenuSelection {
+  id       String   @id @default(uuid())
+  userId   String   @map("user_id")
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  date     DateTime @db.Date
+  mealType MealType @map("meal_type")
+  recipeId String   @map("recipe_id")
+  recipe   Recipe   @relation(fields: [recipeId], references: [id])
+
+  @@unique([userId, date, mealType])
+  @@map("menu_selections")
 }

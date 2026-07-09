@@ -39,6 +39,12 @@ export function AppLayout() {
           <NavLink to="/activities" className={navLinkClass}>
             Activités
           </NavLink>
+          <NavLink to="/nutrition/menu" className={navLinkClass}>
+            Menu
+          </NavLink>
+          <NavLink to="/nutrition/recipes" className={navLinkClass}>
+            Recettes
+          </NavLink>
           <NavLink to="/adaptation-history" className={navLinkClass}>
             Historique
           </NavLink>

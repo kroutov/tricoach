@@ -1,0 +1,1848 @@
+[
+  {
+    "title": "Petit salé aux lentilles",
+    "notionUrl": "https://app.notion.com/p/45a17d0f2d324e30ae335216c1a7cb12",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "categories": [
+      "stew"
+    ],
+    "dietaryTags": [
+      "omnivore"
+    ],
+    "effortProfile": "recovery",
+    "prepTime": "min15to30",
+    "servings": 4,
+    "instructions": "Émincer les carottes épluchées. Couper l'oignon en deux, le piquer de clous de girofle, puis le placer avec les échalotes coupées en deux et le bouquet garni. Couper les saucisses en deux et les ajouter avec les lentilles, les carottes et l'eau (l'eau doit recouvrir les lentilles). Saler, poivrer, puis laisser mijoter environ 55 minutes à 95°C. Servir chaud.",
+    "ingredients": [
+      {
+        "name": "Bouquet garni",
+        "amount": 1,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Sel",
+        "amount": null,
+        "unit": "pincée",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Poivre",
+        "amount": null,
+        "unit": "pincée",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Eau",
+        "amount": 1,
+        "unit": "L",
+        "aisle": null
+      },
+      {
+        "name": "Carottes",
+        "amount": 200,
+        "unit": "g",
+        "aisle": "produce"
+      },
+      {
+        "name": "Oignon",
+        "amount": 1,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Échalotes",
+        "amount": 2,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Lentilles vertes du Puy",
+        "amount": 400,
+        "unit": "g",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Saucisses de Montbéliard",
+        "amount": 2,
+        "unit": null,
+        "aisle": "butcher"
+      },
+      {
+        "name": "Saucisses de Morteau",
+        "amount": 2,
+        "unit": null,
+        "aisle": "butcher"
+      }
+    ],
+    "needsReview": [
+      "mealTypes",
+      "prepTime"
+    ]
+  },
+  {
+    "title": "Gratin de gnocchi",
+    "notionUrl": "https://app.notion.com/p/6a131d6ac449419f89b7d794ecf81934",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "categories": [
+      "pasta"
+    ],
+    "dietaryTags": [
+      "vegetarian",
+      "chickenOnly",
+      "pescatarian",
+      "omnivore"
+    ],
+    "effortProfile": "carbLoad",
+    "prepTime": "min45to60",
+    "servings": 2,
+    "instructions": "Préchauffer le four à 180°C. Préparer une béchamel en mélangeant la maïzena avec le lait froid puis porter à ébullition en ajoutant sel, poivre et noix de muscade. Dans un plat allant au four, disposer les gnocchis crus et les recouvrir de béchamel et d'emmental. Enfourner 30 minutes et servir chaud.",
+    "ingredients": [
+      {
+        "name": "Lait",
+        "amount": 300,
+        "unit": "ml",
+        "aisle": "fresh"
+      },
+      {
+        "name": "Maïzena",
+        "amount": 10,
+        "unit": "g",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Fromage râpé",
+        "amount": 40,
+        "unit": "g",
+        "aisle": "fresh"
+      },
+      {
+        "name": "Noix de muscade",
+        "amount": null,
+        "unit": null,
+        "aisle": "grocery"
+      },
+      {
+        "name": "Gnocchis",
+        "amount": 200,
+        "unit": "g",
+        "aisle": "grocery"
+      }
+    ],
+    "needsReview": [
+      "mealTypes"
+    ]
+  },
+  {
+    "title": "Bruschetta poire bleu",
+    "notionUrl": "https://app.notion.com/p/daae587e55094da2ac7c9b2d7a5dc759",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "categories": [
+      "toast"
+    ],
+    "dietaryTags": [
+      "vegetarian",
+      "chickenOnly",
+      "pescatarian",
+      "omnivore"
+    ],
+    "effortProfile": "light",
+    "prepTime": "under15",
+    "servings": 2,
+    "instructions": "Éplucher et détailler la poire en fines lamelles. Disposer quelques feuilles de mâche puis les lamelles de poire sur le pain, assaisonner. Émietter le bleu sur les poires. Faire toaster.",
+    "ingredients": [
+      {
+        "name": "Pain de campagne",
+        "amount": 100,
+        "unit": "g",
+        "aisle": "bakery"
+      },
+      {
+        "name": "Bleu d'Auvergne",
+        "amount": 40,
+        "unit": "g",
+        "aisle": "fresh"
+      },
+      {
+        "name": "Poire",
+        "amount": 300,
+        "unit": "g",
+        "aisle": "produce"
+      }
+    ],
+    "needsReview": [
+      "mealTypes"
+    ]
+  },
+  {
+    "title": "Pâtes au potiron et à la fêta",
+    "notionUrl": "https://app.notion.com/p/6c3f5810ab1a4aa6bc66bb88e9969ae5",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "categories": [
+      "pasta"
+    ],
+    "dietaryTags": [
+      "vegetarian",
+      "chickenOnly",
+      "pescatarian",
+      "omnivore"
+    ],
+    "effortProfile": "carbLoad",
+    "prepTime": "min30to45",
+    "servings": 2,
+    "instructions": "Préchauffer le four à 200°C. Peler le potiron et le couper en gros cubes, hacher l'oignon, l'ail et les herbes. Déposer le potiron et l'oignon sur une plaque, arroser d'huile et cuire au four environ 40 minutes en remuant régulièrement. En fin de cuisson, répartir les herbes et l'ail. Cuire les pâtes selon les indications du paquet, puis mélanger le tout dans la casserole avec la feta et le parmesan.",
+    "ingredients": [
+      {
+        "name": "Macaronis",
+        "amount": 80,
+        "unit": "g",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Potiron",
+        "amount": 300,
+        "unit": "g",
+        "aisle": "produce"
+      },
+      {
+        "name": "Thym",
+        "amount": 1,
+        "unit": "g",
+        "aisle": "produce"
+      },
+      {
+        "name": "Ail",
+        "amount": 1,
+        "unit": "gousse",
+        "aisle": "produce"
+      },
+      {
+        "name": "Feta",
+        "amount": 60,
+        "unit": "g",
+        "aisle": "fresh"
+      },
+      {
+        "name": "Oignon",
+        "amount": 0.5,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Basilic",
+        "amount": 4,
+        "unit": "g",
+        "aisle": "produce"
+      },
+      {
+        "name": "Parmesan",
+        "amount": 10,
+        "unit": "g",
+        "aisle": "fresh"
+      },
+      {
+        "name": "Huile d'olive",
+        "amount": 20,
+        "unit": "ml",
+        "aisle": "grocery"
+      }
+    ],
+    "needsReview": [
+      "mealTypes"
+    ]
+  },
+  {
+    "title": "Tortilla aux champignons",
+    "notionUrl": "https://app.notion.com/p/60a3210e93b941d7b6bcda31c5d54cb8",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "categories": [
+      "vegetarian"
+    ],
+    "dietaryTags": [
+      "vegetarian",
+      "chickenOnly",
+      "pescatarian",
+      "omnivore"
+    ],
+    "effortProfile": "balanced",
+    "prepTime": "min30to45",
+    "servings": 2,
+    "instructions": "Laver et couper les pommes de terre en tranches, les faire cuire 20 minutes dans une poêle. Faire revenir l'oignon avec les champignons dans l'huile puis les ajouter au mélange. Ajouter les oeufs battus. Poursuivre la cuisson 5 minutes en retournant à mi-cuisson.",
+    "ingredients": [
+      {
+        "name": "Champignons",
+        "amount": 200,
+        "unit": "g",
+        "aisle": "produce"
+      },
+      {
+        "name": "Pommes de terre",
+        "amount": 300,
+        "unit": "g",
+        "aisle": "produce"
+      },
+      {
+        "name": "Oignon",
+        "amount": 60,
+        "unit": "g",
+        "aisle": "produce"
+      },
+      {
+        "name": "Oeufs",
+        "amount": 2,
+        "unit": null,
+        "aisle": "fresh"
+      }
+    ],
+    "needsReview": [
+      "mealTypes"
+    ]
+  },
+  {
+    "title": "Spaghettis aux légumes sautés",
+    "notionUrl": "https://app.notion.com/p/4bf93e750c9e4836b83220aa97a29ef0",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "categories": [
+      "pasta"
+    ],
+    "dietaryTags": [
+      "vegetarian",
+      "chickenOnly",
+      "pescatarian",
+      "omnivore"
+    ],
+    "effortProfile": "carbLoad",
+    "prepTime": "min15to30",
+    "servings": 2,
+    "instructions": "Cuire les spaghettis. Éplucher la carotte et laver les autres légumes. Râper le céleri et le brocoli, tailler des lamelles de carotte à l'économe. Faire chauffer l'huile dans une poêle à feu vif puis ajouter les légumes, les faire revenir quelques minutes. Déglacer avec la sauce soja et laisser cuire 2 à 4 minutes. Égoutter les spaghettis et les verser dans la poêle encore chaude. Rectifier l'assaisonnement.",
+    "ingredients": [
+      {
+        "name": "Carottes",
+        "amount": 100,
+        "unit": "g",
+        "aisle": "produce"
+      },
+      {
+        "name": "Spaghettis",
+        "amount": 70,
+        "unit": "g",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Céleri rave",
+        "amount": 120,
+        "unit": "g",
+        "aisle": "produce"
+      },
+      {
+        "name": "Brocoli",
+        "amount": 120,
+        "unit": "g",
+        "aisle": "produce"
+      },
+      {
+        "name": "Sauce soja",
+        "amount": 20,
+        "unit": "ml",
+        "aisle": "grocery"
+      }
+    ],
+    "needsReview": [
+      "mealTypes",
+      "prepTime"
+    ]
+  },
+  {
+    "title": "Gratin de macaroni à l'emmental",
+    "notionUrl": "https://app.notion.com/p/6a23529472b74b01bddc1c7e3365def9",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "categories": [
+      "pasta"
+    ],
+    "dietaryTags": [
+      "vegetarian",
+      "chickenOnly",
+      "pescatarian",
+      "omnivore"
+    ],
+    "effortProfile": "carbLoad",
+    "prepTime": "min30to45",
+    "servings": 2,
+    "instructions": "Cuire les pâtes al dente. Préchauffer le four à 180°C. Préparer une béchamel en mélangeant la maïzena avec le lait froid puis porter à ébullition en ajoutant sel, poivre et noix de muscade. Mettre les pâtes dans un plat, recouvrir de béchamel et d'emmental. Enfourner 20 minutes.",
+    "ingredients": [
+      {
+        "name": "Fromage râpé",
+        "amount": 30,
+        "unit": "g",
+        "aisle": "fresh"
+      },
+      {
+        "name": "Lait",
+        "amount": 300,
+        "unit": "ml",
+        "aisle": "fresh"
+      },
+      {
+        "name": "Maïzena",
+        "amount": 10,
+        "unit": "g",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Noix de muscade",
+        "amount": null,
+        "unit": null,
+        "aisle": "grocery"
+      },
+      {
+        "name": "Macaronis",
+        "amount": 120,
+        "unit": "g",
+        "aisle": "grocery"
+      }
+    ],
+    "needsReview": [
+      "mealTypes"
+    ]
+  },
+  {
+    "title": "Röstis de patate douce et pomme de terre",
+    "notionUrl": "https://app.notion.com/p/00cce075e43847ccb28fec474431586e",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "categories": [
+      "toast"
+    ],
+    "dietaryTags": [
+      "vegetarian",
+      "chickenOnly",
+      "pescatarian",
+      "omnivore"
+    ],
+    "effortProfile": "light",
+    "prepTime": "under15",
+    "servings": 2,
+    "instructions": "Laver, éplucher et râper les tubercules. Les sécher dans un torchon puis les assaisonner. Ajouter les oeufs battus en omelette, la farine, et mélanger. Former des galettes et les faire cuire 5 minutes à l'air fryer à 180°C.",
+    "ingredients": [
+      {
+        "name": "Pommes de terre",
+        "amount": 240,
+        "unit": "g",
+        "aisle": "produce"
+      },
+      {
+        "name": "Huile d'olive",
+        "amount": 10,
+        "unit": "ml",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Patates douces",
+        "amount": 240,
+        "unit": "g",
+        "aisle": "produce"
+      },
+      {
+        "name": "Farine blanche",
+        "amount": 10,
+        "unit": "g",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Oeufs",
+        "amount": 2,
+        "unit": null,
+        "aisle": "fresh"
+      }
+    ],
+    "needsReview": [
+      "mealTypes"
+    ]
+  },
+  {
+    "title": "Purée de butternut et patate douce avec des oeufs au plats",
+    "notionUrl": "https://app.notion.com/p/5b901428de12418b8dd2497c9c912b72",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "categories": [
+      "vegetarian"
+    ],
+    "dietaryTags": [
+      "vegetarian",
+      "chickenOnly",
+      "pescatarian",
+      "omnivore"
+    ],
+    "effortProfile": "balanced",
+    "prepTime": "min30to45",
+    "servings": 2,
+    "instructions": "Peler et couper le butternut et les patates douces. Faire cuire à la vapeur. Ajouter la crème de soja et réduire en purée. Servir avec des oeufs au plat.",
+    "ingredients": [
+      {
+        "name": "Butternut",
+        "amount": 160,
+        "unit": "g",
+        "aisle": "produce"
+      },
+      {
+        "name": "Patate douce",
+        "amount": 200,
+        "unit": "g",
+        "aisle": "produce"
+      },
+      {
+        "name": "Crème de soja",
+        "amount": 100,
+        "unit": "g",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Oeufs",
+        "amount": 4,
+        "unit": null,
+        "aisle": "fresh"
+      }
+    ],
+    "needsReview": []
+  },
+  {
+    "title": "Brick épinards boursin",
+    "notionUrl": "https://app.notion.com/p/15a0303ca94a4a19abc952b129e7cb81",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "categories": [
+      "toast"
+    ],
+    "dietaryTags": [
+      "vegetarian",
+      "chickenOnly",
+      "pescatarian",
+      "omnivore"
+    ],
+    "effortProfile": "light",
+    "prepTime": "min15to30",
+    "servings": 2,
+    "instructions": "Préchauffer l'air fryer à 220°C pendant 3 minutes. Faire revenir les épinards surgelées et ajouter le boursin. Mettre la farce dans une feuille de brick et la plier en triangle. Enfourner 6 à 10 minutes.",
+    "ingredients": [
+      {
+        "name": "Épinards surgelés",
+        "amount": 200,
+        "unit": "g",
+        "aisle": "frozen"
+      },
+      {
+        "name": "Feuille de brick",
+        "amount": 80,
+        "unit": "g",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Boursin",
+        "amount": 60,
+        "unit": "g",
+        "aisle": "fresh"
+      }
+    ],
+    "needsReview": []
+  },
+  {
+    "title": "Risotto butternut, noix et comté",
+    "notionUrl": "https://app.notion.com/p/f9663729cb5440049b78337578494bd0",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "categories": [
+      "stew"
+    ],
+    "dietaryTags": [
+      "vegetarian",
+      "chickenOnly",
+      "pescatarian",
+      "omnivore"
+    ],
+    "effortProfile": "carbLoad",
+    "prepTime": "min30to45",
+    "servings": 2,
+    "instructions": "Émincer l'échalote, tailler le butternut en brunoise. Faire fondre la moitié du beurre dans une poêle et faire revenir l'échalote. Ajouter le butternut, puis le reste du beurre et le riz. Mouiller de vin blanc. Une fois évaporé, ajouter le bouillon de légumes louche par louche jusqu'à évaporation complète. Ajouter le comté et les cerneaux de noix.",
+    "ingredients": [
+      {
+        "name": "Riz à risotto",
+        "amount": 100,
+        "unit": "g",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Courge butternut",
+        "amount": 300,
+        "unit": "g",
+        "aisle": "produce"
+      },
+      {
+        "name": "Bouillon de légumes",
+        "amount": 250,
+        "unit": "ml",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Noix",
+        "amount": 20,
+        "unit": "g",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Vin blanc",
+        "amount": 50,
+        "unit": "ml",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Comté",
+        "amount": 40,
+        "unit": "g",
+        "aisle": "fresh"
+      },
+      {
+        "name": "Beurre",
+        "amount": 20,
+        "unit": "g",
+        "aisle": "fresh"
+      },
+      {
+        "name": "Échalote",
+        "amount": 2,
+        "unit": "g",
+        "aisle": "produce"
+      }
+    ],
+    "needsReview": []
+  },
+  {
+    "title": "Wok de nouilles aux carottes et cacahuètes",
+    "notionUrl": "https://app.notion.com/p/971a31ff7361410fb008da5ace71a3bf",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "categories": [
+      "pasta"
+    ],
+    "dietaryTags": [
+      "vegetarian",
+      "chickenOnly",
+      "pescatarian",
+      "omnivore"
+    ],
+    "effortProfile": "carbLoad",
+    "prepTime": "min30to45",
+    "servings": 2,
+    "instructions": "Couper les carottes en petits cubes et les faire cuire avec l'huile d'olive pendant 10 minutes. Faire cuire les nouilles pendant 3 minutes. Ajouter les nouilles dans la poêle avec les carottes. Ajouter les cacahuètes concassées et la sauce soja.",
+    "ingredients": [
+      {
+        "name": "Sauce soja",
+        "amount": 40,
+        "unit": "ml",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Cacahuètes",
+        "amount": 30,
+        "unit": "g",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Carottes",
+        "amount": 300,
+        "unit": "g",
+        "aisle": "produce"
+      },
+      {
+        "name": "Nouilles soba",
+        "amount": 80,
+        "unit": "g",
+        "aisle": "grocery"
+      }
+    ],
+    "needsReview": []
+  },
+  {
+    "title": "Dhal de carottes et lentilles",
+    "notionUrl": "https://app.notion.com/p/e3db81ce5eaa4facb09bda73586ba32c",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "categories": [
+      "stew"
+    ],
+    "dietaryTags": [
+      "vegetarian",
+      "chickenOnly",
+      "pescatarian",
+      "omnivore"
+    ],
+    "effortProfile": "recovery",
+    "prepTime": "min30to45",
+    "servings": 2,
+    "instructions": "Cuire les carottes à la vapeur. Cuire les oignons à la poêle. Ajouter les épices avec un peu d'eau. Ajouter les lentilles et le reste de l'eau, cuire à feu doux environ 10 minutes. Ajouter les carottes. Servir.",
+    "ingredients": [
+      {
+        "name": "Curcuma",
+        "amount": 4,
+        "unit": "g",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Lentilles corail",
+        "amount": 100,
+        "unit": "g",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Carottes",
+        "amount": 400,
+        "unit": "g",
+        "aisle": "produce"
+      },
+      {
+        "name": "Oignon",
+        "amount": 100,
+        "unit": "g",
+        "aisle": "produce"
+      },
+      {
+        "name": "Piment de Cayenne",
+        "amount": null,
+        "unit": null,
+        "aisle": "grocery"
+      },
+      {
+        "name": "Curry",
+        "amount": null,
+        "unit": null,
+        "aisle": "grocery"
+      },
+      {
+        "name": "Eau",
+        "amount": 400,
+        "unit": "ml",
+        "aisle": null
+      }
+    ],
+    "needsReview": []
+  },
+  {
+    "title": "Gnocchis aux épinards",
+    "notionUrl": "https://app.notion.com/p/b459a5a020ae438ab2f460aaab711985",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "categories": [
+      "pasta"
+    ],
+    "dietaryTags": [
+      "vegetarian",
+      "chickenOnly",
+      "pescatarian",
+      "omnivore"
+    ],
+    "effortProfile": "carbLoad",
+    "prepTime": "min15to30",
+    "servings": 2,
+    "instructions": "Faire revenir les épinards à la poêle à l'huile d'olive. Ajouter les gnocchis avec un fond de vin blanc et faire revenir 5 minutes à nouveau. Servir avec une salade verte.",
+    "ingredients": [
+      {
+        "name": "Vin blanc",
+        "amount": 40,
+        "unit": "ml",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Épinards surgelés",
+        "amount": 400,
+        "unit": "g",
+        "aisle": "frozen"
+      },
+      {
+        "name": "Gnocchis",
+        "amount": 200,
+        "unit": "g",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Laitue",
+        "amount": 120,
+        "unit": "g",
+        "aisle": "produce"
+      }
+    ],
+    "needsReview": []
+  },
+  {
+    "title": "Croque monsieur chèvre et pesto",
+    "notionUrl": "https://app.notion.com/p/07d84e2c0072444782144e065d8d3cb1",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "categories": [
+      "toast"
+    ],
+    "dietaryTags": [
+      "vegetarian",
+      "chickenOnly",
+      "pescatarian",
+      "omnivore"
+    ],
+    "effortProfile": "balanced",
+    "prepTime": "under15",
+    "servings": 2,
+    "instructions": "Faire les tartines en commençant par le pesto, puis ajouter le fromage. Mettre dans l'appareil à croque monsieur.",
+    "ingredients": [
+      {
+        "name": "Pain",
+        "amount": 100,
+        "unit": "g",
+        "aisle": "bakery"
+      },
+      {
+        "name": "Chèvre",
+        "amount": 80,
+        "unit": "g",
+        "aisle": "fresh"
+      },
+      {
+        "name": "Pesto",
+        "amount": 20,
+        "unit": "g",
+        "aisle": "grocery"
+      }
+    ],
+    "needsReview": []
+  },
+  {
+    "title": "Brick à l'oeuf et à la tomme de brebis",
+    "notionUrl": "https://app.notion.com/p/2458fcfb6728445e9bf284e3ba5a8d28",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "categories": [
+      "toast"
+    ],
+    "dietaryTags": [
+      "vegetarian",
+      "chickenOnly",
+      "pescatarian",
+      "omnivore"
+    ],
+    "effortProfile": "light",
+    "prepTime": "under15",
+    "servings": 2,
+    "instructions": "Dans une grande assiette creuse, disposer la feuille de brick, casser l'oeuf dessus, saler, poivrer et ajouter la tomme coupée en copeaux. Refermer la feuille en demi-lune. Dans une poêle bien chaude avec de l'huile d'olive, faire revenir la brick 3 minutes puis retourner et cuire à nouveau 1 minute.",
+    "ingredients": [
+      {
+        "name": "Oeufs",
+        "amount": 2,
+        "unit": null,
+        "aisle": "fresh"
+      },
+      {
+        "name": "Tomme de brebis",
+        "amount": 60,
+        "unit": "g",
+        "aisle": "fresh"
+      },
+      {
+        "name": "Feuille de brick",
+        "amount": null,
+        "unit": null,
+        "aisle": "grocery"
+      }
+    ],
+    "needsReview": []
+  },
+  {
+    "title": "Frites de panais et fondue de poireaux avec son oeuf mollet",
+    "notionUrl": "https://app.notion.com/p/1bb64ff7466b4e25a3c97b5138e870c4",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "categories": [
+      "vegetarian"
+    ],
+    "dietaryTags": [
+      "vegetarian",
+      "chickenOnly",
+      "pescatarian",
+      "omnivore"
+    ],
+    "effortProfile": "balanced",
+    "prepTime": "min15to30",
+    "servings": 2,
+    "instructions": "Frites de panais : préchauffer l'AirFryer 3 minutes à 200°C. Éplucher les panais et les couper en frites, mélanger avec l'huile d'olive et le paprika, puis enfourner 15 minutes à 200°C. Fondue de poireaux : couper le blanc du poireau, faire revenir à feu moyen sans coloration, ajouter le vin blanc et laisser évaporer, puis ajouter la crème fraîche et laisser épaissir. Oeuf mollet : cuire dans l'eau bouillante pendant 6 minutes.",
+    "ingredients": [
+      {
+        "name": "Panais",
+        "amount": 250,
+        "unit": "g",
+        "aisle": "produce"
+      },
+      {
+        "name": "Paprika",
+        "amount": 10,
+        "unit": "g",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Crème fraîche",
+        "amount": 10,
+        "unit": "ml",
+        "aisle": "fresh"
+      },
+      {
+        "name": "Poireaux",
+        "amount": 200,
+        "unit": "g",
+        "aisle": "produce"
+      },
+      {
+        "name": "Vin blanc",
+        "amount": 60,
+        "unit": "ml",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Oeufs",
+        "amount": 2,
+        "unit": null,
+        "aisle": "fresh"
+      }
+    ],
+    "needsReview": [
+      "prepTime"
+    ]
+  },
+  {
+    "title": "Pâtes aux champignons et à la crème",
+    "notionUrl": "https://app.notion.com/p/e8c47d80883244fe813522bce4fcc8b8",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "categories": [
+      "pasta"
+    ],
+    "dietaryTags": [
+      "vegetarian",
+      "chickenOnly",
+      "pescatarian",
+      "omnivore"
+    ],
+    "effortProfile": "carbLoad",
+    "prepTime": "min15to30",
+    "servings": 2,
+    "instructions": "Laver les champignons, les couper en morceaux et les faire revenir environ 10 minutes à découvert avec l'huile d'olive, le sel et le poivre. Mélanger la crème et la moutarde. En fin de cuisson des champignons, ajouter le mélange. Cuire les pâtes et assembler le tout.",
+    "ingredients": [
+      {
+        "name": "Champignons",
+        "amount": 300,
+        "unit": "g",
+        "aisle": "produce"
+      },
+      {
+        "name": "Crème fraîche",
+        "amount": 60,
+        "unit": "ml",
+        "aisle": "fresh"
+      },
+      {
+        "name": "Pennes",
+        "amount": 100,
+        "unit": "g",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Moutarde",
+        "amount": 30,
+        "unit": "g",
+        "aisle": "grocery"
+      }
+    ],
+    "needsReview": [
+      "mealTypes",
+      "prepTime"
+    ]
+  },
+  {
+    "title": "Fajitas au poulet",
+    "notionUrl": "https://app.notion.com/p/ca9dd2ebff644dc3aae4b0705b4cbea9",
+    "mealTypes": [
+      "dinner"
+    ],
+    "categories": [
+      "sandwich"
+    ],
+    "dietaryTags": [
+      "chickenOnly",
+      "omnivore"
+    ],
+    "effortProfile": "balanced",
+    "prepTime": "min15to30",
+    "servings": 2,
+    "instructions": "Couper les poivrons en lamelles, émincer les oignons, couper le poulet en petits cubes. Dans une grande poêle, dorer les poivrons, saler et poivrer puis réserver. Dans la même poêle, caraméliser les oignons avec l'huile et le beurre, saler et poivrer puis réserver avec les poivrons. Dorer le poulet avec les épices, saler et poivrer, remettre les légumes et poursuivre la cuisson 1 minute en remuant. Servir avec les garnitures à disposition.",
+    "ingredients": [
+      {
+        "name": "Poivrons (rouge et jaune)",
+        "amount": 2,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Oignons",
+        "amount": 2,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Beurre",
+        "amount": 15,
+        "unit": "ml",
+        "aisle": "fresh"
+      },
+      {
+        "name": "Huile d'olive",
+        "amount": 60,
+        "unit": "ml",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Filet de poulet",
+        "amount": 2,
+        "unit": null,
+        "aisle": "butcher"
+      },
+      {
+        "name": "Épices mexicaines",
+        "amount": 15,
+        "unit": "ml",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Origan",
+        "amount": 5,
+        "unit": "ml",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Tortillas",
+        "amount": 8,
+        "unit": null,
+        "aisle": "grocery"
+      },
+      {
+        "name": "Tomates",
+        "amount": 2,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Guacamole",
+        "amount": null,
+        "unit": null,
+        "aisle": "fresh"
+      },
+      {
+        "name": "Fromage râpé",
+        "amount": null,
+        "unit": null,
+        "aisle": "fresh"
+      }
+    ],
+    "needsReview": []
+  },
+  {
+    "title": "Omelette, fromage frais, noix",
+    "notionUrl": "https://app.notion.com/p/21848a1ccadb45bf9f000089ffc19c2a",
+    "mealTypes": [
+      "lunch"
+    ],
+    "categories": [
+      "vegetarian"
+    ],
+    "dietaryTags": [
+      "vegetarian",
+      "chickenOnly",
+      "pescatarian",
+      "omnivore"
+    ],
+    "effortProfile": "balanced",
+    "prepTime": "min15to30",
+    "servings": 2,
+    "instructions": "Ramollir le fromage frais avec le lait. Battre les oeufs en omelette et ajouter le mélange avec le fromage. Assaisonner. Ajouter les noix. Mettre dans une poêle chaude et laisser cuire 5 à 10 minutes selon la cuisson souhaitée.",
+    "ingredients": [
+      {
+        "name": "Oeufs",
+        "amount": 4,
+        "unit": null,
+        "aisle": "fresh"
+      },
+      {
+        "name": "Fromage frais",
+        "amount": 50,
+        "unit": "g",
+        "aisle": "fresh"
+      },
+      {
+        "name": "Lait",
+        "amount": 40,
+        "unit": "ml",
+        "aisle": "fresh"
+      },
+      {
+        "name": "Noix de muscade",
+        "amount": null,
+        "unit": null,
+        "aisle": "grocery"
+      },
+      {
+        "name": "Noix",
+        "amount": 30,
+        "unit": "g",
+        "aisle": "grocery"
+      }
+    ],
+    "needsReview": []
+  },
+  {
+    "title": "Velouté de pois au wasabi et sa tranche de pain",
+    "notionUrl": "https://app.notion.com/p/d69b12fe0f81456bb2c68e9f4cc7e86e",
+    "mealTypes": [
+      "dinner"
+    ],
+    "categories": [
+      "soup"
+    ],
+    "dietaryTags": [
+      "vegetarian",
+      "chickenOnly",
+      "pescatarian",
+      "omnivore"
+    ],
+    "effortProfile": "light",
+    "prepTime": "min15to30",
+    "servings": 2,
+    "instructions": "Peler et couper la pomme de terre en cubes. Verser le wasabi, les petits pois, la pomme de terre et le bouillon de légumes dans le robot cuiseur, puis lancer un programme soupe veloutée (30 min / 110°C). Servir avec une tranche de pain de campagne.",
+    "ingredients": [
+      {
+        "name": "Wasabi",
+        "amount": 6,
+        "unit": "g",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Petits pois",
+        "amount": 250,
+        "unit": "g",
+        "aisle": "produce"
+      },
+      {
+        "name": "Pommes de terre",
+        "amount": 150,
+        "unit": "g",
+        "aisle": "produce"
+      },
+      {
+        "name": "Bouillon de légumes",
+        "amount": 250,
+        "unit": "ml",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Pain de campagne",
+        "amount": 30,
+        "unit": "g",
+        "aisle": "bakery"
+      }
+    ],
+    "needsReview": []
+  },
+  {
+    "title": "Tofu de pommes de terre au curry et sa salade verte",
+    "notionUrl": "https://app.notion.com/p/46648ee12c98408d927a9178bca886f3",
+    "mealTypes": [
+      "lunch"
+    ],
+    "categories": [
+      "stew"
+    ],
+    "dietaryTags": [
+      "vegetarian",
+      "chickenOnly",
+      "pescatarian",
+      "omnivore"
+    ],
+    "effortProfile": "recovery",
+    "prepTime": "min30to45",
+    "servings": 2,
+    "instructions": "Couper le tofu et les pommes de terre en dés de taille moyenne. Faire revenir les pommes de terre avec l'huile et le curry durant 20 minutes puis ajouter le tofu et cuire 5 minutes de plus. Assaisonner, ajouter un filet de citron pressé et servir chaud avec la salade verte.",
+    "ingredients": [
+      {
+        "name": "Huile d'olive",
+        "amount": 10,
+        "unit": "ml",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Citron jaune",
+        "amount": 100,
+        "unit": "g",
+        "aisle": "produce"
+      },
+      {
+        "name": "Tofu",
+        "amount": 200,
+        "unit": "g",
+        "aisle": "fresh"
+      },
+      {
+        "name": "Curry",
+        "amount": null,
+        "unit": null,
+        "aisle": "grocery"
+      },
+      {
+        "name": "Pommes de terre",
+        "amount": 400,
+        "unit": "g",
+        "aisle": "produce"
+      },
+      {
+        "name": "Laitue",
+        "amount": 120,
+        "unit": "g",
+        "aisle": "produce"
+      }
+    ],
+    "needsReview": []
+  },
+  {
+    "title": "Poêlée de tofu avec son pain complet",
+    "notionUrl": "https://app.notion.com/p/59e576cc201245ccad6a894a63f76cf4",
+    "mealTypes": [
+      "dinner"
+    ],
+    "categories": [
+      "vegetarian"
+    ],
+    "dietaryTags": [
+      "vegetarian",
+      "chickenOnly",
+      "pescatarian",
+      "omnivore"
+    ],
+    "effortProfile": "recovery",
+    "prepTime": "min15to30",
+    "servings": 2,
+    "instructions": "Dans une poêle, faire revenir l'oignon 5 minutes à feu vif pour qu'il soit bien caramélisé. Ajouter les carottes détaillées en rondelles fines et le bouillon de légumes, laisser cuire jusqu'à évaporation. Pendant ce temps, cuire les épinards selon les indications du paquet. Ajouter les épinards à la préparation d'oignon et de carottes ainsi que des morceaux de tofu. Laisser cuire encore quelques minutes, saler et poivrer.",
+    "ingredients": [
+      {
+        "name": "Épinards surgelés",
+        "amount": 200,
+        "unit": "g",
+        "aisle": "frozen"
+      },
+      {
+        "name": "Tofu",
+        "amount": 200,
+        "unit": "g",
+        "aisle": "fresh"
+      },
+      {
+        "name": "Bouillon de légumes",
+        "amount": 400,
+        "unit": "ml",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Oignon",
+        "amount": 160,
+        "unit": "g",
+        "aisle": "produce"
+      },
+      {
+        "name": "Carottes",
+        "amount": 300,
+        "unit": "g",
+        "aisle": "produce"
+      }
+    ],
+    "needsReview": []
+  },
+  {
+    "title": "Mijoté de lentilles aux carottes",
+    "notionUrl": "https://app.notion.com/p/68e37c3bd3664970af5591830bb7afa8",
+    "mealTypes": [
+      "lunch"
+    ],
+    "categories": [
+      "stew"
+    ],
+    "dietaryTags": [
+      "vegetarian",
+      "chickenOnly",
+      "pescatarian",
+      "omnivore"
+    ],
+    "effortProfile": "recovery",
+    "prepTime": "min30to45",
+    "servings": 2,
+    "instructions": "Cuire les lentilles avec les 3/4 des carottes, les herbes de provence, le bouquet garni, le sel et le poivre pendant environ les 3/4 du temps de cuisson recommandé (environ 15 minutes) dans 5 fois leur volume d'eau. Couper les carottes restantes en fines rondelles et les faire revenir avec les oignons dans l'huile d'olive pendant 10 minutes. Ajouter ce mélange aux lentilles, ajouter un peu d'eau si besoin, porter à ébullition puis laisser mijoter à feu doux 10 minutes. Saler et poivrer.",
+    "ingredients": [
+      {
+        "name": "Bouquet garni",
+        "amount": 1,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Huile d'olive",
+        "amount": 10,
+        "unit": "ml",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Herbes de Provence",
+        "amount": null,
+        "unit": null,
+        "aisle": "grocery"
+      },
+      {
+        "name": "Oignons",
+        "amount": 100,
+        "unit": "g",
+        "aisle": "produce"
+      },
+      {
+        "name": "Lentilles",
+        "amount": 120,
+        "unit": "g",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Carottes",
+        "amount": 400,
+        "unit": "g",
+        "aisle": "produce"
+      }
+    ],
+    "needsReview": []
+  },
+  {
+    "title": "Tofu sauté aux brocolis avec son riz",
+    "notionUrl": "https://app.notion.com/p/1cc8f6ca4eb8429384f5b258cb165502",
+    "mealTypes": [
+      "dinner"
+    ],
+    "categories": [
+      "vegetarian"
+    ],
+    "dietaryTags": [
+      "vegetarian",
+      "chickenOnly",
+      "pescatarian",
+      "omnivore"
+    ],
+    "effortProfile": "recovery",
+    "prepTime": "min15to30",
+    "servings": 2,
+    "instructions": "Cuire le riz selon le temps indiqué. Hacher l'oignon et l'ail, couper le chou en quartiers et les brocolis en fleurons, râper le gingembre. Couper le tofu en gros cubes et bien l'éponger. Mélanger le ketchup, le vinaigre de riz, la sauce soja, le gingembre et l'ail dans un bol. Enrober les cubes de tofu de maïzena. Chauffer l'huile de colza et faire sauter les oignons quelques minutes, ajouter les brocolis et le pak choi et poursuivre la cuisson 3 minutes, puis réserver. Dans la même poêle, dorer les cubes de tofu de tous côtés, remettre les légumes puis ajouter la sauce et bien mélanger.",
+    "ingredients": [
+      {
+        "name": "Tofu",
+        "amount": 240,
+        "unit": "g",
+        "aisle": "fresh"
+      },
+      {
+        "name": "Ketchup",
+        "amount": 20,
+        "unit": "g",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Huile de colza",
+        "amount": 10,
+        "unit": "ml",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Maïzena",
+        "amount": 20,
+        "unit": "g",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Vinaigre de riz",
+        "amount": 20,
+        "unit": "ml",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Oignon",
+        "amount": 50,
+        "unit": "g",
+        "aisle": "produce"
+      },
+      {
+        "name": "Sauce soja",
+        "amount": 14,
+        "unit": "ml",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Chou pak choi",
+        "amount": 400,
+        "unit": "g",
+        "aisle": "produce"
+      },
+      {
+        "name": "Gingembre",
+        "amount": 4,
+        "unit": "g",
+        "aisle": "produce"
+      },
+      {
+        "name": "Ail",
+        "amount": 8,
+        "unit": "g",
+        "aisle": "produce"
+      },
+      {
+        "name": "Brocoli",
+        "amount": 140,
+        "unit": "g",
+        "aisle": "produce"
+      },
+      {
+        "name": "Riz cru",
+        "amount": 40,
+        "unit": "g",
+        "aisle": "grocery"
+      }
+    ],
+    "needsReview": []
+  },
+  {
+    "title": "Cake au reblochon et salade verte",
+    "notionUrl": "https://app.notion.com/p/9530858b4ff849449fc6104449b46b19",
+    "mealTypes": [
+      "lunch"
+    ],
+    "categories": [
+      "cake"
+    ],
+    "dietaryTags": [
+      "vegetarian",
+      "chickenOnly",
+      "pescatarian",
+      "omnivore"
+    ],
+    "effortProfile": "balanced",
+    "prepTime": "min45to60",
+    "servings": 2,
+    "instructions": "Préchauffer le four à 180°C. Mélanger tous les ingrédients sauf le reblochon (préalablement coupé en cubes). Huiler le moule et retirer l'excédent. Verser une partie de la pâte, ajouter les morceaux de fromage au centre, puis recouvrir avec le reste de la pâte. Enfourner 40 minutes. Servir avec la salade verte.",
+    "ingredients": [
+      {
+        "name": "Farine complète",
+        "amount": 80,
+        "unit": "g",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Vin blanc",
+        "amount": 60,
+        "unit": "ml",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Oeufs",
+        "amount": 2,
+        "unit": null,
+        "aisle": "fresh"
+      },
+      {
+        "name": "Huile d'olive",
+        "amount": 20,
+        "unit": "ml",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Levure chimique",
+        "amount": 10,
+        "unit": "g",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Reblochon",
+        "amount": 60,
+        "unit": "g",
+        "aisle": "fresh"
+      },
+      {
+        "name": "Concentré de tomates",
+        "amount": 10,
+        "unit": "g",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Salade romaine",
+        "amount": 120,
+        "unit": "g",
+        "aisle": "produce"
+      }
+    ],
+    "needsReview": []
+  },
+  {
+    "title": "Risotto aux poireaux et carottes",
+    "notionUrl": "https://app.notion.com/p/e2125e8523e84ba9999d579a7bbc3c48",
+    "mealTypes": [
+      "dinner"
+    ],
+    "categories": [
+      "stew"
+    ],
+    "dietaryTags": [
+      "vegetarian",
+      "chickenOnly",
+      "pescatarian",
+      "omnivore"
+    ],
+    "effortProfile": "carbLoad",
+    "prepTime": "min30to45",
+    "servings": 2,
+    "instructions": "Couper finement l'oignon, les poireaux et les carottes. Faire blondir les oignons avec l'huile d'olive puis ajouter les poireaux et les carottes pendant 5 minutes en remuant souvent. Ajouter le riz et laisser 2 minutes pour qu'il devienne translucide. Ajouter le vin blanc. Une fois évaporé, ajouter le bouillon de légumes louche par louche jusqu'à épuisement. Juste après la dernière louche, ajouter le parmesan et assaisonner avant de servir.",
+    "ingredients": [
+      {
+        "name": "Poireaux",
+        "amount": 200,
+        "unit": "g",
+        "aisle": "produce"
+      },
+      {
+        "name": "Huile d'olive",
+        "amount": 10,
+        "unit": "ml",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Riz",
+        "amount": 100,
+        "unit": "g",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Carottes",
+        "amount": 200,
+        "unit": "g",
+        "aisle": "produce"
+      },
+      {
+        "name": "Bouillon de légumes",
+        "amount": 250,
+        "unit": "ml",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Parmesan",
+        "amount": 20,
+        "unit": "g",
+        "aisle": "fresh"
+      },
+      {
+        "name": "Vin blanc",
+        "amount": 200,
+        "unit": "ml",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Oignon",
+        "amount": 1,
+        "unit": null,
+        "aisle": "produce"
+      }
+    ],
+    "needsReview": []
+  },
+  {
+    "title": "Penne sauce aux cèpes",
+    "notionUrl": "https://app.notion.com/p/ff03a1d378be42318967cc48f7d516e7",
+    "mealTypes": [
+      "lunch"
+    ],
+    "categories": [
+      "pasta"
+    ],
+    "dietaryTags": [
+      "vegetarian",
+      "chickenOnly",
+      "pescatarian",
+      "omnivore"
+    ],
+    "effortProfile": "carbLoad",
+    "prepTime": "min30to45",
+    "servings": 2,
+    "instructions": "Cuire les pâtes selon le temps indiqué. Faire chauffer l'huile d'olive et le beurre et y faire revenir les cèpes pendant 10 à 15 minutes en remuant régulièrement. Saler, poivrer, puis déglacer avec le vin blanc. Laisser réduire de moitié puis ajouter la crème fraîche et poursuivre la cuisson environ 5 minutes. Ajouter les pâtes dans la sauteuse, mélanger avec la sauce et recouvrir de parmesan.",
+    "ingredients": [
+      {
+        "name": "Cèpes",
+        "amount": 30,
+        "unit": "g",
+        "aisle": "produce"
+      },
+      {
+        "name": "Huile d'olive",
+        "amount": 7,
+        "unit": "ml",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Pennes",
+        "amount": 100,
+        "unit": "g",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Crème fraîche",
+        "amount": 60,
+        "unit": "ml",
+        "aisle": "fresh"
+      },
+      {
+        "name": "Vin blanc",
+        "amount": 4,
+        "unit": "ml",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Parmesan",
+        "amount": 30,
+        "unit": "g",
+        "aisle": "fresh"
+      },
+      {
+        "name": "Beurre",
+        "amount": 5,
+        "unit": "g",
+        "aisle": "fresh"
+      }
+    ],
+    "needsReview": []
+  },
+  {
+    "title": "Avocado toast / chèvre",
+    "notionUrl": "https://app.notion.com/p/b78a900345724501bc0cdc6448f87cfb",
+    "mealTypes": [
+      "breakfast"
+    ],
+    "categories": [
+      "toast"
+    ],
+    "dietaryTags": [
+      "vegetarian",
+      "chickenOnly",
+      "pescatarian",
+      "omnivore"
+    ],
+    "effortProfile": "light",
+    "prepTime": "under15",
+    "servings": 2,
+    "instructions": "Couper l'avocat en fines tranches. Couper les tomates séchées. Napper les tranches de pain de fromage de chèvre, recouvrir de lamelles d'avocat. Ajouter la roquette et les lamelles de tomates séchées. Saler, poivrer et parsemer de piment d'Espelette. Refermer les toasts et faire cuire sur le grill à sandwich.",
+    "ingredients": [
+      {
+        "name": "Pain de campagne",
+        "amount": 4,
+        "unit": "tranches",
+        "aisle": "bakery"
+      },
+      {
+        "name": "Avocat",
+        "amount": 1,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Fromage de chèvre frais",
+        "amount": 200,
+        "unit": "g",
+        "aisle": "fresh"
+      },
+      {
+        "name": "Roquette",
+        "amount": 1,
+        "unit": "poignée",
+        "aisle": "produce"
+      },
+      {
+        "name": "Tomates séchées",
+        "amount": 8,
+        "unit": null,
+        "aisle": "grocery"
+      }
+    ],
+    "needsReview": []
+  },
+  {
+    "title": "Soupe de butternut",
+    "notionUrl": "https://app.notion.com/p/cba239deb8ca47df987b85e6ff3fb4e7",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "categories": [
+      "soup"
+    ],
+    "dietaryTags": [
+      "vegetarian",
+      "chickenOnly",
+      "pescatarian",
+      "omnivore"
+    ],
+    "effortProfile": "light",
+    "prepTime": "min30to45",
+    "servings": 4,
+    "instructions": "Couper l'oignon en 4 et le mettre dans le bol avec la pomme de terre coupée en dés et le butternut épluché, épépiné et coupé en dés. Ajouter le bouillon de légumes, le sel, le poivre et la muscade, puis couvrir avec l'eau. Lancer un programme soupe veloutée (30 min / 110°C). Ajouter une cuillère à soupe de crème fraîche et mixer à nouveau brièvement.",
+    "ingredients": [
+      {
+        "name": "Oignon",
+        "amount": 1,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Courge butternut",
+        "amount": 1,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Pomme de terre",
+        "amount": 1,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Eau",
+        "amount": 500,
+        "unit": "ml",
+        "aisle": null
+      },
+      {
+        "name": "Bouillon de légumes",
+        "amount": 1,
+        "unit": "cube",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Muscade",
+        "amount": null,
+        "unit": "pincée",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Crème fraîche",
+        "amount": 1,
+        "unit": "cuillère à soupe",
+        "aisle": "fresh"
+      }
+    ],
+    "needsReview": []
+  },
+  {
+    "title": "Quiche lorraine",
+    "notionUrl": "https://app.notion.com/p/b5a27071cfbe47978bfaa7c0ac4bf959",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "categories": [
+      "pie"
+    ],
+    "dietaryTags": [
+      "omnivore"
+    ],
+    "effortProfile": "balanced",
+    "prepTime": "min45to60",
+    "servings": 4,
+    "instructions": "Préchauffer le four à 180°C. Étaler la pâte dans un moule, la piquer à la fourchette et parsemer de copeaux de beurre. Faire rissoler les lardons à la poêle puis les éponger. Battre les oeufs, la crème fraîche et le lait, ajouter les lardons, assaisonner de sel, poivre et muscade. Verser sur la pâte et cuire 45 à 50 minutes.",
+    "ingredients": [
+      {
+        "name": "Crème fraîche",
+        "amount": 20,
+        "unit": "cl",
+        "aisle": "fresh"
+      },
+      {
+        "name": "Beurre",
+        "amount": 30,
+        "unit": "g",
+        "aisle": "fresh"
+      },
+      {
+        "name": "Lardons",
+        "amount": 200,
+        "unit": "g",
+        "aisle": "butcher"
+      },
+      {
+        "name": "Pâte brisée",
+        "amount": 200,
+        "unit": "g",
+        "aisle": "fresh"
+      },
+      {
+        "name": "Oeufs",
+        "amount": 3,
+        "unit": null,
+        "aisle": "fresh"
+      },
+      {
+        "name": "Lait",
+        "amount": 20,
+        "unit": "cl",
+        "aisle": "fresh"
+      }
+    ],
+    "needsReview": []
+  }
+]

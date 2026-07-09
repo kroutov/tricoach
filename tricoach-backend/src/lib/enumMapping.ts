@@ -2,11 +2,17 @@ import {
   ActivitySource,
   AdaptationTrigger,
   AthleteLevel,
+  DietaryTag,
+  EffortProfile,
   GoalPriority,
   GoalStatus,
   GoalType,
+  GroceryAisle,
   MacrocyclePhase,
+  MealType,
   PlanStatus,
+  PrepTimeBucket,
+  RecipeCategory,
   SportType,
   WorkoutIntensity,
   WorkoutStatus,
@@ -141,4 +147,62 @@ export const adaptationTriggerMap = makeMap<
   ['injuryFlag', 'INJURY_FLAG'],
   ['lowRecovery', 'LOW_RECOVERY'],
   ['physiologicalStrain', 'PHYSIOLOGICAL_STRAIN'],
+]);
+
+export const mealTypeMap = makeMap<'breakfast' | 'lunch' | 'dinner' | 'snack', MealType>([
+  ['breakfast', 'BREAKFAST'],
+  ['lunch', 'LUNCH'],
+  ['dinner', 'DINNER'],
+  ['snack', 'SNACK'],
+]);
+
+export const dietaryTagMap = makeMap<'vegetarian' | 'chickenOnly' | 'pescatarian' | 'omnivore', DietaryTag>([
+  ['vegetarian', 'VEGETARIAN'],
+  ['chickenOnly', 'CHICKEN_ONLY'],
+  ['pescatarian', 'PESCATARIAN'],
+  ['omnivore', 'OMNIVORE'],
+]);
+
+export const effortProfileMap = makeMap<'carbLoad' | 'recovery' | 'light' | 'balanced', EffortProfile>([
+  ['carbLoad', 'CARB_LOAD'],
+  ['recovery', 'RECOVERY'],
+  ['light', 'LIGHT'],
+  ['balanced', 'BALANCED'],
+]);
+
+export const recipeCategoryMap = makeMap<
+  'dips' | 'cookies' | 'ovenBaked' | 'stew' | 'sandwich' | 'dessert' | 'toast' | 'salad' | 'pie' | 'vegetarian' | 'cake' | 'pasta' | 'soup',
+  RecipeCategory
+>([
+  ['dips', 'DIPS'],
+  ['cookies', 'COOKIES'],
+  ['ovenBaked', 'BAKED'],
+  ['stew', 'STEW'],
+  ['sandwich', 'SANDWICH'],
+  ['dessert', 'DESSERT'],
+  ['toast', 'TOAST'],
+  ['salad', 'SALAD'],
+  ['pie', 'PIE'],
+  ['vegetarian', 'VEGETARIAN'],
+  ['cake', 'CAKE'],
+  ['pasta', 'PASTA'],
+  ['soup', 'SOUP'],
+]);
+
+export const prepTimeBucketMap = makeMap<'under15' | 'min15to30' | 'min30to45' | 'min45to60' | 'over60', PrepTimeBucket>([
+  ['under15', 'UNDER_15'],
+  ['min15to30', 'MIN_15_30'],
+  ['min30to45', 'MIN_30_45'],
+  ['min45to60', 'MIN_45_60'],
+  ['over60', 'OVER_60'],
+]);
+
+export const groceryAisleMap = makeMap<'butcher' | 'bakery' | 'grocery' | 'produce' | 'fishmonger' | 'fresh' | 'frozen', GroceryAisle>([
+  ['butcher', 'BUTCHER'],
+  ['bakery', 'BAKERY'],
+  ['grocery', 'GROCERY'],
+  ['produce', 'PRODUCE'],
+  ['fishmonger', 'FISHMONGER'],
+  ['fresh', 'FRESH'],
+  ['frozen', 'FROZEN'],
 ]);

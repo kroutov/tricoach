@@ -13,6 +13,8 @@ import { GoalsPage } from './features/goals/GoalsPage';
 import { AdaptationHistoryPage } from './features/adaptationHistory/AdaptationHistoryPage';
 import { ActivityHistoryPage } from './features/activityHistory/ActivityHistoryPage';
 import { AnalyticsPage } from './features/analytics/AnalyticsPage';
+import { RecipeCatalogPage } from './features/nutrition/RecipeCatalogPage';
+import { WeeklyMenuPage } from './features/nutrition/WeeklyMenuPage';
 import { AppLayout } from './components/AppLayout';
 
 function App() {
@@ -32,6 +34,8 @@ function App() {
               <Route path="/adaptation-history" element={<AdaptationHistoryPage />} />
               <Route path="/activities" element={<ActivityHistoryPage />} />
               <Route path="/analytics" element={<AnalyticsPage />} />
+              <Route path="/nutrition/recipes" element={<RecipeCatalogPage />} />
+              <Route path="/nutrition/menu" element={<WeeklyMenuPage />} />
               <Route path="/profile" element={<ProfilePage />} />
             </Route>
           </Route>

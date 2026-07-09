@@ -2,6 +2,9 @@ import { prisma } from '../../src/db/client';
 
 /** Wipes all tables in FK-safe order. Run between tests so integration tests stay isolated. */
 export async function resetDb(): Promise<void> {
+  await prisma.menuSelection.deleteMany();
+  await prisma.recipeIngredient.deleteMany();
+  await prisma.recipe.deleteMany();
   await prisma.completedActivity.deleteMany();
   await prisma.adaptationEvent.deleteMany();
   await prisma.healthMetricDaily.deleteMany();

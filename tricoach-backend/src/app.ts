@@ -12,6 +12,7 @@ import { healthkitRouter } from './modules/integrations/healthkit';
 import { stravaRouter } from './modules/integrations/strava';
 import { calendarFeedRouter } from './modules/me/calendarFeed';
 import { meRouter } from './modules/me/routes';
+import { nutritionMeRouter, nutritionRouter } from './modules/nutrition/routes';
 import { plansRouter } from './modules/plans/routes';
 import { stravaWebhookRouter } from './modules/webhooks/strava';
 import { workoutsRouter } from './modules/workouts/routes';
@@ -44,7 +45,11 @@ export function createApp(): Express {
   // capability lives in the `token` query param). Must be registered before
   // `/me`'s requireAuth gate below, since it's a sub-path of it.
   api.use('/me/calendar.ics', calendarFeedRouter);
+  // Must be registered before `/me`'s requireAuth gate below, since it's a
+  // sub-path of it and needs its own sub-router rather than falling through.
+  api.use('/me/nutrition', requireAuth, nutritionMeRouter);
   api.use('/me', requireAuth, meRouter);
+  api.use('/nutrition', requireAuth, nutritionRouter);
   api.use('/plans', requireAuth, plansRouter);
   api.use('/workouts', requireAuth, workoutsRouter);
   api.use('/integrations/healthkit', requireAuth, healthkitRouter);

@@ -156,3 +156,104 @@ export const macrocyclePhaseLabel: Record<MacrocyclePhase, string> = {
   taper: 'Affûtage final',
   transition: 'Transition',
 };
+
+// Nutrition (plan §2/§3) — mirrors tricoach-backend/src/lib/enumMapping.ts and Prisma's Recipe/MenuSelection models.
+
+export type MealType = 'breakfast' | 'lunch' | 'dinner' | 'snack';
+export const MEAL_TYPE_OPTIONS: MealType[] = ['breakfast', 'lunch', 'dinner', 'snack'];
+export const mealTypeLabel: Record<MealType, string> = {
+  breakfast: 'Petit-déjeuner',
+  lunch: 'Déjeuner',
+  dinner: 'Dîner',
+  snack: 'Snack',
+};
+
+export type DietaryTag = 'vegetarian' | 'chickenOnly' | 'pescatarian' | 'omnivore';
+export const DIETARY_TAG_OPTIONS: DietaryTag[] = ['vegetarian', 'chickenOnly', 'pescatarian', 'omnivore'];
+export const dietaryTagLabel: Record<DietaryTag, string> = {
+  vegetarian: 'Végétarien',
+  chickenOnly: 'Poulet uniquement',
+  pescatarian: 'Pescétarien',
+  omnivore: 'Tout type d’ingrédient',
+};
+
+export type EffortProfile = 'carbLoad' | 'recovery' | 'light' | 'balanced';
+export const effortProfileLabel: Record<EffortProfile, string> = {
+  carbLoad: 'Riche en glucides',
+  recovery: 'Récupération',
+  light: 'Léger',
+  balanced: 'Équilibré',
+};
+export const effortProfileColorVar: Record<EffortProfile, string> = {
+  carbLoad: 'var(--color-intensity-hard)',
+  recovery: 'var(--color-intensity-easy)',
+  light: 'var(--color-sport-swim)',
+  balanced: 'var(--color-brand)',
+};
+
+export type RecipeCategory =
+  | 'dips'
+  | 'cookies'
+  | 'ovenBaked'
+  | 'stew'
+  | 'sandwich'
+  | 'dessert'
+  | 'toast'
+  | 'salad'
+  | 'pie'
+  | 'vegetarian'
+  | 'cake'
+  | 'pasta'
+  | 'soup';
+
+export const RECIPE_CATEGORY_OPTIONS: RecipeCategory[] = [
+  'dips',
+  'cookies',
+  'ovenBaked',
+  'stew',
+  'sandwich',
+  'dessert',
+  'toast',
+  'salad',
+  'pie',
+  'vegetarian',
+  'cake',
+  'pasta',
+  'soup',
+];
+
+export const recipeCategoryLabel: Record<RecipeCategory, string> = {
+  dips: 'Dips',
+  cookies: 'Biscuits',
+  ovenBaked: 'Plats au four',
+  stew: 'Plats mijotés',
+  sandwich: 'Sandwich',
+  dessert: 'Desserts',
+  toast: 'Tartines',
+  salad: 'Salades',
+  pie: 'Tartes',
+  vegetarian: 'Végétarien',
+  cake: 'Gâteaux',
+  pasta: 'Pâtes',
+  soup: 'Soupe',
+};
+
+export type PrepTimeBucket = 'under15' | 'min15to30' | 'min30to45' | 'min45to60' | 'over60';
+export const prepTimeBucketLabel: Record<PrepTimeBucket, string> = {
+  under15: '< 15 min',
+  min15to30: '15 - 30 min',
+  min30to45: '30 - 45 min',
+  min45to60: '45 - 60 min',
+  over60: '> 1 h',
+};
+
+export type GroceryAisle = 'butcher' | 'bakery' | 'grocery' | 'produce' | 'fishmonger' | 'fresh' | 'frozen';
+export const groceryAisleLabel: Record<GroceryAisle, string> = {
+  butcher: 'Boucherie',
+  bakery: 'Boulangerie',
+  grocery: 'Épicerie',
+  produce: 'Fruits et légumes',
+  fishmonger: 'Poissonnerie',
+  fresh: 'Rayon frais',
+  frozen: 'Surgelé',
+};
