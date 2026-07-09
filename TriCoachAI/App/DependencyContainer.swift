@@ -21,6 +21,7 @@ final class DependencyContainer {
     let stravaAPI: StravaAPI
     let healthKitSyncAPI: HealthKitSyncAPI
     let dashboardAPI: DashboardAPI
+    let nutritionAPI: NutritionAPI
 
     let userSessionRepository: UserSessionRepository
     let profileRepository: ProfileRepository
@@ -42,6 +43,7 @@ final class DependencyContainer {
         stravaAPI = StravaAPI(client: apiClient)
         healthKitSyncAPI = HealthKitSyncAPI(client: apiClient)
         dashboardAPI = DashboardAPI(client: apiClient)
+        nutritionAPI = NutritionAPI(client: apiClient)
 
         userSessionRepository = SwiftDataUserSessionRepository(context: context)
         activityRepository = SwiftDataActivityRepository(context: context)

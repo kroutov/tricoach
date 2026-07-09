@@ -12,6 +12,9 @@ struct MainTabView: View {
             CalendarView(container: container)
                 .tabItem { Label("Calendrier", systemImage: "calendar") }
 
+            NutritionHomeView(container: container)
+                .tabItem { Label("Nutrition", systemImage: "fork.knife") }
+
             ProfileView(container: container, user: appState.currentUser) {
                 appState.signOut()
             }

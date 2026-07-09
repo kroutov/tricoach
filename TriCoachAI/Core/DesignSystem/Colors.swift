@@ -43,4 +43,13 @@ enum TCColor {
         case .rest: return sportRest
         }
     }
+
+    static func color(for effortProfile: EffortProfile) -> Color {
+        switch effortProfile {
+        case .carbLoad: return intensityHard
+        case .recovery: return intensityEasy
+        case .light: return sportSwim
+        case .balanced: return brand
+        }
+    }
 }
