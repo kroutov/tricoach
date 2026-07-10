@@ -1,5 +1,17 @@
 import { test, expect } from '@playwright/test';
-import { login } from './helpers';
+import { login, seedProposedMenuSelection } from './helpers';
+
+function mondayOfCurrentWeek(): string {
+  const now = new Date();
+  const day = now.getDay();
+  const diff = day === 0 ? -6 : 1 - day;
+  const monday = new Date(now);
+  monday.setDate(now.getDate() + diff);
+  const year = monday.getFullYear();
+  const month = String(monday.getMonth() + 1).padStart(2, '0');
+  const date = String(monday.getDate()).padStart(2, '0');
+  return `${year}-${month}-${date}`;
+}
 
 test.describe('nutrition', () => {
   test.beforeEach(async ({ page }) => {
@@ -87,5 +99,37 @@ test.describe('nutrition', () => {
     await expect(targetCell).toContainText(pickedTitle!);
 
     await clearIfFilled();
+  });
+
+  test('a proposed slot shows the "to validate" badge and can be confirmed', async ({ page }) => {
+    const monday = mondayOfCurrentWeek();
+    // Monday lunch: distinct from the Sunday-dinner slot the previous test
+    // exercises, so the two tests never touch the same row.
+    const seed = await seedProposedMenuSelection(monday, 'LUNCH');
+
+    try {
+      await page.goto('/nutrition/menu');
+      await expect(page.getByRole('heading', { name: 'Menu de la semaine' })).toBeVisible();
+
+      await expect(page.getByText(/recette.*proposée.*à valider/i)).toBeVisible();
+
+      const cell = page.getByRole('button', { name: new RegExp(`^Déjeuner du ${monday}`) });
+      await expect(cell).toContainText(seed.recipeTitle);
+      await expect(cell.getByText('À valider')).toBeVisible();
+
+      await cell.click();
+      const dialog = page.getByRole('dialog');
+      await expect(dialog).toBeVisible();
+      await expect(dialog.getByText('À valider')).toBeVisible();
+
+      await dialog.getByRole('button', { name: 'Valider' }).click();
+      await expect(dialog).toBeHidden();
+
+      await expect(page.getByText(/recette.*proposée.*à valider/i)).toBeHidden();
+      const confirmedCell = page.getByRole('button', { name: new RegExp(`^Déjeuner du ${monday}`) });
+      await expect(confirmedCell).not.toContainText('À valider');
+    } finally {
+      await seed.cleanup();
+    }
   });
 });

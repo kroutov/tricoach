@@ -7,3 +7,4 @@ if (process.env.TEST_DATABASE_URL) {
 }
 process.env.NODE_ENV = 'test';
 process.env.JWT_SECRET = 'test-secret';
+process.env.CRON_SECRET = 'test-cron-secret';

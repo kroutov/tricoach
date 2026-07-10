@@ -29,6 +29,8 @@ export const config = {
   backendPublicUrl: process.env.BACKEND_PUBLIC_URL ?? `http://localhost:${process.env.PORT ?? 3000}`,
   /** Web client's public URL — OAuth callbacks (Strava) redirect the browser here now that the web client is primary. */
   webPublicUrl: process.env.WEB_PUBLIC_URL ?? 'http://localhost:5173',
+  /** Shared secret for the scheduled weekly-menu-proposal trigger (see `requireCronSecret`) — no external caller can authenticate without it, so an unset value means the endpoint stays closed rather than open. */
+  cronSecret: process.env.CRON_SECRET,
   strava: {
     clientId: process.env.STRAVA_CLIENT_ID ?? '',
     clientSecret: process.env.STRAVA_CLIENT_SECRET ?? '',

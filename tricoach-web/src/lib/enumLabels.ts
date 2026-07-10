@@ -257,3 +257,9 @@ export const groceryAisleLabel: Record<GroceryAisle, string> = {
   fresh: 'Rayon frais',
   frozen: 'Surgelé',
 };
+
+export type MenuSelectionStatus = 'proposed' | 'confirmed';
+export const menuSelectionStatusLabel: Record<MenuSelectionStatus, string> = {
+  proposed: 'À valider',
+  confirmed: 'Confirmé',
+};

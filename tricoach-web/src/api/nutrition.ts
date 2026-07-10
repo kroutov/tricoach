@@ -1,5 +1,5 @@
 import { apiFetch } from './client';
-import type { DietaryTag, EffortProfile, GroceryAisle, MealType, PrepTimeBucket, RecipeCategory } from '../lib/enumLabels';
+import type { DietaryTag, EffortProfile, GroceryAisle, MealType, MenuSelectionStatus, PrepTimeBucket, RecipeCategory } from '../lib/enumLabels';
 
 export interface RecipeIngredient {
   id: string;
@@ -64,6 +64,7 @@ export interface MenuSelection {
   id: string;
   date: string;
   mealType: MealType;
+  status: MenuSelectionStatus;
   recipe: Recipe;
 }
 
@@ -77,4 +78,9 @@ export function setMenuSelection(date: string, mealType: MealType, recipeId: str
 
 export function deleteMenuSelection(date: string, mealType: MealType): Promise<void> {
   return apiFetch(`/me/nutrition/menu/${date}/${mealType}`, { method: 'DELETE' });
+}
+
+/** Bulk "Tout valider" — flips every PROPOSED slot in the given week (Monday `weekStart`) to CONFIRMED. */
+export function confirmWeek(weekStart: string): Promise<{ confirmed: number }> {
+  return apiFetch('/me/nutrition/menu/confirm-week', { method: 'POST', body: { weekStart } });
 }

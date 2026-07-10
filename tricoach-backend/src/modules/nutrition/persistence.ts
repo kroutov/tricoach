@@ -1,4 +1,4 @@
-import { Prisma, Recipe, RecipeIngredient } from '@prisma/client';
+import { MealType, Prisma, Recipe, RecipeIngredient } from '@prisma/client';
 import { prisma } from '../../db/client';
 import { toDateOnly } from '../../lib/dateOnly';
 import {
@@ -6,11 +6,13 @@ import {
   effortProfileMap,
   groceryAisleMap,
   mealTypeMap,
+  menuSelectionStatusMap,
   prepTimeBucketMap,
   recipeCategoryMap,
 } from '../../lib/enumMapping';
 import { computeLoadForm } from '../dashboard/analytics';
 import { effortProfileForDay, EffortProfileApi } from './engine/effortProfileForDay';
+import { CandidateRecipe, proposeWeeklyMenu, WeeklySlotInput } from './engine/proposeWeeklyMenu';
 
 type RecipeWithIngredients = Recipe & { ingredients: RecipeIngredient[] };
 
@@ -142,11 +144,19 @@ export async function setDietaryPreference(userId: string, preference: string | 
   return profile.dietaryPreference ? dietaryTagMap.toApi(profile.dietaryPreference) : null;
 }
 
-export function serializeMenuSelection(selection: { id: string; date: Date; mealType: string; recipeId: string; recipe: RecipeWithIngredients }) {
+export function serializeMenuSelection(selection: {
+  id: string;
+  date: Date;
+  mealType: string;
+  recipeId: string;
+  status: string;
+  recipe: RecipeWithIngredients;
+}) {
   return {
     id: selection.id,
     date: selection.date,
     mealType: mealTypeMap.toApi(selection.mealType as Parameters<typeof mealTypeMap.toApi>[0]),
+    status: menuSelectionStatusMap.toApi(selection.status as Parameters<typeof menuSelectionStatusMap.toApi>[0]),
     recipe: serializeRecipe(selection.recipe),
   };
 }
@@ -160,15 +170,100 @@ export async function listMenuSelections(userId: string, from: Date, to: Date) {
   return selections.map(serializeMenuSelection);
 }
 
+/**
+ * Any explicit write from the user — picking a recipe for an empty slot,
+ * changing one, or hitting "Valider" on an auto-proposed one (same call,
+ * same `recipeId`) — always lands as CONFIRMED. Only `proposeWeekForUser`
+ * ever writes PROPOSED, so this is the one place that distinction matters.
+ */
 export async function upsertMenuSelection(userId: string, date: Date, mealType: string, recipeId: string) {
   const dbMealType = mealTypeMap.toDb(mealType as Parameters<typeof mealTypeMap.toDb>[0]);
   const selection = await prisma.menuSelection.upsert({
     where: { userId_date_mealType: { userId, date: toDateOnly(date), mealType: dbMealType } },
-    update: { recipeId },
-    create: { userId, date: toDateOnly(date), mealType: dbMealType, recipeId },
+    update: { recipeId, status: 'CONFIRMED' },
+    create: { userId, date: toDateOnly(date), mealType: dbMealType, recipeId, status: 'CONFIRMED' },
     include: { recipe: { include: { ingredients: true } } },
   });
   return serializeMenuSelection(selection);
+}
+
+/** Bulk "Tout valider" for a week — one query instead of N sequential upserts. Idempotent. */
+export async function confirmWeek(userId: string, weekStart: Date, weekEnd: Date): Promise<number> {
+  const result = await prisma.menuSelection.updateMany({
+    where: { userId, date: { gte: toDateOnly(weekStart), lte: toDateOnly(weekEnd) }, status: 'PROPOSED' },
+    data: { status: 'CONFIRMED' },
+  });
+  return result.count;
+}
+
+/** Users considered "using" nutrition — proven engagement, not just an unused profile default. */
+export async function listUserIdsWithMenuHistory(): Promise<string[]> {
+  const rows = await prisma.menuSelection.findMany({ distinct: ['userId'], select: { userId: true } });
+  return rows.map((r) => r.userId);
+}
+
+const RECENT_USE_LOOKBACK_DAYS = 28;
+const PROPOSAL_MEAL_TYPES: Array<Parameters<typeof mealTypeMap.toDb>[0]> = ['lunch', 'dinner'];
+
+/**
+ * Generates and persists next week's lunch/dinner proposals for one user
+ * (called per-user by the scheduled trigger, plan §3/§4). Skips any slot
+ * that already has a CONFIRMED selection; overwrites a stale PROPOSED one.
+ */
+export async function proposeWeekForUser(userId: string, weekStart: Date): Promise<number> {
+  const start = toDateOnly(weekStart);
+  const days = Array.from({ length: 7 }, (_, i) => new Date(start.getTime() + i * 86_400_000));
+  const weekEnd = days[days.length - 1]!;
+  const slotKey = (date: Date, mealType: string) => `${date.toISOString().slice(0, 10)}-${mealType}`;
+
+  const existing = await prisma.menuSelection.findMany({
+    where: { userId, date: { gte: start, lte: weekEnd } },
+    select: { date: true, mealType: true, status: true },
+  });
+  const confirmedSlots = new Set(existing.filter((s) => s.status === 'CONFIRMED').map((s) => slotKey(s.date, s.mealType)));
+
+  const preference = await getDietaryPreference(userId);
+
+  const lookbackStart = new Date(start.getTime() - RECENT_USE_LOOKBACK_DAYS * 86_400_000);
+  const recentSelections = await prisma.menuSelection.findMany({
+    where: { userId, date: { gte: lookbackStart, lt: start } },
+    select: { recipeId: true },
+  });
+  const recentlyUsedRecipeIds = new Set(recentSelections.map((s) => s.recipeId));
+
+  const candidatesByMealType = new Map<string, CandidateRecipe[]>();
+  for (const mealType of PROPOSAL_MEAL_TYPES) {
+    const recipes = await findRecipes({ mealType, dietaryTag: preference ?? undefined });
+    candidatesByMealType.set(
+      mealType,
+      recipes.map((r) => ({ id: r.id, effortProfile: r.effortProfile, ingredientNames: r.ingredients.map((i) => i.name) }))
+    );
+  }
+
+  const slots: WeeklySlotInput[] = [];
+  for (const day of days) {
+    const effortProfile = effortProfileMap.toDb(await computeEffortProfileForUserDate(userId, day));
+    for (const mealType of PROPOSAL_MEAL_TYPES) {
+      const dbMealType = mealTypeMap.toDb(mealType);
+      if (confirmedSlots.has(slotKey(day, dbMealType))) continue;
+      slots.push({ date: day, mealType: dbMealType, effortProfile, candidates: candidatesByMealType.get(mealType) ?? [] });
+    }
+  }
+
+  const picks = proposeWeeklyMenu(slots, recentlyUsedRecipeIds);
+
+  await Promise.all(
+    picks.map((pick) => {
+      const mealType = pick.mealType as MealType;
+      return prisma.menuSelection.upsert({
+        where: { userId_date_mealType: { userId, date: pick.date, mealType } },
+        update: { recipeId: pick.recipeId, status: 'PROPOSED' },
+        create: { userId, date: pick.date, mealType, recipeId: pick.recipeId, status: 'PROPOSED' },
+      });
+    })
+  );
+
+  return picks.length;
 }
 
 export async function deleteMenuSelection(userId: string, date: Date, mealType: string): Promise<boolean> {

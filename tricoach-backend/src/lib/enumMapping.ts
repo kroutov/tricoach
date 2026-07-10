@@ -10,6 +10,7 @@ import {
   GroceryAisle,
   MacrocyclePhase,
   MealType,
+  MenuSelectionStatus,
   PlanStatus,
   PrepTimeBucket,
   RecipeCategory,
@@ -205,4 +206,9 @@ export const groceryAisleMap = makeMap<'butcher' | 'bakery' | 'grocery' | 'produ
   ['fishmonger', 'FISHMONGER'],
   ['fresh', 'FRESH'],
   ['frozen', 'FROZEN'],
+]);
+
+export const menuSelectionStatusMap = makeMap<'proposed' | 'confirmed', MenuSelectionStatus>([
+  ['proposed', 'PROPOSED'],
+  ['confirmed', 'CONFIRMED'],
 ]);

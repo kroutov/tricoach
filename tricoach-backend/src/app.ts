@@ -3,6 +3,7 @@ import express, { Express } from 'express';
 import helmet from 'helmet';
 import { config } from './config';
 import { errorHandler, notFoundHandler } from './middleware/errorHandler';
+import { requireCronSecret } from './middleware/requireCronSecret';
 import { webhookRateLimit } from './middleware/rateLimit';
 import { requireAuth } from './middleware/requireAuth';
 import { authRouter } from './modules/auth/routes';
@@ -12,7 +13,7 @@ import { healthkitRouter } from './modules/integrations/healthkit';
 import { stravaRouter } from './modules/integrations/strava';
 import { calendarFeedRouter } from './modules/me/calendarFeed';
 import { meRouter } from './modules/me/routes';
-import { nutritionMeRouter, nutritionRouter } from './modules/nutrition/routes';
+import { nutritionInternalRouter, nutritionMeRouter, nutritionRouter } from './modules/nutrition/routes';
 import { plansRouter } from './modules/plans/routes';
 import { stravaWebhookRouter } from './modules/webhooks/strava';
 import { workoutsRouter } from './modules/workouts/routes';
@@ -59,6 +60,9 @@ export function createApp(): Express {
   api.use('/integrations/garmin', requireAuth, garminRouter);
   api.use('/webhooks/strava', webhookRateLimit, stravaWebhookRouter);
   api.use('/dashboard', requireAuth, dashboardRouter);
+  // System-to-system trigger (see .github/workflows/propose-weekly-menu.yml)
+  // — no specific user, so it's gated by a shared secret instead of a JWT.
+  api.use('/internal/nutrition', requireCronSecret, nutritionInternalRouter);
   app.use('/api/v1', api);
 
   app.use(notFoundHandler);

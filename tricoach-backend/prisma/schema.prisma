@@ -161,6 +161,11 @@ enum GroceryAisle {
   FROZEN
 }
 
+enum MenuSelectionStatus {
+  PROPOSED
+  CONFIRMED
+}
+
 model User {
   id                     String   @id @default(uuid())
   // Nullable: a user authenticates via Apple, email/password, or some
@@ -477,13 +482,18 @@ model RecipeIngredient {
 }
 
 model MenuSelection {
-  id       String   @id @default(uuid())
-  userId   String   @map("user_id")
-  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  date     DateTime @db.Date
-  mealType MealType @map("meal_type")
-  recipeId String   @map("recipe_id")
-  recipe   Recipe   @relation(fields: [recipeId], references: [id])
+  id       String               @id @default(uuid())
+  userId   String               @map("user_id")
+  user     User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+  date     DateTime             @db.Date
+  mealType MealType             @map("meal_type")
+  recipeId String               @map("recipe_id")
+  recipe   Recipe               @relation(fields: [recipeId], references: [id])
+  // Only the scheduled weekly-proposal job (§ propose-week) ever writes
+  // PROPOSED — every user-driven write (pick, "Valider") forces CONFIRMED,
+  // see upsertMenuSelection. Defaults to CONFIRMED so existing rows need no
+  // backfill.
+  status   MenuSelectionStatus  @default(CONFIRMED)
 
   @@unique([userId, date, mealType])
   @@map("menu_selections")

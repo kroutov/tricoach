@@ -1,17 +1,21 @@
 import { Router } from 'express';
 import { z } from 'zod';
 import {
+  confirmWeek,
   deleteMenuSelection,
   findRecipeById,
   findRecipes,
   findSuggestedRecipes,
   getDietaryPreference,
   listMenuSelections,
+  listUserIdsWithMenuHistory,
+  proposeWeekForUser,
   serializeRecipe,
   setDietaryPreference,
   upsertMenuSelection,
 } from './persistence';
 import { ApiError } from '../../middleware/errorHandler';
+import { toDateOnly } from '../../lib/dateOnly';
 
 const MEAL_TYPES = ['breakfast', 'lunch', 'dinner', 'snack'] as const;
 const DIETARY_TAGS = ['vegetarian', 'chickenOnly', 'pescatarian', 'omnivore'] as const;
@@ -154,4 +158,50 @@ meRouter.delete('/menu/:date/:mealType', async (req, res, next) => {
   }
 });
 
+const confirmWeekSchema = z.object({ weekStart: z.coerce.date() });
+
+/** Bulk "Tout valider" for one week — flips every PROPOSED slot in range to CONFIRMED in a single query. */
+meRouter.post('/menu/confirm-week', async (req, res, next) => {
+  try {
+    const body = confirmWeekSchema.parse(req.body);
+    const start = toDateOnly(body.weekStart);
+    const end = new Date(start.getTime() + 6 * 86_400_000);
+    const confirmed = await confirmWeek(req.userId!, start, end);
+    res.json({ confirmed });
+  } catch (err) {
+    if (err instanceof z.ZodError) {
+      res.status(400).json({ error: 'invalid_request', details: err.issues });
+      return;
+    }
+    next(err);
+  }
+});
+
 export const nutritionMeRouter = meRouter;
+
+// ---- Internal: scheduled weekly proposal trigger (mounted at /internal/nutrition, gated by requireCronSecret — not requireAuth) ----
+
+const internalRouter = Router();
+
+/** The Monday strictly after `from` — if `from` is itself a Monday, rolls to the *following* Monday, not today. */
+function nextMonday(from: Date): Date {
+  const day = from.getUTCDay(); // 0=Sunday...6=Saturday; `from` must already be UTC-midnight (toDateOnly)
+  const daysUntilNextMonday = ((8 - day) % 7) || 7;
+  return new Date(from.getTime() + daysUntilNextMonday * 86_400_000);
+}
+
+internalRouter.post('/propose-week', async (req, res, next) => {
+  try {
+    const weekStart = nextMonday(toDateOnly(new Date()));
+    const userIds = await listUserIdsWithMenuHistory();
+    let selectionsProposed = 0;
+    for (const userId of userIds) {
+      selectionsProposed += await proposeWeekForUser(userId, weekStart);
+    }
+    res.json({ weekStart, usersProcessed: userIds.length, selectionsProposed });
+  } catch (err) {
+    next(err);
+  }
+});
+
+export const nutritionInternalRouter = internalRouter;

@@ -1,0 +1,16 @@
+name: Propose weekly menu
+
+on:
+  schedule:
+    # Saturday 08:00 UTC
+    - cron: '0 8 * * 6'
+  workflow_dispatch: {}
+
+jobs:
+  propose:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger weekly menu proposal
+        run: |
+          curl -sf -X POST https://tricoach-9ob8.onrender.com/api/v1/internal/nutrition/propose-week \
+            -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}"

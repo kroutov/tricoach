@@ -32,6 +32,7 @@ Provisionner une instance PostgreSQL managée (Railway/Render/Fly ont toutes une
 | `WEB_PUBLIC_URL` | URL publique du client web déployé (ex. `https://app.tricoach.ai`) — le callback Strava y redirige le navigateur une fois la connexion terminée |
 | `STRAVA_CLIENT_ID` / `STRAVA_CLIENT_SECRET` | app Strava sur [developers.strava.com](https://developers.strava.com), "Authorization Callback Domain" réglé sur le domaine du backend déployé |
 | `STRAVA_WEBHOOK_VERIFY_TOKEN` | valeur arbitraire que tu choisis, utilisée dans le handshake de souscription |
+| `CRON_SECRET` | valeur arbitraire longue (`openssl rand -base64 32`) — protège `POST /internal/nutrition/propose-week`, voir "Proposition hebdomadaire automatique" ci-dessous |
 
 Garmin (Phase web 4) n'a pas de variable d'environnement dédiée : l'intégration utilise les identifiants Garmin propres à chaque athlète (saisis dans l'app, chiffrés en base comme les tokens Strava), pas de clé d'API globale — voir `src/modules/integrations/garminClient.ts` pour le détail du tradeoff (accès non-officiel, Garmin peut le bloquer sans préavis).
 
@@ -66,6 +67,17 @@ Le `--include=dev` force l'installation malgré `NODE_ENV=production` ; référe
   ```
   Strava appelle immédiatement `GET .../webhooks/strava` pour le handshake — doit réussir avant que la souscription soit confirmée.
 - **CORS** : allowlist explicite via `CORS_ORIGINS` (voir tableau ci-dessus) — inclure l'origine exacte du frontend déployé (ex. `https://app.tricoach.ai`), jamais `*`.
+
+### 5. Proposition hebdomadaire automatique du menu
+
+Chaque samedi, `.github/workflows/propose-weekly-menu.yml` (cron GitHub Actions, `0 8 * * 6` = samedi 8h UTC) appelle `POST /internal/nutrition/propose-week` sur le backend déployé pour pré-remplir le menu (déjeuner + dîner) de la semaine suivante de tous les utilisateurs ayant déjà utilisé la fonctionnalité nutrition. Il n'existe pas de notification pour prévenir l'utilisateur — la proposition est juste prête la prochaine fois qu'il ouvre la page Menu.
+
+Cette route n'utilise pas l'authentification JWT habituelle (c'est un appel système, pas un utilisateur) — elle est protégée par un secret partagé à configurer une fois :
+1. Générer une valeur secrète : `openssl rand -base64 32`.
+2. L'ajouter comme variable d'environnement `CRON_SECRET` sur le service Render du backend (voir tableau ci-dessus).
+3. L'ajouter comme secret de repo GitHub — `Settings → Secrets and variables → Actions → New repository secret`, nom `CRON_SECRET`, même valeur.
+
+Pour tester sans attendre samedi : onglet **Actions** du repo GitHub → "Propose weekly menu" → **Run workflow** (déclenchement manuel via `workflow_dispatch`).
 
 ## Web (`tricoach-web/`)
 

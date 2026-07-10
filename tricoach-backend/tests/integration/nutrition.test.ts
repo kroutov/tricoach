@@ -126,6 +126,13 @@ async function seedActivePlanWithWorkout(userId: string, workoutDate: Date, inte
   });
 }
 
+function nextMondayFrom(now: Date): Date {
+  const start = toDateOnly(now);
+  const day = start.getUTCDay();
+  const daysUntilNextMonday = ((8 - day) % 7) || 7;
+  return new Date(start.getTime() + daysUntilNextMonday * 86_400_000);
+}
+
 describe('GET /nutrition/recipes', () => {
   it('filters the catalog by meal type, dietary tag, and category', async () => {
     await seedRecipes();
@@ -295,5 +302,114 @@ describe('menu selection', () => {
       .set('Authorization', `Bearer ${token}`)
       .send({ recipeId: randomUUID() });
     expect(res.status).toBe(404);
+  });
+
+  it('always confirms a slot on explicit write, even one previously auto-proposed', async () => {
+    await seedRecipes();
+    const { token, user } = await devLogin(app, { appleUserId: 'nutrition-menu-confirm-on-pick' });
+    const recipe = await prisma.recipe.findFirstOrThrow({ where: { title: 'Poulet basquaise' } });
+    const date = new Date().toISOString().slice(0, 10);
+
+    await prisma.menuSelection.create({
+      data: { userId: user.id, date: toDateOnly(new Date()), mealType: 'DINNER', recipeId: recipe.id, status: 'PROPOSED' },
+    });
+
+    const put = await request(app)
+      .put(`/api/v1/me/nutrition/menu/${date}/dinner`)
+      .set('Authorization', `Bearer ${token}`)
+      .send({ recipeId: recipe.id });
+
+    expect(put.body.status).toBe('confirmed');
+  });
+});
+
+describe('POST /me/nutrition/menu/confirm-week', () => {
+  it('confirms every proposed slot in the week and is idempotent', async () => {
+    await seedRecipes();
+    const { token, user } = await devLogin(app, { appleUserId: 'confirm-week' });
+    const recipe = await prisma.recipe.findFirstOrThrow({ where: { title: 'Poulet basquaise' } });
+    const weekStart = nextMondayFrom(new Date());
+    const weekStartStr = weekStart.toISOString().slice(0, 10);
+
+    await prisma.menuSelection.create({
+      data: { userId: user.id, date: weekStart, mealType: 'LUNCH', recipeId: recipe.id, status: 'PROPOSED' },
+    });
+
+    const confirmRes = await request(app)
+      .post('/api/v1/me/nutrition/menu/confirm-week')
+      .set('Authorization', `Bearer ${token}`)
+      .send({ weekStart: weekStartStr });
+    expect(confirmRes.status).toBe(200);
+    expect(confirmRes.body.confirmed).toBe(1);
+
+    const weekEndStr = new Date(weekStart.getTime() + 6 * 86_400_000).toISOString().slice(0, 10);
+    const menu = await request(app)
+      .get(`/api/v1/me/nutrition/menu?from=${weekStartStr}&to=${weekEndStr}`)
+      .set('Authorization', `Bearer ${token}`);
+    expect(menu.body[0].status).toBe('confirmed');
+
+    const secondConfirm = await request(app)
+      .post('/api/v1/me/nutrition/menu/confirm-week')
+      .set('Authorization', `Bearer ${token}`)
+      .send({ weekStart: weekStartStr });
+    expect(secondConfirm.body.confirmed).toBe(0);
+  });
+});
+
+describe('POST /internal/nutrition/propose-week', () => {
+  it('rejects requests without the correct cron secret', async () => {
+    const noAuth = await request(app).post('/api/v1/internal/nutrition/propose-week');
+    expect(noAuth.status).toBe(401);
+
+    const wrongSecret = await request(app).post('/api/v1/internal/nutrition/propose-week').set('Authorization', 'Bearer wrong-secret');
+    expect(wrongSecret.status).toBe(401);
+  });
+
+  it('proposes next week lunch+dinner only for users with prior menu history, skipping already-confirmed slots', async () => {
+    await seedRecipes();
+    const { token: eligibleToken, user: eligibleUser } = await devLogin(app, { appleUserId: 'propose-week-eligible' });
+    const { token: freshToken } = await devLogin(app, { appleUserId: 'propose-week-fresh' });
+    void eligibleUser;
+
+    const today = new Date().toISOString().slice(0, 10);
+    const chicken = await prisma.recipe.findFirstOrThrow({ where: { title: 'Poulet basquaise' } });
+    // One manual pick makes this user "eligible" (proven menu history).
+    await request(app)
+      .put(`/api/v1/me/nutrition/menu/${today}/lunch`)
+      .set('Authorization', `Bearer ${eligibleToken}`)
+      .send({ recipeId: chicken.id });
+
+    const weekStart = nextMondayFrom(new Date());
+    const weekStartStr = weekStart.toISOString().slice(0, 10);
+    const weekEndStr = new Date(weekStart.getTime() + 6 * 86_400_000).toISOString().slice(0, 10);
+
+    // Pre-confirm Monday's dinner — the job must leave it untouched.
+    const bowl = await prisma.recipe.findFirstOrThrow({ where: { title: 'Bowl léger' } });
+    await request(app)
+      .put(`/api/v1/me/nutrition/menu/${weekStartStr}/dinner`)
+      .set('Authorization', `Bearer ${eligibleToken}`)
+      .send({ recipeId: bowl.id });
+
+    const trigger = await request(app).post('/api/v1/internal/nutrition/propose-week').set('Authorization', 'Bearer test-cron-secret');
+    expect(trigger.status).toBe(200);
+    expect(trigger.body.usersProcessed).toBe(1);
+
+    const menu = await request(app)
+      .get(`/api/v1/me/nutrition/menu?from=${weekStartStr}&to=${weekEndStr}`)
+      .set('Authorization', `Bearer ${eligibleToken}`);
+
+    // 7 days x (lunch + dinner) = 14 slots, 1 already confirmed -> 13 freshly proposed.
+    expect(menu.body).toHaveLength(14);
+    const monday = menu.body.filter((s: any) => s.date.slice(0, 10) === weekStartStr);
+    const mondayDinner = monday.find((s: any) => s.mealType === 'dinner');
+    expect(mondayDinner.status).toBe('confirmed');
+    expect(mondayDinner.recipe.title).toBe('Bowl léger');
+    const mondayLunch = monday.find((s: any) => s.mealType === 'lunch');
+    expect(mondayLunch.status).toBe('proposed');
+
+    const freshUserMenu = await request(app)
+      .get(`/api/v1/me/nutrition/menu?from=${weekStartStr}&to=${weekEndStr}`)
+      .set('Authorization', `Bearer ${freshToken}`);
+    expect(freshUserMenu.body).toHaveLength(0);
   });
 });
