@@ -56,7 +56,9 @@ final class AdaptationHistoryUITests: XCTestCase {
         XCTAssertTrue(generateButton.waitForExistence(timeout: 5))
         generateButton.tap()
 
-        XCTAssertTrue(app.tabBars.buttons["Calendrier"].waitForExistence(timeout: 10))
+        // Plan generation persists a full relational tree (macrocycles down
+        // to workouts) server-side — seen timing out at 10s under CI load.
+        XCTAssertTrue(app.tabBars.buttons["Calendrier"].waitForExistence(timeout: 20))
         app.tabBars.buttons["Calendrier"].tap()
         XCTAssertTrue(app.navigationBars["Calendrier"].waitForExistence(timeout: 5))
 

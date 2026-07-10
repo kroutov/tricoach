@@ -21,7 +21,9 @@ final class GoalsManagementUITests: XCTestCase {
         XCTAssertTrue(generateButton.waitForExistence(timeout: 5))
         generateButton.tap()
 
-        XCTAssertTrue(app.tabBars.buttons["Profil"].waitForExistence(timeout: 10))
+        // Plan generation persists a full relational tree (macrocycles down
+        // to workouts) server-side — seen timing out at 10s under CI load.
+        XCTAssertTrue(app.tabBars.buttons["Profil"].waitForExistence(timeout: 20))
         app.tabBars.buttons["Profil"].tap()
 
         let manageGoalsLink = app.buttons.matching(NSPredicate(format: "label CONTAINS %@", "Gérer mes objectifs")).firstMatch
@@ -44,7 +46,13 @@ final class GoalsManagementUITests: XCTestCase {
         let deleteButton = app.buttons["Supprimer cet objectif"]
         XCTAssertTrue(deleteButton.waitForExistence(timeout: 5))
         deleteButton.tap()
-        XCTAssertFalse(app.staticTexts["10 km"].waitForExistence(timeout: 3))
+        // `onDelete` awaits the network round trip before dismissing the
+        // sheet (`editingGoal = nil`), so "10 km" is still legitimately on
+        // screen (inside the type Picker) right after the tap — asserting
+        // its absence immediately raced that in-flight request. Wait for the
+        // sheet to actually dismiss (back on the "Objectifs" list) first.
+        XCTAssertTrue(app.navigationBars["Objectifs"].waitForExistence(timeout: 10))
+        XCTAssertFalse(app.staticTexts["10 km"].exists)
 
         // Regenerate the plan from the remaining goal.
         app.buttons["Régénérer mon plan"].tap()
