@@ -29,3 +29,18 @@ export function fromDayString(dayString: string): Date {
   const [year, month, day] = dayString.split('-').map(Number);
   return new Date(year, month - 1, day);
 }
+
+/** Monday of the week containing `date` — the week-navigation anchor shared by WeeklyMenuPage and GroceryListPage. */
+export function mondayOfWeek(date: Date): Date {
+  const day = date.getDay();
+  const diff = day === 0 ? -6 : 1 - day;
+  const result = new Date(date);
+  result.setDate(date.getDate() + diff);
+  return result;
+}
+
+export function addDays(date: Date, amount: number): Date {
+  const result = new Date(date);
+  result.setDate(date.getDate() + amount);
+  return result;
+}

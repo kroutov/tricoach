@@ -15,6 +15,7 @@ import { ActivityHistoryPage } from './features/activityHistory/ActivityHistoryP
 import { AnalyticsPage } from './features/analytics/AnalyticsPage';
 import { RecipeCatalogPage } from './features/nutrition/RecipeCatalogPage';
 import { WeeklyMenuPage } from './features/nutrition/WeeklyMenuPage';
+import { GroceryListPage } from './features/nutrition/GroceryListPage';
 import { AppLayout } from './components/AppLayout';
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
               <Route path="/analytics" element={<AnalyticsPage />} />
               <Route path="/nutrition/recipes" element={<RecipeCatalogPage />} />
               <Route path="/nutrition/menu" element={<WeeklyMenuPage />} />
+              <Route path="/nutrition/groceries" element={<GroceryListPage />} />
               <Route path="/profile" element={<ProfilePage />} />
             </Route>
           </Route>

@@ -45,6 +45,9 @@ export function AppLayout() {
           <NavLink to="/nutrition/recipes" className={navLinkClass}>
             Recettes
           </NavLink>
+          <NavLink to="/nutrition/groceries" className={navLinkClass}>
+            Liste de courses
+          </NavLink>
           <NavLink to="/adaptation-history" className={navLinkClass}>
             Historique
           </NavLink>

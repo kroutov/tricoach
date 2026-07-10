@@ -7,6 +7,7 @@ import {
   findRecipes,
   findSuggestedRecipes,
   getDietaryPreference,
+  getShoppingList,
   listMenuSelections,
   listUserIdsWithMenuHistory,
   proposeWeekForUser,
@@ -114,6 +115,20 @@ meRouter.get('/menu', async (req, res, next) => {
     const query = menuRangeSchema.parse(req.query);
     const selections = await listMenuSelections(req.userId!, query.from, query.to);
     res.json(selections);
+  } catch (err) {
+    if (err instanceof z.ZodError) {
+      res.status(400).json({ error: 'invalid_request', details: err.issues });
+      return;
+    }
+    next(err);
+  }
+});
+
+meRouter.get('/menu/shopping-list', async (req, res, next) => {
+  try {
+    const query = menuRangeSchema.parse(req.query);
+    const aisles = await getShoppingList(req.userId!, query.from, query.to);
+    res.json({ from: query.from, to: query.to, aisles });
   } catch (err) {
     if (err instanceof z.ZodError) {
       res.status(400).json({ error: 'invalid_request', details: err.issues });

@@ -84,3 +84,25 @@ export function deleteMenuSelection(date: string, mealType: MealType): Promise<v
 export function confirmWeek(weekStart: string): Promise<{ confirmed: number }> {
   return apiFetch('/me/nutrition/menu/confirm-week', { method: 'POST', body: { weekStart } });
 }
+
+export interface ShoppingListItem {
+  name: string;
+  amount: number | null;
+  unit: string | null;
+}
+
+export interface ShoppingListAisleGroup {
+  aisle: GroceryAisle | null;
+  items: ShoppingListItem[];
+}
+
+export interface ShoppingList {
+  from: string;
+  to: string;
+  aisles: ShoppingListAisleGroup[];
+}
+
+/** Ingredients from every selected recipe in [from, to], merged and grouped by aisle — includes PROPOSED slots, not just CONFIRMED. */
+export function getShoppingList(from: string, to: string): Promise<ShoppingList> {
+  return apiFetch(`/me/nutrition/menu/shopping-list?from=${from}&to=${to}`);
+}

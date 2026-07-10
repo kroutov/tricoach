@@ -10,7 +10,7 @@ import {
   type MenuSelection,
   type Recipe,
 } from '../../api/nutrition';
-import { toDayString } from '../../lib/dateOnly';
+import { addDays, mondayOfWeek, toDayString } from '../../lib/dateOnly';
 import {
   MEAL_TYPE_OPTIONS,
   effortProfileColorVar,
@@ -28,20 +28,6 @@ const weekRangeFormatter = new Intl.DateTimeFormat('fr-FR', { day: 'numeric', mo
 
 function capitalize(text: string): string {
   return text.charAt(0).toUpperCase() + text.slice(1);
-}
-
-function mondayOfWeek(date: Date): Date {
-  const day = date.getDay();
-  const diff = day === 0 ? -6 : 1 - day;
-  const result = new Date(date);
-  result.setDate(date.getDate() + diff);
-  return result;
-}
-
-function addDays(date: Date, amount: number): Date {
-  const result = new Date(date);
-  result.setDate(date.getDate() + amount);
-  return result;
 }
 
 interface PendingCell {

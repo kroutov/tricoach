@@ -369,6 +369,68 @@ describe('POST /me/nutrition/menu/confirm-week', () => {
   });
 });
 
+describe('GET /me/nutrition/menu/shopping-list', () => {
+  it('aggregates ingredients across the week, merging same name+unit and grouping by aisle', async () => {
+    await seedRecipes();
+    const { token } = await devLogin(app, { appleUserId: 'shopping-list' });
+
+    // Two recipes sharing an ingredient (same name+unit) to prove merging.
+    const poivrons = await prisma.recipe.create({
+      data: {
+        title: 'Poêlée de poivrons',
+        mealTypes: ['LUNCH'],
+        categories: ['VEGETARIAN'],
+        dietaryTags: ['VEGETARIAN', 'CHICKEN_ONLY', 'PESCATARIAN', 'OMNIVORE'],
+        effortProfile: 'BALANCED',
+        prepTime: 'UNDER_15',
+        instructions: 'Faire revenir les poivrons.',
+        ingredients: { create: [{ name: 'Poivron', amount: 100, unit: 'g', aisle: 'PRODUCE' }] },
+      },
+    });
+    const ratatouille = await prisma.recipe.create({
+      data: {
+        title: 'Ratatouille',
+        mealTypes: ['DINNER'],
+        categories: ['STEW'],
+        dietaryTags: ['VEGETARIAN', 'CHICKEN_ONLY', 'PESCATARIAN', 'OMNIVORE'],
+        effortProfile: 'BALANCED',
+        prepTime: 'MIN_30_45',
+        instructions: 'Mijoter les légumes.',
+        ingredients: { create: [{ name: 'Poivron', amount: 150, unit: 'g', aisle: 'PRODUCE' }] },
+      },
+    });
+    const chicken = await prisma.recipe.findFirstOrThrow({ where: { title: 'Poulet basquaise' } });
+
+    const today = new Date().toISOString().slice(0, 10);
+    const tomorrow = new Date(Date.now() + 86_400_000).toISOString().slice(0, 10);
+    await request(app).put(`/api/v1/me/nutrition/menu/${today}/lunch`).set('Authorization', `Bearer ${token}`).send({ recipeId: poivrons.id });
+    await request(app).put(`/api/v1/me/nutrition/menu/${today}/dinner`).set('Authorization', `Bearer ${token}`).send({ recipeId: ratatouille.id });
+    await request(app).put(`/api/v1/me/nutrition/menu/${tomorrow}/lunch`).set('Authorization', `Bearer ${token}`).send({ recipeId: chicken.id });
+
+    const res = await request(app)
+      .get(`/api/v1/me/nutrition/menu/shopping-list?from=${today}&to=${tomorrow}`)
+      .set('Authorization', `Bearer ${token}`);
+    expect(res.status).toBe(200);
+
+    // PRODUCE before BUTCHER, per the store-walking AISLE_ORDER.
+    expect(res.body.aisles.map((a: any) => a.aisle)).toEqual(['produce', 'butcher']);
+    const produce = res.body.aisles.find((a: any) => a.aisle === 'produce');
+    expect(produce.items).toEqual([{ name: 'Poivron', amount: 250, unit: 'g' }]);
+    const butcher = res.body.aisles.find((a: any) => a.aisle === 'butcher');
+    expect(butcher.items[0]).toMatchObject({ name: 'Blanc de poulet', amount: 400, unit: 'g' });
+  });
+
+  it('returns an empty aisle list for a week with no selections', async () => {
+    const { token } = await devLogin(app, { appleUserId: 'shopping-list-empty' });
+    const today = new Date().toISOString().slice(0, 10);
+    const res = await request(app)
+      .get(`/api/v1/me/nutrition/menu/shopping-list?from=${today}&to=${today}`)
+      .set('Authorization', `Bearer ${token}`);
+    expect(res.status).toBe(200);
+    expect(res.body.aisles).toEqual([]);
+  });
+});
+
 describe('POST /internal/nutrition/propose-week', () => {
   it('rejects requests without the correct cron secret', async () => {
     const noAuth = await request(app).post('/api/v1/internal/nutrition/propose-week');

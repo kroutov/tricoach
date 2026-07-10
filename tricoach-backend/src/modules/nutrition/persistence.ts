@@ -12,6 +12,7 @@ import {
 } from '../../lib/enumMapping';
 import { computeLoadForm } from '../dashboard/analytics';
 import { fetchDailyMaxTemps } from '../integrations/weatherClient';
+import { buildShoppingList, ShoppingListIngredientInput } from './engine/buildShoppingList';
 import { effortProfileForDay, EffortProfileApi } from './engine/effortProfileForDay';
 import { CandidateRecipe, proposeWeeklyMenu, WeeklySlotInput } from './engine/proposeWeeklyMenu';
 import { classifyDailyWeather, WeatherAffinity } from './engine/recipeWeatherAffinity';
@@ -170,6 +171,29 @@ export async function listMenuSelections(userId: string, from: Date, to: Date) {
     orderBy: { date: 'asc' },
   });
   return selections.map(serializeMenuSelection);
+}
+
+/**
+ * Aggregates every ingredient from the week's selected recipes into a
+ * shopping list grouped by aisle (buildShoppingList). Includes PROPOSED
+ * slots, not just CONFIRMED ones — a user planning their shopping trip
+ * cares about what's on the menu regardless of whether they've hit
+ * "Valider" on every slot yet.
+ */
+export async function getShoppingList(userId: string, from: Date, to: Date) {
+  const selections = await prisma.menuSelection.findMany({
+    where: { userId, date: { gte: toDateOnly(from), lte: toDateOnly(to) } },
+    include: { recipe: { include: { ingredients: true } } },
+  });
+
+  const ingredients: ShoppingListIngredientInput[] = selections.flatMap((s) =>
+    s.recipe.ingredients.map((i) => ({ name: i.name, amount: i.amount, unit: i.unit, aisle: i.aisle }))
+  );
+
+  return buildShoppingList(ingredients).map((group) => ({
+    aisle: group.aisle ? groceryAisleMap.toApi(group.aisle) : null,
+    items: group.items,
+  }));
 }
 
 /**
