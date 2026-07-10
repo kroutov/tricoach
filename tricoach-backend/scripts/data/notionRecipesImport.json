@@ -1844,5 +1844,1318 @@
       }
     ],
     "needsReview": []
+  },
+  {
+    "title": "Verrine fromage blanc, fruits rouges & granola",
+    "notionUrl": "https://app.notion.com/p/3989f1d9d45a81159852e20aae41e7f1",
+    "mealTypes": [
+      "snack"
+    ],
+    "categories": [
+      "dessert"
+    ],
+    "dietaryTags": [
+      "vegetarian",
+      "chickenOnly",
+      "pescatarian",
+      "omnivore"
+    ],
+    "effortProfile": "light",
+    "prepTime": "under15",
+    "servings": 2,
+    "instructions": "Mélangez le fromage blanc avec le miel. Répartissez la moitié du fromage blanc dans deux verrines. Ajoutez une couche de fruits rouges puis de granola. Recommencez l'opération et terminez par quelques fruits rouges sur le dessus. Servez frais.",
+    "ingredients": [
+      {
+        "name": "Fromage blanc",
+        "amount": 200,
+        "unit": "g",
+        "aisle": "fresh"
+      },
+      {
+        "name": "Miel",
+        "amount": 1,
+        "unit": "cuillère à soupe",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Fruits rouges (fraises, framboises, myrtilles)",
+        "amount": 100,
+        "unit": "g",
+        "aisle": "produce"
+      },
+      {
+        "name": "Granola",
+        "amount": 3,
+        "unit": "cuillère à soupe",
+        "aisle": "grocery"
+      }
+    ],
+    "needsReview": []
+  },
+  {
+    "title": "Taboulé de quinoa aux légumes croquants",
+    "notionUrl": "https://app.notion.com/p/3989f1d9d45a81199b4dd1b3ebb17e47",
+    "mealTypes": [
+      "lunch"
+    ],
+    "categories": [
+      "salad",
+      "vegetarian"
+    ],
+    "dietaryTags": [
+      "vegetarian",
+      "chickenOnly",
+      "pescatarian",
+      "omnivore"
+    ],
+    "effortProfile": "balanced",
+    "prepTime": "min15to30",
+    "servings": 4,
+    "instructions": "Faites cuire le quinoa selon les indications du paquet, puis laissez-le refroidir. Coupez le concombre, les tomates et le poivron en petits dés. Ciselez finement le persil et la menthe. Mélangez le quinoa, les légumes et les herbes dans un grand saladier. Assaisonnez avec le jus de citron, l'huile d'olive, le sel et le poivre. Réservez au frais au moins 30 minutes avant de servir.",
+    "ingredients": [
+      {
+        "name": "Quinoa",
+        "amount": 200,
+        "unit": "g",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Concombre",
+        "amount": 1,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Tomates",
+        "amount": 2,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Poivron rouge",
+        "amount": 1,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Persil plat",
+        "amount": 1,
+        "unit": "bouquet",
+        "aisle": "produce"
+      },
+      {
+        "name": "Menthe fraîche",
+        "amount": 1,
+        "unit": "bouquet",
+        "aisle": "produce"
+      },
+      {
+        "name": "Citrons",
+        "amount": 2,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Huile d'olive",
+        "amount": 4,
+        "unit": "cuillère à soupe",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Sel",
+        "amount": null,
+        "unit": "pincée",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Poivre",
+        "amount": null,
+        "unit": "pincée",
+        "aisle": "grocery"
+      }
+    ],
+    "needsReview": []
+  },
+  {
+    "title": "Salade de lentilles tièdes, chèvre chaud",
+    "notionUrl": "https://app.notion.com/p/3989f1d9d45a8124b538eec6164988ee",
+    "mealTypes": [
+      "dinner"
+    ],
+    "categories": [
+      "salad",
+      "vegetarian"
+    ],
+    "dietaryTags": [
+      "vegetarian",
+      "chickenOnly",
+      "pescatarian",
+      "omnivore"
+    ],
+    "effortProfile": "recovery",
+    "prepTime": "min30to45",
+    "servings": 2,
+    "instructions": "Faites cuire les lentilles dans de l'eau bouillante non salée pendant environ 25 minutes, puis égouttez. Préparez la vinaigrette avec la moutarde, l'huile d'olive, le vinaigre et l'échalote émincée. Mélangez les lentilles encore tièdes avec la vinaigrette. Coupez le crottin de chèvre en tranches, déposez-les sur les tranches de pain et passez au four quelques minutes jusqu'à ce que le fromage soit fondant. Servez les lentilles avec les toasts de chèvre chaud, parsemez de ciboulette.",
+    "ingredients": [
+      {
+        "name": "Lentilles vertes",
+        "amount": 150,
+        "unit": "g",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Crottin de chèvre",
+        "amount": 1,
+        "unit": null,
+        "aisle": "fresh"
+      },
+      {
+        "name": "Pain",
+        "amount": 4,
+        "unit": "tranches",
+        "aisle": "bakery"
+      },
+      {
+        "name": "Échalote",
+        "amount": 1,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Moutarde",
+        "amount": 1,
+        "unit": "cuillère à soupe",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Huile d'olive",
+        "amount": 3,
+        "unit": "cuillère à soupe",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Vinaigre de vin",
+        "amount": 1,
+        "unit": "cuillère à soupe",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Ciboulette",
+        "amount": null,
+        "unit": null,
+        "aisle": "produce"
+      }
+    ],
+    "needsReview": []
+  },
+  {
+    "title": "Houmous maison & bâtonnets de légumes",
+    "notionUrl": "https://app.notion.com/p/3989f1d9d45a812684c4e1b2e96ed928",
+    "mealTypes": [
+      "snack"
+    ],
+    "categories": [
+      "dips",
+      "vegetarian"
+    ],
+    "dietaryTags": [
+      "vegetarian",
+      "chickenOnly",
+      "pescatarian",
+      "omnivore"
+    ],
+    "effortProfile": "light",
+    "prepTime": "under15",
+    "servings": 4,
+    "instructions": "Mixez les pois chiches, le tahini, le jus de citron et l'ail jusqu'à obtenir une texture lisse. Ajoutez l'huile d'olive petit à petit en mixant, jusqu'à la consistance désirée. Salez selon le goût. Coupez les légumes en bâtonnets. Servez le houmous avec les bâtonnets de légumes.",
+    "ingredients": [
+      {
+        "name": "Pois chiches cuits",
+        "amount": 240,
+        "unit": "g",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Tahini",
+        "amount": 2,
+        "unit": "cuillère à soupe",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Citron",
+        "amount": 1,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Ail",
+        "amount": 1,
+        "unit": "gousse",
+        "aisle": "produce"
+      },
+      {
+        "name": "Huile d'olive",
+        "amount": 2,
+        "unit": "cuillère à soupe",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Carottes, concombre, céleri (pour l'accompagnement)",
+        "amount": null,
+        "unit": null,
+        "aisle": "produce"
+      }
+    ],
+    "needsReview": []
+  },
+  {
+    "title": "Cookies avoine & pépites de chocolat",
+    "notionUrl": "https://app.notion.com/p/3989f1d9d45a81598563dff723e7aa28",
+    "mealTypes": [
+      "snack"
+    ],
+    "categories": [
+      "cookies"
+    ],
+    "dietaryTags": [
+      "vegetarian",
+      "chickenOnly",
+      "pescatarian",
+      "omnivore"
+    ],
+    "effortProfile": "light",
+    "prepTime": "min15to30",
+    "servings": 15,
+    "instructions": "Préchauffez le four à 180°C. Mélangez le beurre mou avec le sucre jusqu'à obtenir une texture crémeuse. Ajoutez l'oeuf, puis la farine, les flocons d'avoine et la levure. Incorporez les pépites de chocolat. Formez des petits tas sur une plaque recouverte de papier cuisson. Enfournez 12 à 15 minutes jusqu'à ce que les bords soient dorés.",
+    "ingredients": [
+      {
+        "name": "Beurre mou",
+        "amount": 100,
+        "unit": "g",
+        "aisle": "fresh"
+      },
+      {
+        "name": "Sucre roux",
+        "amount": 100,
+        "unit": "g",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Oeufs",
+        "amount": 1,
+        "unit": null,
+        "aisle": "fresh"
+      },
+      {
+        "name": "Farine",
+        "amount": 150,
+        "unit": "g",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Flocons d'avoine",
+        "amount": 80,
+        "unit": "g",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Levure chimique",
+        "amount": 0.5,
+        "unit": "cuillère à café",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Pépites de chocolat",
+        "amount": 100,
+        "unit": "g",
+        "aisle": "grocery"
+      }
+    ],
+    "needsReview": [
+      "servings"
+    ]
+  },
+  {
+    "title": "Muffins moelleux aux myrtilles",
+    "notionUrl": "https://app.notion.com/p/3989f1d9d45a815c9a67e1823706c88f",
+    "mealTypes": [
+      "snack"
+    ],
+    "categories": [
+      "cake"
+    ],
+    "dietaryTags": [
+      "vegetarian",
+      "chickenOnly",
+      "pescatarian",
+      "omnivore"
+    ],
+    "effortProfile": "light",
+    "prepTime": "min30to45",
+    "servings": 12,
+    "instructions": "Préchauffez le four à 180°C et préparez un moule à muffins. Mélangez la farine, le sucre et la levure dans un saladier. Dans un autre bol, fouettez les oeufs, l'huile et le lait. Incorporez le mélange liquide au mélange sec, sans trop travailler la pâte. Ajoutez délicatement les myrtilles. Répartissez la pâte dans les moules et enfournez 20 à 25 minutes.",
+    "ingredients": [
+      {
+        "name": "Farine",
+        "amount": 250,
+        "unit": "g",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Sucre",
+        "amount": 100,
+        "unit": "g",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Oeufs",
+        "amount": 2,
+        "unit": null,
+        "aisle": "fresh"
+      },
+      {
+        "name": "Huile neutre",
+        "amount": 100,
+        "unit": "ml",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Lait",
+        "amount": 150,
+        "unit": "ml",
+        "aisle": "fresh"
+      },
+      {
+        "name": "Levure chimique",
+        "amount": 1,
+        "unit": "sachet",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Myrtilles",
+        "amount": 200,
+        "unit": "g",
+        "aisle": "produce"
+      }
+    ],
+    "needsReview": [
+      "servings"
+    ]
+  },
+  {
+    "title": "Tian de légumes provençal",
+    "notionUrl": "https://app.notion.com/p/3989f1d9d45a816e9e24e07b5a7eb356",
+    "mealTypes": [
+      "dinner"
+    ],
+    "categories": [
+      "ovenBaked",
+      "vegetarian"
+    ],
+    "dietaryTags": [
+      "vegetarian",
+      "chickenOnly",
+      "pescatarian",
+      "omnivore"
+    ],
+    "effortProfile": "balanced",
+    "prepTime": "min45to60",
+    "servings": 4,
+    "instructions": "Préchauffez le four à 180°C. Émincez l'oignon et l'ail, répartissez-les au fond d'un plat à gratin huilé. Coupez les courgettes, aubergines et tomates en fines rondelles. Disposez les rondelles de légumes en les alternant et en les intercalant debout dans le plat. Arrosez d'huile d'olive, parsemez d'herbes de Provence et de parmesan. Enfournez pendant 40 minutes jusqu'à ce que les légumes soient tendres et légèrement dorés.",
+    "ingredients": [
+      {
+        "name": "Courgettes",
+        "amount": 2,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Aubergines",
+        "amount": 2,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Tomates",
+        "amount": 3,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Oignon",
+        "amount": 1,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Ail",
+        "amount": 2,
+        "unit": "gousses",
+        "aisle": "produce"
+      },
+      {
+        "name": "Huile d'olive",
+        "amount": 3,
+        "unit": "cuillère à soupe",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Herbes de Provence",
+        "amount": null,
+        "unit": null,
+        "aisle": "grocery"
+      },
+      {
+        "name": "Parmesan râpé (facultatif)",
+        "amount": 50,
+        "unit": "g",
+        "aisle": "fresh"
+      }
+    ],
+    "needsReview": []
+  },
+  {
+    "title": "Galette de courgettes & feta, salade verte",
+    "notionUrl": "https://app.notion.com/p/3989f1d9d45a8183bac7e9097bb04e89",
+    "mealTypes": [
+      "lunch"
+    ],
+    "categories": [
+      "vegetarian"
+    ],
+    "dietaryTags": [
+      "vegetarian",
+      "chickenOnly",
+      "pescatarian",
+      "omnivore"
+    ],
+    "effortProfile": "balanced",
+    "prepTime": "min30to45",
+    "servings": 4,
+    "instructions": "Râpez les courgettes et laissez-les dégorger avec une pincée de sel pendant 10 minutes, puis essorez-les. Mélangez les courgettes avec les oeufs, la farine, la feta émiettée, l'ail haché et la menthe ciselée. Faites cuire des petites galettes à la poêle avec un filet d'huile d'olive, 3-4 minutes de chaque côté. Servez chaud accompagné d'une salade verte.",
+    "ingredients": [
+      {
+        "name": "Courgettes",
+        "amount": 3,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Feta",
+        "amount": 150,
+        "unit": "g",
+        "aisle": "fresh"
+      },
+      {
+        "name": "Oeufs",
+        "amount": 2,
+        "unit": null,
+        "aisle": "fresh"
+      },
+      {
+        "name": "Farine",
+        "amount": 60,
+        "unit": "g",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Ail",
+        "amount": 1,
+        "unit": "gousse",
+        "aisle": "produce"
+      },
+      {
+        "name": "Menthe fraîche",
+        "amount": null,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Salade verte",
+        "amount": null,
+        "unit": null,
+        "aisle": "produce"
+      }
+    ],
+    "needsReview": []
+  },
+  {
+    "title": "Salade de pâtes estivale, tomates & mozzarella",
+    "notionUrl": "https://app.notion.com/p/3989f1d9d45a818d895ce634efbb0230",
+    "mealTypes": [
+      "lunch"
+    ],
+    "categories": [
+      "salad",
+      "pasta"
+    ],
+    "dietaryTags": [
+      "vegetarian",
+      "chickenOnly",
+      "pescatarian",
+      "omnivore"
+    ],
+    "effortProfile": "carbLoad",
+    "prepTime": "min15to30",
+    "servings": 4,
+    "instructions": "Faites cuire les pâtes al dente dans une grande casserole d'eau salée, puis égouttez et laissez refroidir. Coupez les tomates cerises en deux et la mozzarella en petits morceaux si besoin. Mélangez les pâtes, les tomates, la mozzarella et le basilic ciselé dans un saladier. Assaisonnez avec l'huile d'olive, le vinaigre balsamique, le sel et le poivre. Mélangez bien et réservez au frais avant de servir.",
+    "ingredients": [
+      {
+        "name": "Pâtes courtes (fusilli ou penne)",
+        "amount": 300,
+        "unit": "g",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Tomates cerises",
+        "amount": 250,
+        "unit": "g",
+        "aisle": "produce"
+      },
+      {
+        "name": "Billes de mozzarella",
+        "amount": 150,
+        "unit": "g",
+        "aisle": "fresh"
+      },
+      {
+        "name": "Basilic frais",
+        "amount": 1,
+        "unit": "poignée",
+        "aisle": "produce"
+      },
+      {
+        "name": "Huile d'olive",
+        "amount": 2,
+        "unit": "cuillère à soupe",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Vinaigre balsamique",
+        "amount": 1,
+        "unit": "cuillère à soupe",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Sel",
+        "amount": null,
+        "unit": "pincée",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Poivre",
+        "amount": null,
+        "unit": "pincée",
+        "aisle": "grocery"
+      }
+    ],
+    "needsReview": []
+  },
+  {
+    "title": "Brochettes de poulet marinées & légumes grillés",
+    "notionUrl": "https://app.notion.com/p/3989f1d9d45a819f9b03d06d855981f7",
+    "mealTypes": [
+      "dinner"
+    ],
+    "categories": [],
+    "dietaryTags": [
+      "chickenOnly",
+      "omnivore"
+    ],
+    "effortProfile": "balanced",
+    "prepTime": "min30to45",
+    "servings": 4,
+    "instructions": "Coupez le poulet en cubes et préparez la marinade avec l'huile d'olive, le miel, le jus de citron, l'ail écrasé, le paprika et le thym. Faites mariner le poulet au moins 30 minutes au réfrigérateur. Coupez les légumes en gros morceaux. Montez les brochettes en alternant poulet et légumes. Faites griller au barbecue ou sous le grill du four environ 15 minutes en retournant régulièrement. Servez chaud.",
+    "ingredients": [
+      {
+        "name": "Blancs de poulet",
+        "amount": 4,
+        "unit": null,
+        "aisle": "butcher"
+      },
+      {
+        "name": "Courgettes",
+        "amount": 2,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Poivrons",
+        "amount": 2,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Oignon rouge",
+        "amount": 1,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Huile d'olive",
+        "amount": 3,
+        "unit": "cuillère à soupe",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Miel",
+        "amount": 1,
+        "unit": "cuillère à soupe",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Citron",
+        "amount": 1,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Ail",
+        "amount": 1,
+        "unit": "gousse",
+        "aisle": "produce"
+      },
+      {
+        "name": "Paprika, thym",
+        "amount": null,
+        "unit": null,
+        "aisle": "grocery"
+      }
+    ],
+    "needsReview": [
+      "categories"
+    ]
+  },
+  {
+    "title": "Salade César revisitée au poulet grillé",
+    "notionUrl": "https://app.notion.com/p/3989f1d9d45a81a6b3c6d7a64a39ff5e",
+    "mealTypes": [
+      "lunch"
+    ],
+    "categories": [
+      "salad"
+    ],
+    "dietaryTags": [
+      "chickenOnly",
+      "omnivore"
+    ],
+    "effortProfile": "balanced",
+    "prepTime": "min15to30",
+    "servings": 2,
+    "instructions": "Faites griller les blancs de poulet à la poêle, puis coupez-les en lanières. Préparez la sauce en mélangeant la mayonnaise, la moutarde, l'ail écrasé et le jus de citron. Lavez et coupez la salade romaine. Mélangez la salade avec la sauce, ajoutez le poulet, les croûtons et le parmesan. Servez immédiatement.",
+    "ingredients": [
+      {
+        "name": "Blancs de poulet",
+        "amount": 2,
+        "unit": null,
+        "aisle": "butcher"
+      },
+      {
+        "name": "Salade romaine",
+        "amount": 1,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Parmesan en copeaux",
+        "amount": 30,
+        "unit": "g",
+        "aisle": "fresh"
+      },
+      {
+        "name": "Croûtons",
+        "amount": null,
+        "unit": null,
+        "aisle": "grocery"
+      },
+      {
+        "name": "Mayonnaise",
+        "amount": 2,
+        "unit": "cuillère à soupe",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Moutarde",
+        "amount": 1,
+        "unit": "cuillère à café",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Ail",
+        "amount": 1,
+        "unit": "gousse",
+        "aisle": "produce"
+      },
+      {
+        "name": "Citron",
+        "amount": 0.5,
+        "unit": null,
+        "aisle": "produce"
+      }
+    ],
+    "needsReview": []
+  },
+  {
+    "title": "Energy balls dattes & amandes",
+    "notionUrl": "https://app.notion.com/p/3989f1d9d45a81a9a265d9ce099e6b6b",
+    "mealTypes": [
+      "snack"
+    ],
+    "categories": [
+      "cookies",
+      "vegetarian"
+    ],
+    "dietaryTags": [
+      "vegetarian",
+      "chickenOnly",
+      "pescatarian",
+      "omnivore"
+    ],
+    "effortProfile": "light",
+    "prepTime": "under15",
+    "servings": 12,
+    "instructions": "Mixez les dattes et les amandes jusqu'à obtenir une pâte homogène. Ajoutez le cacao et l'huile de coco, mixez à nouveau. Formez des petites boules avec les mains. Roulez-les dans la noix de coco râpée. Conservez au réfrigérateur dans une boîte hermétique.",
+    "ingredients": [
+      {
+        "name": "Dattes dénoyautées",
+        "amount": 200,
+        "unit": "g",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Amandes",
+        "amount": 100,
+        "unit": "g",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Cacao en poudre",
+        "amount": 2,
+        "unit": "cuillère à soupe",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Huile de coco",
+        "amount": 1,
+        "unit": "cuillère à soupe",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Noix de coco râpée",
+        "amount": null,
+        "unit": null,
+        "aisle": "grocery"
+      }
+    ],
+    "needsReview": [
+      "servings"
+    ]
+  },
+  {
+    "title": "Poêlée de légumes d'été & halloumi grillé",
+    "notionUrl": "https://app.notion.com/p/3989f1d9d45a81b0a0a6d53703f0512c",
+    "mealTypes": [
+      "dinner"
+    ],
+    "categories": [
+      "vegetarian"
+    ],
+    "dietaryTags": [
+      "vegetarian",
+      "chickenOnly",
+      "pescatarian",
+      "omnivore"
+    ],
+    "effortProfile": "light",
+    "prepTime": "min15to30",
+    "servings": 2,
+    "instructions": "Coupez les légumes en morceaux et faites-les revenir dans l'huile d'olive à feu vif pendant 8 à 10 minutes. Coupez l'halloumi en tranches et faites-le griller à sec dans une poêle jusqu'à ce qu'il soit doré des deux côtés. Répartissez les légumes dans les assiettes, ajoutez l'halloumi grillé. Parsemez de basilic frais, salez et poivrez légèrement.",
+    "ingredients": [
+      {
+        "name": "Halloumi",
+        "amount": 200,
+        "unit": "g",
+        "aisle": "fresh"
+      },
+      {
+        "name": "Courgette",
+        "amount": 1,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Poivron",
+        "amount": 1,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Tomates cerises",
+        "amount": 1,
+        "unit": "poignée",
+        "aisle": "produce"
+      },
+      {
+        "name": "Huile d'olive",
+        "amount": 2,
+        "unit": "cuillère à soupe",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Basilic frais",
+        "amount": null,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Sel",
+        "amount": null,
+        "unit": "pincée",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Poivre",
+        "amount": null,
+        "unit": "pincée",
+        "aisle": "grocery"
+      }
+    ],
+    "needsReview": []
+  },
+  {
+    "title": "Ratatouille maison & riz basmati",
+    "notionUrl": "https://app.notion.com/p/3989f1d9d45a81bb8bcad274dd8605e1",
+    "mealTypes": [
+      "dinner"
+    ],
+    "categories": [
+      "stew",
+      "vegetarian"
+    ],
+    "dietaryTags": [
+      "vegetarian",
+      "chickenOnly",
+      "pescatarian",
+      "omnivore"
+    ],
+    "effortProfile": "carbLoad",
+    "prepTime": "min45to60",
+    "servings": 4,
+    "instructions": "Coupez tous les légumes en gros dés. Faites revenir l'oignon et l'ail dans l'huile d'olive dans une grande cocotte. Ajoutez les légumes et les herbes de Provence, salez et poivrez. Laissez mijoter à couvert environ 40 minutes en remuant de temps en temps. Pendant ce temps, faites cuire le riz basmati selon les indications du paquet. Servez la ratatouille bien chaude avec le riz.",
+    "ingredients": [
+      {
+        "name": "Courgettes",
+        "amount": 2,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Aubergines",
+        "amount": 2,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Poivrons",
+        "amount": 2,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Tomates",
+        "amount": 3,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Oignon",
+        "amount": 1,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Ail",
+        "amount": 2,
+        "unit": "gousses",
+        "aisle": "produce"
+      },
+      {
+        "name": "Huile d'olive",
+        "amount": 2,
+        "unit": "cuillère à soupe",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Herbes de Provence",
+        "amount": null,
+        "unit": null,
+        "aisle": "grocery"
+      },
+      {
+        "name": "Riz basmati",
+        "amount": 200,
+        "unit": "g",
+        "aisle": "grocery"
+      }
+    ],
+    "needsReview": []
+  },
+  {
+    "title": "Wrap poulet, avocat & crudités",
+    "notionUrl": "https://app.notion.com/p/3989f1d9d45a81d38a16e63aa6b2fdc4",
+    "mealTypes": [
+      "lunch"
+    ],
+    "categories": [
+      "sandwich"
+    ],
+    "dietaryTags": [
+      "chickenOnly",
+      "omnivore"
+    ],
+    "effortProfile": "light",
+    "prepTime": "under15",
+    "servings": 2,
+    "instructions": "Émincez le poulet et coupez l'avocat en tranches. Étalez la sauce yaourt-citron sur les tortillas. Répartissez la salade, la carotte râpée, le poulet et l'avocat sur chaque tortilla. Roulez fermement les wraps et coupez-les en deux avant de servir.",
+    "ingredients": [
+      {
+        "name": "Tortillas de blé",
+        "amount": 2,
+        "unit": null,
+        "aisle": "grocery"
+      },
+      {
+        "name": "Blanc de poulet cuit (ou reste de poulet rôti)",
+        "amount": 1,
+        "unit": null,
+        "aisle": "butcher"
+      },
+      {
+        "name": "Avocat",
+        "amount": 1,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Salade",
+        "amount": 1,
+        "unit": "poignée",
+        "aisle": "produce"
+      },
+      {
+        "name": "Carotte râpée",
+        "amount": 1,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Sauce yaourt-citron",
+        "amount": 2,
+        "unit": "cuillère à soupe",
+        "aisle": "fresh"
+      }
+    ],
+    "needsReview": []
+  },
+  {
+    "title": "Pancakes moelleux au babeurre",
+    "notionUrl": "https://app.notion.com/p/3989f1d9d45a817e98a5c05210af4fe4",
+    "mealTypes": [
+      "breakfast"
+    ],
+    "categories": [],
+    "dietaryTags": [
+      "vegetarian",
+      "chickenOnly",
+      "pescatarian",
+      "omnivore"
+    ],
+    "effortProfile": "balanced",
+    "prepTime": "min15to30",
+    "servings": 2,
+    "instructions": "Mélangez la farine, la levure, le sel et le sucre dans un saladier. Dans un autre bol, fouettez le babeurre, l'oeuf et le beurre fondu. Versez le mélange liquide dans le mélange sec et mélangez sans trop insister (quelques grumeaux peuvent rester). Faites chauffer une poêle légèrement huilée à feu moyen. Versez une louche de pâte par pancake et cuisez 2 minutes de chaque côté, jusqu'à ce que des bulles apparaissent en surface. Servez avec du sirop d'érable ou des fruits frais.",
+    "ingredients": [
+      {
+        "name": "Farine",
+        "amount": 150,
+        "unit": "g",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Levure chimique",
+        "amount": 1,
+        "unit": "cuillère à café",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Sel",
+        "amount": null,
+        "unit": "pincée",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Sucre",
+        "amount": 2,
+        "unit": "cuillère à soupe",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Babeurre (ou lait + jus de citron)",
+        "amount": 200,
+        "unit": "ml",
+        "aisle": "fresh"
+      },
+      {
+        "name": "Oeufs",
+        "amount": 1,
+        "unit": null,
+        "aisle": "fresh"
+      },
+      {
+        "name": "Beurre fondu",
+        "amount": 20,
+        "unit": "g",
+        "aisle": "fresh"
+      }
+    ],
+    "needsReview": [
+      "categories"
+    ]
+  },
+  {
+    "title": "Granola maison croustillant, yaourt & fruits frais",
+    "notionUrl": "https://app.notion.com/p/3989f1d9d45a81a9a801da14a7054cb5",
+    "mealTypes": [
+      "breakfast"
+    ],
+    "categories": [
+      "vegetarian"
+    ],
+    "dietaryTags": [
+      "vegetarian",
+      "chickenOnly",
+      "pescatarian",
+      "omnivore"
+    ],
+    "effortProfile": "balanced",
+    "prepTime": "min30to45",
+    "servings": 4,
+    "instructions": "Préchauffez le four à 160°C. Mélangez les flocons d'avoine, les fruits secs et la cannelle dans un saladier. Faites fondre l'huile de coco avec le miel puis versez sur le mélange sec en remuant bien. Étalez sur une plaque recouverte de papier cuisson et enfournez 25 minutes en remuant à mi-cuisson. Laissez refroidir complètement (le granola devient croustillant en refroidissant). Servez avec du yaourt nature et des fruits frais.",
+    "ingredients": [
+      {
+        "name": "Flocons d'avoine",
+        "amount": 250,
+        "unit": "g",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Amandes et noisettes concassées",
+        "amount": 80,
+        "unit": "g",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Huile de coco",
+        "amount": 60,
+        "unit": "ml",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Miel",
+        "amount": 80,
+        "unit": "g",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Cannelle",
+        "amount": 1,
+        "unit": "cuillère à café",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Yaourt nature et fruits frais (pour servir)",
+        "amount": null,
+        "unit": null,
+        "aisle": "fresh"
+      }
+    ],
+    "needsReview": []
+  },
+  {
+    "title": "Porridge avoine, banane & miel",
+    "notionUrl": "https://app.notion.com/p/3989f1d9d45a81bf96bff90bc6cc6ae3",
+    "mealTypes": [
+      "breakfast"
+    ],
+    "categories": [
+      "vegetarian"
+    ],
+    "dietaryTags": [
+      "vegetarian",
+      "chickenOnly",
+      "pescatarian",
+      "omnivore"
+    ],
+    "effortProfile": "carbLoad",
+    "prepTime": "under15",
+    "servings": 2,
+    "instructions": "Faites chauffer le lait dans une casserole. Ajoutez les flocons d'avoine et laissez cuire 5 minutes à feu doux en remuant. Coupez la banane en rondelles. Répartissez le porridge dans deux bols. Ajoutez les rondelles de banane, le miel, la cannelle et les amandes effilées.",
+    "ingredients": [
+      {
+        "name": "Flocons d'avoine",
+        "amount": 100,
+        "unit": "g",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Lait (ou boisson végétale)",
+        "amount": 400,
+        "unit": "ml",
+        "aisle": "fresh"
+      },
+      {
+        "name": "Banane",
+        "amount": 1,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Miel",
+        "amount": 2,
+        "unit": "cuillère à soupe",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Cannelle",
+        "amount": null,
+        "unit": "pincée",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Amandes effilées",
+        "amount": null,
+        "unit": null,
+        "aisle": "grocery"
+      }
+    ],
+    "needsReview": []
+  },
+  {
+    "title": "Tartines ricotta, miel & noix",
+    "notionUrl": "https://app.notion.com/p/3989f1d9d45a81c1a0aed9b54dbb56c8",
+    "mealTypes": [
+      "breakfast"
+    ],
+    "categories": [
+      "toast"
+    ],
+    "dietaryTags": [
+      "vegetarian",
+      "chickenOnly",
+      "pescatarian",
+      "omnivore"
+    ],
+    "effortProfile": "light",
+    "prepTime": "under15",
+    "servings": 2,
+    "instructions": "Faites griller les tranches de pain de campagne. Tartinez généreusement de ricotta. Coupez les figues en quartiers et répartissez-les sur les tartines. Parsemez de noix concassées. Arrosez d'un filet de miel et décorez de quelques feuilles de menthe.",
+    "ingredients": [
+      {
+        "name": "Pain de campagne",
+        "amount": 4,
+        "unit": "tranches",
+        "aisle": "bakery"
+      },
+      {
+        "name": "Ricotta",
+        "amount": 200,
+        "unit": "g",
+        "aisle": "fresh"
+      },
+      {
+        "name": "Miel",
+        "amount": 2,
+        "unit": "cuillère à soupe",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Noix concassées",
+        "amount": 40,
+        "unit": "g",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Figues fraîches (ou fraises selon la saison)",
+        "amount": null,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Menthe fraîche",
+        "amount": null,
+        "unit": null,
+        "aisle": "produce"
+      }
+    ],
+    "needsReview": []
+  },
+  {
+    "title": "Smoothie bowl mangue-passion",
+    "notionUrl": "https://app.notion.com/p/3989f1d9d45a81e7a90ae37d76f4a46b",
+    "mealTypes": [
+      "breakfast"
+    ],
+    "categories": [
+      "vegetarian"
+    ],
+    "dietaryTags": [
+      "vegetarian",
+      "chickenOnly",
+      "pescatarian",
+      "omnivore"
+    ],
+    "effortProfile": "light",
+    "prepTime": "under15",
+    "servings": 2,
+    "instructions": "Mixez la mangue, la banane congelée et le lait de coco jusqu'à obtenir une texture lisse et épaisse. Répartissez la préparation dans deux bols. Ajoutez la pulpe des fruits de la passion, le granola et les framboises sur le dessus. Dégustez immédiatement.",
+    "ingredients": [
+      {
+        "name": "Mangue mûre",
+        "amount": 1,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Fruits de la passion",
+        "amount": 2,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Banane congelée",
+        "amount": 1,
+        "unit": null,
+        "aisle": "frozen"
+      },
+      {
+        "name": "Lait de coco",
+        "amount": 100,
+        "unit": "ml",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Granola maison",
+        "amount": null,
+        "unit": null,
+        "aisle": "grocery"
+      },
+      {
+        "name": "Framboises",
+        "amount": null,
+        "unit": null,
+        "aisle": "produce"
+      }
+    ],
+    "needsReview": []
   }
 ]
