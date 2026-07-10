@@ -98,4 +98,61 @@ describe('proposeWeeklyMenu', () => {
     );
     expect(picks).toEqual([]);
   });
+
+  it('prefers the candidate whose category matches the expected weather, among equal effort matches', () => {
+    const picks = proposeWeeklyMenu(
+      [
+        slot({
+          date: new Date('2026-07-13'),
+          effortProfile: 'BALANCED',
+          expectedWeather: 'hot',
+          candidates: [
+            { id: 'stew', effortProfile: 'BALANCED', ingredientNames: [], categories: ['STEW'] },
+            { id: 'salad', effortProfile: 'BALANCED', ingredientNames: [], categories: ['SALAD'] },
+          ],
+        }),
+      ],
+      new Set(),
+      noJitter
+    );
+    expect(picks[0]!.recipeId).toBe('salad');
+  });
+
+  it('ignores expectedWeather when it is neutral', () => {
+    const picks = proposeWeeklyMenu(
+      [
+        slot({
+          date: new Date('2026-07-13'),
+          effortProfile: 'BALANCED',
+          expectedWeather: 'neutral',
+          candidates: [
+            { id: 'first', effortProfile: 'BALANCED', ingredientNames: [], categories: ['STEW'] },
+            { id: 'second', effortProfile: 'BALANCED', ingredientNames: [], categories: ['SALAD'] },
+          ],
+        }),
+      ],
+      new Set(),
+      noJitter
+    );
+    // No weather signal applied — first candidate wins on declaration-order tie-break, same as before this feature existed.
+    expect(picks[0]!.recipeId).toBe('first');
+  });
+
+  it('behaves exactly as before when expectedWeather is absent (no location set)', () => {
+    const picks = proposeWeeklyMenu(
+      [
+        slot({
+          date: new Date('2026-07-13'),
+          effortProfile: 'BALANCED',
+          candidates: [
+            { id: 'first', effortProfile: 'BALANCED', ingredientNames: [], categories: ['STEW'] },
+            { id: 'second', effortProfile: 'BALANCED', ingredientNames: [], categories: ['SALAD'] },
+          ],
+        }),
+      ],
+      new Set(),
+      noJitter
+    );
+    expect(picks[0]!.recipeId).toBe('first');
+  });
 });

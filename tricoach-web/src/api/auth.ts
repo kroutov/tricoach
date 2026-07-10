@@ -7,6 +7,7 @@ export interface User {
   fullName: string | null;
   createdAt: string;
   hasCompletedOnboarding: boolean;
+  location: string | null;
 }
 
 export interface AuthResponse {

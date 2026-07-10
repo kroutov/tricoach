@@ -77,7 +77,7 @@ export function createCheckIn(input: CheckInInput): Promise<CheckIn> {
   return apiFetch('/me/constraints', { method: 'POST', body: input });
 }
 
-export function updateUser(input: { fullName?: string; hasCompletedOnboarding?: boolean }): Promise<User> {
+export function updateUser(input: { fullName?: string; hasCompletedOnboarding?: boolean; location?: string | null }): Promise<User> {
   return apiFetch('/me', { method: 'PUT', body: input });
 }
 

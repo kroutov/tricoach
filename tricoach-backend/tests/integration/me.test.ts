@@ -6,8 +6,21 @@ import { resetDb } from '../helpers/db';
 
 const app = createApp();
 
+const originalFetch = global.fetch;
+afterEach(() => {
+  global.fetch = originalFetch;
+});
 afterEach(resetDb);
 afterAll(async () => prisma.$disconnect());
+
+function mockFetchOnce(body: unknown, ok = true, status = 200) {
+  global.fetch = jest.fn().mockResolvedValue({
+    ok,
+    status,
+    json: async () => body,
+    text: async () => JSON.stringify(body),
+  }) as unknown as typeof fetch;
+}
 
 describe('athlete profile', () => {
   it('round-trips profile fields including sport-specific paces', async () => {
@@ -112,5 +125,45 @@ describe('activity history', () => {
     expect(res.body[0].sport).toBe('bike');
     expect(res.body[0].source).toBe('strava');
     expect(res.body[1].sport).toBe('run');
+  });
+});
+
+describe('location', () => {
+  it('geocodes and persists a valid city', async () => {
+    const { token } = await devLogin(app);
+    mockFetchOnce({ results: [{ latitude: 45.75, longitude: 4.85 }] });
+
+    const res = await request(app).put('/api/v1/me').set('Authorization', `Bearer ${token}`).send({ location: 'Lyon' });
+    expect(res.status).toBe(200);
+    expect(res.body.location).toBe('Lyon');
+
+    const stored = await prisma.user.findUniqueOrThrow({ where: { id: res.body.id } });
+    expect(stored.latitude).toBe(45.75);
+    expect(stored.longitude).toBe(4.85);
+  });
+
+  it('rejects a city that cannot be geocoded, persisting nothing', async () => {
+    const { token, user } = await devLogin(app);
+    mockFetchOnce({ results: [] });
+
+    const res = await request(app).put('/api/v1/me').set('Authorization', `Bearer ${token}`).send({ location: 'asdkjaskjd' });
+    expect(res.status).toBe(400);
+    expect(res.body.error).toBe('city_not_found');
+
+    const stored = await prisma.user.findUniqueOrThrow({ where: { id: user.id } });
+    expect(stored.location).toBeNull();
+  });
+
+  it('clears location and coordinates when set to null', async () => {
+    const { token, user } = await devLogin(app);
+    await prisma.user.update({ where: { id: user.id }, data: { location: 'Lyon', latitude: 45.75, longitude: 4.85 } });
+
+    const res = await request(app).put('/api/v1/me').set('Authorization', `Bearer ${token}`).send({ location: null });
+    expect(res.status).toBe(200);
+    expect(res.body.location).toBeNull();
+
+    const stored = await prisma.user.findUniqueOrThrow({ where: { id: user.id } });
+    expect(stored.latitude).toBeNull();
+    expect(stored.longitude).toBeNull();
   });
 });

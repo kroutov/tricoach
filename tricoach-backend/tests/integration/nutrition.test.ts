@@ -9,8 +9,21 @@ import { resetDb } from '../helpers/db';
 
 const app = createApp();
 
+const originalFetch = global.fetch;
+afterEach(() => {
+  global.fetch = originalFetch;
+});
 afterEach(resetDb);
 afterAll(async () => prisma.$disconnect());
+
+function mockFetchOnce(body: unknown, ok = true, status = 200) {
+  global.fetch = jest.fn().mockResolvedValue({
+    ok,
+    status,
+    json: async () => body,
+    text: async () => JSON.stringify(body),
+  }) as unknown as typeof fetch;
+}
 
 async function seedRecipes() {
   await prisma.recipe.create({
@@ -411,5 +424,40 @@ describe('POST /internal/nutrition/propose-week', () => {
       .get(`/api/v1/me/nutrition/menu?from=${weekStartStr}&to=${weekEndStr}`)
       .set('Authorization', `Bearer ${freshToken}`);
     expect(freshUserMenu.body).toHaveLength(0);
+  });
+
+  it('prefers a weather-matching recipe when the user has a location and effort profile ties', async () => {
+    await seedRecipes();
+    const { token, user } = await devLogin(app, { appleUserId: 'propose-week-weather' });
+
+    // One manual pick makes this user eligible; a location makes the forecast fetch fire.
+    const chicken = await prisma.recipe.findFirstOrThrow({ where: { title: 'Poulet basquaise' } });
+    const today = new Date().toISOString().slice(0, 10);
+    await request(app)
+      .put(`/api/v1/me/nutrition/menu/${today}/dinner`)
+      .set('Authorization', `Bearer ${token}`)
+      .send({ recipeId: chicken.id });
+    await prisma.user.update({ where: { id: user.id }, data: { latitude: 45.75, longitude: 4.85 } });
+
+    const weekStart = nextMondayFrom(new Date());
+    const weekStartStr = weekStart.toISOString().slice(0, 10);
+    const weekEndStr = new Date(weekStart.getTime() + 6 * 86_400_000).toISOString().slice(0, 10);
+
+    // This user has no active plan, so every day defaults to a 'light' effort profile (see
+    // effortProfileForDay) — neither LUNCH candidate (both BALANCED) matches it, so their effort
+    // scores tie and the forecast (mocked here as a hot week) is what decides between them.
+    const dailyDates = Array.from({ length: 7 }, (_, i) => new Date(weekStart.getTime() + i * 86_400_000).toISOString().slice(0, 10));
+    mockFetchOnce({ daily: { time: dailyDates, temperature_2m_max: dailyDates.map(() => 35) } });
+
+    const trigger = await request(app).post('/api/v1/internal/nutrition/propose-week').set('Authorization', 'Bearer test-cron-secret');
+    expect(trigger.status).toBe(200);
+
+    const menu = await request(app)
+      .get(`/api/v1/me/nutrition/menu?from=${weekStartStr}&to=${weekEndStr}`)
+      .set('Authorization', `Bearer ${token}`);
+    const monday = menu.body.filter((s: any) => s.date.slice(0, 10) === weekStartStr);
+    const mondayLunch = monday.find((s: any) => s.mealType === 'lunch');
+    // "Salade de quinoa" (SALAD → hot) over "Poulet basquaise" (BAKED → cold).
+    expect(mondayLunch.recipe.title).toBe('Salade de quinoa');
   });
 });

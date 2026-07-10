@@ -181,6 +181,14 @@ model User {
   // — looked up by exact value like an API key, not hashed like passwordHash,
   // since calendar apps must present it verbatim on every fetch.
   calendarToken          String?  @unique @map("calendar_token")
+  // City as typed by the user (PUT /me), geocoded synchronously on save —
+  // latitude/longitude are the resolved coordinates used to fetch a weather
+  // forecast for the weekly menu proposal (nutrition/proposeWeekForUser).
+  // All three nullable: a user who never sets a location just loses the
+  // weather signal, nothing else depends on it.
+  location               String?
+  latitude               Float?
+  longitude              Float?
 
   profile              AthleteProfile?
   goals                Goal[]

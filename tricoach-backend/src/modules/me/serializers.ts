@@ -9,6 +9,7 @@ export function serializeUser(user: User) {
     fullName: user.fullName,
     createdAt: user.createdAt,
     hasCompletedOnboarding: user.hasCompletedOnboarding,
+    location: user.location,
   };
 }
 

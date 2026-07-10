@@ -1,10 +1,12 @@
 import crypto from 'crypto';
+import { Prisma } from '@prisma/client';
 import { Router } from 'express';
 import { z } from 'zod';
 import { config } from '../../config';
 import { prisma } from '../../db/client';
 import { toDateOnly } from '../../lib/dateOnly';
 import { athleteLevelMap, goalPriorityMap, goalStatusMap, goalTypeMap } from '../../lib/enumMapping';
+import { geocodeCity } from '../integrations/weatherClient';
 import { ApiError } from '../../middleware/errorHandler';
 import { serializeActivity, serializeAvailability, serializeCheckIn, serializeGoal, serializeProfile, serializeUser } from './serializers';
 
@@ -20,12 +22,30 @@ router.get('/', async (req, res) => {
 const updateUserSchema = z.object({
   fullName: z.string().optional(),
   hasCompletedOnboarding: z.boolean().optional(),
+  // City as free text, geocoded synchronously below — null clears it (and the resolved coordinates).
+  location: z.string().trim().min(1).max(120).nullable().optional(),
 });
 
 router.put('/', async (req, res, next) => {
   try {
     const body = updateUserSchema.parse(req.body);
-    const user = await prisma.user.update({ where: { id: req.userId }, data: body });
+    const data: Prisma.UserUpdateInput = { fullName: body.fullName, hasCompletedOnboarding: body.hasCompletedOnboarding };
+
+    if (body.location === null) {
+      data.location = null;
+      data.latitude = null;
+      data.longitude = null;
+    } else if (body.location !== undefined) {
+      // All-or-nothing: an unresolvable city rejects the whole request rather than silently
+      // saving text with no coordinates (which would just look like the weather signal is broken).
+      const geocoded = await geocodeCity(body.location);
+      if (!geocoded) throw new ApiError(400, 'city_not_found');
+      data.location = body.location;
+      data.latitude = geocoded.latitude;
+      data.longitude = geocoded.longitude;
+    }
+
+    const user = await prisma.user.update({ where: { id: req.userId }, data });
     res.json(serializeUser(user));
   } catch (err) {
     if (err instanceof z.ZodError) {

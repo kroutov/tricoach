@@ -11,8 +11,10 @@ import {
   recipeCategoryMap,
 } from '../../lib/enumMapping';
 import { computeLoadForm } from '../dashboard/analytics';
+import { fetchDailyMaxTemps } from '../integrations/weatherClient';
 import { effortProfileForDay, EffortProfileApi } from './engine/effortProfileForDay';
 import { CandidateRecipe, proposeWeeklyMenu, WeeklySlotInput } from './engine/proposeWeeklyMenu';
+import { classifyDailyWeather, WeatherAffinity } from './engine/recipeWeatherAffinity';
 
 type RecipeWithIngredients = Recipe & { ingredients: RecipeIngredient[] };
 
@@ -206,6 +208,24 @@ const RECENT_USE_LOOKBACK_DAYS = 28;
 const PROPOSAL_MEAL_TYPES: Array<Parameters<typeof mealTypeMap.toDb>[0]> = ['lunch', 'dinner'];
 
 /**
+ * Best-effort daily max-temp forecast for a user's saved location, keyed by
+ * ISO date. Returns null (not a throw) when the user has no location, or the
+ * forecast fetch fails — a flaky/unreachable weather API must never break
+ * the rest of the weekly proposal, it just loses the weather signal for
+ * this run.
+ */
+async function fetchForecastForUser(userId: string, start: Date, end: Date): Promise<Map<string, number> | null> {
+  const user = await prisma.user.findUnique({ where: { id: userId }, select: { latitude: true, longitude: true } });
+  if (user?.latitude == null || user?.longitude == null) return null;
+  try {
+    return await fetchDailyMaxTemps(user.latitude, user.longitude, start, end);
+  } catch (err) {
+    console.warn(`Weather forecast fetch failed for user ${userId}, proceeding without weather signal:`, err);
+    return null;
+  }
+}
+
+/**
  * Generates and persists next week's lunch/dinner proposals for one user
  * (called per-user by the scheduled trigger, plan §3/§4). Skips any slot
  * that already has a CONFIRMED selection; overwrites a stale PROPOSED one.
@@ -236,17 +256,33 @@ export async function proposeWeekForUser(userId: string, weekStart: Date): Promi
     const recipes = await findRecipes({ mealType, dietaryTag: preference ?? undefined });
     candidatesByMealType.set(
       mealType,
-      recipes.map((r) => ({ id: r.id, effortProfile: r.effortProfile, ingredientNames: r.ingredients.map((i) => i.name) }))
+      recipes.map((r) => ({
+        id: r.id,
+        effortProfile: r.effortProfile,
+        ingredientNames: r.ingredients.map((i) => i.name),
+        categories: r.categories,
+      }))
     );
   }
+
+  const forecastByDate = await fetchForecastForUser(userId, days[0]!, weekEnd);
 
   const slots: WeeklySlotInput[] = [];
   for (const day of days) {
     const effortProfile = effortProfileMap.toDb(await computeEffortProfileForUserDate(userId, day));
+    const dateKey = day.toISOString().slice(0, 10);
+    const maxTempC = forecastByDate?.get(dateKey);
+    const expectedWeather: WeatherAffinity | undefined = maxTempC !== undefined ? classifyDailyWeather(maxTempC) : undefined;
     for (const mealType of PROPOSAL_MEAL_TYPES) {
       const dbMealType = mealTypeMap.toDb(mealType);
       if (confirmedSlots.has(slotKey(day, dbMealType))) continue;
-      slots.push({ date: day, mealType: dbMealType, effortProfile, candidates: candidatesByMealType.get(mealType) ?? [] });
+      slots.push({
+        date: day,
+        mealType: dbMealType,
+        effortProfile,
+        candidates: candidatesByMealType.get(mealType) ?? [],
+        expectedWeather,
+      });
     }
   }
 

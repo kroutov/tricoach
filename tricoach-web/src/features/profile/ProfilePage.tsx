@@ -5,7 +5,7 @@ import { useAuth } from '../auth/AuthContext';
 import { Card } from '../../components/Card';
 import { Modal } from '../../components/Modal';
 import { ApiClientError } from '../../api/client';
-import { getCalendarToken, rotateCalendarToken } from '../../api/me';
+import { getCalendarToken, rotateCalendarToken, updateUser } from '../../api/me';
 import {
   connectGarmin,
   disconnectGarmin,
@@ -76,7 +76,7 @@ function ConnectionSection({
 }
 
 export function ProfilePage() {
-  const { user, signOut } = useAuth();
+  const { user, signOut, setUser } = useAuth();
   const queryClient = useQueryClient();
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -85,6 +85,8 @@ export function ProfilePage() {
   const [garminPassword, setGarminPassword] = useState('');
   const [garminError, setGarminError] = useState<string | null>(null);
   const [syncResultMessage, setSyncResultMessage] = useState<string | null>(null);
+  const [locationInput, setLocationInput] = useState(user?.location ?? '');
+  const [locationError, setLocationError] = useState<string | null>(null);
 
   useEffect(() => {
     const stravaResult = searchParams.get('strava');
@@ -101,6 +103,10 @@ export function ProfilePage() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    setLocationInput(user?.location ?? '');
+  }, [user?.location]);
 
   const stravaStatusQuery = useQuery({ queryKey: ['strava', 'status'], queryFn: getStravaStatus });
   const garminStatusQuery = useQuery({ queryKey: ['garmin', 'status'], queryFn: getGarminStatus });
@@ -164,6 +170,17 @@ export function ProfilePage() {
   const rotateCalendarTokenMutation = useMutation({
     mutationFn: rotateCalendarToken,
     onSuccess: (data) => queryClient.setQueryData(['me', 'calendarToken'], data),
+  });
+
+  const updateLocationMutation = useMutation({
+    mutationFn: (location: string | null) => updateUser({ location }),
+    onSuccess: (updatedUser) => {
+      setLocationError(null);
+      setUser(updatedUser);
+    },
+    onError: (err) => {
+      setLocationError(err instanceof ApiClientError && err.code === 'city_not_found' ? 'Ville introuvable.' : 'Impossible d’enregistrer la localisation.');
+    },
   });
 
   const copyCalendarUrl = async () => {
@@ -276,6 +293,35 @@ export function ProfilePage() {
             </div>
           </div>
         )}
+      </Card>
+
+      <Card>
+        <p className="font-semibold text-primary-text">Localisation</p>
+        <p className="mt-1 text-xs text-secondary-text">
+          Utilisée pour adapter les recettes proposées chaque semaine à la météo prévue (ex. une salade un jour de canicule,
+          un plat mijoté un jour froid).
+        </p>
+        <div className="mt-3 flex gap-2">
+          <input
+            type="text"
+            placeholder="Ville, ex. Lyon"
+            value={locationInput}
+            onChange={(e) => setLocationInput(e.target.value)}
+            className="flex-1 rounded-control border border-separator bg-background px-2 py-2 text-primary-text"
+          />
+          <button
+            type="button"
+            onClick={() => {
+              setLocationError(null);
+              updateLocationMutation.mutate(locationInput.trim() ? locationInput.trim() : null);
+            }}
+            disabled={updateLocationMutation.isPending}
+            className="rounded-control bg-brand px-4 py-2 text-sm font-semibold text-white disabled:opacity-60"
+          >
+            Enregistrer
+          </button>
+        </div>
+        {locationError && <p className="mt-2 text-xs text-intensity-hard">{locationError}</p>}
       </Card>
 
       <button

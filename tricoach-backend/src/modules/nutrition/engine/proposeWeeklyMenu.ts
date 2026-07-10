@@ -1,3 +1,5 @@
+import { recipeWeatherAffinity, RecipeCategoryDb, WeatherAffinity } from './recipeWeatherAffinity';
+
 export type EffortProfileDb = 'CARB_LOAD' | 'RECOVERY' | 'LIGHT' | 'BALANCED';
 
 export interface CandidateRecipe {
@@ -5,6 +7,8 @@ export interface CandidateRecipe {
   effortProfile: EffortProfileDb;
   /** Ingredient names, compared by exact string match — no normalization/stemming (see plan §2). */
   ingredientNames: string[];
+  /** Optional: only used when the slot has an `expectedWeather`. Absent/empty candidates are simply never weather-matched. */
+  categories?: RecipeCategoryDb[];
 }
 
 export interface WeeklySlotInput {
@@ -12,6 +16,8 @@ export interface WeeklySlotInput {
   mealType: string;
   effortProfile: EffortProfileDb;
   candidates: CandidateRecipe[];
+  /** Forecast-derived affinity for this day, set by persistence.ts when the user has a location and the forecast fetch succeeded. Absent (no location/fetch failure) or 'neutral' both mean no weather bonus applies. */
+  expectedWeather?: WeatherAffinity;
 }
 
 export interface WeeklyMenuPick {
@@ -23,6 +29,11 @@ export interface WeeklyMenuPick {
 const EFFORT_MATCH_BONUS = 1000;
 const RECENT_USE_PENALTY = 500;
 const SAME_WEEK_PENALTY = 1000;
+// Priority order: effort match > diversification penalties > weather match > ingredient
+// homogenization > random jitter. Weather is deliberately smaller than the diversification
+// penalties (must never flip a "don't repeat this week"/"avoid recent" decision) but bigger
+// than the per-ingredient bonus (must still be able to tip a homogenization-driven tie).
+const WEATHER_MATCH_BONUS = 50;
 const INGREDIENT_OVERLAP_BONUS = 10;
 
 /**
@@ -35,6 +46,9 @@ const INGREDIENT_OVERLAP_BONUS = 10;
  *   could leave a slot unfillable; the penalty self-adjusts as the catalog grows.
  * - a stronger penalty avoids picking the exact same recipe twice within
  *   this same week's proposal.
+ * - a candidate whose category-derived weather affinity (recipeWeatherAffinity)
+ *   matches the slot's forecast-derived `expectedWeather` gets a smaller bonus —
+ *   secondary to effort/diversification, but still meaningful.
  * - shared ingredients with recipes already picked earlier this week are
  *   rewarded — the homogenization signal, so a week's shopping list trends
  *   toward fewer distinct ingredients.
@@ -62,6 +76,13 @@ export function proposeWeeklyMenu(
       if (candidate.effortProfile === slot.effortProfile) score += EFFORT_MATCH_BONUS;
       if (recentlyUsedRecipeIds.has(candidate.id)) score -= RECENT_USE_PENALTY;
       if (pickedThisWeek.has(candidate.id)) score -= SAME_WEEK_PENALTY;
+      if (
+        slot.expectedWeather &&
+        slot.expectedWeather !== 'neutral' &&
+        recipeWeatherAffinity(candidate.categories ?? []) === slot.expectedWeather
+      ) {
+        score += WEATHER_MATCH_BONUS;
+      }
       const overlap = candidate.ingredientNames.filter((name) => usedIngredients.has(name)).length;
       score += overlap * INGREDIENT_OVERLAP_BONUS;
       score += random();

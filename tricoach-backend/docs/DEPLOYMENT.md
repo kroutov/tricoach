@@ -36,6 +36,8 @@ Provisionner une instance PostgreSQL managée (Railway/Render/Fly ont toutes une
 
 Garmin (Phase web 4) n'a pas de variable d'environnement dédiée : l'intégration utilise les identifiants Garmin propres à chaque athlète (saisis dans l'app, chiffrés en base comme les tokens Strava), pas de clé d'API globale — voir `src/modules/integrations/garminClient.ts` pour le détail du tradeoff (accès non-officiel, Garmin peut le bloquer sans préavis).
 
+La météo (adaptation des propositions de menu à la ville de l'utilisateur, `src/modules/integrations/weatherClient.ts`) n'a elle non plus aucune variable d'environnement : [Open-Meteo](https://open-meteo.com) est gratuit et ne nécessite aucune clé API.
+
 ### 3. Build & démarrage
 
 ```bash
