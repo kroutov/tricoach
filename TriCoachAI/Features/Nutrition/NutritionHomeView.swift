@@ -8,7 +8,7 @@ struct NutritionHomeView: View {
     @State private var section: Section = .menu
 
     private enum Section: String, CaseIterable, Identifiable {
-        case menu = "Menu", recipes = "Recettes"
+        case menu = "Menu", recipes = "Recettes", groceries = "Courses"
         var id: String { rawValue }
     }
 
@@ -25,6 +25,7 @@ struct NutritionHomeView: View {
                 switch section {
                 case .menu: WeeklyMenuView(container: container)
                 case .recipes: RecipeCatalogView(container: container)
+                case .groceries: GroceryListView(container: container)
                 }
             }
         }

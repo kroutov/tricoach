@@ -123,9 +123,41 @@ struct SuggestedRecipesResponse: Codable {
     let recipes: [Recipe]
 }
 
+enum MenuSelectionStatus: String, Codable, CaseIterable, Identifiable, Hashable {
+    case proposed, confirmed
+    var id: String { rawValue }
+
+    var label: String {
+        switch self {
+        case .proposed: return "À valider"
+        case .confirmed: return "Confirmé"
+        }
+    }
+}
+
 struct MenuSelection: Codable, Identifiable, Equatable, Hashable {
     let id: UUID
     let date: Date
     let mealType: MealType
+    let status: MenuSelectionStatus
     let recipe: Recipe
+}
+
+struct ShoppingListItem: Codable, Identifiable, Hashable {
+    let name: String
+    let amount: Double?
+    let unit: String?
+    var id: String { name }
+}
+
+struct ShoppingListAisleGroup: Codable, Identifiable, Hashable {
+    let aisle: GroceryAisle?
+    let items: [ShoppingListItem]
+    var id: String { aisle?.rawValue ?? "other" }
+}
+
+struct ShoppingListResponse: Codable {
+    let from: Date
+    let to: Date
+    let aisles: [ShoppingListAisleGroup]
 }

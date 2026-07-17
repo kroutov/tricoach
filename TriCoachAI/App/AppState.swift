@@ -43,6 +43,14 @@ final class AppState {
         }
     }
 
+    /// Reconciles the shared user record after a direct `/me` update made
+    /// outside onboarding (e.g. saving the profile location) — same
+    /// persist-then-publish shape as `completeOnboarding`'s success path.
+    func setCurrentUser(_ user: User) {
+        container.userSessionRepository.save(user)
+        currentUser = user
+    }
+
     func signOut() {
         KeychainTokenStore.shared.clear()
         container.userSessionRepository.signOut()

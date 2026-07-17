@@ -15,7 +15,7 @@ struct MainTabView: View {
             NutritionHomeView(container: container)
                 .tabItem { Label("Nutrition", systemImage: "fork.knife") }
 
-            ProfileView(container: container, user: appState.currentUser) {
+            ProfileView(container: container, user: appState.currentUser, onUserUpdated: appState.setCurrentUser) {
                 appState.signOut()
             }
             .tabItem { Label("Profil", systemImage: "person.crop.circle") }

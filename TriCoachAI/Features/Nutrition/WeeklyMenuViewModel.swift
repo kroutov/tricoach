@@ -38,6 +38,21 @@ final class WeeklyMenuViewModel {
         selections.first { Calendar.current.isDate($0.date, inSameDayAs: date) && $0.mealType == mealType }
     }
 
+    var proposedCount: Int {
+        selections.filter { $0.status == .proposed }.count
+    }
+
+    /// Bulk "Tout valider" — flips every PROPOSED slot in the displayed week to CONFIRMED.
+    func confirmWeek() async {
+        errorMessage = nil
+        do {
+            try await nutritionAPI.confirmWeek(weekStart: weekStart)
+            await load()
+        } catch {
+            errorMessage = "Impossible de valider la semaine : \(error.localizedDescription)"
+        }
+    }
+
     func goToPreviousWeek() { shiftWeek(by: -7) }
     func goToNextWeek() { shiftWeek(by: 7) }
     func goToToday() { weekStart = Self.mondayOfWeek(.now) }

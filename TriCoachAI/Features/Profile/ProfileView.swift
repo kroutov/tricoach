@@ -3,17 +3,23 @@ import SwiftUI
 struct ProfileView: View {
     let container: DependencyContainer
     let user: User?
+    var onUserUpdated: (User) -> Void
     var onSignOut: () -> Void
 
     @State private var profile: AthleteProfile = .empty
     @State private var goals: [Goal] = []
     @State private var integrationsViewModel: IntegrationsViewModel
+    @State private var locationInput: String
+    @State private var locationError: String?
+    @State private var isSavingLocation = false
 
-    init(container: DependencyContainer, user: User?, onSignOut: @escaping () -> Void) {
+    init(container: DependencyContainer, user: User?, onUserUpdated: @escaping (User) -> Void, onSignOut: @escaping () -> Void) {
         self.container = container
         self.user = user
+        self.onUserUpdated = onUserUpdated
         self.onSignOut = onSignOut
         _integrationsViewModel = State(initialValue: IntegrationsViewModel(container: container))
+        _locationInput = State(initialValue: user?.location ?? "")
     }
 
     var body: some View {
@@ -49,6 +55,21 @@ struct ProfileView: View {
                                 }
                             }
                         }
+                    }
+                }
+
+                Section("Localisation") {
+                    Text("Utilisée pour adapter les recettes proposées chaque semaine à la météo prévue.")
+                        .font(TCFont.caption)
+                        .foregroundStyle(TCColor.secondaryText)
+                    TextField("Ville, ex. Lyon", text: $locationInput)
+                    if let locationError {
+                        Text(locationError).font(TCFont.caption).foregroundStyle(.red)
+                    }
+                    if isSavingLocation {
+                        ProgressView()
+                    } else {
+                        Button("Enregistrer") { Task { await saveLocation() } }
                     }
                 }
 
@@ -113,6 +134,21 @@ struct ProfileView: View {
                 goals = (try? await container.goalRepository.fetchGoals()) ?? []
                 await integrationsViewModel.loadStatuses()
             }
+        }
+    }
+
+    private func saveLocation() async {
+        locationError = nil
+        isSavingLocation = true
+        defer { isSavingLocation = false }
+        let trimmed = locationInput.trimmingCharacters(in: .whitespacesAndNewlines)
+        do {
+            let updated = try await container.userAPI.updateLocation(trimmed.isEmpty ? nil : trimmed)
+            onUserUpdated(updated)
+        } catch NetworkError.server(_, let code) where code == "city_not_found" {
+            locationError = "Ville introuvable."
+        } catch {
+            locationError = "Impossible d'enregistrer la localisation."
         }
     }
 }
