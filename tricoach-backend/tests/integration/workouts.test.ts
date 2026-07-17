@@ -142,6 +142,19 @@ describe('POST /workouts/:id/complete', () => {
 
     expect(res.status).toBe(404);
   });
+
+  it('accepts an explicit null for actualDurationMin/rpe (Android sends null rather than omitting the key)', async () => {
+    const { token, plan } = await setUpPlan(app, 'workout-athlete-6');
+    const workout = firstWorkout(plan);
+
+    const res = await request(app)
+      .post(`/api/v1/workouts/${workout.id}/complete`)
+      .set('Authorization', `Bearer ${token}`)
+      .send({ status: 'skipped', actualDurationMin: null, rpe: null });
+
+    expect(res.status).toBe(200);
+    expect(res.body.workout.status).toBe('skipped');
+  });
 });
 
 describe('PATCH /workouts/:id (drag & drop reschedule)', () => {

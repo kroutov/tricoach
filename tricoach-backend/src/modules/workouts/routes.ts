@@ -10,8 +10,11 @@ const router = Router();
 
 const completeSchema = z.object({
   status: z.enum(['completed', 'skipped']).default('completed'),
-  actualDurationMin: z.number().int().min(1).max(600).optional(),
-  rpe: z.number().int().min(1).max(10).optional(),
+  // .nullable() alongside .optional(): some clients (e.g. Android's kotlinx.serialization,
+  // with encodeDefaults=true) send an explicit `null` for an absent value rather than
+  // omitting the key entirely, unlike iOS/web — accept both conventions.
+  actualDurationMin: z.number().int().min(1).max(600).nullable().optional(),
+  rpe: z.number().int().min(1).max(10).nullable().optional(),
 });
 
 router.post('/:id/complete', async (req, res, next) => {

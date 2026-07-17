@@ -20,7 +20,12 @@ router.get('/', async (req, res) => {
 });
 
 const updateUserSchema = z.object({
-  fullName: z.string().optional(),
+  // .nullable(): Android's kotlinx.serialization (encodeDefaults=true) sends an explicit
+  // `null` for a field it isn't setting, rather than omitting the key like iOS/web do —
+  // e.g. every completeOnboarding() call includes `fullName: null`. There's no "clear my
+  // name" affordance in the product, so null is normalized to undefined below (left
+  // untouched) rather than treated as an intentional clear, unlike `location`.
+  fullName: z.string().nullable().optional(),
   hasCompletedOnboarding: z.boolean().optional(),
   // City as free text, geocoded synchronously below — null clears it (and the resolved coordinates).
   location: z.string().trim().min(1).max(120).nullable().optional(),
@@ -29,7 +34,7 @@ const updateUserSchema = z.object({
 router.put('/', async (req, res, next) => {
   try {
     const body = updateUserSchema.parse(req.body);
-    const data: Prisma.UserUpdateInput = { fullName: body.fullName, hasCompletedOnboarding: body.hasCompletedOnboarding };
+    const data: Prisma.UserUpdateInput = { fullName: body.fullName ?? undefined, hasCompletedOnboarding: body.hasCompletedOnboarding };
 
     if (body.location === null) {
       data.location = null;

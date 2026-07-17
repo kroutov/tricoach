@@ -22,6 +22,21 @@ function mockFetchOnce(body: unknown, ok = true, status = 200) {
   }) as unknown as typeof fetch;
 }
 
+describe('user', () => {
+  it('accepts an explicit null for fullName without clearing an existing name (Android sends null rather than omitting the key)', async () => {
+    const { token } = await devLogin(app, { fullName: 'Athlete Name' });
+
+    const res = await request(app)
+      .put('/api/v1/me')
+      .set('Authorization', `Bearer ${token}`)
+      .send({ fullName: null, hasCompletedOnboarding: true });
+
+    expect(res.status).toBe(200);
+    expect(res.body.hasCompletedOnboarding).toBe(true);
+    expect(res.body.fullName).toBe('Athlete Name');
+  });
+});
+
 describe('athlete profile', () => {
   it('round-trips profile fields including sport-specific paces', async () => {
     const { token } = await devLogin(app);
