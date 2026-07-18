@@ -22,7 +22,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.tricoach.android.R
 import com.tricoach.android.app.AppContainer
 import com.tricoach.android.features.integrations.HealthConnectSection
 import com.tricoach.android.features.integrations.StravaConnectSection
@@ -54,7 +56,7 @@ fun ProfileScreen(
     }
 
     Column(modifier = Modifier.fillMaxSize()) {
-        Text("Profil", style = MaterialTheme.typography.headlineSmall, modifier = Modifier.padding(16.dp))
+        Text(stringResource(R.string.profile_title), style = MaterialTheme.typography.headlineSmall, modifier = Modifier.padding(16.dp))
 
         Column(
             modifier = Modifier
@@ -65,25 +67,25 @@ fun ProfileScreen(
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
             CardBox {
-                Text("Compte", style = MaterialTheme.typography.titleMedium)
-                LabeledRow("Nom", user?.fullName ?: "Athlète")
-                user?.email?.let { LabeledRow("Email", it) }
+                Text(stringResource(R.string.profile_account_title), style = MaterialTheme.typography.titleMedium)
+                LabeledRow(stringResource(R.string.profile_account_name), user?.fullName ?: stringResource(R.string.profile_account_fallback_name))
+                user?.email?.let { LabeledRow(stringResource(R.string.profile_account_email), it) }
             }
 
             CardBox {
-                Text("Profil athlète", style = MaterialTheme.typography.titleMedium)
-                LabeledRow("Niveau", profile.level.label)
-                profile.hrMax?.let { LabeledRow("FC max", "$it bpm") }
-                profile.hrRest?.let { LabeledRow("FC repos", "$it bpm") }
-                profile.ftpWatts?.let { LabeledRow("FTP", "$it W") }
+                Text(stringResource(R.string.profile_athlete_title), style = MaterialTheme.typography.titleMedium)
+                LabeledRow(stringResource(R.string.profile_athlete_level), profile.level.label)
+                profile.hrMax?.let { LabeledRow(stringResource(R.string.profile_athlete_hr_max), stringResource(R.string.profile_value_bpm, it)) }
+                profile.hrRest?.let { LabeledRow(stringResource(R.string.profile_athlete_hr_rest), stringResource(R.string.profile_value_bpm, it)) }
+                profile.ftpWatts?.let { LabeledRow(stringResource(R.string.profile_athlete_ftp), stringResource(R.string.profile_value_watts, it)) }
             }
 
             CardBox(modifier = Modifier.clickable(onClick = onNavigateToGoals)) {
-                Text("Objectifs", style = MaterialTheme.typography.titleMedium)
+                Text(stringResource(R.string.profile_goals_title), style = MaterialTheme.typography.titleMedium)
                 if (goals.isEmpty()) {
-                    Text("Gérer mes objectifs")
+                    Text(stringResource(R.string.profile_goals_manage))
                 } else {
-                    Text("Gérer mes objectifs (${goals.size})")
+                    Text(stringResource(R.string.profile_goals_manage_count, goals.size))
                     val primary = goals.firstOrNull { it.priority == GoalPriority.A } ?: goals.first()
                     Text(
                         "${primary.type.label} — ${formatFullDate(primary.targetDate)}",
@@ -94,7 +96,7 @@ fun ProfileScreen(
             }
 
             CardBox {
-                Text("Intégrations", style = MaterialTheme.typography.titleMedium)
+                Text(stringResource(R.string.profile_integrations_title), style = MaterialTheme.typography.titleMedium)
                 StravaConnectSection(container)
                 HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
                 HealthConnectSection(container)
@@ -105,7 +107,7 @@ fun ProfileScreen(
                 colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.error),
                 modifier = Modifier.fillMaxWidth(),
             ) {
-                Text("Se déconnecter")
+                Text(stringResource(R.string.profile_sign_out))
             }
         }
     }

@@ -1,4 +1,408 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">TriCoach AI</string>
+    <string name="app_name" translatable="false">TriCoach AI</string>
+
+    <!-- Sex -->
+    <string name="enum_sex_male">Homme</string>
+    <string name="enum_sex_female">Femme</string>
+    <string name="enum_sex_other">Autre</string>
+
+    <!-- AthleteLevel -->
+    <string name="enum_athlete_level_beginner">Débutant</string>
+    <string name="enum_athlete_level_intermediate">Intermédiaire</string>
+    <string name="enum_athlete_level_advanced">Avancé</string>
+    <string name="enum_athlete_level_description_beginner">Vous découvrez ce sport ou reprenez après une longue pause.</string>
+    <string name="enum_athlete_level_description_intermediate">Vous vous entraînez régulièrement depuis plus d\'un an.</string>
+    <string name="enum_athlete_level_description_advanced">Vous avez déjà bouclé des courses et structurez votre entraînement.</string>
+
+    <!-- GoalType -->
+    <string name="enum_goal_type_triathlon_sprint">Triathlon Sprint</string>
+    <string name="enum_goal_type_triathlon_olympic">Triathlon Olympique</string>
+    <string name="enum_goal_type_duathlon">Duathlon</string>
+    <string name="enum_goal_type_run_10k">10 km</string>
+    <string name="enum_goal_type_half_marathon">Semi-marathon</string>
+    <string name="enum_goal_type_marathon">Marathon</string>
+    <string name="enum_goal_type_ironman">Ironman</string>
+    <string name="enum_goal_type_half_ironman">Semi-Ironman (70.3)</string>
+    <string name="enum_goal_type_improve_vma">Améliorer sa VMA</string>
+    <string name="enum_goal_type_weight_loss">Perdre du poids</string>
+    <string name="enum_goal_type_general_endurance">Améliorer l\'endurance</string>
+
+    <!-- GoalPriority: %1$s = enum name (A/B/C) -->
+    <string name="enum_goal_priority_label">Priorité %1$s</string>
+
+    <!-- TimeSlot -->
+    <string name="enum_time_slot_early_morning">Tôt le matin (avant 7h)</string>
+    <string name="enum_time_slot_morning">Matin</string>
+    <string name="enum_time_slot_lunch">Pause déjeuner</string>
+    <string name="enum_time_slot_afternoon">Après-midi</string>
+    <string name="enum_time_slot_evening">Soir</string>
+
+    <!-- SportType -->
+    <string name="enum_sport_type_run">Course à pied</string>
+    <string name="enum_sport_type_bike">Vélo</string>
+    <string name="enum_sport_type_swim">Natation</string>
+    <string name="enum_sport_type_brick">Enchaînement (brick)</string>
+    <string name="enum_sport_type_strength">Renforcement</string>
+    <string name="enum_sport_type_rest">Repos</string>
+
+    <!-- WorkoutIntensity -->
+    <string name="enum_workout_intensity_easy">Facile</string>
+    <string name="enum_workout_intensity_moderate">Modérée</string>
+    <string name="enum_workout_intensity_hard">Difficile</string>
+
+    <!-- AdaptationTrigger -->
+    <string name="enum_adaptation_trigger_missed_workout">Séance ratée</string>
+    <string name="enum_adaptation_trigger_overperformance">Surperformance</string>
+    <string name="enum_adaptation_trigger_underperformance">Sous-performance</string>
+    <string name="enum_adaptation_trigger_high_fatigue">Fatigue élevée</string>
+    <string name="enum_adaptation_trigger_injury_flag">Alerte blessure</string>
+    <string name="enum_adaptation_trigger_low_recovery">Récupération faible</string>
+    <string name="enum_adaptation_trigger_physiological_strain">Dérive cardiaque</string>
+
+    <!-- MacrocyclePhase -->
+    <string name="enum_macrocycle_phase_base">Base</string>
+    <string name="enum_macrocycle_phase_build">Développement</string>
+    <string name="enum_macrocycle_phase_peak">Affûtage spécifique</string>
+    <string name="enum_macrocycle_phase_taper">Affûtage final</string>
+    <string name="enum_macrocycle_phase_transition">Transition</string>
+
+    <!-- Weekday -->
+    <string name="enum_weekday_monday">Lundi</string>
+    <string name="enum_weekday_tuesday">Mardi</string>
+    <string name="enum_weekday_wednesday">Mercredi</string>
+    <string name="enum_weekday_thursday">Jeudi</string>
+    <string name="enum_weekday_friday">Vendredi</string>
+    <string name="enum_weekday_saturday">Samedi</string>
+    <string name="enum_weekday_sunday">Dimanche</string>
+    <string name="enum_weekday_unknown">?</string>
+
+    <!-- Auth -->
+    <string name="auth_login">Connexion</string>
+    <string name="auth_register">Inscription</string>
+    <string name="auth_email">Email</string>
+    <string name="auth_full_name">Nom complet (optionnel)</string>
+    <string name="auth_password">Mot de passe</string>
+    <string name="auth_password_hint">8 caractères minimum</string>
+    <string name="auth_create_account">Créer mon compte</string>
+    <string name="auth_sign_in">Se connecter</string>
+    <string name="auth_error_network">Impossible de contacter le serveur. Vérifiez votre connexion.</string>
+    <string name="auth_error_email_taken">Un compte existe déjà avec cette adresse email.</string>
+    <string name="auth_error_invalid_credentials">Email ou mot de passe incorrect.</string>
+    <string name="auth_error_invalid_request">Vérifiez les informations saisies.</string>
+    <string name="auth_error_generic">Une erreur est survenue. Réessayez.</string>
+
+    <!-- Dashboard -->
+    <string name="dashboard_title">Dashboard</string>
+    <string name="dashboard_error_load_failed">Impossible de charger le tableau de bord.</string>
+    <string name="dashboard_no_active_plan">Aucun plan actif. Terminez l\'onboarding pour générer votre plan.</string>
+    <!-- %1$d = progress percent -->
+    <string name="dashboard_progress_percent">%1$d%%</string>
+    <!-- %1$d = week number, %2$d = plan duration in weeks -->
+    <string name="dashboard_week_number">Semaine %1$d / %2$d</string>
+    <string name="dashboard_week_current">Semaine en cours</string>
+    <string name="dashboard_phase_unknown">—</string>
+    <string name="dashboard_recovery_week">Semaine allégée</string>
+    <string name="dashboard_load_title">Charge de la semaine</string>
+    <string name="dashboard_load_completed">TSS réalisés</string>
+    <string name="dashboard_load_planned">TSS planifiés</string>
+    <string name="dashboard_analytics_link_title">Analytique complète</string>
+    <string name="dashboard_analytics_link_hint">Charge hebdomadaire, forme (CTL/ATL), distribution des zones et tendance VO2max.</string>
+    <string name="dashboard_upcoming_title">Prochaines séances</string>
+    <string name="dashboard_health_placeholder_title">VO2max, HRV, sommeil</string>
+    <string name="dashboard_health_placeholder_hint">Connectez Health Connect et Strava pour voir vos tendances de forme, fatigue et récupération ici.</string>
+    <string name="dashboard_adaptation_title">Dernières adaptations</string>
+    <string name="dashboard_adaptation_view_all">Voir tout l\'historique</string>
+
+    <!-- WorkoutRow (shared by Dashboard and Calendar) -->
+    <!-- %1$d = minutes -->
+    <string name="workout_row_duration_minutes">%1$d min</string>
+    <!-- %1$d = TSS -->
+    <string name="workout_row_tss_suffix">" · %1$d TSS"</string>
+
+    <!-- Calendar -->
+    <string name="calendar_title">Calendrier</string>
+    <string name="calendar_rest_day_title">Journée de repos</string>
+    <string name="calendar_rest_day_hint">Aucune séance planifiée ce jour.</string>
+    <string name="calendar_today">Aujourd\'hui</string>
+    <!-- %1$d = week number -->
+    <string name="calendar_week_number">Semaine %1$d</string>
+    <string name="calendar_recovery_week_suffix">" · allégée"</string>
+    <!-- %1$d = planned TSS -->
+    <string name="calendar_planned_tss">%1$d TSS planifiés</string>
+
+    <!-- Workout Detail -->
+    <string name="error_workout_reschedule_failed">Impossible de déplacer la séance : %1$s</string>
+    <string name="error_workout_complete_failed">Impossible d\'enregistrer la séance : %1$s</string>
+    <string name="workout_detail_warmup">Échauffement</string>
+    <string name="workout_detail_cooldown">Retour au calme</string>
+    <string name="workout_detail_plan_adjusted_title">Votre plan a été ajusté</string>
+    <string name="workout_detail_dialog_understood">Compris</string>
+    <string name="workout_detail_conflict_title">Conflit détecté</string>
+    <string name="workout_detail_status_completed">Complétée</string>
+    <string name="workout_detail_status_missed">Ratée</string>
+    <!-- %1$d = minutes -->
+    <string name="workout_detail_duration_value">%1$d min</string>
+    <string name="workout_detail_duration_label">Durée</string>
+    <!-- %1$d = RPE out of 10 -->
+    <string name="workout_detail_rpe_value">%1$d/10</string>
+    <string name="workout_detail_rpe_target_label">RPE cible</string>
+    <string name="workout_detail_value_unknown">—</string>
+    <string name="workout_detail_tss_label">TSS estimé</string>
+    <string name="workout_detail_trimp_label">TRIMP</string>
+    <!-- %1$s = section title (e.g. "Échauffement"), %2$d = duration in minutes -->
+    <string name="workout_detail_section_with_duration">%1$s · %2$d min</string>
+    <string name="workout_detail_main_set_title">Corps principal</string>
+    <!-- %1$d = minutes for a single continuous block -->
+    <string name="workout_detail_block_continuous">%1$d min continu</string>
+    <!-- %1$d = recovery seconds -->
+    <string name="workout_detail_block_recovery_suffix">", récup %1$ds"</string>
+    <!-- %1$d = work minutes -->
+    <string name="workout_detail_block_work_minutes">%1$d min</string>
+    <!-- %1$d = work seconds -->
+    <string name="workout_detail_block_work_seconds">%1$ds</string>
+    <!-- %1$d = repetitions, %2$s = work label (e.g. "45s" or "3 min") -->
+    <string name="workout_detail_block_repeated">%1$d x %2$s</string>
+    <string name="workout_detail_action_mark_completed">Marquer comme complétée</string>
+    <string name="workout_detail_action_reschedule">Déplacer cette séance</string>
+    <string name="workout_detail_action_mark_skipped">Marquer comme ratée</string>
+    <string name="workout_detail_feedback_title">Feedback séance</string>
+    <string name="workout_detail_feedback_duration">Durée réalisée</string>
+    <string name="workout_detail_feedback_rpe">RPE ressenti</string>
+    <string name="workout_detail_confirm">Valider</string>
+    <string name="workout_detail_cancel">Annuler</string>
+    <string name="workout_detail_reschedule_title">Déplacer la séance</string>
+    <string name="workout_detail_reschedule_new_date">Nouvelle date</string>
+    <string name="workout_detail_reschedule_confirm">Déplacer</string>
+
+    <!-- Goals (standalone screen) -->
+    <string name="goals_title">Objectifs</string>
+    <string name="goals_empty_state">Aucun objectif. Ajoutez-en un pour générer votre plan.</string>
+    <string name="goals_action_add">+ Ajouter un objectif</string>
+    <string name="goals_regenerate_button">Régénérer mon plan</string>
+    <string name="goals_regenerate_hint">Le plan est régénéré à partir de l\'objectif de priorité A (ou du premier objectif si aucun n\'est prioritaire). Le plan actuel est archivé, pas supprimé.</string>
+    <string name="goals_dialog_title_new">Nouvel objectif</string>
+    <string name="goals_dialog_title_edit">Modifier l\'objectif</string>
+    <string name="goals_dialog_save">Enregistrer</string>
+    <string name="goals_dialog_cancel">Annuler</string>
+
+    <!-- Adaptation History -->
+    <string name="adaptation_title">Historique d\'adaptation</string>
+    <string name="adaptation_empty_state">Aucune adaptation — votre plan n\'a pas encore été ajusté automatiquement.</string>
+
+    <!-- Dashboard Analytics -->
+    <string name="analytics_error_load_failed">Impossible de charger l\'analytique.</string>
+    <string name="analytics_title">Analytique complète</string>
+    <string name="analytics_no_active_plan">Aucun plan actif pour le moment.</string>
+    <string name="analytics_weekly_load_title">Charge hebdomadaire</string>
+    <string name="analytics_legend_planned">Prévue</string>
+    <string name="analytics_legend_completed">Réalisée</string>
+    <!-- %1$d: week number, prefix used on the chart's bottom axis (e.g. "S12") -->
+    <string name="analytics_week_axis_prefix">S</string>
+    <string name="analytics_load_form_title">Charge chronique / aiguë (CTL / ATL)</string>
+    <string name="analytics_legend_ctl">CTL (chronique)</string>
+    <string name="analytics_legend_atl">ATL (aiguë)</string>
+    <!-- %1$d: TSB value, rounded -->
+    <string name="analytics_tsb_fresh">Forme fraîche (TSB %1$d)</string>
+    <string name="analytics_tsb_high_fatigue">Fatigue élevée (TSB %1$d)</string>
+    <string name="analytics_tsb_balanced">Forme équilibrée (TSB %1$d)</string>
+    <string name="analytics_zone_distribution_title">Distribution des zones</string>
+    <string name="analytics_vo2max_trend_title">Tendance VO2max</string>
+
+    <!-- Integrations: Health Connect -->
+    <!-- %1$s: exception message, not translated -->
+    <string name="health_connect_error_sync_failed">Impossible de synchroniser Health Connect : %1$s</string>
+    <string name="health_connect_status_not_installed">Application non installée</string>
+    <string name="health_connect_status_unsupported">Non disponible sur cet appareil</string>
+    <string name="health_connect_status_connected">Connecté</string>
+    <string name="health_connect_status_not_connected">Non connecté</string>
+    <string name="health_connect_action_install">Installer</string>
+    <string name="health_connect_action_resync">Resynchroniser</string>
+    <string name="health_connect_action_connect">Connecter</string>
+
+    <!-- Integrations: Strava -->
+    <!-- %1$s: exception message, not translated -->
+    <string name="strava_error_connect_failed">Impossible d\'ouvrir la connexion Strava : %1$s</string>
+    <string name="strava_error_disconnect_failed">Impossible de déconnecter Strava : %1$s</string>
+    <string name="strava_error_sync_failed">Impossible de synchroniser Strava : %1$s</string>
+    <!-- %1$s: formatted connection date, appended to strava_status_connected -->
+    <string name="strava_connected_since_suffix">" depuis %1$s"</string>
+    <string name="strava_status_loading">Chargement…</string>
+    <string name="strava_status_connected">Connecté</string>
+    <string name="strava_status_not_connected">Non connecté</string>
+    <string name="strava_action_resync">Resynchroniser</string>
+    <string name="strava_action_disconnect">Déconnecter</string>
+    <string name="strava_action_connect">Connecter</string>
+
+    <!-- French plural rule: "one" covers 0 and 1, "other" covers 2+ -->
+    <plurals name="plural_activities_imported">
+        <item quantity="one">%d activité importée.</item>
+        <item quantity="other">%d activités importées.</item>
+    </plurals>
+
+    <!-- Profile -->
+    <string name="profile_title">Profil</string>
+    <string name="profile_account_title">Compte</string>
+    <string name="profile_account_name">Nom</string>
+    <string name="profile_account_fallback_name">Athlète</string>
+    <string name="profile_account_email">Email</string>
+    <string name="profile_athlete_title">Profil athlète</string>
+    <string name="profile_athlete_level">Niveau</string>
+    <string name="profile_athlete_hr_max">FC max</string>
+    <string name="profile_athlete_hr_rest">FC repos</string>
+    <string name="profile_athlete_ftp">FTP</string>
+    <!-- %1$d: heart rate value -->
+    <string name="profile_value_bpm">%1$d bpm</string>
+    <!-- %1$d: power value -->
+    <string name="profile_value_watts">%1$d W</string>
+    <string name="profile_goals_title">Objectifs</string>
+    <string name="profile_goals_manage">Gérer mes objectifs</string>
+    <!-- %1$d: goal count -->
+    <string name="profile_goals_manage_count">Gérer mes objectifs (%1$d)</string>
+    <string name="profile_integrations_title">Intégrations</string>
+    <string name="profile_sign_out">Se déconnecter</string>
+
+    <!-- Main navigation (MainScaffold) -->
+    <string name="nav_dashboard">Dashboard</string>
+    <string name="nav_calendar">Calendrier</string>
+    <string name="nav_profile">Profil</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_step_title_personal_info">Vous</string>
+    <string name="onboarding_step_title_sport_level">Niveau</string>
+    <string name="onboarding_step_title_history">Historique</string>
+    <string name="onboarding_step_title_goals">Objectifs</string>
+    <string name="onboarding_step_title_availability">Disponibilités</string>
+    <string name="onboarding_step_title_constraints">Contraintes</string>
+    <string name="onboarding_step_title_summary">Résumé</string>
+    <string name="error_onboarding_no_goal_saved">Aucun objectif enregistré.</string>
+    <!-- %1$s = exception message -->
+    <string name="error_onboarding_generate_plan_failed">Impossible de générer le plan : %1$s</string>
+
+    <!-- Onboarding: Personal Info step -->
+    <string name="onboarding_personal_info_title">Parlez-nous de vous</string>
+    <string name="onboarding_personal_info_age">Âge</string>
+    <!-- %1$d = age in years -->
+    <string name="onboarding_personal_info_age_value">%1$d ans</string>
+    <string name="onboarding_personal_info_sex">Sexe</string>
+    <string name="onboarding_personal_info_height">Taille (cm)</string>
+    <!-- %1$d = height in cm -->
+    <string name="onboarding_personal_info_height_value">%1$d cm</string>
+    <string name="onboarding_personal_info_weight">Poids (kg)</string>
+    <!-- %1$.1f = weight in kg -->
+    <string name="onboarding_personal_info_weight_value">%1$.1f kg</string>
+
+    <!-- Onboarding: Sport Level step -->
+    <string name="onboarding_sport_level_title">Quel est votre niveau ?</string>
+
+    <!-- Onboarding: History step -->
+    <string name="onboarding_history_title">Votre historique</string>
+    <string name="onboarding_history_hint">Ces données personnalisent vos zones d\'entraînement. Laissez vide si inconnu — vous pourrez les compléter plus tard.</string>
+    <string name="onboarding_history_years_practice">Années de pratique</string>
+    <!-- %1$.1f = years -->
+    <string name="onboarding_history_years_practice_value">%1$.1f ans</string>
+    <string name="onboarding_history_weekly_volume">Volume hebdomadaire moyen</string>
+    <!-- %1$d = minutes per week -->
+    <string name="onboarding_history_weekly_volume_value">%1$d min / semaine</string>
+    <string name="onboarding_history_hr_max">Fréquence cardiaque max (bpm)</string>
+    <string name="onboarding_history_hr_rest">Fréquence cardiaque au repos (bpm)</string>
+    <!-- %1$d = beats per minute -->
+    <string name="onboarding_history_bpm_value">%1$d bpm</string>
+    <string name="onboarding_history_ftp">FTP vélo (watts, si connu)</string>
+    <!-- %1$d = watts -->
+    <string name="onboarding_history_ftp_value">%1$d W</string>
+    <string name="onboarding_history_threshold_pace">Allure seuil course (min/km, si connue)</string>
+    <!-- %1$s = pace label (e.g. "5:03") -->
+    <string name="onboarding_history_threshold_pace_value">%1$s /km</string>
+    <string name="onboarding_history_css_pace">CSS natation (min/100m, si connue)</string>
+    <!-- %1$s = pace label (e.g. "1:40") -->
+    <string name="onboarding_history_css_pace_value">%1$s /100m</string>
+    <string name="onboarding_history_not_provided_masc">Non renseigné</string>
+    <string name="onboarding_history_not_provided_fem">Non renseignée</string>
+
+    <!-- Onboarding: Goals step -->
+    <string name="onboarding_goals_title">Vos objectifs</string>
+    <string name="onboarding_goals_hint">Vous pouvez viser plusieurs courses ; la priorité A détermine le plan généré.</string>
+    <string name="onboarding_goals_add">+ Ajouter un objectif</string>
+
+    <!-- Onboarding: Availability step -->
+    <string name="onboarding_availability_title">Vos disponibilités</string>
+    <string name="onboarding_availability_sessions_per_week">Séances par semaine</string>
+    <string name="onboarding_availability_max_duration">Durée maximale par séance</string>
+    <!-- %1$d = minutes -->
+    <string name="onboarding_availability_max_duration_value">%1$d min</string>
+    <string name="onboarding_availability_available_days">Jours disponibles</string>
+    <string name="onboarding_availability_preferred_time_slots">Créneaux horaires préférés</string>
+    <string name="onboarding_availability_mandatory_rest_days">Jours de repos obligatoires</string>
+
+    <!-- Onboarding: Constraints step -->
+    <string name="onboarding_constraints_title">Contraintes actuelles</string>
+    <string name="onboarding_constraints_hint">Ces informations permettent au moteur d\'adaptation de rester prudent dès la première semaine.</string>
+    <string name="onboarding_constraints_injuries">Blessures éventuelles</string>
+    <string name="onboarding_constraints_remove_injury">Retirer</string>
+    <string name="onboarding_constraints_injury_placeholder">Ex : douleur genou droit</string>
+    <string name="onboarding_constraints_add_injury">Ajouter</string>
+    <string name="onboarding_constraints_fatigue_level">Niveau de fatigue (1 = très frais, 5 = épuisé)</string>
+    <string name="onboarding_constraints_stress_level">Niveau de stress (1 = détendu, 5 = très stressé)</string>
+    <!-- %1$d = level 1-5 -->
+    <string name="onboarding_constraints_level_value">%1$d / 5</string>
+    <string name="onboarding_constraints_avg_sleep">Sommeil moyen</string>
+    <!-- %1$.1f = hours -->
+    <string name="onboarding_constraints_avg_sleep_value">%1$.1f h / nuit</string>
+
+    <!-- Onboarding: Summary step -->
+    <string name="onboarding_summary_title">Résumé</string>
+    <string name="onboarding_summary_hint">Vérifiez vos informations avant de générer votre plan personnalisé.</string>
+    <!-- %1$d = age in years -->
+    <string name="onboarding_summary_age_value">%1$d ans</string>
+    <string name="onboarding_summary_age_not_provided">âge non renseigné</string>
+    <!-- %1$d = minutes per week -->
+    <string name="onboarding_summary_weekly_volume">%1$d min/semaine en moyenne actuellement</string>
+    <string name="onboarding_summary_goals_title">Objectifs</string>
+    <string name="onboarding_summary_availability_title">Disponibilités</string>
+    <!-- %1$d = sessions per week, %2$d = max duration in minutes -->
+    <string name="onboarding_summary_availability_value">%1$d séances/semaine, %2$d min max</string>
+    <string name="onboarding_summary_constraints_title">Contraintes</string>
+    <!-- %1$d = fatigue level, %2$d = stress level, %3$.1f = sleep hours -->
+    <string name="onboarding_summary_constraints_value">Fatigue %1$d/5 · Stress %2$d/5 · Sommeil %3$.1f h</string>
+    <string name="onboarding_summary_footer">Appuyez sur « Générer mon plan » pour construire votre programme périodisé.</string>
+
+    <!-- Onboarding: flow shell nav -->
+    <string name="onboarding_nav_back">Retour</string>
+    <string name="onboarding_nav_generate_plan">Générer mon plan</string>
+    <string name="onboarding_nav_next">Suivant</string>
+
+    <!-- GoalEditor (shared by onboarding GoalsStep and standalone GoalsScreen) -->
+    <string name="goal_editor_delete">Supprimer</string>
+    <string name="goal_editor_target_date">Date cible</string>
+    <!-- %1$d = weeks from now -->
+    <string name="goal_editor_weeks_until">%1$d semaines</string>
+    <string name="goal_editor_priority">Priorité</string>
+    <string name="goal_editor_target_time">Temps visé</string>
+    <string name="goal_editor_hours">Heures</string>
+    <string name="goal_editor_minutes">Minutes</string>
+
+    <!-- Goals errors: %1$s = exception message -->
+    <string name="error_goals_save_failed">Impossible d\'enregistrer l\'objectif : %1$s</string>
+    <string name="error_goals_delete_failed">Impossible de supprimer l\'objectif : %1$s</string>
+    <string name="error_goals_no_goal_to_regenerate">Ajoutez au moins un objectif avant de générer un plan.</string>
+    <string name="error_goals_regenerate_failed">Impossible de régénérer le plan : %1$s</string>
+    <!-- %1$s = translated GoalType label -->
+    <string name="goals_regenerate_success">Nouveau plan généré à partir de « %1$s ».</string>
+
+    <string-array name="weekday_narrow">
+        <item>L</item>
+        <item>M</item>
+        <item>M</item>
+        <item>J</item>
+        <item>V</item>
+        <item>S</item>
+        <item>D</item>
+    </string-array>
+
+    <!-- French plural rule: "one" covers 0 and 1, "other" covers 2+ -->
+    <plurals name="plural_sessions_per_week">
+        <item quantity="one">%d séance</item>
+        <item quantity="other">%d séances</item>
+    </plurals>
 </resources>

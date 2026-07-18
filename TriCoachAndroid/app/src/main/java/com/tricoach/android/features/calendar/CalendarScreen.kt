@@ -27,8 +27,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.tricoach.android.R
 import com.tricoach.android.app.AppContainer
 import com.tricoach.android.features.shared.WorkoutRow
 import com.tricoach.android.features.shared.formatMonthYear
@@ -46,7 +48,7 @@ fun CalendarScreen(container: AppContainer, onWorkoutClick: (Workout) -> Unit) {
     LaunchedEffect(Unit) { state.refresh() }
 
     Column(modifier = Modifier.fillMaxSize()) {
-        Text("Calendrier", style = MaterialTheme.typography.headlineSmall, modifier = Modifier.padding(16.dp, 16.dp, 16.dp, 8.dp))
+        Text(stringResource(R.string.calendar_title), style = MaterialTheme.typography.headlineSmall, modifier = Modifier.padding(16.dp, 16.dp, 16.dp, 8.dp))
 
         MonthHeader(
             state = state,
@@ -67,10 +69,10 @@ fun CalendarScreen(container: AppContainer, onWorkoutClick: (Workout) -> Unit) {
         if (dayWorkouts.isEmpty()) {
             Box(modifier = Modifier.fillMaxWidth().padding(32.dp), contentAlignment = Alignment.Center) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text("Journée de repos", style = MaterialTheme.typography.titleMedium)
+                    Text(stringResource(R.string.calendar_rest_day_title), style = MaterialTheme.typography.titleMedium)
                     Spacer(Modifier.height(4.dp))
                     Text(
-                        "Aucune séance planifiée ce jour.",
+                        stringResource(R.string.calendar_rest_day_hint),
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
@@ -103,7 +105,7 @@ private fun MonthHeader(state: CalendarState, onPrevious: () -> Unit, onNext: ()
         TextButton(onClick = onPrevious, enabled = state.canGoToPreviousMonth) { Text("‹") }
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Text(formatMonthYear(state.displayedMonth), style = MaterialTheme.typography.titleMedium)
-            TextButton(onClick = onToday) { Text("Aujourd'hui", style = MaterialTheme.typography.labelMedium) }
+            TextButton(onClick = onToday) { Text(stringResource(R.string.calendar_today), style = MaterialTheme.typography.labelMedium) }
         }
         TextButton(onClick = onNext, enabled = state.canGoToNextMonth) { Text("›") }
     }
@@ -192,11 +194,12 @@ private fun MicrocycleBanner(microcycle: Microcycle) {
         horizontalArrangement = Arrangement.SpaceBetween,
     ) {
         Text(
-            "Semaine ${microcycle.weekNumber}" + if (microcycle.isRecoveryWeek) " · allégée" else "",
+            stringResource(R.string.calendar_week_number, microcycle.weekNumber) +
+                if (microcycle.isRecoveryWeek) stringResource(R.string.calendar_recovery_week_suffix) else "",
             style = MaterialTheme.typography.labelMedium,
         )
         Text(
-            "${microcycle.plannedLoad.toInt()} TSS planifiés",
+            stringResource(R.string.calendar_planned_tss, microcycle.plannedLoad.toInt()),
             style = MaterialTheme.typography.labelSmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )

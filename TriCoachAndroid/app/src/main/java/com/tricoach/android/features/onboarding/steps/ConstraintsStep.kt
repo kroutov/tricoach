@@ -16,7 +16,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.tricoach.android.R
 import com.tricoach.android.features.shared.DoubleStepperField
 import com.tricoach.android.features.shared.IntStepperField
 import com.tricoach.android.features.shared.OnboardingField
@@ -27,14 +29,14 @@ fun ConstraintsStep(checkIn: ConstraintCheckIn, onChange: (ConstraintCheckIn) ->
     var newInjury by remember { mutableStateOf("") }
 
     Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
-        Text("Contraintes actuelles", style = MaterialTheme.typography.headlineSmall)
+        Text(stringResource(R.string.onboarding_constraints_title), style = MaterialTheme.typography.headlineSmall)
         Text(
-            "Ces informations permettent au moteur d'adaptation de rester prudent dès la première semaine.",
+            stringResource(R.string.onboarding_constraints_hint),
             style = MaterialTheme.typography.bodySmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
 
-        OnboardingField("Blessures éventuelles") {
+        OnboardingField(stringResource(R.string.onboarding_constraints_injuries)) {
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 checkIn.injuries.forEach { injury ->
                     Row(
@@ -43,14 +45,14 @@ fun ConstraintsStep(checkIn: ConstraintCheckIn, onChange: (ConstraintCheckIn) ->
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
                         Text(injury, modifier = Modifier.weight(1f))
-                        TextButton(onClick = { onChange(checkIn.copy(injuries = checkIn.injuries - injury)) }) { Text("Retirer") }
+                        TextButton(onClick = { onChange(checkIn.copy(injuries = checkIn.injuries - injury)) }) { Text(stringResource(R.string.onboarding_constraints_remove_injury)) }
                     }
                 }
                 Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     OutlinedTextField(
                         value = newInjury,
                         onValueChange = { newInjury = it },
-                        label = { Text("Ex : douleur genou droit") },
+                        label = { Text(stringResource(R.string.onboarding_constraints_injury_placeholder)) },
                         modifier = Modifier.weight(1f),
                     )
                     Button(onClick = {
@@ -58,34 +60,34 @@ fun ConstraintsStep(checkIn: ConstraintCheckIn, onChange: (ConstraintCheckIn) ->
                             onChange(checkIn.copy(injuries = checkIn.injuries + newInjury.trim()))
                             newInjury = ""
                         }
-                    }) { Text("Ajouter") }
+                    }) { Text(stringResource(R.string.onboarding_constraints_add_injury)) }
                 }
             }
         }
 
         IntStepperField(
-            label = "Niveau de fatigue (1 = très frais, 5 = épuisé)",
+            label = stringResource(R.string.onboarding_constraints_fatigue_level),
             value = checkIn.fatigueLevel,
             onValueChange = { onChange(checkIn.copy(fatigueLevel = it)) },
             range = 1..5,
-            valueLabel = { "$it / 5" },
+            valueLabel = { stringResource(R.string.onboarding_constraints_level_value, it) },
         )
 
         IntStepperField(
-            label = "Niveau de stress (1 = détendu, 5 = très stressé)",
+            label = stringResource(R.string.onboarding_constraints_stress_level),
             value = checkIn.stressLevel,
             onValueChange = { onChange(checkIn.copy(stressLevel = it)) },
             range = 1..5,
-            valueLabel = { "$it / 5" },
+            valueLabel = { stringResource(R.string.onboarding_constraints_level_value, it) },
         )
 
         DoubleStepperField(
-            label = "Sommeil moyen",
+            label = stringResource(R.string.onboarding_constraints_avg_sleep),
             value = checkIn.sleepHours,
             onValueChange = { onChange(checkIn.copy(sleepHours = it)) },
             range = 3.0..11.0,
             step = 0.5,
-            valueLabel = { "%.1f h / nuit".format(it) },
+            valueLabel = { stringResource(R.string.onboarding_constraints_avg_sleep_value, it) },
         )
     }
 }

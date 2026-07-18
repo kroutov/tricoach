@@ -5,7 +5,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.pluralStringResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.tricoach.android.R
 import com.tricoach.android.features.shared.ChipGroup
 import com.tricoach.android.features.shared.IntStepperField
 import com.tricoach.android.features.shared.OnboardingField
@@ -17,26 +20,26 @@ import com.tricoach.android.models.label
 @Composable
 fun AvailabilityStep(availability: Availability, onChange: (Availability) -> Unit) {
     Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
-        Text("Vos disponibilités", style = MaterialTheme.typography.headlineSmall)
+        Text(stringResource(R.string.onboarding_availability_title), style = MaterialTheme.typography.headlineSmall)
 
         IntStepperField(
-            label = "Séances par semaine",
+            label = stringResource(R.string.onboarding_availability_sessions_per_week),
             value = availability.sessionsPerWeek,
             onValueChange = { onChange(availability.copy(sessionsPerWeek = it)) },
             range = 1..14,
-            valueLabel = { "$it séances" },
+            valueLabel = { pluralStringResource(R.plurals.plural_sessions_per_week, it, it) },
         )
 
         IntStepperField(
-            label = "Durée maximale par séance",
+            label = stringResource(R.string.onboarding_availability_max_duration),
             value = availability.maxSessionDurationMin,
             onValueChange = { onChange(availability.copy(maxSessionDurationMin = it)) },
             range = 20..240,
             step = 5,
-            valueLabel = { "$it min" },
+            valueLabel = { stringResource(R.string.onboarding_availability_max_duration_value, it) },
         )
 
-        OnboardingField("Jours disponibles") {
+        OnboardingField(stringResource(R.string.onboarding_availability_available_days)) {
             ChipGroup(
                 items = Weekday.orderedWeek,
                 selected = availability.availableDays,
@@ -45,7 +48,7 @@ fun AvailabilityStep(availability: Availability, onChange: (Availability) -> Uni
             )
         }
 
-        OnboardingField("Créneaux horaires préférés") {
+        OnboardingField(stringResource(R.string.onboarding_availability_preferred_time_slots)) {
             ChipGroup(
                 items = TimeSlot.entries,
                 selected = availability.preferredTimeSlots,
@@ -54,7 +57,7 @@ fun AvailabilityStep(availability: Availability, onChange: (Availability) -> Uni
             )
         }
 
-        OnboardingField("Jours de repos obligatoires") {
+        OnboardingField(stringResource(R.string.onboarding_availability_mandatory_rest_days)) {
             ChipGroup(
                 items = Weekday.orderedWeek,
                 selected = availability.mandatoryRestDays,

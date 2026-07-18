@@ -11,7 +11,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.tricoach.android.R
 import com.tricoach.android.features.onboarding.OnboardingState
 import com.tricoach.android.features.shared.formatFullDate
 import com.tricoach.android.models.Weekday
@@ -20,42 +22,55 @@ import com.tricoach.android.models.label
 @Composable
 fun SummaryStep(state: OnboardingState) {
     Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
-        Text("Résumé", style = MaterialTheme.typography.headlineSmall)
+        Text(stringResource(R.string.onboarding_summary_title), style = MaterialTheme.typography.headlineSmall)
         Text(
-            "Vérifiez vos informations avant de générer votre plan personnalisé.",
+            stringResource(R.string.onboarding_summary_hint),
             style = MaterialTheme.typography.bodySmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
 
         SummaryCard {
-            Text("${state.profile.level.label} • ${state.profile.age?.let { "$it ans" } ?: "âge non renseigné"}")
+            val ageFragment = state.profile.age?.let { stringResource(R.string.onboarding_summary_age_value, it) }
+                ?: stringResource(R.string.onboarding_summary_age_not_provided)
+            Text("${state.profile.level.label} • $ageFragment")
             state.profile.weeklyVolumeAvgMin?.let {
-                Text("$it min/semaine en moyenne actuellement")
+                Text(stringResource(R.string.onboarding_summary_weekly_volume, it))
             }
         }
 
         SummaryCard {
-            Text("Objectifs", style = MaterialTheme.typography.titleMedium)
+            Text(stringResource(R.string.onboarding_summary_goals_title), style = MaterialTheme.typography.titleMedium)
             state.goals.forEach { goal ->
                 Text("${goal.type.label} — ${goal.priority.label} — ${formatFullDate(goal.targetDate)}")
             }
         }
 
         SummaryCard {
-            Text("Disponibilités", style = MaterialTheme.typography.titleMedium)
-            Text("${state.availability.sessionsPerWeek} séances/semaine, ${state.availability.maxSessionDurationMin} min max")
+            Text(stringResource(R.string.onboarding_summary_availability_title), style = MaterialTheme.typography.titleMedium)
+            Text(
+                stringResource(
+                    R.string.onboarding_summary_availability_value,
+                    state.availability.sessionsPerWeek,
+                    state.availability.maxSessionDurationMin,
+                ),
+            )
             Text(
                 state.availability.availableDays
                     .sortedBy { Weekday.orderedWeek.indexOf(it) }
-                    .joinToString(", ") { Weekday.label(it) },
+                    .map { Weekday.label(it) }
+                    .joinToString(", "),
             )
         }
 
         SummaryCard {
-            Text("Contraintes", style = MaterialTheme.typography.titleMedium)
+            Text(stringResource(R.string.onboarding_summary_constraints_title), style = MaterialTheme.typography.titleMedium)
             Text(
-                "Fatigue ${state.checkIn.fatigueLevel}/5 · Stress ${state.checkIn.stressLevel}/5 · " +
-                    "Sommeil %.1f h".format(state.checkIn.sleepHours),
+                stringResource(
+                    R.string.onboarding_summary_constraints_value,
+                    state.checkIn.fatigueLevel,
+                    state.checkIn.stressLevel,
+                    state.checkIn.sleepHours,
+                ),
             )
             if (state.checkIn.injuries.isNotEmpty()) {
                 Text(state.checkIn.injuries.joinToString(", "), color = MaterialTheme.colorScheme.error)
@@ -63,7 +78,7 @@ fun SummaryStep(state: OnboardingState) {
         }
 
         Text(
-            "Appuyez sur « Générer mon plan » pour construire votre programme périodisé.",
+            stringResource(R.string.onboarding_summary_footer),
             style = MaterialTheme.typography.bodySmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )

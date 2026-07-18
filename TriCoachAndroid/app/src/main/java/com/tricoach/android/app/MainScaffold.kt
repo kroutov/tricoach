@@ -11,12 +11,14 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.tricoach.android.R
 import com.tricoach.android.features.adaptation.AdaptationHistoryScreen
 import com.tricoach.android.features.analytics.DashboardAnalyticsScreen
 import com.tricoach.android.features.calendar.CalendarScreen
@@ -61,19 +63,19 @@ fun MainScaffold(container: AppContainer, appState: AppState) {
                     selected = currentRoute?.hierarchy?.any { it.route == ROUTE_DASHBOARD } == true,
                     onClick = { navController.navigate(ROUTE_DASHBOARD) { popUpTo(navController.graph.findStartDestination().id) { saveState = true }; launchSingleTop = true; restoreState = true } },
                     icon = { Text("⏱") },
-                    label = { Text("Dashboard") },
+                    label = { Text(stringResource(R.string.nav_dashboard)) },
                 )
                 NavigationBarItem(
                     selected = currentRoute?.hierarchy?.any { it.route == ROUTE_CALENDAR } == true,
                     onClick = { navController.navigate(ROUTE_CALENDAR) { popUpTo(navController.graph.findStartDestination().id) { saveState = true }; launchSingleTop = true; restoreState = true } },
                     icon = { Text("📅") },
-                    label = { Text("Calendrier") },
+                    label = { Text(stringResource(R.string.nav_calendar)) },
                 )
                 NavigationBarItem(
                     selected = currentRoute?.hierarchy?.any { it.route == ROUTE_PROFILE } == true,
                     onClick = { navController.navigate(ROUTE_PROFILE) { popUpTo(navController.graph.findStartDestination().id) { saveState = true }; launchSingleTop = true; restoreState = true } },
                     icon = { Text("👤") },
-                    label = { Text("Profil") },
+                    label = { Text(stringResource(R.string.nav_profile)) },
                 )
             }
         },

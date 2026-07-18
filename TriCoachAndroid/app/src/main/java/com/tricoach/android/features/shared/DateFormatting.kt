@@ -12,12 +12,12 @@ fun parseIsoDate(iso: String): LocalDate =
     runCatching { Instant.parse(iso).atZone(ZoneOffset.UTC).toLocalDate() }
         .getOrElse { runCatching { LocalDate.parse(iso) }.getOrElse { LocalDate.now() } }
 
-private val monthYearFormatter = DateTimeFormatter.ofPattern("MMMM yyyy", Locale.FRENCH)
+private val monthYearFormatter = DateTimeFormatter.ofPattern("MMMM yyyy", Locale.getDefault())
 
 fun formatMonthYear(month: YearMonth): String =
     month.atDay(1).format(monthYearFormatter).replaceFirstChar { it.uppercase() }
 
-private val fullDateFormatter = DateTimeFormatter.ofPattern("d MMM yyyy", Locale.FRENCH)
+private val fullDateFormatter = DateTimeFormatter.ofPattern("d MMM yyyy", Locale.getDefault())
 
 fun formatFullDate(iso: String): String = parseIsoDate(iso).format(fullDateFormatter)
 

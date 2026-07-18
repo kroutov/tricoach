@@ -6,16 +6,18 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.tricoach.android.R
 import com.tricoach.android.features.onboarding.OnboardingState
 import com.tricoach.android.features.shared.GoalEditorCard
 
 @Composable
 fun GoalsStep(state: OnboardingState) {
     Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
-        Text("Vos objectifs", style = MaterialTheme.typography.headlineSmall)
+        Text(stringResource(R.string.onboarding_goals_title), style = MaterialTheme.typography.headlineSmall)
         Text(
-            "Vous pouvez viser plusieurs courses ; la priorité A détermine le plan généré.",
+            stringResource(R.string.onboarding_goals_hint),
             style = MaterialTheme.typography.bodySmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
@@ -28,6 +30,6 @@ fun GoalsStep(state: OnboardingState) {
             )
         }
 
-        TextButton(onClick = { state.addGoal() }) { Text("+ Ajouter un objectif") }
+        TextButton(onClick = { state.addGoal() }) { Text(stringResource(R.string.onboarding_goals_add)) }
     }
 }

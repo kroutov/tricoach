@@ -1,9 +1,13 @@
 package com.tricoach.android.features.onboarding
 
+import androidx.annotation.StringRes
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.res.stringResource
+import com.tricoach.android.R
 import com.tricoach.android.app.AppContainer
 import com.tricoach.android.models.AthleteProfile
 import com.tricoach.android.models.Availability
@@ -12,15 +16,18 @@ import com.tricoach.android.models.Goal
 import com.tricoach.android.models.GoalPriority
 import com.tricoach.android.models.GoalType
 
-enum class OnboardingStep(val title: String) {
-    PERSONAL_INFO("Vous"),
-    SPORT_LEVEL("Niveau"),
-    HISTORY("Historique"),
-    GOALS("Objectifs"),
-    AVAILABILITY("Disponibilités"),
-    CONSTRAINTS("Contraintes"),
-    SUMMARY("Résumé"),
+enum class OnboardingStep(@StringRes val titleResId: Int) {
+    PERSONAL_INFO(R.string.onboarding_step_title_personal_info),
+    SPORT_LEVEL(R.string.onboarding_step_title_sport_level),
+    HISTORY(R.string.onboarding_step_title_history),
+    GOALS(R.string.onboarding_step_title_goals),
+    AVAILABILITY(R.string.onboarding_step_title_availability),
+    CONSTRAINTS(R.string.onboarding_step_title_constraints),
+    SUMMARY(R.string.onboarding_step_title_summary),
 }
+
+val OnboardingStep.title: String
+    @Composable get() = stringResource(titleResId)
 
 /** Plain state holder (not a ViewModel) — mirrors iOS's OnboardingViewModel, owned once by OnboardingFlowScreen via remember. */
 class OnboardingState(private val container: AppContainer) {
@@ -83,14 +90,14 @@ class OnboardingState(private val container: AppContainer) {
             val savedGoals = container.goalRepository.fetchGoals()
             val primaryGoal = savedGoals.firstOrNull { it.priority == GoalPriority.A } ?: savedGoals.firstOrNull()
             if (primaryGoal == null) {
-                errorMessage = "Aucun objectif enregistré."
+                errorMessage = container.context.getString(R.string.error_onboarding_no_goal_saved)
                 return false
             }
 
             container.planRepository.generatePlan(primaryGoal.id)
             return true
         } catch (e: Exception) {
-            errorMessage = "Impossible de générer le plan : ${e.message}"
+            errorMessage = container.context.getString(R.string.error_onboarding_generate_plan_failed, e.message)
             return false
         } finally {
             isGenerating = false

@@ -3,12 +3,13 @@ package com.tricoach.android.features.goals
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import com.tricoach.android.R
 import com.tricoach.android.app.AppContainer
 import com.tricoach.android.features.onboarding.dateStringWeeksFromNow
 import com.tricoach.android.models.Goal
 import com.tricoach.android.models.GoalPriority
 import com.tricoach.android.models.GoalType
-import com.tricoach.android.models.label
+import com.tricoach.android.models.labelResId
 
 /** Plain state holder (not a ViewModel) — mirrors iOS's GoalsManagementViewModel. */
 class GoalsState(private val container: AppContainer) {
@@ -34,7 +35,7 @@ class GoalsState(private val container: AppContainer) {
             container.goalRepository.save(goal)
             load()
         } catch (e: Exception) {
-            errorMessage = "Impossible d'enregistrer l'objectif : ${e.message}"
+            errorMessage = container.context.getString(R.string.error_goals_save_failed, e.message)
         }
     }
 
@@ -44,7 +45,7 @@ class GoalsState(private val container: AppContainer) {
             container.goalRepository.delete(goal.id)
             goals = goals.filter { it.id != goal.id }
         } catch (e: Exception) {
-            errorMessage = "Impossible de supprimer l'objectif : ${e.message}"
+            errorMessage = container.context.getString(R.string.error_goals_delete_failed, e.message)
         }
     }
 
@@ -52,7 +53,7 @@ class GoalsState(private val container: AppContainer) {
     suspend fun regeneratePlan() {
         val primaryGoal = goals.firstOrNull { it.priority == GoalPriority.A } ?: goals.firstOrNull()
         if (primaryGoal == null) {
-            errorMessage = "Ajoutez au moins un objectif avant de générer un plan."
+            errorMessage = container.context.getString(R.string.error_goals_no_goal_to_regenerate)
             return
         }
         isRegenerating = true
@@ -60,9 +61,10 @@ class GoalsState(private val container: AppContainer) {
         regenerationMessage = null
         try {
             container.planRepository.generatePlan(primaryGoal.id)
-            regenerationMessage = "Nouveau plan généré à partir de « ${primaryGoal.type.label} »."
+            val goalTypeLabel = container.context.getString(primaryGoal.type.labelResId())
+            regenerationMessage = container.context.getString(R.string.goals_regenerate_success, goalTypeLabel)
         } catch (e: Exception) {
-            errorMessage = "Impossible de régénérer le plan : ${e.message}"
+            errorMessage = container.context.getString(R.string.error_goals_regenerate_failed, e.message)
         } finally {
             isRegenerating = false
         }

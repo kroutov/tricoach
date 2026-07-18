@@ -20,6 +20,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.pluralStringResource
+import androidx.compose.ui.res.stringResource
+import com.tricoach.android.R
 import com.tricoach.android.app.AppContainer
 import com.tricoach.android.core.healthconnect.HealthConnectAvailability
 import com.tricoach.android.core.healthconnect.HealthConnectManager
@@ -49,7 +52,7 @@ class HealthConnectState(private val container: AppContainer) {
             val result = container.integrationsApi.syncHealthMetrics(payload)
             lastSyncCount = result.activitiesIngested
         } catch (e: Exception) {
-            errorMessage = "Impossible de synchroniser Health Connect : ${e.message}"
+            errorMessage = container.context.getString(R.string.health_connect_error_sync_failed, e.message)
         } finally {
             isSyncing = false
         }
@@ -81,10 +84,10 @@ fun HealthConnectSection(container: AppContainer) {
             Column(modifier = Modifier.weight(1f)) {
                 Text("Health Connect", style = MaterialTheme.typography.titleMedium)
                 val statusText = when {
-                    state.availability == HealthConnectAvailability.NOT_INSTALLED -> "Application non installée"
-                    state.availability == HealthConnectAvailability.UNSUPPORTED -> "Non disponible sur cet appareil"
-                    state.hasPermissions -> "Connecté"
-                    else -> "Non connecté"
+                    state.availability == HealthConnectAvailability.NOT_INSTALLED -> stringResource(R.string.health_connect_status_not_installed)
+                    state.availability == HealthConnectAvailability.UNSUPPORTED -> stringResource(R.string.health_connect_status_unsupported)
+                    state.hasPermissions -> stringResource(R.string.health_connect_status_connected)
+                    else -> stringResource(R.string.health_connect_status_not_connected)
                 }
                 Text(statusText, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
@@ -93,22 +96,26 @@ fun HealthConnectSection(container: AppContainer) {
                     Button(onClick = {
                         val uri = Uri.parse("market://details?id=com.google.android.apps.healthdata")
                         context.startActivity(Intent(Intent.ACTION_VIEW, uri).apply { setPackage("com.android.vending") })
-                    }) { Text("Installer") }
+                    }) { Text(stringResource(R.string.health_connect_action_install)) }
                 }
                 state.availability == HealthConnectAvailability.AVAILABLE && state.hasPermissions -> {
                     TextButton(onClick = { scope.launch { state.sync() } }, enabled = !state.isSyncing) {
-                        Text(if (state.isSyncing) "…" else "Resynchroniser")
+                        Text(if (state.isSyncing) "…" else stringResource(R.string.health_connect_action_resync))
                     }
                 }
                 state.availability == HealthConnectAvailability.AVAILABLE -> {
                     Button(onClick = { permissionLauncher.launch(HealthConnectManager.PERMISSIONS) }) {
-                        Text("Connecter")
+                        Text(stringResource(R.string.health_connect_action_connect))
                     }
                 }
             }
         }
         state.lastSyncCount?.let {
-            Text("$it activité(s) importée(s).", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.primary)
+            Text(
+                pluralStringResource(R.plurals.plural_activities_imported, it, it),
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.primary,
+            )
         }
         state.errorMessage?.let {
             Text(it, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.error)

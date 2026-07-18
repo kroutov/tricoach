@@ -14,7 +14,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.tricoach.android.R
 import com.tricoach.android.models.AthleteLevel
 import com.tricoach.android.models.AthleteProfile
 import com.tricoach.android.models.description
@@ -23,7 +25,7 @@ import com.tricoach.android.models.label
 @Composable
 fun SportLevelStep(profile: AthleteProfile, onChange: (AthleteProfile) -> Unit) {
     Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
-        Text("Quel est votre niveau ?", style = MaterialTheme.typography.headlineSmall)
+        Text(stringResource(R.string.onboarding_sport_level_title), style = MaterialTheme.typography.headlineSmall)
         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
             AthleteLevel.entries.forEach { level ->
                 val selected = profile.level == level

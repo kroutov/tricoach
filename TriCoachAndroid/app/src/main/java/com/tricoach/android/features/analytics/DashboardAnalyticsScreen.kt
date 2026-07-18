@@ -26,6 +26,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.patrykandpatrick.vico.compose.cartesian.CartesianChartHost
 import com.patrykandpatrick.vico.compose.cartesian.axis.rememberBottom
@@ -48,6 +49,7 @@ import com.patrykandpatrick.vico.core.cartesian.layer.ColumnCartesianLayer
 import com.patrykandpatrick.vico.core.cartesian.layer.LineCartesianLayer
 import com.patrykandpatrick.vico.core.cartesian.data.ColumnCartesianLayerModel
 import com.patrykandpatrick.vico.core.common.data.ExtraStore
+import com.tricoach.android.R
 import com.tricoach.android.app.AppContainer
 import com.tricoach.android.features.shared.CardBox
 import com.tricoach.android.features.shared.intensityColor
@@ -61,6 +63,7 @@ fun DashboardAnalyticsScreen(container: AppContainer) {
     var analytics by remember { mutableStateOf<DashboardAnalytics?>(null) }
     var isLoading by remember { mutableStateOf(true) }
     var errorMessage by remember { mutableStateOf<String?>(null) }
+    val errorLoadFailedText = stringResource(R.string.analytics_error_load_failed)
 
     LaunchedEffect(Unit) {
         isLoading = true
@@ -68,14 +71,14 @@ fun DashboardAnalyticsScreen(container: AppContainer) {
         analytics = try {
             container.dashboardApi.fetchAnalytics()
         } catch (e: Exception) {
-            errorMessage = "Impossible de charger l'analytique."
+            errorMessage = errorLoadFailedText
             null
         }
         isLoading = false
     }
 
     Column(modifier = Modifier.fillMaxSize()) {
-        Text("Analytique", style = MaterialTheme.typography.headlineSmall, modifier = Modifier.padding(16.dp))
+        Text(stringResource(R.string.analytics_title), style = MaterialTheme.typography.headlineSmall, modifier = Modifier.padding(16.dp))
 
         Column(
             modifier = Modifier
@@ -92,7 +95,7 @@ fun DashboardAnalyticsScreen(container: AppContainer) {
                 }
                 errorMessage != null -> Text(errorMessage!!, color = MaterialTheme.colorScheme.error)
                 a?.hasActivePlan != true -> Text(
-                    "Aucun plan actif. Générez un plan pour voir votre analytique.",
+                    stringResource(R.string.analytics_no_active_plan),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
@@ -113,9 +116,14 @@ fun DashboardAnalyticsScreen(container: AppContainer) {
 @Composable
 private fun WeeklyLoadCard(analytics: DashboardAnalytics) {
     CardBox {
-        Text("Charge hebdomadaire", style = MaterialTheme.typography.titleMedium)
+        Text(stringResource(R.string.analytics_weekly_load_title), style = MaterialTheme.typography.titleMedium)
         Spacer(Modifier.height(4.dp))
-        LegendRow(listOf("Planifié" to MaterialTheme.colorScheme.primary, "Réalisé" to MaterialTheme.colorScheme.tertiary))
+        LegendRow(
+            listOf(
+                stringResource(R.string.analytics_legend_planned) to MaterialTheme.colorScheme.primary,
+                stringResource(R.string.analytics_legend_completed) to MaterialTheme.colorScheme.tertiary,
+            ),
+        )
         Spacer(Modifier.height(8.dp))
 
         val points = analytics.weeklyLoad
@@ -130,6 +138,7 @@ private fun WeeklyLoadCard(analytics: DashboardAnalytics) {
         }
         val plannedColor = MaterialTheme.colorScheme.primary
         val completedColor = MaterialTheme.colorScheme.tertiary
+        val weekAxisPrefix = stringResource(R.string.analytics_week_axis_prefix)
         ProvideVicoTheme(rememberM3VicoTheme()) {
             CartesianChartHost(
                 chart = rememberCartesianChart(
@@ -143,7 +152,7 @@ private fun WeeklyLoadCard(analytics: DashboardAnalytics) {
                     ),
                     startAxis = VerticalAxis.rememberStart(),
                     bottomAxis = HorizontalAxis.rememberBottom(
-                        valueFormatter = CartesianValueFormatter { _, value, _ -> "S${value.toInt()}" },
+                        valueFormatter = CartesianValueFormatter { _, value, _ -> "$weekAxisPrefix${value.toInt()}" },
                     ),
                 ),
                 modelProducer = modelProducer,
@@ -156,9 +165,14 @@ private fun WeeklyLoadCard(analytics: DashboardAnalytics) {
 @Composable
 private fun LoadFormCard(analytics: DashboardAnalytics) {
     CardBox {
-        Text("Charge chronique / aiguë (CTL / ATL)", style = MaterialTheme.typography.titleMedium)
+        Text(stringResource(R.string.analytics_load_form_title), style = MaterialTheme.typography.titleMedium)
         Spacer(Modifier.height(4.dp))
-        LegendRow(listOf("CTL (chronique)" to MaterialTheme.colorScheme.primary, "ATL (aiguë)" to MaterialTheme.colorScheme.tertiary))
+        LegendRow(
+            listOf(
+                stringResource(R.string.analytics_legend_ctl) to MaterialTheme.colorScheme.primary,
+                stringResource(R.string.analytics_legend_atl) to MaterialTheme.colorScheme.tertiary,
+            ),
+        )
         Spacer(Modifier.height(8.dp))
 
         val points = analytics.loadForm
@@ -194,9 +208,9 @@ private fun LoadFormCard(analytics: DashboardAnalytics) {
         if (lastTsb != null) {
             Spacer(Modifier.height(8.dp))
             val tsbText = when {
-                lastTsb > 5 -> "Forme fraîche (TSB ${lastTsb.toInt()})"
-                lastTsb < -15 -> "Fatigue élevée (TSB ${lastTsb.toInt()})"
-                else -> "Forme équilibrée (TSB ${lastTsb.toInt()})"
+                lastTsb > 5 -> stringResource(R.string.analytics_tsb_fresh, lastTsb.toInt())
+                lastTsb < -15 -> stringResource(R.string.analytics_tsb_high_fatigue, lastTsb.toInt())
+                else -> stringResource(R.string.analytics_tsb_balanced, lastTsb.toInt())
             }
             Text(tsbText, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
@@ -206,7 +220,7 @@ private fun LoadFormCard(analytics: DashboardAnalytics) {
 @Composable
 private fun ZoneDistributionCard(analytics: DashboardAnalytics) {
     CardBox {
-        Text("Distribution des zones", style = MaterialTheme.typography.titleMedium)
+        Text(stringResource(R.string.analytics_zone_distribution_title), style = MaterialTheme.typography.titleMedium)
         Spacer(Modifier.height(8.dp))
 
         val points = analytics.zoneDistribution
@@ -243,7 +257,7 @@ private fun ZoneDistributionCard(analytics: DashboardAnalytics) {
 @Composable
 private fun Vo2MaxCard(analytics: DashboardAnalytics) {
     CardBox {
-        Text("Tendance VO2max", style = MaterialTheme.typography.titleMedium)
+        Text(stringResource(R.string.analytics_vo2max_trend_title), style = MaterialTheme.typography.titleMedium)
         Spacer(Modifier.height(8.dp))
 
         val points = analytics.vo2maxTrend

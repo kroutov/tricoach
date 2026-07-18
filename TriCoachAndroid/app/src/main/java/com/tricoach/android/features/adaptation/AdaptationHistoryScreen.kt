@@ -25,7 +25,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.tricoach.android.R
 import com.tricoach.android.app.AppContainer
 import com.tricoach.android.features.shared.CardBox
 import com.tricoach.android.features.shared.formatFullDate
@@ -49,7 +51,7 @@ fun AdaptationHistoryScreen(container: AppContainer) {
     }
 
     Column(modifier = Modifier.fillMaxSize()) {
-        Text("Historique d'adaptation", style = MaterialTheme.typography.headlineSmall, modifier = Modifier.padding(16.dp))
+        Text(stringResource(R.string.adaptation_title), style = MaterialTheme.typography.headlineSmall, modifier = Modifier.padding(16.dp))
 
         Column(
             modifier = Modifier
@@ -64,7 +66,7 @@ fun AdaptationHistoryScreen(container: AppContainer) {
                     CircularProgressIndicator()
                 }
                 events.isEmpty() -> Text(
-                    "Aucune adaptation — votre plan n'a pas encore été ajusté automatiquement.",
+                    stringResource(R.string.adaptation_empty_state),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
@@ -98,6 +100,7 @@ private fun AdaptationEventCard(event: AdaptationEvent) {
             }
         }
         Spacer(Modifier.height(4.dp))
+        // Intentionally not localized: opaque string from the backend's adaptationEngine.ts, French-only regardless of device language.
         Text(event.actionTaken, style = MaterialTheme.typography.bodyMedium)
         if (event.createdAt.isNotBlank()) {
             Spacer(Modifier.height(4.dp))

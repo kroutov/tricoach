@@ -27,6 +27,8 @@ import com.tricoach.android.core.repository.WorkoutRepository
  * network clients to the repositories that wrap them.
  */
 class AppContainer(context: Context) {
+    /** applicationContext, not an Activity context — safe to hold for the container's lifetime (state holders use it to build localized error/status messages outside Composition). */
+    val context: Context = context.applicationContext
     private val tokenStore = TokenStore(context)
     private val database = AppDatabase.build(context)
     private val apiClient = ApiClient(tokenStore)

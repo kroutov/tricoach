@@ -24,7 +24,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.tricoach.android.R
 import com.tricoach.android.app.AppContainer
 import com.tricoach.android.features.onboarding.steps.AvailabilityStep
 import com.tricoach.android.features.onboarding.steps.ConstraintsStep
@@ -82,7 +84,7 @@ fun OnboardingFlowScreen(container: AppContainer, onFinished: suspend () -> Unit
             verticalAlignment = Alignment.CenterVertically,
         ) {
             if (state.stepIndex > 0) {
-                TextButton(onClick = { state.goBack() }) { Text("Retour") }
+                TextButton(onClick = { state.goBack() }) { Text(stringResource(R.string.onboarding_nav_back)) }
             } else {
                 Spacer(Modifier.width(1.dp))
             }
@@ -99,11 +101,11 @@ fun OnboardingFlowScreen(container: AppContainer, onFinished: suspend () -> Unit
                     if (state.isGenerating) {
                         CircularProgressIndicator(modifier = Modifier.size(20.dp))
                     } else {
-                        Text("Générer mon plan")
+                        Text(stringResource(R.string.onboarding_nav_generate_plan))
                     }
                 }
             } else {
-                Button(onClick = { state.goNext() }, enabled = state.canGoNext) { Text("Suivant") }
+                Button(onClick = { state.goNext() }, enabled = state.canGoNext) { Text(stringResource(R.string.onboarding_nav_next)) }
             }
         }
     }

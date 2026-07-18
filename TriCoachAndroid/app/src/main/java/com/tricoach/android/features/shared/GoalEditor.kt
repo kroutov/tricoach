@@ -25,7 +25,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.tricoach.android.R
 import com.tricoach.android.features.onboarding.dateStringWeeksFromNow
 import com.tricoach.android.features.onboarding.weeksFromNow
 import com.tricoach.android.models.Goal
@@ -48,20 +50,20 @@ fun GoalEditorCard(goal: Goal, onChange: (Goal) -> Unit, onDelete: (() -> Unit)?
                 GoalTypeDropdown(selected = goal.type, onSelect = { onChange(goal.copy(type = it)) })
             }
             if (onDelete != null) {
-                TextButton(onClick = onDelete) { Text("Supprimer") }
+                TextButton(onClick = onDelete) { Text(stringResource(R.string.goal_editor_delete)) }
             }
         }
 
         val weeks = weeksFromNow(goal.targetDate)
         IntStepperField(
-            label = "Date cible",
+            label = stringResource(R.string.goal_editor_target_date),
             value = weeks,
             onValueChange = { onChange(goal.copy(targetDate = dateStringWeeksFromNow(it))) },
             range = 1..208,
-            valueLabel = { "$it semaines — ${formatFullDate(goal.targetDate)}" },
+            valueLabel = { "${stringResource(R.string.goal_editor_weeks_until, it)} — ${formatFullDate(goal.targetDate)}" },
         )
 
-        OnboardingField("Priorité") {
+        OnboardingField(stringResource(R.string.goal_editor_priority)) {
             SingleChoiceSegmentedButtonRow(modifier = Modifier.fillMaxWidth()) {
                 GoalPriority.entries.forEachIndexed { index, priority ->
                     SegmentedButton(
@@ -75,7 +77,7 @@ fun GoalEditorCard(goal: Goal, onChange: (Goal) -> Unit, onDelete: (() -> Unit)?
 
         val hasTargetTime = goal.targetTimeSeconds != null
         Row(verticalAlignment = Alignment.CenterVertically) {
-            Text("Temps visé", modifier = Modifier.weight(1f))
+            Text(stringResource(R.string.goal_editor_target_time), modifier = Modifier.weight(1f))
             Switch(
                 checked = hasTargetTime,
                 onCheckedChange = { checked -> onChange(goal.copy(targetTimeSeconds = if (checked) 3600 else null)) },
@@ -86,7 +88,7 @@ fun GoalEditorCard(goal: Goal, onChange: (Goal) -> Unit, onDelete: (() -> Unit)?
             Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                 Box(modifier = Modifier.weight(1f)) {
                     IntStepperField(
-                        label = "Heures",
+                        label = stringResource(R.string.goal_editor_hours),
                         value = totalSeconds / 3600,
                         onValueChange = { h -> onChange(goal.copy(targetTimeSeconds = h * 3600 + (totalSeconds % 3600 / 60) * 60)) },
                         range = 0..15,
@@ -94,7 +96,7 @@ fun GoalEditorCard(goal: Goal, onChange: (Goal) -> Unit, onDelete: (() -> Unit)?
                 }
                 Box(modifier = Modifier.weight(1f)) {
                     IntStepperField(
-                        label = "Minutes",
+                        label = stringResource(R.string.goal_editor_minutes),
                         value = (totalSeconds % 3600) / 60,
                         onValueChange = { m -> onChange(goal.copy(targetTimeSeconds = (totalSeconds / 3600) * 3600 + m * 60)) },
                         range = 0..59,

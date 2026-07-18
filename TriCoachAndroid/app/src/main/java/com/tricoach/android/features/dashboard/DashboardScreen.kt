@@ -27,7 +27,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.tricoach.android.R
 import com.tricoach.android.app.AppContainer
 import com.tricoach.android.core.network.apiCall
 import com.tricoach.android.features.shared.CardBox
@@ -49,6 +52,7 @@ fun DashboardScreen(
     var adaptationEvents by remember { mutableStateOf<List<AdaptationEvent>>(emptyList()) }
     var isLoading by remember { mutableStateOf(true) }
     var errorMessage by remember { mutableStateOf<String?>(null) }
+    val context = LocalContext.current
 
     suspend fun load() {
         isLoading = true
@@ -56,7 +60,7 @@ fun DashboardScreen(
         val result = try {
             apiCall { container.dashboardApi.fetchSummary() }
         } catch (e: Exception) {
-            errorMessage = "Impossible de charger le tableau de bord."
+            errorMessage = context.getString(R.string.dashboard_error_load_failed)
             isLoading = false
             return
         }
@@ -70,7 +74,7 @@ fun DashboardScreen(
     LaunchedEffect(Unit) { load() }
 
     Column(modifier = Modifier.fillMaxSize()) {
-        Text("Dashboard", style = MaterialTheme.typography.headlineSmall, modifier = Modifier.padding(16.dp))
+        Text(stringResource(R.string.dashboard_title), style = MaterialTheme.typography.headlineSmall, modifier = Modifier.padding(16.dp))
 
         Column(
             modifier = Modifier
@@ -86,7 +90,7 @@ fun DashboardScreen(
                 }
                 errorMessage != null -> Text(errorMessage!!, color = MaterialTheme.colorScheme.error)
                 summary?.hasActivePlan != true -> Text(
-                    "Aucun plan actif. Terminez l'onboarding pour générer votre plan.",
+                    stringResource(R.string.dashboard_no_active_plan),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
@@ -120,24 +124,24 @@ private fun WeekCard(summary: DashboardSummary) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Box(modifier = Modifier.size(64.dp), contentAlignment = Alignment.Center) {
                 CircularProgressIndicator(progress = { progress }, modifier = Modifier.size(64.dp), strokeWidth = 6.dp)
-                Text("${(progress * 100).toInt()}%", style = MaterialTheme.typography.labelLarge)
+                Text(stringResource(R.string.dashboard_progress_percent, (progress * 100).toInt()), style = MaterialTheme.typography.labelLarge)
             }
             Spacer(Modifier.width(16.dp))
             Column {
                 val weekLabel = if (summary.weekNumber != null && summary.durationWeeks != null) {
-                    "Semaine ${summary.weekNumber} / ${summary.durationWeeks}"
+                    stringResource(R.string.dashboard_week_number, summary.weekNumber, summary.durationWeeks)
                 } else {
-                    "Semaine en cours"
+                    stringResource(R.string.dashboard_week_current)
                 }
                 Text(weekLabel, style = MaterialTheme.typography.titleMedium)
                 Text(
-                    summary.currentPhase?.label ?: "—",
+                    summary.currentPhase?.label ?: stringResource(R.string.dashboard_phase_unknown),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
                 if (summary.isRecoveryWeek) {
                     Text(
-                        "Semaine allégée",
+                        stringResource(R.string.dashboard_recovery_week),
                         style = MaterialTheme.typography.labelSmall,
                         color = MaterialTheme.colorScheme.primary,
                     )
@@ -150,11 +154,11 @@ private fun WeekCard(summary: DashboardSummary) {
 @Composable
 private fun LoadCard(summary: DashboardSummary) {
     CardBox {
-        Text("Charge de la semaine", style = MaterialTheme.typography.titleMedium)
+        Text(stringResource(R.string.dashboard_load_title), style = MaterialTheme.typography.titleMedium)
         Spacer(Modifier.height(8.dp))
         Row(modifier = Modifier.fillMaxWidth()) {
-            Metric(value = summary.weekCompletedLoad.toInt().toString(), label = "TSS réalisés", modifier = Modifier.weight(1f))
-            Metric(value = summary.weekPlannedLoad.toInt().toString(), label = "TSS planifiés", modifier = Modifier.weight(1f))
+            Metric(value = summary.weekCompletedLoad.toInt().toString(), label = stringResource(R.string.dashboard_load_completed), modifier = Modifier.weight(1f))
+            Metric(value = summary.weekPlannedLoad.toInt().toString(), label = stringResource(R.string.dashboard_load_planned), modifier = Modifier.weight(1f))
         }
     }
 }
@@ -170,10 +174,10 @@ private fun Metric(value: String, label: String, modifier: Modifier = Modifier) 
 @Composable
 private fun AnalyticsLinkCard(onClick: () -> Unit) {
     CardBox(modifier = Modifier.clickable(onClick = onClick)) {
-        Text("Analytique complète", style = MaterialTheme.typography.titleMedium)
+        Text(stringResource(R.string.dashboard_analytics_link_title), style = MaterialTheme.typography.titleMedium)
         Spacer(Modifier.height(4.dp))
         Text(
-            "Charge hebdomadaire, forme (CTL/ATL), distribution des zones et tendance VO2max.",
+            stringResource(R.string.dashboard_analytics_link_hint),
             style = MaterialTheme.typography.bodySmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
@@ -183,7 +187,7 @@ private fun AnalyticsLinkCard(onClick: () -> Unit) {
 @Composable
 private fun UpcomingCard(workouts: List<Workout>, onWorkoutClick: (Workout) -> Unit) {
     CardBox {
-        Text("Prochaines séances", style = MaterialTheme.typography.titleMedium)
+        Text(stringResource(R.string.dashboard_upcoming_title), style = MaterialTheme.typography.titleMedium)
         Spacer(Modifier.height(8.dp))
         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
             workouts.forEach { workout ->
@@ -196,10 +200,10 @@ private fun UpcomingCard(workouts: List<Workout>, onWorkoutClick: (Workout) -> U
 @Composable
 private fun HealthPlaceholderCard() {
     CardBox {
-        Text("VO2max, HRV, sommeil", style = MaterialTheme.typography.titleMedium)
+        Text(stringResource(R.string.dashboard_health_placeholder_title), style = MaterialTheme.typography.titleMedium)
         Spacer(Modifier.height(4.dp))
         Text(
-            "Connectez Health Connect et Strava (phase ultérieure) pour voir vos tendances de forme, fatigue et récupération ici.",
+            stringResource(R.string.dashboard_health_placeholder_hint),
             style = MaterialTheme.typography.bodySmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
@@ -209,17 +213,18 @@ private fun HealthPlaceholderCard() {
 @Composable
 private fun AdaptationCard(events: List<AdaptationEvent>, onViewHistory: () -> Unit) {
     CardBox {
-        Text("Dernières adaptations", style = MaterialTheme.typography.titleMedium)
+        Text(stringResource(R.string.dashboard_adaptation_title), style = MaterialTheme.typography.titleMedium)
         Spacer(Modifier.height(8.dp))
         events.forEachIndexed { index, event ->
             Column {
                 Text(event.triggeredBy.label, style = MaterialTheme.typography.bodyMedium)
+                // Intentionally not localized: opaque string from the backend's adaptationEngine.ts, French-only regardless of device language.
                 Text(event.actionTaken, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
             if (index != events.lastIndex) {
                 HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
             }
         }
-        TextButton(onClick = onViewHistory) { Text("Voir tout l'historique") }
+        TextButton(onClick = onViewHistory) { Text(stringResource(R.string.dashboard_adaptation_view_all)) }
     }
 }

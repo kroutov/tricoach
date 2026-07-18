@@ -3,6 +3,7 @@ package com.tricoach.android.features.workoutdetail
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import com.tricoach.android.R
 import com.tricoach.android.app.AppContainer
 import com.tricoach.android.models.Workout
 import com.tricoach.android.models.WorkoutStatus
@@ -44,7 +45,7 @@ class WorkoutDetailState(private val container: AppContainer, initialWorkout: Wo
                 rescheduleConflictMessage = response.conflicts.joinToString("\n")
             }
         } catch (e: Exception) {
-            errorMessage = "Impossible de déplacer la séance : ${e.message}"
+            errorMessage = container.context.getString(R.string.error_workout_reschedule_failed, e.message)
         } finally {
             isSubmitting = false
         }
@@ -61,7 +62,7 @@ class WorkoutDetailState(private val container: AppContainer, initialWorkout: Wo
                 lastAdaptationSummary = response.adaptationEvents.joinToString("\n\n") { it.actionTaken }
             }
         } catch (e: Exception) {
-            errorMessage = "Impossible d'enregistrer la séance : ${e.message}"
+            errorMessage = container.context.getString(R.string.error_workout_complete_failed, e.message)
         } finally {
             isSubmitting = false
         }

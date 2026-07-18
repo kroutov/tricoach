@@ -1,5 +1,6 @@
 package com.tricoach.android.features.auth
 
+import android.content.Context
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -22,9 +23,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
+import com.tricoach.android.R
 import com.tricoach.android.app.AppContainer
 import com.tricoach.android.core.network.ApiException
 import com.tricoach.android.models.User
@@ -42,6 +46,7 @@ fun AuthScreen(container: AppContainer, onSignedIn: (User) -> Unit) {
     var isLoading by remember { mutableStateOf(false) }
     var errorMessage by remember { mutableStateOf<String?>(null) }
     val scope = rememberCoroutineScope()
+    val context = LocalContext.current
 
     val isEmailValid = email.contains("@") && email.substringAfter("@").contains(".")
     val isPasswordValid = if (mode == CredentialsMode.REGISTER) password.length >= 8 else password.isNotEmpty()
@@ -59,12 +64,12 @@ fun AuthScreen(container: AppContainer, onSignedIn: (User) -> Unit) {
                 }
                 onSignedIn(user)
             } catch (e: ApiException.Server) {
-                errorMessage = friendlyCredentialsMessage(e.code)
+                errorMessage = friendlyCredentialsMessage(context, e.code)
             } catch (e: ApiException.Unauthorized) {
                 // /auth/login returns a plain 401 for a wrong password (no body to parse) — map it the same as an explicit invalid_credentials code.
-                errorMessage = friendlyCredentialsMessage("invalid_credentials")
+                errorMessage = friendlyCredentialsMessage(context, "invalid_credentials")
             } catch (e: ApiException.Network) {
-                errorMessage = "Impossible de contacter le serveur. Vérifiez votre connexion."
+                errorMessage = context.getString(R.string.auth_error_network)
             } finally {
                 isLoading = false
             }
@@ -80,19 +85,19 @@ fun AuthScreen(container: AppContainer, onSignedIn: (User) -> Unit) {
                 selected = mode == CredentialsMode.LOGIN,
                 onClick = { mode = CredentialsMode.LOGIN },
                 shape = SegmentedButtonDefaults.itemShape(0, 2),
-            ) { Text("Connexion") }
+            ) { Text(stringResource(R.string.auth_login)) }
             SegmentedButton(
                 selected = mode == CredentialsMode.REGISTER,
                 onClick = { mode = CredentialsMode.REGISTER },
                 shape = SegmentedButtonDefaults.itemShape(1, 2),
-            ) { Text("Inscription") }
+            ) { Text(stringResource(R.string.auth_register)) }
         }
         Spacer(Modifier.height(16.dp))
 
         OutlinedTextField(
             value = email,
             onValueChange = { email = it },
-            label = { Text("Email") },
+            label = { Text(stringResource(R.string.auth_email)) },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
             modifier = Modifier.fillMaxWidth(),
         )
@@ -102,7 +107,7 @@ fun AuthScreen(container: AppContainer, onSignedIn: (User) -> Unit) {
             OutlinedTextField(
                 value = fullName,
                 onValueChange = { fullName = it },
-                label = { Text("Nom complet (optionnel)") },
+                label = { Text(stringResource(R.string.auth_full_name)) },
                 modifier = Modifier.fillMaxWidth(),
             )
             Spacer(Modifier.height(8.dp))
@@ -111,10 +116,10 @@ fun AuthScreen(container: AppContainer, onSignedIn: (User) -> Unit) {
         OutlinedTextField(
             value = password,
             onValueChange = { password = it },
-            label = { Text("Mot de passe") },
+            label = { Text(stringResource(R.string.auth_password)) },
             visualTransformation = PasswordVisualTransformation(),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-            supportingText = if (mode == CredentialsMode.REGISTER) { { Text("8 caractères minimum") } } else null,
+            supportingText = if (mode == CredentialsMode.REGISTER) { { Text(stringResource(R.string.auth_password_hint)) } } else null,
             modifier = Modifier.fillMaxWidth(),
         )
         Spacer(Modifier.height(16.dp))
@@ -128,16 +133,16 @@ fun AuthScreen(container: AppContainer, onSignedIn: (User) -> Unit) {
             CircularProgressIndicator()
         } else {
             Button(onClick = ::submit, enabled = canSubmit, modifier = Modifier.fillMaxWidth()) {
-                Text(if (mode == CredentialsMode.REGISTER) "Créer mon compte" else "Se connecter")
+                Text(stringResource(if (mode == CredentialsMode.REGISTER) R.string.auth_create_account else R.string.auth_sign_in))
             }
         }
     }
 }
 
-/** Mirrors iOS's friendlyCredentialsMessage(for:) exactly, including the backend error codes it maps. */
-private fun friendlyCredentialsMessage(code: String?): String = when (code) {
-    "email_taken" -> "Un compte existe déjà avec cette adresse email."
-    "invalid_credentials" -> "Email ou mot de passe incorrect."
-    "invalid_request" -> "Vérifiez les informations saisies."
-    else -> "Une erreur est survenue. Réessayez."
+/** Mirrors iOS's friendlyCredentialsMessage(for:) exactly, including the backend error codes it maps. Not @Composable — called from inside a coroutine (submit()'s scope.launch), so it takes an explicit Context rather than using stringResource(). */
+private fun friendlyCredentialsMessage(context: Context, code: String?): String = when (code) {
+    "email_taken" -> context.getString(R.string.auth_error_email_taken)
+    "invalid_credentials" -> context.getString(R.string.auth_error_invalid_credentials)
+    "invalid_request" -> context.getString(R.string.auth_error_invalid_request)
+    else -> context.getString(R.string.auth_error_generic)
 }

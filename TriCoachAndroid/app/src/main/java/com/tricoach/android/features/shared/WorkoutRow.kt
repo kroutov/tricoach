@@ -16,8 +16,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
+import com.tricoach.android.R
 import com.tricoach.android.models.SportType
 import com.tricoach.android.models.Workout
 import com.tricoach.android.models.WorkoutIntensity
@@ -70,9 +72,9 @@ fun WorkoutRow(workout: Workout, onClick: () -> Unit) {
                     MaterialTheme.colorScheme.onSurface
                 },
             )
-            val tssSuffix = workout.estimatedTSS?.let { " · ${it.toInt()} TSS" } ?: ""
+            val tssSuffix = workout.estimatedTSS?.let { stringResource(R.string.workout_row_tss_suffix, it.toInt()) } ?: ""
             Text(
-                "${workout.plannedDurationMin} min$tssSuffix",
+                stringResource(R.string.workout_row_duration_minutes, workout.plannedDurationMin) + tssSuffix,
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )

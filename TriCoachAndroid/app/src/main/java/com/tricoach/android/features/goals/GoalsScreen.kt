@@ -31,7 +31,9 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.tricoach.android.R
 import com.tricoach.android.app.AppContainer
 import com.tricoach.android.features.shared.CardBox
 import com.tricoach.android.features.shared.GoalEditorCard
@@ -51,7 +53,7 @@ fun GoalsScreen(container: AppContainer) {
     LaunchedEffect(Unit) { state.load() }
 
     Column(modifier = Modifier.fillMaxSize()) {
-        Text("Objectifs", style = MaterialTheme.typography.headlineSmall, modifier = Modifier.padding(16.dp))
+        Text(stringResource(R.string.goals_title), style = MaterialTheme.typography.headlineSmall, modifier = Modifier.padding(16.dp))
 
         Column(
             modifier = Modifier
@@ -66,7 +68,7 @@ fun GoalsScreen(container: AppContainer) {
                     CircularProgressIndicator()
                 }
                 state.goals.isEmpty() -> Text(
-                    "Aucun objectif. Ajoutez-en un pour générer votre plan.",
+                    stringResource(R.string.goals_empty_state),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
@@ -76,7 +78,7 @@ fun GoalsScreen(container: AppContainer) {
             }
 
             TextButton(onClick = { editingGoal = newDraftGoal(); isNewGoal = true }) {
-                Text("+ Ajouter un objectif")
+                Text(stringResource(R.string.goals_action_add))
             }
 
             Spacer(Modifier.height(8.dp))
@@ -91,11 +93,11 @@ fun GoalsScreen(container: AppContainer) {
                 if (state.isRegenerating) {
                     CircularProgressIndicator(modifier = Modifier.size(20.dp))
                 } else {
-                    Text("Régénérer mon plan")
+                    Text(stringResource(R.string.goals_regenerate_button))
                 }
             }
             Text(
-                "Le plan est régénéré à partir de l'objectif de priorité A (ou du premier objectif si aucun n'est prioritaire). Le plan actuel est archivé, pas supprimé.",
+                stringResource(R.string.goals_regenerate_hint),
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
@@ -158,13 +160,13 @@ private fun GoalEditDialog(
     var goal by remember(initialGoal.id) { mutableStateOf(initialGoal) }
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text(if (isNew) "Nouvel objectif" else "Modifier l'objectif") },
+        title = { Text(stringResource(if (isNew) R.string.goals_dialog_title_new else R.string.goals_dialog_title_edit)) },
         text = {
             Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
                 GoalEditorCard(goal = goal, onChange = { goal = it }, onDelete = onDelete)
             }
         },
-        confirmButton = { TextButton(onClick = { onSave(goal) }) { Text("Enregistrer") } },
-        dismissButton = { TextButton(onClick = onDismiss) { Text("Annuler") } },
+        confirmButton = { TextButton(onClick = { onSave(goal) }) { Text(stringResource(R.string.goals_dialog_save)) } },
+        dismissButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.goals_dialog_cancel)) } },
     )
 }

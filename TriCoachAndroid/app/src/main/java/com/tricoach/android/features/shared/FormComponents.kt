@@ -53,7 +53,7 @@ fun IntStepperField(
     onValueChange: (Int) -> Unit,
     range: IntRange,
     step: Int = 1,
-    valueLabel: (Int) -> String = { it.toString() },
+    valueLabel: @Composable (Int) -> String = { it.toString() },
 ) {
     OnboardingField(label) {
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -76,7 +76,7 @@ fun DoubleStepperField(
     onValueChange: (Double) -> Unit,
     range: ClosedFloatingPointRange<Double>,
     step: Double = 1.0,
-    valueLabel: (Double) -> String = { it.toString() },
+    valueLabel: @Composable (Double) -> String = { it.toString() },
 ) {
     OnboardingField(label) {
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -95,7 +95,7 @@ fun DoubleStepperField(
 /** Multi-select chip grid — mirrors iOS's ChipGrid used for weekday/time-slot selection. */
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun <T> ChipGroup(items: List<T>, selected: List<T>, label: (T) -> String, onToggle: (T) -> Unit) {
+fun <T> ChipGroup(items: List<T>, selected: List<T>, label: @Composable (T) -> String, onToggle: (T) -> Unit) {
     FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
         items.forEach { item ->
             val isSelected = selected.contains(item)

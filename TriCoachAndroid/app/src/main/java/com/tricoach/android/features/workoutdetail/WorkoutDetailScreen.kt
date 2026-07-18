@@ -29,7 +29,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.tricoach.android.R
 import com.tricoach.android.app.AppContainer
 import com.tricoach.android.features.shared.CardBox
 import com.tricoach.android.features.shared.IntStepperField
@@ -74,9 +76,9 @@ fun WorkoutDetailScreen(
         ) {
             Header(current)
             LoadSummaryCard(current)
-            SectionCard(title = "Échauffement", section = current.structure.warmup)
+            SectionCard(title = stringResource(R.string.workout_detail_warmup), section = current.structure.warmup)
             MainSetCard(current.structure.mainSet)
-            SectionCard(title = "Retour au calme", section = current.structure.cooldown)
+            SectionCard(title = stringResource(R.string.workout_detail_cooldown), section = current.structure.cooldown)
             Actions(
                 workout = current,
                 isSubmitting = state.isSubmitting,
@@ -126,18 +128,18 @@ fun WorkoutDetailScreen(
     state.lastAdaptationSummary?.let { summary ->
         AlertDialog(
             onDismissRequest = { state.dismissAdaptationSummary() },
-            title = { Text("Votre plan a été ajusté") },
+            title = { Text(stringResource(R.string.workout_detail_plan_adjusted_title)) },
             text = { Text(summary) },
-            confirmButton = { TextButton(onClick = { state.dismissAdaptationSummary() }) { Text("Compris") } },
+            confirmButton = { TextButton(onClick = { state.dismissAdaptationSummary() }) { Text(stringResource(R.string.workout_detail_dialog_understood)) } },
         )
     }
 
     state.rescheduleConflictMessage?.let { conflict ->
         AlertDialog(
             onDismissRequest = { state.rescheduleConflictMessage = null },
-            title = { Text("Conflit détecté") },
+            title = { Text(stringResource(R.string.workout_detail_conflict_title)) },
             text = { Text(conflict) },
-            confirmButton = { TextButton(onClick = { state.rescheduleConflictMessage = null }) { Text("Compris") } },
+            confirmButton = { TextButton(onClick = { state.rescheduleConflictMessage = null }) { Text(stringResource(R.string.workout_detail_dialog_understood)) } },
         )
     }
 }
@@ -176,7 +178,7 @@ private fun StatusPill(status: WorkoutStatus) {
     val completed = status == WorkoutStatus.COMPLETED
     val color = if (completed) Color(0xFF2E7D32) else MaterialTheme.colorScheme.onSurfaceVariant
     Text(
-        if (completed) "Complétée" else "Ratée",
+        stringResource(if (completed) R.string.workout_detail_status_completed else R.string.workout_detail_status_missed),
         style = MaterialTheme.typography.labelSmall,
         color = color,
         modifier = Modifier
@@ -189,10 +191,22 @@ private fun StatusPill(status: WorkoutStatus) {
 private fun LoadSummaryCard(workout: Workout) {
     CardBox {
         Row(modifier = Modifier.fillMaxWidth()) {
-            Metric("${workout.plannedDurationMin} min", "Durée", Modifier.weight(1f))
-            Metric(workout.rpeTarget?.let { "$it/10" } ?: "—", "RPE cible", Modifier.weight(1f))
-            Metric(workout.estimatedTSS?.let { "${it.toInt()}" } ?: "—", "TSS estimé", Modifier.weight(1f))
-            Metric(workout.estimatedTRIMP?.let { "${it.toInt()}" } ?: "—", "TRIMP", Modifier.weight(1f))
+            Metric(stringResource(R.string.workout_detail_duration_value, workout.plannedDurationMin), stringResource(R.string.workout_detail_duration_label), Modifier.weight(1f))
+            Metric(
+                workout.rpeTarget?.let { stringResource(R.string.workout_detail_rpe_value, it) } ?: stringResource(R.string.workout_detail_value_unknown),
+                stringResource(R.string.workout_detail_rpe_target_label),
+                Modifier.weight(1f),
+            )
+            Metric(
+                workout.estimatedTSS?.let { "${it.toInt()}" } ?: stringResource(R.string.workout_detail_value_unknown),
+                stringResource(R.string.workout_detail_tss_label),
+                Modifier.weight(1f),
+            )
+            Metric(
+                workout.estimatedTRIMP?.let { "${it.toInt()}" } ?: stringResource(R.string.workout_detail_value_unknown),
+                stringResource(R.string.workout_detail_trimp_label),
+                Modifier.weight(1f),
+            )
         }
     }
 }
@@ -208,7 +222,7 @@ private fun Metric(value: String, label: String, modifier: Modifier = Modifier) 
 @Composable
 private fun SectionCard(title: String, section: WorkoutSection) {
     CardBox {
-        Text("$title · ${section.durationMin} min", style = MaterialTheme.typography.titleMedium)
+        Text(stringResource(R.string.workout_detail_section_with_duration, title, section.durationMin), style = MaterialTheme.typography.titleMedium)
         Text(section.description, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
         ZoneRow(section.target)
     }
@@ -218,7 +232,7 @@ private fun SectionCard(title: String, section: WorkoutSection) {
 private fun MainSetCard(mainSet: List<IntervalBlock>) {
     if (mainSet.isEmpty()) return
     CardBox {
-        Text("Corps principal", style = MaterialTheme.typography.titleMedium)
+        Text(stringResource(R.string.workout_detail_main_set_title), style = MaterialTheme.typography.titleMedium)
         Spacer(Modifier.height(4.dp))
         mainSet.forEachIndexed { index, block ->
             Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
@@ -233,11 +247,22 @@ private fun MainSetCard(mainSet: List<IntervalBlock>) {
     }
 }
 
+@Composable
 private fun blockLabel(block: IntervalBlock): String {
-    if (block.repetitions <= 1) return "${block.workDurationSec / 60} min continu"
-    val recovery = if (block.recoveryDurationSec > 0) ", récup ${block.recoveryDurationSec}s" else ""
-    val workLabel = if (block.workDurationSec >= 60) "${block.workDurationSec / 60} min" else "${block.workDurationSec}s"
-    return "${block.repetitions} x $workLabel$recovery"
+    if (block.repetitions <= 1) {
+        return stringResource(R.string.workout_detail_block_continuous, block.workDurationSec / 60)
+    }
+    val recovery = if (block.recoveryDurationSec > 0) {
+        stringResource(R.string.workout_detail_block_recovery_suffix, block.recoveryDurationSec)
+    } else {
+        ""
+    }
+    val workLabel = if (block.workDurationSec >= 60) {
+        stringResource(R.string.workout_detail_block_work_minutes, block.workDurationSec / 60)
+    } else {
+        stringResource(R.string.workout_detail_block_work_seconds, block.workDurationSec)
+    }
+    return stringResource(R.string.workout_detail_block_repeated, block.repetitions, workLabel) + recovery
 }
 
 @Composable
@@ -265,13 +290,13 @@ private fun Actions(
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
         if (workout.status == WorkoutStatus.PLANNED) {
             Button(onClick = onMarkCompleted, enabled = !isSubmitting, modifier = Modifier.fillMaxWidth()) {
-                Text("Marquer comme complétée")
+                Text(stringResource(R.string.workout_detail_action_mark_completed))
             }
             OutlinedButton(onClick = onReschedule, enabled = !isSubmitting, modifier = Modifier.fillMaxWidth()) {
-                Text("Déplacer cette séance")
+                Text(stringResource(R.string.workout_detail_action_reschedule))
             }
             TextButton(onClick = onMarkSkipped, enabled = !isSubmitting, modifier = Modifier.fillMaxWidth()) {
-                Text("Marquer comme ratée", color = MaterialTheme.colorScheme.error)
+                Text(stringResource(R.string.workout_detail_action_mark_skipped), color = MaterialTheme.colorScheme.error)
             }
         }
         errorMessage?.let {
@@ -284,32 +309,32 @@ private fun Actions(
 private fun FeedbackDialog(state: WorkoutDetailState, onDismiss: () -> Unit, onDone: () -> Unit) {
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("Feedback séance") },
+        title = { Text(stringResource(R.string.workout_detail_feedback_title)) },
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
                 IntStepperField(
-                    label = "Durée réalisée",
+                    label = stringResource(R.string.workout_detail_feedback_duration),
                     value = state.actualDurationMin,
                     onValueChange = { state.actualDurationMin = it },
                     range = 5..300,
                     step = 5,
-                    valueLabel = { "$it min" },
+                    valueLabel = { stringResource(R.string.workout_detail_duration_value, it) },
                 )
                 IntStepperField(
-                    label = "RPE ressenti",
+                    label = stringResource(R.string.workout_detail_feedback_rpe),
                     value = state.actualRpe,
                     onValueChange = { state.actualRpe = it },
                     range = 1..10,
-                    valueLabel = { "$it/10" },
+                    valueLabel = { stringResource(R.string.workout_detail_rpe_value, it) },
                 )
             }
         },
         confirmButton = {
             TextButton(onClick = onDone, enabled = !state.isSubmitting) {
-                if (state.isSubmitting) CircularProgressIndicator(modifier = Modifier.height(16.dp)) else Text("Valider")
+                if (state.isSubmitting) CircularProgressIndicator(modifier = Modifier.height(16.dp)) else Text(stringResource(R.string.workout_detail_confirm))
             }
         },
-        dismissButton = { TextButton(onClick = onDismiss) { Text("Annuler") } },
+        dismissButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.workout_detail_cancel)) } },
     )
 }
 
@@ -321,11 +346,11 @@ private fun RescheduleDialog(state: WorkoutDetailState, onDismiss: () -> Unit, o
 
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("Déplacer la séance") },
+        title = { Text(stringResource(R.string.workout_detail_reschedule_title)) },
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
                 IntStepperField(
-                    label = "Nouvelle date",
+                    label = stringResource(R.string.workout_detail_reschedule_new_date),
                     value = offsetDays,
                     onValueChange = { offsetDays = it },
                     range = -6..6,
@@ -336,9 +361,9 @@ private fun RescheduleDialog(state: WorkoutDetailState, onDismiss: () -> Unit, o
         },
         confirmButton = {
             TextButton(onClick = { onDone(newDate) }, enabled = !state.isSubmitting) {
-                if (state.isSubmitting) CircularProgressIndicator(modifier = Modifier.height(16.dp)) else Text("Déplacer")
+                if (state.isSubmitting) CircularProgressIndicator(modifier = Modifier.height(16.dp)) else Text(stringResource(R.string.workout_detail_reschedule_confirm))
             }
         },
-        dismissButton = { TextButton(onClick = onDismiss) { Text("Annuler") } },
+        dismissButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.workout_detail_cancel)) } },
     )
 }

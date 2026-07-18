@@ -21,8 +21,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
+import com.tricoach.android.R
 import com.tricoach.android.app.AppContainer
 import com.tricoach.android.core.network.StravaStatusResponse
 import com.tricoach.android.features.shared.formatFullDate
@@ -56,7 +58,7 @@ class StravaConnectState(private val container: AppContainer) {
             val response = container.integrationsApi.stravaAuthUrl()
             launchAuthUrl(response.url)
         } catch (e: Exception) {
-            errorMessage = "Impossible d'ouvrir la connexion Strava : ${e.message}"
+            errorMessage = container.context.getString(R.string.strava_error_connect_failed, e.message)
         }
     }
 
@@ -66,7 +68,7 @@ class StravaConnectState(private val container: AppContainer) {
             container.integrationsApi.disconnectStrava()
             refresh()
         } catch (e: Exception) {
-            errorMessage = "Impossible de déconnecter Strava : ${e.message}"
+            errorMessage = container.context.getString(R.string.strava_error_disconnect_failed, e.message)
         }
     }
 
@@ -76,9 +78,13 @@ class StravaConnectState(private val container: AppContainer) {
         isSyncing = true
         try {
             val result = container.integrationsApi.syncStrava()
-            syncMessage = "${result.activitiesIngested} activité(s) importée(s)."
+            syncMessage = container.context.resources.getQuantityString(
+                R.plurals.plural_activities_imported,
+                result.activitiesIngested,
+                result.activitiesIngested,
+            )
         } catch (e: Exception) {
-            errorMessage = "Impossible de synchroniser Strava : ${e.message}"
+            errorMessage = container.context.getString(R.string.strava_error_sync_failed, e.message)
         } finally {
             isSyncing = false
         }
@@ -113,21 +119,21 @@ fun StravaConnectSection(container: AppContainer) {
             Column(modifier = Modifier.weight(1f)) {
                 Text("Strava", style = MaterialTheme.typography.titleMedium)
                 val status = state.status
+                val connectedSinceSuffix = status?.connectedAt?.let {
+                    stringResource(R.string.strava_connected_since_suffix, formatFullDate(it))
+                } ?: ""
                 val statusText = when {
-                    state.isLoading -> "Chargement…"
-                    status?.connected == true -> {
-                        val since = status.connectedAt?.let { " depuis ${formatFullDate(it)}" } ?: ""
-                        "Connecté$since"
-                    }
-                    else -> "Non connecté"
+                    state.isLoading -> stringResource(R.string.strava_status_loading)
+                    status?.connected == true -> stringResource(R.string.strava_status_connected) + connectedSinceSuffix
+                    else -> stringResource(R.string.strava_status_not_connected)
                 }
                 Text(statusText, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
             if (state.status?.connected == true) {
                 TextButton(onClick = { scope.launch { state.sync() } }, enabled = !state.isSyncing) {
-                    Text(if (state.isSyncing) "…" else "Resynchroniser")
+                    Text(if (state.isSyncing) "…" else stringResource(R.string.strava_action_resync))
                 }
-                TextButton(onClick = { scope.launch { state.disconnect() } }) { Text("Déconnecter") }
+                TextButton(onClick = { scope.launch { state.disconnect() } }) { Text(stringResource(R.string.strava_action_disconnect)) }
             } else {
                 Button(onClick = {
                     scope.launch {
@@ -135,7 +141,7 @@ fun StravaConnectSection(container: AppContainer) {
                             CustomTabsIntent.Builder().build().launchUrl(context, Uri.parse(url))
                         }
                     }
-                }) { Text("Connecter") }
+                }) { Text(stringResource(R.string.strava_action_connect)) }
             }
         }
         state.syncMessage?.let {
