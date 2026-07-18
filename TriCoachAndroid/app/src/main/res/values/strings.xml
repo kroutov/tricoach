@@ -234,6 +234,33 @@
     <string name="strava_action_disconnect">Déconnecter</string>
     <string name="strava_action_connect">Connecter</string>
 
+    <!-- Integrations: Garmin -->
+    <string name="garmin_status_loading">Chargement…</string>
+    <string name="garmin_status_connected">Connecté</string>
+    <string name="garmin_status_not_connected">Non connecté</string>
+    <!-- %1$s: formatted connection date, appended to garmin_status_connected -->
+    <string name="garmin_connected_since_suffix">" depuis %1$s"</string>
+    <string name="garmin_action_resync">Resynchroniser</string>
+    <string name="garmin_action_disconnect">Déconnecter</string>
+    <string name="garmin_action_connect">Connecter</string>
+    <string name="garmin_field_username">Email Garmin</string>
+    <string name="garmin_field_password">Mot de passe Garmin</string>
+    <string name="garmin_unofficial_warning">Connexion via l\'accès non-officiel Garmin Connect (identifiants Garmin, pas d\'OAuth) — Garmin peut bloquer cet accès sans préavis.</string>
+    <string name="garmin_error_invalid_credentials">Identifiants Garmin incorrects.</string>
+    <!-- %1$s: exception message, not translated -->
+    <string name="garmin_error_connect_failed">Impossible de se connecter à Garmin : %1$s</string>
+    <string name="garmin_error_disconnect_failed">Impossible de déconnecter Garmin : %1$s</string>
+    <string name="garmin_error_sync_failed">Impossible de synchroniser Garmin : %1$s</string>
+
+    <!-- Calendar feed subscription (ICS) -->
+    <string name="calendar_feed_title">Abonnement calendrier</string>
+    <string name="calendar_feed_description">Abonnez-vous à ce flux en lecture seule depuis Google Calendar (« Autres agendas » → « Depuis une URL »), Apple Calendar (« Fichier » → « Nouvel abonnement calendrier ») ou tout client compatible iCal.</string>
+    <string name="calendar_feed_url_label">URL du flux calendrier</string>
+    <string name="calendar_feed_copy_link">Copier le lien</string>
+    <string name="calendar_feed_regenerate_link">Régénérer le lien</string>
+    <!-- %1$s: exception message, not translated -->
+    <string name="calendar_feed_error_load_failed">Impossible de charger le lien du calendrier : %1$s</string>
+
     <!-- French plural rule: "one" covers 0 and 1, "other" covers 2+ -->
     <plurals name="plural_activities_imported">
         <item quantity="one">%d activité importée.</item>

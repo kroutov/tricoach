@@ -26,6 +26,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.tricoach.android.R
 import com.tricoach.android.app.AppContainer
+import com.tricoach.android.features.integrations.CalendarFeedSection
+import com.tricoach.android.features.integrations.GarminConnectSection
 import com.tricoach.android.features.integrations.HealthConnectSection
 import com.tricoach.android.features.integrations.StravaConnectSection
 import com.tricoach.android.features.shared.CardBox
@@ -37,7 +39,7 @@ import com.tricoach.android.models.User
 import com.tricoach.android.models.label
 import kotlinx.coroutines.launch
 
-/** Read-only account/athlete summary + Objectifs entry point + sign out + Intégrations (Strava/Health Connect). */
+/** Read-only account/athlete summary + Objectifs entry point + sign out + Intégrations (Strava/Health Connect/Garmin) + calendar feed subscription. */
 @Composable
 fun ProfileScreen(
     container: AppContainer,
@@ -100,7 +102,11 @@ fun ProfileScreen(
                 StravaConnectSection(container)
                 HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
                 HealthConnectSection(container)
+                HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
+                GarminConnectSection(container)
             }
+
+            CalendarFeedSection(container)
 
             Button(
                 onClick = { scope.launch { onSignOut() } },

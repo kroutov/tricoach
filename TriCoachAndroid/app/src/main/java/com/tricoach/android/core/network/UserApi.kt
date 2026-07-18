@@ -57,6 +57,9 @@ data class CreateGoalRequest(
     val targetTimeSeconds: Int? = null,
 )
 
+@Serializable
+data class CalendarTokenResponse(val token: String, val url: String)
+
 interface UserApi {
     @GET("me")
     suspend fun fetchCurrentUser(): User
@@ -90,4 +93,10 @@ interface UserApi {
 
     @DELETE("me/goals/{id}")
     suspend fun deleteGoal(@Path("id") id: String)
+
+    @GET("me/calendar-token")
+    suspend fun fetchCalendarToken(): CalendarTokenResponse
+
+    @POST("me/calendar-token/rotate")
+    suspend fun rotateCalendarToken(): CalendarTokenResponse
 }

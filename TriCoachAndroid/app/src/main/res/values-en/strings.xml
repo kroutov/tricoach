@@ -234,6 +234,33 @@
     <string name="strava_action_disconnect">Disconnect</string>
     <string name="strava_action_connect">Connect</string>
 
+    <!-- Integrations: Garmin -->
+    <string name="garmin_status_loading">Loading…</string>
+    <string name="garmin_status_connected">Connected</string>
+    <string name="garmin_status_not_connected">Not connected</string>
+    <!-- %1$s: formatted connection date, appended to garmin_status_connected -->
+    <string name="garmin_connected_since_suffix">" since %1$s"</string>
+    <string name="garmin_action_resync">Resync</string>
+    <string name="garmin_action_disconnect">Disconnect</string>
+    <string name="garmin_action_connect">Connect</string>
+    <string name="garmin_field_username">Garmin email</string>
+    <string name="garmin_field_password">Garmin password</string>
+    <string name="garmin_unofficial_warning">Connects via the unofficial Garmin Connect access (your Garmin credentials, no OAuth) — Garmin may block this access without notice.</string>
+    <string name="garmin_error_invalid_credentials">Incorrect Garmin credentials.</string>
+    <!-- %1$s: exception message, not translated -->
+    <string name="garmin_error_connect_failed">Unable to connect to Garmin: %1$s</string>
+    <string name="garmin_error_disconnect_failed">Unable to disconnect Garmin: %1$s</string>
+    <string name="garmin_error_sync_failed">Unable to sync Garmin: %1$s</string>
+
+    <!-- Calendar feed subscription (ICS) -->
+    <string name="calendar_feed_title">Calendar subscription</string>
+    <string name="calendar_feed_description">Subscribe to this read-only feed from Google Calendar ("Other calendars" → "From URL"), Apple Calendar ("File" → "New Calendar Subscription"), or any iCal-compatible client.</string>
+    <string name="calendar_feed_url_label">Calendar feed URL</string>
+    <string name="calendar_feed_copy_link">Copy link</string>
+    <string name="calendar_feed_regenerate_link">Regenerate link</string>
+    <!-- %1$s: exception message, not translated -->
+    <string name="calendar_feed_error_load_failed">Unable to load the calendar link: %1$s</string>
+
     <!-- English plural rule: "one" covers only exactly 1, "other" covers 0 and 2+ -->
     <plurals name="plural_activities_imported">
         <item quantity="one">%d activity imported.</item>

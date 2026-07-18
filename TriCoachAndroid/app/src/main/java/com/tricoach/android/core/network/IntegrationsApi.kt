@@ -50,6 +50,9 @@ data class HealthSyncRequest(
     val healthMetrics: List<HealthMetricSync> = emptyList(),
 )
 
+@Serializable
+data class GarminConnectRequest(val username: String, val password: String)
+
 interface IntegrationsApi {
     @GET("integrations/strava/auth-url")
     suspend fun stravaAuthUrl(): AuthUrlResponse
@@ -65,4 +68,17 @@ interface IntegrationsApi {
 
     @POST("integrations/healthkit/sync")
     suspend fun syncHealthMetrics(@Body body: HealthSyncRequest): IntegrationSyncResult
+
+    /** No OAuth — direct Garmin username/password login (see backend's garminClient.ts). Status/sync response shapes are identical to Strava's, reused as-is. */
+    @POST("integrations/garmin/connect")
+    suspend fun connectGarmin(@Body body: GarminConnectRequest)
+
+    @GET("integrations/garmin/status")
+    suspend fun garminStatus(): StravaStatusResponse
+
+    @DELETE("integrations/garmin")
+    suspend fun disconnectGarmin()
+
+    @POST("integrations/garmin/sync")
+    suspend fun syncGarmin(): IntegrationSyncResult
 }
