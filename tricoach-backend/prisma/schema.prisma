@@ -86,6 +86,7 @@ enum ActivitySource {
   STRAVA
   GARMIN
   MANUAL
+  HEALTH_CONNECT
 }
 
 enum AdaptationTrigger {

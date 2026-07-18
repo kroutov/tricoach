@@ -124,11 +124,15 @@ export const workoutStatusMap = makeMap<'planned' | 'completed' | 'skipped' | 'm
   ['modified', 'MODIFIED'],
 ]);
 
-export const activitySourceMap = makeMap<'healthKit' | 'strava' | 'garmin' | 'manual', ActivitySource>([
+export const activitySourceMap = makeMap<
+  'healthKit' | 'strava' | 'garmin' | 'manual' | 'healthConnect',
+  ActivitySource
+>([
   ['healthKit', 'HEALTHKIT'],
   ['strava', 'STRAVA'],
   ['garmin', 'GARMIN'],
   ['manual', 'MANUAL'],
+  ['healthConnect', 'HEALTH_CONNECT'],
 ]);
 
 export const adaptationTriggerMap = makeMap<

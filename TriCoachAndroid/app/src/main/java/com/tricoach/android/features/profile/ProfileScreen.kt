@@ -1,5 +1,6 @@
 package com.tricoach.android.features.profile
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -10,6 +11,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,25 +24,33 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.tricoach.android.app.AppContainer
+import com.tricoach.android.features.integrations.HealthConnectSection
+import com.tricoach.android.features.integrations.StravaConnectSection
 import com.tricoach.android.features.shared.CardBox
+import com.tricoach.android.features.shared.formatFullDate
 import com.tricoach.android.models.AthleteProfile
+import com.tricoach.android.models.Goal
+import com.tricoach.android.models.GoalPriority
 import com.tricoach.android.models.User
 import com.tricoach.android.models.label
 import kotlinx.coroutines.launch
 
-/** Minimal read-only profile for Phase 1 — account info + athlete summary + sign out. Goals management, integrations, and location (all iOS features) are deferred to later phases, see plan. */
+/** Read-only account/athlete summary + Objectifs entry point + sign out + Intégrations (Strava/Health Connect). */
 @Composable
 fun ProfileScreen(
     container: AppContainer,
     user: User?,
     onUserUpdated: suspend (User) -> Unit,
     onSignOut: suspend () -> Unit,
+    onNavigateToGoals: () -> Unit,
 ) {
     var profile by remember { mutableStateOf(AthleteProfile.empty) }
+    var goals by remember { mutableStateOf<List<Goal>>(emptyList()) }
     val scope = rememberCoroutineScope()
 
     LaunchedEffect(Unit) {
         profile = runCatching { container.profileRepository.fetch() }.getOrDefault(AthleteProfile.empty)
+        goals = runCatching { container.goalRepository.fetchGoals() }.getOrDefault(emptyList())
     }
 
     Column(modifier = Modifier.fillMaxSize()) {
@@ -66,6 +76,28 @@ fun ProfileScreen(
                 profile.hrMax?.let { LabeledRow("FC max", "$it bpm") }
                 profile.hrRest?.let { LabeledRow("FC repos", "$it bpm") }
                 profile.ftpWatts?.let { LabeledRow("FTP", "$it W") }
+            }
+
+            CardBox(modifier = Modifier.clickable(onClick = onNavigateToGoals)) {
+                Text("Objectifs", style = MaterialTheme.typography.titleMedium)
+                if (goals.isEmpty()) {
+                    Text("Gérer mes objectifs")
+                } else {
+                    Text("Gérer mes objectifs (${goals.size})")
+                    val primary = goals.firstOrNull { it.priority == GoalPriority.A } ?: goals.first()
+                    Text(
+                        "${primary.type.label} — ${formatFullDate(primary.targetDate)}",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                }
+            }
+
+            CardBox {
+                Text("Intégrations", style = MaterialTheme.typography.titleMedium)
+                StravaConnectSection(container)
+                HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
+                HealthConnectSection(container)
             }
 
             Button(

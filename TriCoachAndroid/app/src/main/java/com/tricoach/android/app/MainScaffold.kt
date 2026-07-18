@@ -17,8 +17,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.tricoach.android.features.adaptation.AdaptationHistoryScreen
+import com.tricoach.android.features.analytics.DashboardAnalyticsScreen
 import com.tricoach.android.features.calendar.CalendarScreen
 import com.tricoach.android.features.dashboard.DashboardScreen
+import com.tricoach.android.features.goals.GoalsScreen
 import com.tricoach.android.features.profile.ProfileScreen
 import com.tricoach.android.features.workoutdetail.WorkoutDetailScreen
 import com.tricoach.android.models.Workout
@@ -27,6 +30,9 @@ private const val ROUTE_DASHBOARD = "dashboard"
 private const val ROUTE_CALENDAR = "calendar"
 private const val ROUTE_PROFILE = "profile"
 private const val ROUTE_WORKOUT_DETAIL = "workout_detail"
+private const val ROUTE_GOALS = "goals"
+private const val ROUTE_ADAPTATION_HISTORY = "adaptation_history"
+private const val ROUTE_DASHBOARD_ANALYTICS = "dashboard_analytics"
 
 /**
  * Three-tab shell (Dashboard/Calendar/Profile) + a pushed Workout Detail
@@ -73,7 +79,14 @@ fun MainScaffold(container: AppContainer, appState: AppState) {
         },
     ) { padding ->
         NavHost(navController, startDestination = ROUTE_DASHBOARD, modifier = Modifier.padding(padding)) {
-            composable(ROUTE_DASHBOARD) { DashboardScreen(container, onWorkoutClick = ::openWorkout) }
+            composable(ROUTE_DASHBOARD) {
+                DashboardScreen(
+                    container,
+                    onWorkoutClick = ::openWorkout,
+                    onViewAdaptationHistory = { navController.navigate(ROUTE_ADAPTATION_HISTORY) },
+                    onViewAnalytics = { navController.navigate(ROUTE_DASHBOARD_ANALYTICS) },
+                )
+            }
             composable(ROUTE_CALENDAR) { CalendarScreen(container, onWorkoutClick = ::openWorkout) }
             composable(ROUTE_PROFILE) {
                 ProfileScreen(
@@ -81,8 +94,12 @@ fun MainScaffold(container: AppContainer, appState: AppState) {
                     user = appState.currentUser,
                     onUserUpdated = { appState.setCurrentUser(it) },
                     onSignOut = { appState.signOut() },
+                    onNavigateToGoals = { navController.navigate(ROUTE_GOALS) },
                 )
             }
+            composable(ROUTE_GOALS) { GoalsScreen(container) }
+            composable(ROUTE_ADAPTATION_HISTORY) { AdaptationHistoryScreen(container) }
+            composable(ROUTE_DASHBOARD_ANALYTICS) { DashboardAnalyticsScreen(container) }
             composable(ROUTE_WORKOUT_DETAIL) {
                 selectedWorkout?.let { workout ->
                     WorkoutDetailScreen(

@@ -7,7 +7,7 @@ import { ingestActivities } from './activityIngestion';
 const router = Router();
 
 const activitySchema = z.object({
-  source: z.enum(['healthKit', 'strava', 'manual']),
+  source: z.enum(['healthKit', 'strava', 'manual', 'healthConnect']),
   externalId: z.string().nullable().optional(),
   startTime: z.coerce.date(),
   durationS: z.number().int().min(0),

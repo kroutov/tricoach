@@ -65,4 +65,10 @@ dependencies {
 
     implementation(libs.androidx.datastore.preferences)
     implementation(libs.androidx.security.crypto)
+
+    implementation(libs.vico.compose)
+    implementation(libs.vico.compose.m3)
+
+    implementation(libs.androidx.browser)
+    implementation(libs.androidx.health.connect)
 }

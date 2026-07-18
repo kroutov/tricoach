@@ -1,5 +1,6 @@
 package com.tricoach.android.features.dashboard
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -17,6 +18,7 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -37,7 +39,12 @@ import com.tricoach.android.models.label
 
 /** Android Phase 1 deliberately calls GET /dashboard/summary directly instead of reconstructing the numbers client-side from the full plan tree (as iOS does) — same displayed result, simpler code. */
 @Composable
-fun DashboardScreen(container: AppContainer, onWorkoutClick: (Workout) -> Unit) {
+fun DashboardScreen(
+    container: AppContainer,
+    onWorkoutClick: (Workout) -> Unit,
+    onViewAdaptationHistory: () -> Unit,
+    onViewAnalytics: () -> Unit,
+) {
     var summary by remember { mutableStateOf<DashboardSummary?>(null) }
     var adaptationEvents by remember { mutableStateOf<List<AdaptationEvent>>(emptyList()) }
     var isLoading by remember { mutableStateOf(true) }
@@ -87,12 +94,13 @@ fun DashboardScreen(container: AppContainer, onWorkoutClick: (Workout) -> Unit) 
                     val s = summary!!
                     WeekCard(s)
                     LoadCard(s)
+                    AnalyticsLinkCard(onViewAnalytics)
                     if (s.upcomingWorkouts.isNotEmpty()) {
                         UpcomingCard(s.upcomingWorkouts, onWorkoutClick)
                     }
                     HealthPlaceholderCard()
                     if (adaptationEvents.isNotEmpty()) {
-                        AdaptationCard(adaptationEvents)
+                        AdaptationCard(adaptationEvents, onViewAdaptationHistory)
                     }
                 }
             }
@@ -160,6 +168,19 @@ private fun Metric(value: String, label: String, modifier: Modifier = Modifier) 
 }
 
 @Composable
+private fun AnalyticsLinkCard(onClick: () -> Unit) {
+    CardBox(modifier = Modifier.clickable(onClick = onClick)) {
+        Text("Analytique complète", style = MaterialTheme.typography.titleMedium)
+        Spacer(Modifier.height(4.dp))
+        Text(
+            "Charge hebdomadaire, forme (CTL/ATL), distribution des zones et tendance VO2max.",
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+        )
+    }
+}
+
+@Composable
 private fun UpcomingCard(workouts: List<Workout>, onWorkoutClick: (Workout) -> Unit) {
     CardBox {
         Text("Prochaines séances", style = MaterialTheme.typography.titleMedium)
@@ -186,7 +207,7 @@ private fun HealthPlaceholderCard() {
 }
 
 @Composable
-private fun AdaptationCard(events: List<AdaptationEvent>) {
+private fun AdaptationCard(events: List<AdaptationEvent>, onViewHistory: () -> Unit) {
     CardBox {
         Text("Dernières adaptations", style = MaterialTheme.typography.titleMedium)
         Spacer(Modifier.height(8.dp))
@@ -199,5 +220,6 @@ private fun AdaptationCard(events: List<AdaptationEvent>) {
                 HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
             }
         }
+        TextButton(onClick = onViewHistory) { Text("Voir tout l'historique") }
     }
 }

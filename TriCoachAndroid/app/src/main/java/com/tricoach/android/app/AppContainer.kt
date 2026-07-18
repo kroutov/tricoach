@@ -2,9 +2,11 @@ package com.tricoach.android.app
 
 import android.content.Context
 import com.tricoach.android.core.auth.TokenStore
+import com.tricoach.android.core.healthconnect.HealthConnectManager
 import com.tricoach.android.core.network.ApiClient
 import com.tricoach.android.core.network.AuthApi
 import com.tricoach.android.core.network.DashboardApi
+import com.tricoach.android.core.network.IntegrationsApi
 import com.tricoach.android.core.network.PlanApi
 import com.tricoach.android.core.network.UserApi
 import com.tricoach.android.core.network.WorkoutApi
@@ -34,6 +36,8 @@ class AppContainer(context: Context) {
     private val planApi = apiClient.retrofit.create(PlanApi::class.java)
     private val workoutApi = apiClient.retrofit.create(WorkoutApi::class.java)
     val dashboardApi: DashboardApi = apiClient.retrofit.create(DashboardApi::class.java)
+    val integrationsApi: IntegrationsApi = apiClient.retrofit.create(IntegrationsApi::class.java)
+    val healthConnectManager = HealthConnectManager(context)
 
     val userApiClient: UserApi get() = userApi
 

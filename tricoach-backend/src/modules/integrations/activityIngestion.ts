@@ -5,7 +5,7 @@ import { runAdaptation } from '../plans/adaptationRunner';
 import { AdaptationEvent } from '../plans/engine/types';
 
 export interface ActivityInput {
-  source: 'healthKit' | 'strava' | 'garmin' | 'manual';
+  source: 'healthKit' | 'strava' | 'garmin' | 'manual' | 'healthConnect';
   externalId?: string | null;
   startTime: Date;
   durationS: number;

@@ -13,7 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.tricoach.android.features.onboarding.OnboardingState
-import com.tricoach.android.features.onboarding.formatTargetDate
+import com.tricoach.android.features.shared.formatFullDate
 import com.tricoach.android.models.Weekday
 import com.tricoach.android.models.label
 
@@ -37,7 +37,7 @@ fun SummaryStep(state: OnboardingState) {
         SummaryCard {
             Text("Objectifs", style = MaterialTheme.typography.titleMedium)
             state.goals.forEach { goal ->
-                Text("${goal.type.label} — ${goal.priority.label} — ${formatTargetDate(goal.targetDate)}")
+                Text("${goal.type.label} — ${goal.priority.label} — ${formatFullDate(goal.targetDate)}")
             }
         }
 

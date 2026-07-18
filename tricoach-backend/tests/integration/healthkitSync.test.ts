@@ -63,6 +63,32 @@ describe('POST /integrations/healthkit/sync', () => {
     expect(metric?.hrvMs).toBeCloseTo(65.4);
   });
 
+  it('accepts source "healthConnect" (Android) and stores it as HEALTH_CONNECT', async () => {
+    const { token, plan } = await setUpPlan('healthconnect-athlete-1');
+    const workout = plan.macrocycles[0].mesocycles[0].microcycles[0].workouts[0];
+
+    const res = await request(app)
+      .post('/api/v1/integrations/healthkit/sync')
+      .set('Authorization', `Bearer ${token}`)
+      .send({
+        activities: [
+          {
+            source: 'healthConnect',
+            externalId: 'hc-uuid-1',
+            startTime: workout.date,
+            durationS: workout.plannedDurationMin * 60,
+            sport: workout.sport,
+          },
+        ],
+      });
+
+    expect(res.status).toBe(200);
+    expect(res.body.activitiesIngested).toBe(1);
+
+    const activity = await prisma.completedActivity.findFirst({ where: { externalId: 'hc-uuid-1' } });
+    expect(activity?.source).toBe('HEALTH_CONNECT');
+  });
+
   it('does not ingest the same externalId twice', async () => {
     const { token, plan } = await setUpPlan('healthkit-athlete-2');
     const workout = plan.macrocycles[0].mesocycles[0].microcycles[0].workouts[0];
