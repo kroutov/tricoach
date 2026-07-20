@@ -107,3 +107,12 @@ enum class PlanStatus {
     @SerialName("completed") COMPLETED,
     @SerialName("archived") ARCHIVED,
 }
+
+@Serializable
+enum class ActivitySource {
+    @SerialName("healthKit") HEALTH_KIT,
+    @SerialName("strava") STRAVA,
+    @SerialName("manual") MANUAL,
+    @SerialName("garmin") GARMIN,
+    @SerialName("healthConnect") HEALTH_CONNECT,
+}

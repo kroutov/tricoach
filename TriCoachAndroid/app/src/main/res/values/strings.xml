@@ -67,6 +67,13 @@
     <string name="enum_macrocycle_phase_taper">Affûtage final</string>
     <string name="enum_macrocycle_phase_transition">Transition</string>
 
+    <!-- ActivitySource -->
+    <string name="enum_activity_source_health_kit">Apple Santé</string>
+    <string name="enum_activity_source_strava">Strava</string>
+    <string name="enum_activity_source_manual">Manuel</string>
+    <string name="enum_activity_source_garmin">Garmin</string>
+    <string name="enum_activity_source_health_connect">Health Connect</string>
+
     <!-- Weekday -->
     <string name="enum_weekday_monday">Lundi</string>
     <string name="enum_weekday_tuesday">Mardi</string>
@@ -260,6 +267,21 @@
     <string name="calendar_feed_regenerate_link">Régénérer le lien</string>
     <!-- %1$s: exception message, not translated -->
     <string name="calendar_feed_error_load_failed">Impossible de charger le lien du calendrier : %1$s</string>
+
+    <!-- Activity History -->
+    <string name="activity_history_title">Activités</string>
+    <string name="activity_history_empty_state">Aucune activité synchronisée pour le moment.</string>
+    <string name="activity_unknown_sport">Activité</string>
+    <!-- %1$d: minutes -->
+    <string name="activity_duration_minutes">%1$d min</string>
+    <!-- %1$d: hours, %2$d: minutes (always 2 digits) -->
+    <string name="activity_duration_hours_minutes">%1$dh%2$02d</string>
+    <!-- %1$s: distance in km, one decimal -->
+    <string name="activity_distance_suffix">" · %1$s km"</string>
+    <!-- %1$d: average heart rate -->
+    <string name="activity_avg_hr_suffix">" · %1$d bpm moy."</string>
+    <string name="profile_activity_history_title">Activités</string>
+    <string name="profile_activity_history_caption">Voir l\'historique des activités synchronisées</string>
 
     <!-- French plural rule: "one" covers 0 and 1, "other" covers 2+ -->
     <plurals name="plural_activities_imported">

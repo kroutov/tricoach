@@ -1,5 +1,6 @@
 package com.tricoach.android.core.network
 
+import com.tricoach.android.models.Activity
 import com.tricoach.android.models.AthleteProfile
 import com.tricoach.android.models.Availability
 import com.tricoach.android.models.ConstraintCheckIn
@@ -99,4 +100,7 @@ interface UserApi {
 
     @POST("me/calendar-token/rotate")
     suspend fun rotateCalendarToken(): CalendarTokenResponse
+
+    @GET("me/activities")
+    suspend fun fetchActivities(): List<Activity>
 }

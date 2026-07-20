@@ -39,7 +39,7 @@ import com.tricoach.android.models.User
 import com.tricoach.android.models.label
 import kotlinx.coroutines.launch
 
-/** Read-only account/athlete summary + Objectifs entry point + sign out + Intégrations (Strava/Health Connect/Garmin) + calendar feed subscription. */
+/** Read-only account/athlete summary + Objectifs entry point + sign out + Intégrations (Strava/Health Connect/Garmin) + calendar feed subscription + activity history entry point. */
 @Composable
 fun ProfileScreen(
     container: AppContainer,
@@ -47,6 +47,7 @@ fun ProfileScreen(
     onUserUpdated: suspend (User) -> Unit,
     onSignOut: suspend () -> Unit,
     onNavigateToGoals: () -> Unit,
+    onNavigateToActivityHistory: () -> Unit,
 ) {
     var profile by remember { mutableStateOf(AthleteProfile.empty) }
     var goals by remember { mutableStateOf<List<Goal>>(emptyList()) }
@@ -104,6 +105,15 @@ fun ProfileScreen(
                 HealthConnectSection(container)
                 HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
                 GarminConnectSection(container)
+            }
+
+            CardBox(modifier = Modifier.clickable(onClick = onNavigateToActivityHistory)) {
+                Text(stringResource(R.string.profile_activity_history_title), style = MaterialTheme.typography.titleMedium)
+                Text(
+                    stringResource(R.string.profile_activity_history_caption),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
             }
 
             CalendarFeedSection(container)

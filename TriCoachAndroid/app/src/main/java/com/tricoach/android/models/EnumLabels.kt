@@ -126,6 +126,18 @@ fun MacrocyclePhase.labelResId(): Int = when (this) {
 val MacrocyclePhase.label: String
     @Composable get() = stringResource(labelResId())
 
+@StringRes
+fun ActivitySource.labelResId(): Int = when (this) {
+    ActivitySource.HEALTH_KIT -> R.string.enum_activity_source_health_kit
+    ActivitySource.STRAVA -> R.string.enum_activity_source_strava
+    ActivitySource.MANUAL -> R.string.enum_activity_source_manual
+    ActivitySource.GARMIN -> R.string.enum_activity_source_garmin
+    ActivitySource.HEALTH_CONNECT -> R.string.enum_activity_source_health_connect
+}
+
+val ActivitySource.label: String
+    @Composable get() = stringResource(labelResId())
+
 /** Calendar-style weekday numbering (Sunday=1...Saturday=7), ordered Monday-first for display — mirrors iOS's Weekday enum. */
 object Weekday {
     val orderedWeek = listOf(2, 3, 4, 5, 6, 7, 1)

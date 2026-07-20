@@ -19,6 +19,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.tricoach.android.R
+import com.tricoach.android.features.activityhistory.ActivityHistoryScreen
 import com.tricoach.android.features.adaptation.AdaptationHistoryScreen
 import com.tricoach.android.features.analytics.DashboardAnalyticsScreen
 import com.tricoach.android.features.calendar.CalendarScreen
@@ -35,6 +36,7 @@ private const val ROUTE_WORKOUT_DETAIL = "workout_detail"
 private const val ROUTE_GOALS = "goals"
 private const val ROUTE_ADAPTATION_HISTORY = "adaptation_history"
 private const val ROUTE_DASHBOARD_ANALYTICS = "dashboard_analytics"
+private const val ROUTE_ACTIVITY_HISTORY = "activity_history"
 
 /**
  * Three-tab shell (Dashboard/Calendar/Profile) + a pushed Workout Detail
@@ -97,11 +99,13 @@ fun MainScaffold(container: AppContainer, appState: AppState) {
                     onUserUpdated = { appState.setCurrentUser(it) },
                     onSignOut = { appState.signOut() },
                     onNavigateToGoals = { navController.navigate(ROUTE_GOALS) },
+                    onNavigateToActivityHistory = { navController.navigate(ROUTE_ACTIVITY_HISTORY) },
                 )
             }
             composable(ROUTE_GOALS) { GoalsScreen(container) }
             composable(ROUTE_ADAPTATION_HISTORY) { AdaptationHistoryScreen(container) }
             composable(ROUTE_DASHBOARD_ANALYTICS) { DashboardAnalyticsScreen(container) }
+            composable(ROUTE_ACTIVITY_HISTORY) { ActivityHistoryScreen(container) }
             composable(ROUTE_WORKOUT_DETAIL) {
                 selectedWorkout?.let { workout ->
                     WorkoutDetailScreen(

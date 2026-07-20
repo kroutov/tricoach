@@ -67,6 +67,13 @@
     <string name="enum_macrocycle_phase_taper">Taper</string>
     <string name="enum_macrocycle_phase_transition">Transition</string>
 
+    <!-- ActivitySource -->
+    <string name="enum_activity_source_health_kit">Apple Health</string>
+    <string name="enum_activity_source_strava">Strava</string>
+    <string name="enum_activity_source_manual">Manual</string>
+    <string name="enum_activity_source_garmin">Garmin</string>
+    <string name="enum_activity_source_health_connect">Health Connect</string>
+
     <!-- Weekday -->
     <string name="enum_weekday_monday">Monday</string>
     <string name="enum_weekday_tuesday">Tuesday</string>
@@ -260,6 +267,21 @@
     <string name="calendar_feed_regenerate_link">Regenerate link</string>
     <!-- %1$s: exception message, not translated -->
     <string name="calendar_feed_error_load_failed">Unable to load the calendar link: %1$s</string>
+
+    <!-- Activity History -->
+    <string name="activity_history_title">Activities</string>
+    <string name="activity_history_empty_state">No activities synced yet.</string>
+    <string name="activity_unknown_sport">Activity</string>
+    <!-- %1$d: minutes -->
+    <string name="activity_duration_minutes">%1$d min</string>
+    <!-- %1$d: hours, %2$d: minutes (always 2 digits) -->
+    <string name="activity_duration_hours_minutes">%1$dh%2$02d</string>
+    <!-- %1$s: distance in km, one decimal -->
+    <string name="activity_distance_suffix">" · %1$s km"</string>
+    <!-- %1$d: average heart rate -->
+    <string name="activity_avg_hr_suffix">" · %1$d bpm avg"</string>
+    <string name="profile_activity_history_title">Activities</string>
+    <string name="profile_activity_history_caption">View synced activity history</string>
 
     <!-- English plural rule: "one" covers only exactly 1, "other" covers 0 and 2+ -->
     <plurals name="plural_activities_imported">
