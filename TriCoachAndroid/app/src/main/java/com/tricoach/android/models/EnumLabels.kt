@@ -138,6 +138,94 @@ fun ActivitySource.labelResId(): Int = when (this) {
 val ActivitySource.label: String
     @Composable get() = stringResource(labelResId())
 
+@StringRes
+fun MealType.labelResId(): Int = when (this) {
+    MealType.BREAKFAST -> R.string.enum_meal_type_breakfast
+    MealType.LUNCH -> R.string.enum_meal_type_lunch
+    MealType.DINNER -> R.string.enum_meal_type_dinner
+    MealType.SNACK -> R.string.enum_meal_type_snack
+}
+
+val MealType.label: String
+    @Composable get() = stringResource(labelResId())
+
+@StringRes
+fun DietaryTag.labelResId(): Int = when (this) {
+    DietaryTag.VEGETARIAN -> R.string.enum_dietary_tag_vegetarian
+    DietaryTag.CHICKEN_ONLY -> R.string.enum_dietary_tag_chicken_only
+    DietaryTag.PESCATARIAN -> R.string.enum_dietary_tag_pescatarian
+    DietaryTag.OMNIVORE -> R.string.enum_dietary_tag_omnivore
+}
+
+val DietaryTag.label: String
+    @Composable get() = stringResource(labelResId())
+
+@StringRes
+fun EffortProfile.labelResId(): Int = when (this) {
+    EffortProfile.CARB_LOAD -> R.string.enum_effort_profile_carb_load
+    EffortProfile.RECOVERY -> R.string.enum_effort_profile_recovery
+    EffortProfile.LIGHT -> R.string.enum_effort_profile_light
+    EffortProfile.BALANCED -> R.string.enum_effort_profile_balanced
+}
+
+val EffortProfile.label: String
+    @Composable get() = stringResource(labelResId())
+
+@StringRes
+fun RecipeCategory.labelResId(): Int = when (this) {
+    RecipeCategory.DIPS -> R.string.enum_recipe_category_dips
+    RecipeCategory.COOKIES -> R.string.enum_recipe_category_cookies
+    RecipeCategory.OVEN_BAKED -> R.string.enum_recipe_category_oven_baked
+    RecipeCategory.STEW -> R.string.enum_recipe_category_stew
+    RecipeCategory.SANDWICH -> R.string.enum_recipe_category_sandwich
+    RecipeCategory.DESSERT -> R.string.enum_recipe_category_dessert
+    RecipeCategory.TOAST -> R.string.enum_recipe_category_toast
+    RecipeCategory.SALAD -> R.string.enum_recipe_category_salad
+    RecipeCategory.PIE -> R.string.enum_recipe_category_pie
+    RecipeCategory.VEGETARIAN -> R.string.enum_recipe_category_vegetarian
+    RecipeCategory.CAKE -> R.string.enum_recipe_category_cake
+    RecipeCategory.PASTA -> R.string.enum_recipe_category_pasta
+    RecipeCategory.SOUP -> R.string.enum_recipe_category_soup
+}
+
+val RecipeCategory.label: String
+    @Composable get() = stringResource(labelResId())
+
+@StringRes
+fun PrepTimeBucket.labelResId(): Int = when (this) {
+    PrepTimeBucket.UNDER_15 -> R.string.enum_prep_time_under_15
+    PrepTimeBucket.MIN_15_TO_30 -> R.string.enum_prep_time_min_15_to_30
+    PrepTimeBucket.MIN_30_TO_45 -> R.string.enum_prep_time_min_30_to_45
+    PrepTimeBucket.MIN_45_TO_60 -> R.string.enum_prep_time_min_45_to_60
+    PrepTimeBucket.OVER_60 -> R.string.enum_prep_time_over_60
+}
+
+val PrepTimeBucket.label: String
+    @Composable get() = stringResource(labelResId())
+
+@StringRes
+fun GroceryAisle.labelResId(): Int = when (this) {
+    GroceryAisle.BUTCHER -> R.string.enum_grocery_aisle_butcher
+    GroceryAisle.BAKERY -> R.string.enum_grocery_aisle_bakery
+    GroceryAisle.GROCERY -> R.string.enum_grocery_aisle_grocery
+    GroceryAisle.PRODUCE -> R.string.enum_grocery_aisle_produce
+    GroceryAisle.FISHMONGER -> R.string.enum_grocery_aisle_fishmonger
+    GroceryAisle.FRESH -> R.string.enum_grocery_aisle_fresh
+    GroceryAisle.FROZEN -> R.string.enum_grocery_aisle_frozen
+}
+
+val GroceryAisle.label: String
+    @Composable get() = stringResource(labelResId())
+
+@StringRes
+fun MenuSelectionStatus.labelResId(): Int = when (this) {
+    MenuSelectionStatus.PROPOSED -> R.string.enum_menu_status_proposed
+    MenuSelectionStatus.CONFIRMED -> R.string.enum_menu_status_confirmed
+}
+
+val MenuSelectionStatus.label: String
+    @Composable get() = stringResource(labelResId())
+
 /** Calendar-style weekday numbering (Sunday=1...Saturday=7), ordered Monday-first for display — mirrors iOS's Weekday enum. */
 object Weekday {
     val orderedWeek = listOf(2, 3, 4, 5, 6, 7, 1)

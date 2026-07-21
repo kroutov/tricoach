@@ -74,6 +74,103 @@
     <string name="enum_activity_source_garmin">Garmin</string>
     <string name="enum_activity_source_health_connect">Health Connect</string>
 
+    <!-- MealType -->
+    <string name="enum_meal_type_breakfast">Petit-déjeuner</string>
+    <string name="enum_meal_type_lunch">Déjeuner</string>
+    <string name="enum_meal_type_dinner">Dîner</string>
+    <string name="enum_meal_type_snack">Snack</string>
+
+    <!-- DietaryTag -->
+    <string name="enum_dietary_tag_vegetarian">Végétarien</string>
+    <string name="enum_dietary_tag_chicken_only">Poulet uniquement</string>
+    <string name="enum_dietary_tag_pescatarian">Pescétarien</string>
+    <string name="enum_dietary_tag_omnivore">Tout type d\'ingrédient</string>
+
+    <!-- EffortProfile -->
+    <string name="enum_effort_profile_carb_load">Riche en glucides</string>
+    <string name="enum_effort_profile_recovery">Récupération</string>
+    <string name="enum_effort_profile_light">Léger</string>
+    <string name="enum_effort_profile_balanced">Équilibré</string>
+
+    <!-- RecipeCategory -->
+    <string name="enum_recipe_category_dips">Dips</string>
+    <string name="enum_recipe_category_cookies">Biscuits</string>
+    <string name="enum_recipe_category_oven_baked">Plats au four</string>
+    <string name="enum_recipe_category_stew">Plats mijotés</string>
+    <string name="enum_recipe_category_sandwich">Sandwich</string>
+    <string name="enum_recipe_category_dessert">Desserts</string>
+    <string name="enum_recipe_category_toast">Tartines</string>
+    <string name="enum_recipe_category_salad">Salades</string>
+    <string name="enum_recipe_category_pie">Tartes</string>
+    <string name="enum_recipe_category_vegetarian">Végétarien</string>
+    <string name="enum_recipe_category_cake">Gâteaux</string>
+    <string name="enum_recipe_category_pasta">Pâtes</string>
+    <string name="enum_recipe_category_soup">Soupe</string>
+
+    <!-- PrepTimeBucket -->
+    <string name="enum_prep_time_under_15">&lt; 15 min</string>
+    <string name="enum_prep_time_min_15_to_30">15 - 30 min</string>
+    <string name="enum_prep_time_min_30_to_45">30 - 45 min</string>
+    <string name="enum_prep_time_min_45_to_60">45 - 60 min</string>
+    <string name="enum_prep_time_over_60">&gt; 1 h</string>
+
+    <!-- GroceryAisle -->
+    <string name="enum_grocery_aisle_butcher">Boucherie</string>
+    <string name="enum_grocery_aisle_bakery">Boulangerie</string>
+    <string name="enum_grocery_aisle_grocery">Épicerie</string>
+    <string name="enum_grocery_aisle_produce">Fruits et légumes</string>
+    <string name="enum_grocery_aisle_fishmonger">Poissonnerie</string>
+    <string name="enum_grocery_aisle_fresh">Rayon frais</string>
+    <string name="enum_grocery_aisle_frozen">Surgelé</string>
+
+    <!-- MenuSelectionStatus -->
+    <string name="enum_menu_status_proposed">À valider</string>
+    <string name="enum_menu_status_confirmed">Confirmé</string>
+
+    <!-- Recipe Catalog -->
+    <string name="recipe_catalog_search_label">Rechercher une recette</string>
+    <string name="recipe_catalog_filter_meal_type">Repas</string>
+    <string name="recipe_catalog_filter_dietary_tag">Régime</string>
+    <string name="recipe_catalog_filter_category">Catégorie</string>
+    <string name="recipe_catalog_filter_all">Tous</string>
+    <string name="recipe_catalog_empty_state">Aucune recette ne correspond à ces filtres.</string>
+    <!-- %1$s: exception message, not translated -->
+    <string name="recipe_catalog_error_load_failed">Impossible de charger les recettes : %1$s</string>
+
+    <!-- Recipe Detail -->
+    <string name="recipe_detail_ingredients_title">Ingrédients</string>
+    <string name="recipe_detail_instructions_title">Préparation</string>
+    <!-- %1$d: servings count -->
+    <string name="recipe_detail_servings">%1$d pers.</string>
+
+    <!-- Grocery List -->
+    <string name="grocery_list_today">Aujourd\'hui</string>
+    <string name="grocery_list_aisle_other">Autres</string>
+    <string name="grocery_list_empty_state">Aucune recette sélectionnée cette semaine.</string>
+    <!-- %1$s: exception message, not translated -->
+    <string name="grocery_list_error_load_failed">Impossible de charger la liste de courses : %1$s</string>
+
+    <!-- Weekly Menu -->
+    <string name="weekly_menu_today">Aujourd\'hui</string>
+    <string name="weekly_menu_confirm_all">Tout valider</string>
+    <string name="weekly_menu_action_confirm">Valider</string>
+    <string name="weekly_menu_action_change">Changer</string>
+    <string name="weekly_menu_action_remove">Retirer</string>
+    <string name="weekly_menu_picker_title">Choisir une recette</string>
+    <string name="weekly_menu_picker_empty">Aucune suggestion pour ce créneau.</string>
+    <!-- %1$s: exception message, not translated -->
+    <string name="weekly_menu_error_load_failed">Impossible de charger le menu : %1$s</string>
+    <string name="weekly_menu_error_save_failed">Impossible d\'enregistrer ce choix : %1$s</string>
+    <string name="weekly_menu_error_remove_failed">Impossible de retirer ce menu : %1$s</string>
+    <string name="weekly_menu_error_confirm_failed">Impossible de valider la semaine : %1$s</string>
+
+    <!-- Nutrition home -->
+    <string name="nutrition_nav_label">Nutrition</string>
+    <string name="nutrition_home_title">Nutrition</string>
+    <string name="nutrition_home_tab_menu">Menu</string>
+    <string name="nutrition_home_tab_recipes">Recettes</string>
+    <string name="nutrition_home_tab_groceries">Courses</string>
+
     <!-- Weekday -->
     <string name="enum_weekday_monday">Lundi</string>
     <string name="enum_weekday_tuesday">Mardi</string>
@@ -287,6 +384,12 @@
     <plurals name="plural_activities_imported">
         <item quantity="one">%d activité importée.</item>
         <item quantity="other">%d activités importées.</item>
+    </plurals>
+
+    <!-- French plural rule: "one" covers 0 and 1, "other" covers 2+ -->
+    <plurals name="weekly_menu_proposed_count">
+        <item quantity="one">%d recette proposée — à valider</item>
+        <item quantity="other">%d recettes proposées — à valider</item>
     </plurals>
 
     <!-- Profile -->

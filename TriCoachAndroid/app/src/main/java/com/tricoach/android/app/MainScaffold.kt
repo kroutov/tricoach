@@ -25,35 +25,46 @@ import com.tricoach.android.features.analytics.DashboardAnalyticsScreen
 import com.tricoach.android.features.calendar.CalendarScreen
 import com.tricoach.android.features.dashboard.DashboardScreen
 import com.tricoach.android.features.goals.GoalsScreen
+import com.tricoach.android.features.nutrition.NutritionHomeScreen
+import com.tricoach.android.features.nutrition.RecipeDetailScreen
 import com.tricoach.android.features.profile.ProfileScreen
 import com.tricoach.android.features.workoutdetail.WorkoutDetailScreen
+import com.tricoach.android.models.Recipe
 import com.tricoach.android.models.Workout
 
 private const val ROUTE_DASHBOARD = "dashboard"
 private const val ROUTE_CALENDAR = "calendar"
+private const val ROUTE_NUTRITION = "nutrition"
 private const val ROUTE_PROFILE = "profile"
 private const val ROUTE_WORKOUT_DETAIL = "workout_detail"
 private const val ROUTE_GOALS = "goals"
 private const val ROUTE_ADAPTATION_HISTORY = "adaptation_history"
 private const val ROUTE_DASHBOARD_ANALYTICS = "dashboard_analytics"
 private const val ROUTE_ACTIVITY_HISTORY = "activity_history"
+private const val ROUTE_RECIPE_DETAIL = "recipe_detail"
 
 /**
- * Three-tab shell (Dashboard/Calendar/Profile) + a pushed Workout Detail
- * destination — mirrors iOS's MainTabView, minus the Nutrition tab (out of
- * scope for Android Phase 1). The selected workout is passed via a small
- * shared holder rather than a nav argument: iOS never re-fetches a workout
- * by id either (no such endpoint exists), it's always handed the object the
- * user just tapped.
+ * Four-tab shell (Dashboard/Calendar/Nutrition/Profile) + pushed Workout
+ * Detail and Recipe Detail destinations — mirrors iOS's MainTabView. The
+ * selected workout/recipe is passed via a small shared holder rather than a
+ * nav argument: iOS never re-fetches either by id (no such endpoint exists
+ * for a workout; a recipe is already fully loaded in the list that pushed
+ * it), it's always handed the object the user just tapped.
  */
 @Composable
 fun MainScaffold(container: AppContainer, appState: AppState) {
     val navController = rememberNavController()
     var selectedWorkout by remember { mutableStateOf<Workout?>(null) }
+    var selectedRecipe by remember { mutableStateOf<Recipe?>(null) }
 
     fun openWorkout(workout: Workout) {
         selectedWorkout = workout
         navController.navigate(ROUTE_WORKOUT_DETAIL)
+    }
+
+    fun openRecipe(recipe: Recipe) {
+        selectedRecipe = recipe
+        navController.navigate(ROUTE_RECIPE_DETAIL)
     }
 
     Scaffold(
@@ -74,6 +85,12 @@ fun MainScaffold(container: AppContainer, appState: AppState) {
                     label = { Text(stringResource(R.string.nav_calendar)) },
                 )
                 NavigationBarItem(
+                    selected = currentRoute?.hierarchy?.any { it.route == ROUTE_NUTRITION } == true,
+                    onClick = { navController.navigate(ROUTE_NUTRITION) { popUpTo(navController.graph.findStartDestination().id) { saveState = true }; launchSingleTop = true; restoreState = true } },
+                    icon = { Text("🍽") },
+                    label = { Text(stringResource(R.string.nutrition_nav_label)) },
+                )
+                NavigationBarItem(
                     selected = currentRoute?.hierarchy?.any { it.route == ROUTE_PROFILE } == true,
                     onClick = { navController.navigate(ROUTE_PROFILE) { popUpTo(navController.graph.findStartDestination().id) { saveState = true }; launchSingleTop = true; restoreState = true } },
                     icon = { Text("👤") },
@@ -92,6 +109,7 @@ fun MainScaffold(container: AppContainer, appState: AppState) {
                 )
             }
             composable(ROUTE_CALENDAR) { CalendarScreen(container, onWorkoutClick = ::openWorkout) }
+            composable(ROUTE_NUTRITION) { NutritionHomeScreen(container, onRecipeClick = ::openRecipe) }
             composable(ROUTE_PROFILE) {
                 ProfileScreen(
                     container = container,
@@ -106,6 +124,11 @@ fun MainScaffold(container: AppContainer, appState: AppState) {
             composable(ROUTE_ADAPTATION_HISTORY) { AdaptationHistoryScreen(container) }
             composable(ROUTE_DASHBOARD_ANALYTICS) { DashboardAnalyticsScreen(container) }
             composable(ROUTE_ACTIVITY_HISTORY) { ActivityHistoryScreen(container) }
+            composable(ROUTE_RECIPE_DETAIL) {
+                selectedRecipe?.let { recipe ->
+                    RecipeDetailScreen(recipe = recipe, onBack = { navController.popBackStack() })
+                }
+            }
             composable(ROUTE_WORKOUT_DETAIL) {
                 selectedWorkout?.let { workout ->
                     WorkoutDetailScreen(

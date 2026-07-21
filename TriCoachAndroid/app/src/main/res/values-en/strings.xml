@@ -74,6 +74,103 @@
     <string name="enum_activity_source_garmin">Garmin</string>
     <string name="enum_activity_source_health_connect">Health Connect</string>
 
+    <!-- MealType -->
+    <string name="enum_meal_type_breakfast">Breakfast</string>
+    <string name="enum_meal_type_lunch">Lunch</string>
+    <string name="enum_meal_type_dinner">Dinner</string>
+    <string name="enum_meal_type_snack">Snack</string>
+
+    <!-- DietaryTag -->
+    <string name="enum_dietary_tag_vegetarian">Vegetarian</string>
+    <string name="enum_dietary_tag_chicken_only">Chicken only</string>
+    <string name="enum_dietary_tag_pescatarian">Pescatarian</string>
+    <string name="enum_dietary_tag_omnivore">Any ingredient</string>
+
+    <!-- EffortProfile -->
+    <string name="enum_effort_profile_carb_load">High-carb</string>
+    <string name="enum_effort_profile_recovery">Recovery</string>
+    <string name="enum_effort_profile_light">Light</string>
+    <string name="enum_effort_profile_balanced">Balanced</string>
+
+    <!-- RecipeCategory -->
+    <string name="enum_recipe_category_dips">Dips</string>
+    <string name="enum_recipe_category_cookies">Cookies</string>
+    <string name="enum_recipe_category_oven_baked">Oven-baked</string>
+    <string name="enum_recipe_category_stew">Stews</string>
+    <string name="enum_recipe_category_sandwich">Sandwich</string>
+    <string name="enum_recipe_category_dessert">Desserts</string>
+    <string name="enum_recipe_category_toast">Toast</string>
+    <string name="enum_recipe_category_salad">Salads</string>
+    <string name="enum_recipe_category_pie">Pies</string>
+    <string name="enum_recipe_category_vegetarian">Vegetarian</string>
+    <string name="enum_recipe_category_cake">Cakes</string>
+    <string name="enum_recipe_category_pasta">Pasta</string>
+    <string name="enum_recipe_category_soup">Soup</string>
+
+    <!-- PrepTimeBucket -->
+    <string name="enum_prep_time_under_15">&lt; 15 min</string>
+    <string name="enum_prep_time_min_15_to_30">15 - 30 min</string>
+    <string name="enum_prep_time_min_30_to_45">30 - 45 min</string>
+    <string name="enum_prep_time_min_45_to_60">45 - 60 min</string>
+    <string name="enum_prep_time_over_60">&gt; 1 hr</string>
+
+    <!-- GroceryAisle -->
+    <string name="enum_grocery_aisle_butcher">Butcher</string>
+    <string name="enum_grocery_aisle_bakery">Bakery</string>
+    <string name="enum_grocery_aisle_grocery">Grocery</string>
+    <string name="enum_grocery_aisle_produce">Produce</string>
+    <string name="enum_grocery_aisle_fishmonger">Fishmonger</string>
+    <string name="enum_grocery_aisle_fresh">Fresh</string>
+    <string name="enum_grocery_aisle_frozen">Frozen</string>
+
+    <!-- MenuSelectionStatus -->
+    <string name="enum_menu_status_proposed">To confirm</string>
+    <string name="enum_menu_status_confirmed">Confirmed</string>
+
+    <!-- Recipe Catalog -->
+    <string name="recipe_catalog_search_label">Search a recipe</string>
+    <string name="recipe_catalog_filter_meal_type">Meal</string>
+    <string name="recipe_catalog_filter_dietary_tag">Diet</string>
+    <string name="recipe_catalog_filter_category">Category</string>
+    <string name="recipe_catalog_filter_all">All</string>
+    <string name="recipe_catalog_empty_state">No recipe matches these filters.</string>
+    <!-- %1$s: exception message, not translated -->
+    <string name="recipe_catalog_error_load_failed">Unable to load recipes: %1$s</string>
+
+    <!-- Recipe Detail -->
+    <string name="recipe_detail_ingredients_title">Ingredients</string>
+    <string name="recipe_detail_instructions_title">Instructions</string>
+    <!-- %1$d: servings count -->
+    <string name="recipe_detail_servings">%1$d servings</string>
+
+    <!-- Grocery List -->
+    <string name="grocery_list_today">Today</string>
+    <string name="grocery_list_aisle_other">Other</string>
+    <string name="grocery_list_empty_state">No recipe selected this week.</string>
+    <!-- %1$s: exception message, not translated -->
+    <string name="grocery_list_error_load_failed">Unable to load the shopping list: %1$s</string>
+
+    <!-- Weekly Menu -->
+    <string name="weekly_menu_today">Today</string>
+    <string name="weekly_menu_confirm_all">Confirm all</string>
+    <string name="weekly_menu_action_confirm">Confirm</string>
+    <string name="weekly_menu_action_change">Change</string>
+    <string name="weekly_menu_action_remove">Remove</string>
+    <string name="weekly_menu_picker_title">Choose a recipe</string>
+    <string name="weekly_menu_picker_empty">No suggestion for this slot.</string>
+    <!-- %1$s: exception message, not translated -->
+    <string name="weekly_menu_error_load_failed">Unable to load the menu: %1$s</string>
+    <string name="weekly_menu_error_save_failed">Unable to save this choice: %1$s</string>
+    <string name="weekly_menu_error_remove_failed">Unable to remove this menu: %1$s</string>
+    <string name="weekly_menu_error_confirm_failed">Unable to confirm the week: %1$s</string>
+
+    <!-- Nutrition home -->
+    <string name="nutrition_nav_label">Nutrition</string>
+    <string name="nutrition_home_title">Nutrition</string>
+    <string name="nutrition_home_tab_menu">Menu</string>
+    <string name="nutrition_home_tab_recipes">Recipes</string>
+    <string name="nutrition_home_tab_groceries">Groceries</string>
+
     <!-- Weekday -->
     <string name="enum_weekday_monday">Monday</string>
     <string name="enum_weekday_tuesday">Tuesday</string>
@@ -287,6 +384,12 @@
     <plurals name="plural_activities_imported">
         <item quantity="one">%d activity imported.</item>
         <item quantity="other">%d activities imported.</item>
+    </plurals>
+
+    <!-- English plural rule: "one" covers only exactly 1, "other" covers 0 and 2+ -->
+    <plurals name="weekly_menu_proposed_count">
+        <item quantity="one">%d recipe proposed — to confirm</item>
+        <item quantity="other">%d recipes proposed — to confirm</item>
     </plurals>
 
     <!-- Profile -->

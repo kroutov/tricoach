@@ -116,3 +116,70 @@ enum class ActivitySource {
     @SerialName("garmin") GARMIN,
     @SerialName("healthConnect") HEALTH_CONNECT,
 }
+
+@Serializable
+enum class MealType {
+    @SerialName("breakfast") BREAKFAST,
+    @SerialName("lunch") LUNCH,
+    @SerialName("dinner") DINNER,
+    @SerialName("snack") SNACK,
+}
+
+@Serializable
+enum class DietaryTag {
+    @SerialName("vegetarian") VEGETARIAN,
+    @SerialName("chickenOnly") CHICKEN_ONLY,
+    @SerialName("pescatarian") PESCATARIAN,
+    @SerialName("omnivore") OMNIVORE,
+}
+
+@Serializable
+enum class EffortProfile {
+    @SerialName("carbLoad") CARB_LOAD,
+    @SerialName("recovery") RECOVERY,
+    @SerialName("light") LIGHT,
+    @SerialName("balanced") BALANCED,
+}
+
+@Serializable
+enum class RecipeCategory {
+    @SerialName("dips") DIPS,
+    @SerialName("cookies") COOKIES,
+    @SerialName("ovenBaked") OVEN_BAKED,
+    @SerialName("stew") STEW,
+    @SerialName("sandwich") SANDWICH,
+    @SerialName("dessert") DESSERT,
+    @SerialName("toast") TOAST,
+    @SerialName("salad") SALAD,
+    @SerialName("pie") PIE,
+    @SerialName("vegetarian") VEGETARIAN,
+    @SerialName("cake") CAKE,
+    @SerialName("pasta") PASTA,
+    @SerialName("soup") SOUP,
+}
+
+@Serializable
+enum class PrepTimeBucket {
+    @SerialName("under15") UNDER_15,
+    @SerialName("min15to30") MIN_15_TO_30,
+    @SerialName("min30to45") MIN_30_TO_45,
+    @SerialName("min45to60") MIN_45_TO_60,
+    @SerialName("over60") OVER_60,
+}
+
+@Serializable
+enum class GroceryAisle {
+    @SerialName("butcher") BUTCHER,
+    @SerialName("bakery") BAKERY,
+    @SerialName("grocery") GROCERY,
+    @SerialName("produce") PRODUCE,
+    @SerialName("fishmonger") FISHMONGER,
+    @SerialName("fresh") FRESH,
+    @SerialName("frozen") FROZEN,
+}
+
+@Serializable
+enum class MenuSelectionStatus {
+    @SerialName("proposed") PROPOSED,
+    @SerialName("confirmed") CONFIRMED,
+}
