@@ -77,11 +77,17 @@ struct WeeklyMenuView: View {
                 .accessibilityLabel("Semaine précédente")
             }
             ToolbarItem(placement: .principal) {
-                Button("Aujourd'hui") {
-                    viewModel.goToToday()
-                    Task { await viewModel.load() }
+                VStack(spacing: 2) {
+                    if let first = viewModel.days.first, let last = viewModel.days.last {
+                        Text("\(weekRangeFormatter.string(from: first)) – \(weekRangeFormatter.string(from: last))")
+                            .font(TCFont.caption)
+                    }
+                    Button("Aujourd'hui") {
+                        viewModel.goToToday()
+                        Task { await viewModel.load() }
+                    }
+                    .font(TCFont.caption)
                 }
-                .font(TCFont.caption)
             }
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
