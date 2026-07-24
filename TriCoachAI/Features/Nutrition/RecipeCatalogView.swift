@@ -21,6 +21,9 @@ struct RecipeCatalogView: View {
                             HStack {
                                 PillBadge(text: recipe.effortProfile.label, tint: TCColor.color(for: recipe.effortProfile))
                                 PillBadge(text: recipe.prepTime.label, tint: TCColor.secondaryText)
+                                if let kcal = recipe.kcalPerServing {
+                                    PillBadge(text: "\(kcal) kcal", tint: TCColor.secondaryText)
+                                }
                             }
                             Text(recipe.categories.map(\.label).joined(separator: ", "))
                                 .font(TCFont.caption)
@@ -96,6 +99,29 @@ struct RecipeDetailSections: View {
                 PillBadge(text: recipe.effortProfile.label, tint: TCColor.color(for: recipe.effortProfile))
                 PillBadge(text: recipe.prepTime.label, tint: TCColor.secondaryText)
                 PillBadge(text: "\(recipe.servings) pers.", tint: TCColor.secondaryText)
+                if let kcal = recipe.kcalPerServing {
+                    PillBadge(text: "\(kcal) kcal", tint: TCColor.secondaryText)
+                }
+            }
+        }
+
+        if recipe.proteins != nil || recipe.carbs != nil || recipe.fat != nil || recipe.fiber != nil || recipe.salt != nil {
+            Section("Nutrition (par portion)") {
+                if let proteins = recipe.proteins {
+                    LabeledContent("Protéines", value: "\(Int((proteins / Double(recipe.servings)).rounded()))g")
+                }
+                if let carbs = recipe.carbs {
+                    LabeledContent("Glucides", value: "\(Int((carbs / Double(recipe.servings)).rounded()))g")
+                }
+                if let fat = recipe.fat {
+                    LabeledContent("Lipides", value: "\(Int((fat / Double(recipe.servings)).rounded()))g")
+                }
+                if let fiber = recipe.fiber {
+                    LabeledContent("Fibres", value: "\(Int((fiber / Double(recipe.servings)).rounded()))g")
+                }
+                if let salt = recipe.salt {
+                    LabeledContent("Sel", value: String(format: "%.1fg", salt / Double(recipe.servings)))
+                }
             }
         }
 

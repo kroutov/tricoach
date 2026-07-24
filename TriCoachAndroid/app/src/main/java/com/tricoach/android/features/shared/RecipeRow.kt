@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.tricoach.android.models.Recipe
+import com.tricoach.android.models.kcalPerServing
 import com.tricoach.android.models.label
 
 /** Shared recipe list row — reused by RecipeCatalogScreen (browse) and WeeklyMenuScreen's quick recipe picker dialog. Mirrors WorkoutRow.kt's card shape. */
@@ -31,6 +32,7 @@ fun RecipeRow(recipe: Recipe, onClick: () -> Unit) {
             Row(horizontalArrangement = Arrangement.spacedBy(6.dp), modifier = Modifier.padding(top = 4.dp)) {
                 RecipePill(recipe.effortProfile.label)
                 RecipePill(recipe.prepTime.label)
+                recipe.kcalPerServing()?.let { RecipePill("$it kcal") }
             }
             if (recipe.categories.isNotEmpty()) {
                 Text(

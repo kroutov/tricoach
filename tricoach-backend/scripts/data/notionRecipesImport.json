@@ -81,7 +81,13 @@
     "needsReview": [
       "mealTypes",
       "prepTime"
-    ]
+    ],
+    "kcal": 4067.8,
+    "proteins": 218.5,
+    "carbs": 208.9,
+    "fat": 246.7,
+    "fiber": 74.3,
+    "salt": 19.5
   },
   {
     "title": "Gratin de gnocchi",
@@ -137,7 +143,13 @@
     ],
     "needsReview": [
       "mealTypes"
-    ]
+    ],
+    "kcal": 694.8,
+    "proteins": 30.3,
+    "carbs": 94.3,
+    "fat": 21.0,
+    "fiber": 4.5,
+    "salt": 3.2
   },
   {
     "title": "Bruschetta poire bleu",
@@ -181,7 +193,13 @@
     ],
     "needsReview": [
       "mealTypes"
-    ]
+    ],
+    "kcal": 559.6,
+    "proteins": 16.8,
+    "carbs": 86.9,
+    "fat": 13.7,
+    "fiber": 13.0,
+    "salt": 2.3
   },
   {
     "title": "Pâtes au potiron et à la fêta",
@@ -261,7 +279,13 @@
     ],
     "needsReview": [
       "mealTypes"
-    ]
+    ],
+    "kcal": 610.4,
+    "proteins": 21.1,
+    "carbs": 39.9,
+    "fat": 39.2,
+    "fiber": 4.6,
+    "salt": 1.6
   },
   {
     "title": "Tortilla aux champignons",
@@ -311,7 +335,13 @@
     ],
     "needsReview": [
       "mealTypes"
-    ]
+    ],
+    "kcal": 459.4,
+    "proteins": 25.0,
+    "carbs": 56.1,
+    "fat": 12.2,
+    "fiber": 9.6,
+    "salt": 0.6
   },
   {
     "title": "Spaghettis aux légumes sautés",
@@ -368,7 +398,13 @@
     "needsReview": [
       "mealTypes",
       "prepTime"
-    ]
+    ],
+    "kcal": 224.9,
+    "proteins": 11.6,
+    "carbs": 34.8,
+    "fat": 2.4,
+    "fiber": 13.1,
+    "salt": 3.0
   },
   {
     "title": "Gratin de macaroni à l'emmental",
@@ -424,7 +460,13 @@
     ],
     "needsReview": [
       "mealTypes"
-    ]
+    ],
+    "kcal": 502.4,
+    "proteins": 25.7,
+    "carbs": 61.9,
+    "fat": 16.1,
+    "fiber": 2.7,
+    "salt": 0.7
   },
   {
     "title": "Röstis de patate douce et pomme de terre",
@@ -480,7 +522,13 @@
     ],
     "needsReview": [
       "mealTypes"
-    ]
+    ],
+    "kcal": 665.8,
+    "proteins": 23.6,
+    "carbs": 87.4,
+    "fat": 21.2,
+    "fiber": 12.8,
+    "salt": 0.7
   },
   {
     "title": "Purée de butternut et patate douce avec des oeufs au plats",
@@ -528,7 +576,13 @@
         "aisle": "fresh"
       }
     ],
-    "needsReview": []
+    "needsReview": [],
+    "kcal": 671.2,
+    "proteins": 36.2,
+    "carbs": 45.0,
+    "fat": 36.6,
+    "fiber": 9.2,
+    "salt": 1.0
   },
   {
     "title": "Brick épinards boursin",
@@ -570,7 +624,13 @@
         "aisle": "fresh"
       }
     ],
-    "needsReview": []
+    "needsReview": [],
+    "kcal": 485.0,
+    "proteins": 15.8,
+    "carbs": 54.9,
+    "fat": 20.5,
+    "fiber": 7.2,
+    "salt": 3.7
   },
   {
     "title": "Risotto butternut, noix et comté",
@@ -642,7 +702,13 @@
         "aisle": "produce"
       }
     ],
-    "needsReview": []
+    "needsReview": [],
+    "kcal": 939.9,
+    "proteins": 24.9,
+    "carbs": 96.8,
+    "fat": 45.1,
+    "fiber": 8.9,
+    "salt": 1.9
   },
   {
     "title": "Wok de nouilles aux carottes et cacahuètes",
@@ -690,7 +756,13 @@
         "aisle": "grocery"
       }
     ],
-    "needsReview": []
+    "needsReview": [],
+    "kcal": 590.3,
+    "proteins": 21.6,
+    "carbs": 77.4,
+    "fat": 18.8,
+    "fiber": 14.8,
+    "salt": 6.4
   },
   {
     "title": "Dhal de carottes et lentilles",
@@ -756,7 +828,13 @@
         "aisle": null
       }
     ],
-    "needsReview": []
+    "needsReview": [],
+    "kcal": 498.8,
+    "proteins": 29.9,
+    "carbs": 71.5,
+    "fat": 5.0,
+    "fiber": 31.8,
+    "salt": 0.7
   },
   {
     "title": "Gnocchis aux épinards",
@@ -804,7 +882,13 @@
         "aisle": "produce"
       }
     ],
-    "needsReview": []
+    "needsReview": [],
+    "kcal": 525.0,
+    "proteins": 21.8,
+    "carbs": 83.8,
+    "fat": 4.6,
+    "fiber": 16.1,
+    "salt": 3.2
   },
   {
     "title": "Croque monsieur chèvre et pesto",
@@ -846,7 +930,13 @@
         "aisle": "grocery"
       }
     ],
-    "needsReview": []
+    "needsReview": [],
+    "kcal": 505.2,
+    "proteins": 18.6,
+    "carbs": 58.3,
+    "fat": 20.6,
+    "fiber": 4.4,
+    "salt": 2.7
   },
   {
     "title": "Brick à l'oeuf et à la tomme de brebis",
@@ -888,7 +978,13 @@
         "aisle": "grocery"
       }
     ],
-    "needsReview": []
+    "needsReview": [],
+    "kcal": 503.0,
+    "proteins": 30.3,
+    "carbs": 24.1,
+    "fat": 31.6,
+    "fiber": 1.0,
+    "salt": 2.6
   },
   {
     "title": "Frites de panais et fondue de poireaux avec son oeuf mollet",
@@ -950,7 +1046,13 @@
     ],
     "needsReview": [
       "prepTime"
-    ]
+    ],
+    "kcal": 567.9,
+    "proteins": 21.9,
+    "carbs": 42.8,
+    "fat": 26.4,
+    "fiber": 19.6,
+    "salt": 0.5
   },
   {
     "title": "Pâtes aux champignons et à la crème",
@@ -1001,7 +1103,13 @@
     "needsReview": [
       "mealTypes",
       "prepTime"
-    ]
+    ],
+    "kcal": 446.3,
+    "proteins": 15.9,
+    "carbs": 39.0,
+    "fat": 23.5,
+    "fiber": 7.3,
+    "salt": 2.3
   },
   {
     "title": "Fajitas au poulet",
@@ -1088,7 +1196,13 @@
         "aisle": "fresh"
       }
     ],
-    "needsReview": []
+    "needsReview": [],
+    "kcal": 2763.4,
+    "proteins": 121.2,
+    "carbs": 250.4,
+    "fat": 134.9,
+    "fiber": 29.2,
+    "salt": 8.1
   },
   {
     "title": "Omelette, fromage frais, noix",
@@ -1141,7 +1255,13 @@
         "aisle": "grocery"
       }
     ],
-    "needsReview": []
+    "needsReview": [],
+    "kcal": 583.8,
+    "proteins": 38.4,
+    "carbs": 5.7,
+    "fat": 44.4,
+    "fiber": 2.1,
+    "salt": 0.8
   },
   {
     "title": "Velouté de pois au wasabi et sa tranche de pain",
@@ -1194,7 +1314,13 @@
         "aisle": "bakery"
       }
     ],
-    "needsReview": []
+    "needsReview": [],
+    "kcal": 408.0,
+    "proteins": 20.9,
+    "carbs": 65.3,
+    "fat": 2.0,
+    "fiber": 21.1,
+    "salt": 2.4
   },
   {
     "title": "Tofu de pommes de terre au curry et sa salade verte",
@@ -1253,7 +1379,13 @@
         "aisle": "produce"
       }
     ],
-    "needsReview": []
+    "needsReview": [],
+    "kcal": 760.9,
+    "proteins": 37.5,
+    "carbs": 73.7,
+    "fat": 28.8,
+    "fiber": 14.3,
+    "salt": 0.1
   },
   {
     "title": "Poêlée de tofu avec son pain complet",
@@ -1306,7 +1438,13 @@
         "aisle": "produce"
       }
     ],
-    "needsReview": []
+    "needsReview": [],
+    "kcal": 532.7,
+    "proteins": 37.6,
+    "carbs": 39.4,
+    "fat": 20.9,
+    "fiber": 17.6,
+    "salt": 3.4
   },
   {
     "title": "Mijoté de lentilles aux carottes",
@@ -1365,7 +1503,13 @@
         "aisle": "produce"
       }
     ],
-    "needsReview": []
+    "needsReview": [],
+    "kcal": 647.8,
+    "proteins": 34.6,
+    "carbs": 80.8,
+    "fat": 14.9,
+    "fiber": 33.8,
+    "salt": 0.7
   },
   {
     "title": "Tofu sauté aux brocolis avec son riz",
@@ -1460,7 +1604,13 @@
         "aisle": "grocery"
       }
     ],
-    "needsReview": []
+    "needsReview": [],
+    "kcal": 820.0,
+    "proteins": 47.4,
+    "carbs": 74.1,
+    "fat": 32.5,
+    "fiber": 11.3,
+    "salt": 3.2
   },
   {
     "title": "Cake au reblochon et salade verte",
@@ -1531,7 +1681,13 @@
         "aisle": "produce"
       }
     ],
-    "needsReview": []
+    "needsReview": [],
+    "kcal": 873.4,
+    "proteins": 37.5,
+    "carbs": 57.8,
+    "fat": 48.5,
+    "fiber": 11.0,
+    "salt": 1.3
   },
   {
     "title": "Risotto aux poireaux et carottes",
@@ -1602,7 +1758,13 @@
         "aisle": "produce"
       }
     ],
-    "needsReview": []
+    "needsReview": [],
+    "kcal": 804.9,
+    "proteins": 20.3,
+    "carbs": 105.0,
+    "fat": 19.6,
+    "fiber": 12.6,
+    "salt": 2.3
   },
   {
     "title": "Penne sauce aux cèpes",
@@ -1667,7 +1829,13 @@
         "aisle": "fresh"
       }
     ],
-    "needsReview": []
+    "needsReview": [],
+    "kcal": 571.4,
+    "proteins": 17.6,
+    "carbs": 33.3,
+    "fat": 39.6,
+    "fiber": 4.5,
+    "salt": 0.6
   },
   {
     "title": "Avocado toast / chèvre",
@@ -1720,7 +1888,13 @@
         "aisle": "grocery"
       }
     ],
-    "needsReview": []
+    "needsReview": [],
+    "kcal": 1104.9,
+    "proteins": 41.5,
+    "carbs": 82.8,
+    "fat": 64.2,
+    "fiber": 15.8,
+    "salt": 4.0
   },
   {
     "title": "Soupe de butternut",
@@ -1786,7 +1960,13 @@
         "aisle": "fresh"
       }
     ],
-    "needsReview": []
+    "needsReview": [],
+    "kcal": 447.4,
+    "proteins": 12.5,
+    "carbs": 74.1,
+    "fat": 6.1,
+    "fiber": 21.7,
+    "salt": 0.3
   },
   {
     "title": "Quiche lorraine",
@@ -1843,7 +2023,13 @@
         "aisle": "fresh"
       }
     ],
-    "needsReview": []
+    "needsReview": [],
+    "kcal": 2440.3,
+    "proteins": 78.0,
+    "carbs": 105.0,
+    "fat": 188.3,
+    "fiber": 10.8,
+    "salt": 9.7
   },
   {
     "title": "Verrine fromage blanc, fruits rouges & granola",
@@ -1890,7 +2076,13 @@
         "aisle": "grocery"
       }
     ],
-    "needsReview": []
+    "needsReview": [],
+    "kcal": 335.6,
+    "proteins": 17.3,
+    "carbs": 52.0,
+    "fat": 9.9,
+    "fiber": 6.2,
+    "salt": 0.2
   },
   {
     "title": "Taboulé de quinoa aux légumes croquants",
@@ -1974,7 +2166,13 @@
         "aisle": "grocery"
       }
     ],
-    "needsReview": []
+    "needsReview": [],
+    "kcal": 1391.4,
+    "proteins": 32.7,
+    "carbs": 143.6,
+    "fat": 70.9,
+    "fiber": 24.7,
+    "salt": 2.2
   },
   {
     "title": "Salade de lentilles tièdes, chèvre chaud",
@@ -2046,7 +2244,13 @@
         "aisle": "produce"
       }
     ],
-    "needsReview": []
+    "needsReview": [],
+    "kcal": 1422.2,
+    "proteins": 61.4,
+    "carbs": 137.7,
+    "fat": 63.0,
+    "fiber": 30.7,
+    "salt": 3.6
   },
   {
     "title": "Houmous maison & bâtonnets de légumes",
@@ -2106,7 +2310,13 @@
         "aisle": "produce"
       }
     ],
-    "needsReview": []
+    "needsReview": [],
+    "kcal": 775.6,
+    "proteins": 22.8,
+    "carbs": 46.4,
+    "fat": 51.1,
+    "fiber": 18.3,
+    "salt": 1.5
   },
   {
     "title": "Cookies avoine & pépites de chocolat",
@@ -2173,7 +2383,13 @@
     ],
     "needsReview": [
       "servings"
-    ]
+    ],
+    "kcal": 2566.4,
+    "proteins": 35.8,
+    "carbs": 309.1,
+    "fat": 125.8,
+    "fiber": 22.1,
+    "salt": 0.5
   },
   {
     "title": "Muffins moelleux aux myrtilles",
@@ -2240,7 +2456,13 @@
     ],
     "needsReview": [
       "servings"
-    ]
+    ],
+    "kcal": 2526.8,
+    "proteins": 43.9,
+    "carbs": 315.6,
+    "fat": 116.3,
+    "fiber": 12.8,
+    "salt": 0.8
   },
   {
     "title": "Tian de légumes provençal",
@@ -2312,7 +2534,13 @@
         "aisle": "fresh"
       }
     ],
-    "needsReview": []
+    "needsReview": [],
+    "kcal": 880.7,
+    "proteins": 29.0,
+    "carbs": 41.4,
+    "fat": 62.3,
+    "fiber": 25.7,
+    "salt": 1.1
   },
   {
     "title": "Galette de courgettes & feta, salade verte",
@@ -2377,7 +2605,13 @@
         "aisle": "produce"
       }
     ],
-    "needsReview": []
+    "needsReview": [],
+    "kcal": 903.7,
+    "proteins": 50.4,
+    "carbs": 56.9,
+    "fat": 49.9,
+    "fiber": 9.3,
+    "salt": 4.0
   },
   {
     "title": "Salade de pâtes estivale, tomates & mozzarella",
@@ -2449,7 +2683,13 @@
         "aisle": "grocery"
       }
     ],
-    "needsReview": []
+    "needsReview": [],
+    "kcal": 1193.3,
+    "proteins": 46.9,
+    "carbs": 112.7,
+    "fat": 59.3,
+    "fiber": 10.1,
+    "salt": 3.0
   },
   {
     "title": "Brochettes de poulet marinées & légumes grillés",
@@ -2524,7 +2764,13 @@
     ],
     "needsReview": [
       "categories"
-    ]
+    ],
+    "kcal": 1285.4,
+    "proteins": 149.5,
+    "carbs": 40.1,
+    "fat": 53.9,
+    "fiber": 11.8,
+    "salt": 0.8
   },
   {
     "title": "Salade César revisitée au poulet grillé",
@@ -2593,7 +2839,13 @@
         "aisle": "produce"
       }
     ],
-    "needsReview": []
+    "needsReview": [],
+    "kcal": 847.5,
+    "proteins": 85.7,
+    "carbs": 23.8,
+    "fat": 42.8,
+    "fiber": 5.7,
+    "salt": 2.1
   },
   {
     "title": "Energy balls dattes & amandes",
@@ -2649,7 +2901,13 @@
     ],
     "needsReview": [
       "servings"
-    ]
+    ],
+    "kcal": 1515.3,
+    "proteins": 27.4,
+    "carbs": 142.3,
+    "fat": 82.5,
+    "fiber": 34.6,
+    "salt": 0.2
   },
   {
     "title": "Poêlée de légumes d'été & halloumi grillé",
@@ -2720,7 +2978,13 @@
         "aisle": "grocery"
       }
     ],
-    "needsReview": []
+    "needsReview": [],
+    "kcal": 1135.1,
+    "proteins": 49.7,
+    "carbs": 15.3,
+    "fat": 96.7,
+    "fiber": 5.3,
+    "salt": 4.3
   },
   {
     "title": "Ratatouille maison & riz basmati",
@@ -2798,7 +3062,13 @@
         "aisle": "grocery"
       }
     ],
-    "needsReview": []
+    "needsReview": [],
+    "kcal": 1306.3,
+    "proteins": 29.5,
+    "carbs": 206.1,
+    "fat": 34.7,
+    "fiber": 31.6,
+    "salt": 0.4
   },
   {
     "title": "Wrap poulet, avocat & crudités",
@@ -2855,7 +3125,13 @@
         "aisle": "fresh"
       }
     ],
-    "needsReview": []
+    "needsReview": [],
+    "kcal": 831.6,
+    "proteins": 47.5,
+    "carbs": 58.6,
+    "fat": 41.6,
+    "fiber": 10.8,
+    "salt": 1.7
   },
   {
     "title": "Pancakes moelleux au babeurre",
@@ -2920,7 +3196,13 @@
     ],
     "needsReview": [
       "categories"
-    ]
+    ],
+    "kcal": 949.0,
+    "proteins": 27.4,
+    "carbs": 149.5,
+    "fat": 24.6,
+    "fiber": 4.9,
+    "salt": 1.1
   },
   {
     "title": "Granola maison croustillant, yaourt & fruits frais",
@@ -2979,7 +3261,13 @@
         "aisle": "fresh"
       }
     ],
-    "needsReview": []
+    "needsReview": [],
+    "kcal": 2314.0,
+    "proteins": 47.4,
+    "carbs": 235.0,
+    "fat": 120.1,
+    "fiber": 39.4,
+    "salt": 0.2
   },
   {
     "title": "Porridge avoine, banane & miel",
@@ -3038,7 +3326,13 @@
         "aisle": "grocery"
       }
     ],
-    "needsReview": []
+    "needsReview": [],
+    "kcal": 899.8,
+    "proteins": 29.3,
+    "carbs": 137.2,
+    "fat": 22.6,
+    "fiber": 16.2,
+    "salt": 0.4
   },
   {
     "title": "Tartines ricotta, miel & noix",
@@ -3097,7 +3391,13 @@
         "aisle": "produce"
       }
     ],
-    "needsReview": []
+    "needsReview": [],
+    "kcal": 795.0,
+    "proteins": 32.1,
+    "carbs": 119.0,
+    "fat": 50.4,
+    "fiber": 12.1,
+    "salt": 2.0
   },
   {
     "title": "Smoothie bowl mangue-passion",
@@ -3156,6 +3456,980 @@
         "aisle": "produce"
       }
     ],
-    "needsReview": []
+    "needsReview": [],
+    "kcal": 678.3,
+    "proteins": 9.2,
+    "carbs": 87.7,
+    "fat": 28.5,
+    "fiber": 14.0,
+    "salt": 0.2
+  },
+  {
+    "title": "Gratin de courgettes et pommes de terre",
+    "notionUrl": "https://app.notion.com/p/3a59f1d9d45a8109b072ed1d1b86581d",
+    "mealTypes": [
+      "dinner"
+    ],
+    "categories": [
+      "ovenBaked",
+      "vegetarian"
+    ],
+    "dietaryTags": [
+      "vegetarian",
+      "chickenOnly",
+      "pescatarian",
+      "omnivore"
+    ],
+    "effortProfile": "balanced",
+    "prepTime": "min45to60",
+    "servings": 4,
+    "instructions": "Préchauffer le four à 180°C. Éplucher et couper les pommes de terre et les courgettes en fines rondelles. Disposer les légumes en couches alternées dans un plat à gratin, avec l'ail émincé. Verser la crème fraîche sur les légumes, puis parsemer de gruyère râpé. Enfourner 45 minutes jusqu'à ce que le gratin soit doré et les légumes fondants.",
+    "ingredients": [
+      {
+        "name": "Courgettes",
+        "amount": 3,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Pommes de terre",
+        "amount": 4,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Crème fraîche",
+        "amount": 200,
+        "unit": "ml",
+        "aisle": "fresh"
+      },
+      {
+        "name": "Gruyère râpé",
+        "amount": 100,
+        "unit": "g",
+        "aisle": "fresh"
+      },
+      {
+        "name": "Ail",
+        "amount": 2,
+        "unit": "gousses",
+        "aisle": "produce"
+      }
+    ],
+    "kcal": 1564.7,
+    "proteins": 50.6,
+    "carbs": 112.4,
+    "fat": 95.8,
+    "fiber": 25.5,
+    "salt": 1.6
+  },
+  {
+    "title": "Bircher muesli pommes & noisettes",
+    "notionUrl": "https://app.notion.com/p/3a59f1d9d45a81109b0dce10b68b7544",
+    "mealTypes": [
+      "breakfast"
+    ],
+    "categories": [
+      "vegetarian"
+    ],
+    "dietaryTags": [
+      "vegetarian",
+      "chickenOnly",
+      "pescatarian",
+      "omnivore"
+    ],
+    "effortProfile": "light",
+    "prepTime": "under15",
+    "servings": 2,
+    "instructions": "Mélanger les flocons d'avoine avec le lait et le yaourt dans un bol. Couvrir et laisser reposer au réfrigérateur toute la nuit. Le lendemain, râper la pomme et l'incorporer au mélange, ajouter le miel et les noisettes concassées, puis mélanger et déguster frais.",
+    "ingredients": [
+      {
+        "name": "Flocons d'avoine",
+        "amount": 80,
+        "unit": "g",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Lait",
+        "amount": 200,
+        "unit": "ml",
+        "aisle": "fresh"
+      },
+      {
+        "name": "Pomme",
+        "amount": 1,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Noisettes concassées",
+        "amount": 30,
+        "unit": "g",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Yaourt nature",
+        "amount": 1,
+        "unit": null,
+        "aisle": "fresh"
+      },
+      {
+        "name": "Miel",
+        "amount": 1,
+        "unit": "cuillère à soupe",
+        "aisle": "grocery"
+      }
+    ],
+    "kcal": 793.3,
+    "proteins": 25.1,
+    "carbs": 98.2,
+    "fat": 28.9,
+    "fiber": 14.5,
+    "salt": 0.3
+  },
+  {
+    "title": "Barres énergétiques avoine-miel",
+    "notionUrl": "https://app.notion.com/p/3a59f1d9d45a812c8cf5c449a5d04f52",
+    "mealTypes": [
+      "snack"
+    ],
+    "categories": [
+      "cookies"
+    ],
+    "dietaryTags": [
+      "vegetarian",
+      "chickenOnly",
+      "pescatarian",
+      "omnivore"
+    ],
+    "effortProfile": "light",
+    "prepTime": "min15to30",
+    "servings": 8,
+    "instructions": "Préchauffer le four à 160°C. Mixer grossièrement les dattes et les amandes, puis mélanger avec les flocons d'avoine, le miel et le beurre de cacahuète fondu. Étaler le mélange dans un plat rectangulaire tapissé de papier cuisson en tassant bien, et enfourner 15 à 18 minutes. Laisser refroidir complètement avant de découper en barres.",
+    "ingredients": [
+      {
+        "name": "Flocons d'avoine",
+        "amount": 150,
+        "unit": "g",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Miel",
+        "amount": 3,
+        "unit": "cuillère à soupe",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Beurre de cacahuète",
+        "amount": 2,
+        "unit": "cuillère à soupe",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Amandes",
+        "amount": 50,
+        "unit": "g",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Dattes dénoyautées",
+        "amount": 80,
+        "unit": "g",
+        "aisle": "grocery"
+      }
+    ],
+    "kcal": 1504.9,
+    "proteins": 34.3,
+    "carbs": 200.3,
+    "fat": 54.0,
+    "fiber": 30.5,
+    "salt": 0.4
+  },
+  {
+    "title": "Smoothie vert pomme-épinard",
+    "notionUrl": "https://app.notion.com/p/3a59f1d9d45a81478de3df70b790797f",
+    "mealTypes": [
+      "snack"
+    ],
+    "categories": [
+      "vegetarian"
+    ],
+    "dietaryTags": [
+      "vegetarian",
+      "chickenOnly",
+      "pescatarian",
+      "omnivore"
+    ],
+    "effortProfile": "light",
+    "prepTime": "under15",
+    "servings": 2,
+    "instructions": "Couper les pommes en morceaux. Mixer tous les ingrédients ensemble jusqu'à obtenir une texture lisse. Servir immédiatement, bien frais.",
+    "ingredients": [
+      {
+        "name": "Pommes",
+        "amount": 2,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Épinards frais",
+        "amount": 1,
+        "unit": "poignée",
+        "aisle": "produce"
+      },
+      {
+        "name": "Banane",
+        "amount": 1,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Lait d'amande",
+        "amount": 200,
+        "unit": "ml",
+        "aisle": "fresh"
+      },
+      {
+        "name": "Citron",
+        "amount": 0.5,
+        "unit": null,
+        "aisle": "produce"
+      }
+    ],
+    "kcal": 352.4,
+    "proteins": 5.0,
+    "carbs": 61.0,
+    "fat": 7.9,
+    "fiber": 9.3,
+    "salt": 0.2
+  },
+  {
+    "title": "Risotto aux champignons",
+    "notionUrl": "https://app.notion.com/p/3a59f1d9d45a8178b41fc0536c9e680f",
+    "mealTypes": [
+      "dinner"
+    ],
+    "categories": [
+      "vegetarian"
+    ],
+    "dietaryTags": [
+      "vegetarian",
+      "chickenOnly",
+      "pescatarian",
+      "omnivore"
+    ],
+    "effortProfile": "carbLoad",
+    "prepTime": "min30to45",
+    "servings": 4,
+    "instructions": "Faire chauffer le bouillon de légumes dans une casserole et le garder frémissant. Faire revenir l'oignon émincé dans le beurre, ajouter le riz et le nacrer 2 minutes, puis déglacer avec le vin blanc et laisser évaporer. Ajouter le bouillon louche par louche, en remuant régulièrement, jusqu'à absorption complète (environ 18-20 minutes). Faire revenir les champignons émincés à part dans une poêle, puis les incorporer avec le parmesan au riz en fin de cuisson.",
+    "ingredients": [
+      {
+        "name": "Riz à risotto",
+        "amount": 300,
+        "unit": "g",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Champignons",
+        "amount": 400,
+        "unit": "g",
+        "aisle": "produce"
+      },
+      {
+        "name": "Oignon",
+        "amount": 1,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Vin blanc",
+        "amount": 1,
+        "unit": "verre",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Bouillon de légumes",
+        "amount": 1,
+        "unit": "L",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Parmesan",
+        "amount": 50,
+        "unit": "g",
+        "aisle": "fresh"
+      },
+      {
+        "name": "Beurre",
+        "amount": 30,
+        "unit": "g",
+        "aisle": "fresh"
+      }
+    ],
+    "kcal": 1718.6,
+    "proteins": 50.0,
+    "carbs": 252.2,
+    "fat": 46.4,
+    "fiber": 10.3,
+    "salt": 7.4
+  },
+  {
+    "title": "Pain perdu à la cannelle",
+    "notionUrl": "https://app.notion.com/p/3a59f1d9d45a81829e4bfa25bc4e614f",
+    "mealTypes": [
+      "breakfast"
+    ],
+    "categories": [
+      "dessert"
+    ],
+    "dietaryTags": [
+      "vegetarian",
+      "chickenOnly",
+      "pescatarian",
+      "omnivore"
+    ],
+    "effortProfile": "light",
+    "prepTime": "min15to30",
+    "servings": 2,
+    "instructions": "Fouetter les oeufs avec le lait, le sucre et la cannelle dans un plat creux. Tremper les tranches de pain des deux côtés dans le mélange. Faire chauffer le beurre dans une poêle et faire dorer les tranches de pain perdu 2 à 3 minutes de chaque côté. Servir chaud, éventuellement avec un peu de sucre ou de miel.",
+    "ingredients": [
+      {
+        "name": "Pain rassis",
+        "amount": 4,
+        "unit": "tranches",
+        "aisle": "bakery"
+      },
+      {
+        "name": "Oeufs",
+        "amount": 2,
+        "unit": null,
+        "aisle": "fresh"
+      },
+      {
+        "name": "Lait",
+        "amount": 200,
+        "unit": "ml",
+        "aisle": "fresh"
+      },
+      {
+        "name": "Sucre",
+        "amount": 1,
+        "unit": "cuillère à soupe",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Cannelle",
+        "amount": 1,
+        "unit": "cuillère à café",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Beurre",
+        "amount": 20,
+        "unit": "g",
+        "aisle": "fresh"
+      }
+    ],
+    "kcal": 797.4,
+    "proteins": 31.1,
+    "carbs": 91.8,
+    "fat": 32.2,
+    "fiber": 6.0,
+    "salt": 2.0
+  },
+  {
+    "title": "Fromage blanc, noix et miel",
+    "notionUrl": "https://app.notion.com/p/3a59f1d9d45a8185b514dd7731b6d7e1",
+    "mealTypes": [
+      "snack"
+    ],
+    "categories": [
+      "dessert"
+    ],
+    "dietaryTags": [
+      "vegetarian",
+      "chickenOnly",
+      "pescatarian",
+      "omnivore"
+    ],
+    "effortProfile": "light",
+    "prepTime": "under15",
+    "servings": 2,
+    "instructions": "Répartir le fromage blanc dans deux bols, parsemer de noix concassées et arroser d'un filet de miel avant de servir.",
+    "ingredients": [
+      {
+        "name": "Fromage blanc",
+        "amount": 300,
+        "unit": "g",
+        "aisle": "fresh"
+      },
+      {
+        "name": "Noix concassées",
+        "amount": 40,
+        "unit": "g",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Miel",
+        "amount": 2,
+        "unit": "cuillère à soupe",
+        "aisle": "grocery"
+      }
+    ],
+    "kcal": 662.6,
+    "proteins": 26.7,
+    "carbs": 56.3,
+    "fat": 35.4,
+    "fiber": 2.7,
+    "salt": 0.3
+  },
+  {
+    "title": "Poulet rôti aux herbes et pommes de terre",
+    "notionUrl": "https://app.notion.com/p/3a59f1d9d45a81ab9885ee6a9dc08b57",
+    "mealTypes": [
+      "dinner"
+    ],
+    "categories": [
+      "ovenBaked"
+    ],
+    "dietaryTags": [
+      "chickenOnly",
+      "omnivore"
+    ],
+    "effortProfile": "balanced",
+    "prepTime": "min45to60",
+    "servings": 4,
+    "instructions": "Préchauffer le four à 200°C. Couper les pommes de terre en quartiers. Disposer le poulet et les pommes de terre dans un plat, ajouter l'ail entier en chemise. Arroser d'huile d'olive et de jus de citron, parsemer de thym. Enfourner 45 minutes en retournant à mi-cuisson, jusqu'à ce que le poulet soit doré.",
+    "ingredients": [
+      {
+        "name": "Cuisses de poulet",
+        "amount": 4,
+        "unit": null,
+        "aisle": "butcher"
+      },
+      {
+        "name": "Pommes de terre",
+        "amount": 6,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Ail",
+        "amount": 3,
+        "unit": "gousses",
+        "aisle": "produce"
+      },
+      {
+        "name": "Thym",
+        "amount": 1,
+        "unit": "cuillère à soupe",
+        "aisle": "produce"
+      },
+      {
+        "name": "Huile d'olive",
+        "amount": 3,
+        "unit": "cuillère à soupe",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Citron",
+        "amount": 1,
+        "unit": null,
+        "aisle": "produce"
+      }
+    ],
+    "needsReview": [
+      "categories"
+    ],
+    "kcal": 2652.8,
+    "proteins": 157.3,
+    "carbs": 148.2,
+    "fat": 151.0,
+    "fiber": 20.8,
+    "salt": 1.8
+  },
+  {
+    "title": "Riz sauté aux légumes et oeuf",
+    "notionUrl": "https://app.notion.com/p/3a59f1d9d45a81bdaef9c9cffd10ebaf",
+    "mealTypes": [
+      "lunch"
+    ],
+    "categories": [
+      "vegetarian"
+    ],
+    "dietaryTags": [
+      "vegetarian",
+      "chickenOnly",
+      "pescatarian",
+      "omnivore"
+    ],
+    "effortProfile": "carbLoad",
+    "prepTime": "min15to30",
+    "servings": 2,
+    "instructions": "Faire chauffer l'huile dans un wok ou une grande poêle. Faire revenir l'oignon émincé et les carottes coupées en dés pendant 5 minutes, puis ajouter les petits pois et poursuivre la cuisson 5 minutes. Pousser les légumes sur le côté, casser les oeufs dans la poêle et les brouiller. Ajouter le riz cuit et la sauce soja, mélanger bien pendant 3 à 4 minutes à feu vif, puis servir chaud.",
+    "ingredients": [
+      {
+        "name": "Riz basmati",
+        "amount": 200,
+        "unit": "g",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Oeufs",
+        "amount": 2,
+        "unit": null,
+        "aisle": "fresh"
+      },
+      {
+        "name": "Carottes",
+        "amount": 100,
+        "unit": "g",
+        "aisle": "produce"
+      },
+      {
+        "name": "Petits pois",
+        "amount": 100,
+        "unit": "g",
+        "aisle": "produce"
+      },
+      {
+        "name": "Oignon",
+        "amount": 1,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Sauce soja",
+        "amount": 2,
+        "unit": "cuillère à soupe",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Huile neutre",
+        "amount": 1,
+        "unit": "cuillère à soupe",
+        "aisle": "grocery"
+      }
+    ],
+    "kcal": 1141.1,
+    "proteins": 38.2,
+    "carbs": 178.3,
+    "fat": 27.7,
+    "fiber": 13.4,
+    "salt": 4.7
+  },
+  {
+    "title": "Oeufs au plat, tomates rôties & avocat toast",
+    "notionUrl": "https://app.notion.com/p/3a59f1d9d45a81c59d5ac03cc8405a1e",
+    "mealTypes": [
+      "breakfast"
+    ],
+    "categories": [
+      "toast"
+    ],
+    "dietaryTags": [
+      "vegetarian",
+      "chickenOnly",
+      "pescatarian",
+      "omnivore"
+    ],
+    "effortProfile": "light",
+    "prepTime": "min15to30",
+    "servings": 2,
+    "instructions": "Préchauffer le four à 200°C. Couper les tomates en deux, arroser d'huile d'olive, saler et enfourner 15 minutes. Faire griller les tranches de pain. Écraser l'avocat à la fourchette et l'étaler sur le pain grillé. Faire cuire les oeufs au plat dans une poêle huilée. Servir les oeufs sur les toasts à l'avocat, accompagnés des tomates rôties.",
+    "ingredients": [
+      {
+        "name": "Oeufs",
+        "amount": 4,
+        "unit": null,
+        "aisle": "fresh"
+      },
+      {
+        "name": "Tomates",
+        "amount": 2,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Avocat",
+        "amount": 1,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Pain",
+        "amount": 4,
+        "unit": "tranches",
+        "aisle": "bakery"
+      },
+      {
+        "name": "Huile d'olive",
+        "amount": 2,
+        "unit": "cuillère à soupe",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Sel",
+        "amount": null,
+        "unit": "pincée",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Poivre",
+        "amount": null,
+        "unit": "pincée",
+        "aisle": "grocery"
+      }
+    ],
+    "kcal": 1240.7,
+    "proteins": 41.7,
+    "carbs": 74.7,
+    "fat": 83.4,
+    "fiber": 12.7,
+    "salt": 3.2
+  },
+  {
+    "title": "Compote pomme-poire maison, fromage blanc",
+    "notionUrl": "https://app.notion.com/p/3a59f1d9d45a81c8a85ec710cd9d2d31",
+    "mealTypes": [
+      "breakfast"
+    ],
+    "categories": [
+      "dessert"
+    ],
+    "dietaryTags": [
+      "vegetarian",
+      "chickenOnly",
+      "pescatarian",
+      "omnivore"
+    ],
+    "effortProfile": "light",
+    "prepTime": "min15to30",
+    "servings": 2,
+    "instructions": "Éplucher et couper les pommes et les poires en morceaux. Les faire cuire à couvert dans une casserole avec un fond d'eau pendant 15 à 20 minutes, jusqu'à ce qu'elles soient tendres. Écraser à la fourchette ou mixer selon la texture souhaitée, sucrer si besoin, puis laisser refroidir. Servir la compote avec le fromage blanc.",
+    "ingredients": [
+      {
+        "name": "Pommes",
+        "amount": 3,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Poires",
+        "amount": 2,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Sucre (facultatif)",
+        "amount": 1,
+        "unit": "cuillère à soupe",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Fromage blanc",
+        "amount": 200,
+        "unit": "g",
+        "aisle": "fresh"
+      }
+    ],
+    "kcal": 632.6,
+    "proteins": 16.2,
+    "carbs": 116.7,
+    "fat": 7.6,
+    "fiber": 15.0,
+    "salt": 0.2
+  },
+  {
+    "title": "Sandwich club poulet-lardons",
+    "notionUrl": "https://app.notion.com/p/3a59f1d9d45a81d68546cca2cf8925b3",
+    "mealTypes": [
+      "lunch"
+    ],
+    "categories": [
+      "sandwich"
+    ],
+    "dietaryTags": [
+      "omnivore"
+    ],
+    "effortProfile": "light",
+    "prepTime": "min15to30",
+    "servings": 2,
+    "instructions": "Faire griller les tranches de pain de mie. Faire revenir les lardons à la poêle jusqu'à ce qu'ils soient dorés. Émincer le poulet et couper la tomate en tranches. Tartiner les tranches de pain de mayonnaise, puis monter le sandwich en alternant pain, salade, tomate, poulet et lardons, sur trois étages. Couper en triangles et servir.",
+    "ingredients": [
+      {
+        "name": "Pain de mie",
+        "amount": 6,
+        "unit": "tranches",
+        "aisle": "bakery"
+      },
+      {
+        "name": "Blanc de poulet cuit",
+        "amount": 1,
+        "unit": null,
+        "aisle": "butcher"
+      },
+      {
+        "name": "Lardons",
+        "amount": 100,
+        "unit": "g",
+        "aisle": "butcher"
+      },
+      {
+        "name": "Salade verte",
+        "amount": 1,
+        "unit": "poignée",
+        "aisle": "produce"
+      },
+      {
+        "name": "Tomate",
+        "amount": 1,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Mayonnaise",
+        "amount": 2,
+        "unit": "cuillère à soupe",
+        "aisle": "grocery"
+      }
+    ],
+    "kcal": 1167.7,
+    "proteins": 65.7,
+    "carbs": 97.1,
+    "fat": 55.2,
+    "fiber": 7.0,
+    "salt": 5.2
+  },
+  {
+    "title": "Gaspacho vert au concombre",
+    "notionUrl": "https://app.notion.com/p/3a59f1d9d45a81e3bfebc758f4ffbe1e",
+    "mealTypes": [
+      "lunch"
+    ],
+    "categories": [
+      "soup",
+      "vegetarian"
+    ],
+    "dietaryTags": [
+      "vegetarian",
+      "chickenOnly",
+      "pescatarian",
+      "omnivore"
+    ],
+    "effortProfile": "light",
+    "prepTime": "under15",
+    "servings": 2,
+    "instructions": "Éplucher et couper le concombre en morceaux. Mixer le concombre avec le yaourt, l'ail, la menthe, l'huile d'olive et le jus de citron. Saler et poivrer selon le goût, puis réserver au réfrigérateur au moins 30 minutes avant de servir bien frais.",
+    "ingredients": [
+      {
+        "name": "Concombre",
+        "amount": 1,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Yaourt nature",
+        "amount": 1,
+        "unit": null,
+        "aisle": "fresh"
+      },
+      {
+        "name": "Ail",
+        "amount": 1,
+        "unit": "gousse",
+        "aisle": "produce"
+      },
+      {
+        "name": "Menthe fraîche",
+        "amount": null,
+        "unit": "feuilles",
+        "aisle": "produce"
+      },
+      {
+        "name": "Huile d'olive",
+        "amount": 2,
+        "unit": "cuillère à soupe",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Citron",
+        "amount": 1,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Sel",
+        "amount": null,
+        "unit": "pincée",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Poivre",
+        "amount": null,
+        "unit": "pincée",
+        "aisle": "grocery"
+      }
+    ],
+    "kcal": 380.3,
+    "proteins": 7.3,
+    "carbs": 15.5,
+    "fat": 30.7,
+    "fiber": 2.3,
+    "salt": 1.1
+  },
+  {
+    "title": "Curry de légumes au lait de coco",
+    "notionUrl": "https://app.notion.com/p/3a59f1d9d45a81f8aab8d4542cba753b",
+    "mealTypes": [
+      "dinner"
+    ],
+    "categories": [
+      "stew",
+      "vegetarian"
+    ],
+    "dietaryTags": [
+      "vegetarian",
+      "chickenOnly",
+      "pescatarian",
+      "omnivore"
+    ],
+    "effortProfile": "recovery",
+    "prepTime": "min30to45",
+    "servings": 4,
+    "instructions": "Faire revenir l'oignon émincé dans un peu d'huile. Ajouter le curry en poudre et laisser torréfier 1 minute. Ajouter la patate douce, la courgette et le poivron coupés en morceaux, puis verser le lait de coco et laisser mijoter 20 minutes à couvert. Ajouter les pois chiches en fin de cuisson et servir avec le riz basmati cuit.",
+    "ingredients": [
+      {
+        "name": "Lait de coco",
+        "amount": 400,
+        "unit": "ml",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Patate douce",
+        "amount": 1,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Courgette",
+        "amount": 1,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Poivron",
+        "amount": 1,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Pois chiches cuits",
+        "amount": 200,
+        "unit": "g",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Oignon",
+        "amount": 1,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Curry en poudre",
+        "amount": 2,
+        "unit": "cuillère à soupe",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Riz basmati",
+        "amount": 200,
+        "unit": "g",
+        "aisle": "grocery"
+      }
+    ],
+    "kcal": 2052.1,
+    "proteins": 45.3,
+    "carbs": 252.5,
+    "fat": 87.3,
+    "fiber": 36.0,
+    "salt": 1.9
+  },
+  {
+    "title": "Buddha bowl quinoa, pois chiches & légumes rôtis",
+    "notionUrl": "https://app.notion.com/p/3a59f1d9d45a81fb9468c44d56933e6c",
+    "mealTypes": [
+      "lunch"
+    ],
+    "categories": [
+      "salad",
+      "vegetarian"
+    ],
+    "dietaryTags": [
+      "vegetarian",
+      "chickenOnly",
+      "pescatarian",
+      "omnivore"
+    ],
+    "effortProfile": "recovery",
+    "prepTime": "min30to45",
+    "servings": 2,
+    "instructions": "Préchauffer le four à 200°C. Couper la patate douce et la courgette en cubes, arroser d'huile d'olive et enfourner 25 minutes. Faire cuire le quinoa selon les indications du paquet. Préparer la sauce en mélangeant le tahini et le jus de citron avec un peu d'eau. Répartir le quinoa, les épinards, les pois chiches et les légumes rôtis dans des bols, puis arroser de sauce tahini-citron avant de servir.",
+    "ingredients": [
+      {
+        "name": "Quinoa",
+        "amount": 150,
+        "unit": "g",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Pois chiches cuits",
+        "amount": 200,
+        "unit": "g",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Patate douce",
+        "amount": 1,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Courgette",
+        "amount": 1,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Huile d'olive",
+        "amount": 2,
+        "unit": "cuillère à soupe",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Tahini",
+        "amount": 1,
+        "unit": "cuillère à soupe",
+        "aisle": "grocery"
+      },
+      {
+        "name": "Citron",
+        "amount": 1,
+        "unit": null,
+        "aisle": "produce"
+      },
+      {
+        "name": "Épinards frais",
+        "amount": 1,
+        "unit": "poignée",
+        "aisle": "produce"
+      }
+    ],
+    "kcal": 1340.5,
+    "proteins": 42.4,
+    "carbs": 158.3,
+    "fat": 51.5,
+    "fiber": 31.4,
+    "salt": 1.5
   }
 ]

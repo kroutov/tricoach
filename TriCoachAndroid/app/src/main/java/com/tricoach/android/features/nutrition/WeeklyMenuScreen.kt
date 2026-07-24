@@ -49,6 +49,7 @@ import com.tricoach.android.models.MealType
 import com.tricoach.android.models.MenuSelection
 import com.tricoach.android.models.MenuSelectionStatus
 import com.tricoach.android.models.Recipe
+import com.tricoach.android.models.kcalPerServing
 import com.tricoach.android.models.label
 import kotlinx.coroutines.launch
 import java.time.LocalDate
@@ -244,6 +245,9 @@ private fun FilledSlotRow(selection: MenuSelection, onClick: () -> Unit) {
         Column(modifier = Modifier.weight(1f)) {
             Text(selection.mealType.label, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
             Text(selection.recipe.title, style = MaterialTheme.typography.bodyMedium)
+            selection.recipe.kcalPerServing()?.let {
+                Text("$it kcal", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            }
         }
         if (selection.status == MenuSelectionStatus.PROPOSED) {
             Text(
@@ -282,7 +286,10 @@ private fun SlotDetailDialog(
     AlertDialog(
         onDismissRequest = onDismiss,
         title = { Text(selection.recipe.title) },
-        text = { Text("${selection.mealType.label} · ${selection.recipe.effortProfile.label}") },
+        text = {
+            val kcalSuffix = selection.recipe.kcalPerServing()?.let { " · $it kcal" } ?: ""
+            Text("${selection.mealType.label} · ${selection.recipe.effortProfile.label}$kcalSuffix")
+        },
         confirmButton = {
             Row {
                 if (selection.status == MenuSelectionStatus.PROPOSED) {

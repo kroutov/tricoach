@@ -41,6 +41,12 @@ export function serializeRecipe(recipe: RecipeWithIngredients) {
     servings: recipe.servings,
     instructions: recipe.instructions,
     ingredients: recipe.ingredients.map(serializeIngredient),
+    kcal: recipe.kcal,
+    proteins: recipe.proteins,
+    carbs: recipe.carbs,
+    fat: recipe.fat,
+    fiber: recipe.fiber,
+    salt: recipe.salt,
   };
 }
 

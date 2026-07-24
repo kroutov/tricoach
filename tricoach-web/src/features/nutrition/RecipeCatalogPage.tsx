@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { getRecipes, type Recipe, type RecipeCatalogFilter } from '../../api/nutrition';
+import { getRecipes, kcalPerServing, type Recipe, type RecipeCatalogFilter } from '../../api/nutrition';
 import {
   DIETARY_TAG_OPTIONS,
   MEAL_TYPE_OPTIONS,
@@ -20,13 +20,31 @@ import { PillBadge } from '../../components/PillBadge';
 import { Modal } from '../../components/Modal';
 
 function RecipeDetail({ recipe }: { recipe: Recipe }) {
+  const kcal = kcalPerServing(recipe);
   return (
     <div className="space-y-3">
       <div className="flex flex-wrap gap-1">
         <PillBadge text={effortProfileLabel[recipe.effortProfile]} tint={effortProfileColorVar[recipe.effortProfile]} />
         <PillBadge text={prepTimeBucketLabel[recipe.prepTime]} tint="var(--color-secondary-text)" />
         <PillBadge text={`${recipe.servings} pers.`} tint="var(--color-secondary-text)" />
+        {kcal != null && <PillBadge text={`${kcal} kcal / portion`} tint="var(--color-secondary-text)" />}
       </div>
+      {(recipe.proteins != null || recipe.carbs != null || recipe.fat != null || recipe.fiber != null || recipe.salt != null) && (
+        <div>
+          <p className="text-sm font-semibold text-primary-text">Nutrition (par portion)</p>
+          <p className="mt-1 text-sm text-secondary-text">
+            {[
+              recipe.proteins != null && `${Math.round(recipe.proteins / recipe.servings)}g protéines`,
+              recipe.carbs != null && `${Math.round(recipe.carbs / recipe.servings)}g glucides`,
+              recipe.fat != null && `${Math.round(recipe.fat / recipe.servings)}g lipides`,
+              recipe.fiber != null && `${Math.round(recipe.fiber / recipe.servings)}g fibres`,
+              recipe.salt != null && `${(recipe.salt / recipe.servings).toFixed(1)}g sel`,
+            ]
+              .filter(Boolean)
+              .join(' · ')}
+          </p>
+        </div>
+      )}
       <div>
         <p className="text-sm font-semibold text-primary-text">Ingrédients</p>
         <ul className="mt-1 list-disc space-y-0.5 pl-5 text-sm text-secondary-text">
@@ -122,18 +140,22 @@ export function RecipeCatalogPage() {
         <p className="text-center text-secondary-text">Aucune recette ne correspond à ces filtres.</p>
       ) : (
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-          {(recipes ?? []).map((recipe) => (
-            <button key={recipe.id} type="button" onClick={() => setSelected(recipe)} aria-label={recipe.title} className="text-left">
-              <Card className="h-full space-y-2">
-                <p className="font-medium text-primary-text">{recipe.title}</p>
-                <div className="flex flex-wrap gap-1">
-                  <PillBadge text={effortProfileLabel[recipe.effortProfile]} tint={effortProfileColorVar[recipe.effortProfile]} />
-                  <PillBadge text={prepTimeBucketLabel[recipe.prepTime]} tint="var(--color-secondary-text)" />
-                </div>
-                <p className="text-xs text-secondary-text">{recipe.categories.map((c) => recipeCategoryLabel[c]).join(', ')}</p>
-              </Card>
-            </button>
-          ))}
+          {(recipes ?? []).map((recipe) => {
+            const kcal = kcalPerServing(recipe);
+            return (
+              <button key={recipe.id} type="button" onClick={() => setSelected(recipe)} aria-label={recipe.title} className="text-left">
+                <Card className="h-full space-y-2">
+                  <p className="font-medium text-primary-text">{recipe.title}</p>
+                  <div className="flex flex-wrap gap-1">
+                    <PillBadge text={effortProfileLabel[recipe.effortProfile]} tint={effortProfileColorVar[recipe.effortProfile]} />
+                    <PillBadge text={prepTimeBucketLabel[recipe.prepTime]} tint="var(--color-secondary-text)" />
+                    {kcal != null && <PillBadge text={`${kcal} kcal`} tint="var(--color-secondary-text)" />}
+                  </div>
+                  <p className="text-xs text-secondary-text">{recipe.categories.map((c) => recipeCategoryLabel[c]).join(', ')}</p>
+                </Card>
+              </button>
+            );
+          })}
         </div>
       )}
 

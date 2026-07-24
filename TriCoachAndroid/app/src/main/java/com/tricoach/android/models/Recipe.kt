@@ -23,4 +23,13 @@ data class Recipe(
     val servings: Int,
     val instructions: String,
     val ingredients: List<RecipeIngredient> = emptyList(),
+    val kcal: Double? = null,
+    val proteins: Double? = null,
+    val carbs: Double? = null,
+    val fat: Double? = null,
+    val fiber: Double? = null,
+    val salt: Double? = null,
 )
+
+/** Nutrition totals from the API are for the whole recipe (all servings) — divide down for a per-portion read. */
+fun Recipe.kcalPerServing(): Int? = kcal?.let { Math.round(it / servings).toInt() }

@@ -41,6 +41,12 @@ interface ImportRecipe {
   servings: number;
   instructions: string;
   ingredients: ImportIngredient[];
+  kcal?: number | null;
+  proteins?: number | null;
+  carbs?: number | null;
+  fat?: number | null;
+  fiber?: number | null;
+  salt?: number | null;
 }
 
 async function main() {
@@ -60,6 +66,12 @@ async function main() {
       prepTime: prepTimeBucketMap.toDb(recipe.prepTime as Parameters<typeof prepTimeBucketMap.toDb>[0]),
       servings: recipe.servings,
       instructions: recipe.instructions,
+      kcal: recipe.kcal ?? null,
+      proteins: recipe.proteins ?? null,
+      carbs: recipe.carbs ?? null,
+      fat: recipe.fat ?? null,
+      fiber: recipe.fiber ?? null,
+      salt: recipe.salt ?? null,
     };
 
     const existing = await prisma.recipe.findFirst({ where: { title: recipe.title } });

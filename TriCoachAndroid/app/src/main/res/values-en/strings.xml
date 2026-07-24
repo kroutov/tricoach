@@ -142,6 +142,19 @@
     <string name="recipe_detail_instructions_title">Instructions</string>
     <!-- %1$d: servings count -->
     <string name="recipe_detail_servings">%1$d servings</string>
+    <!-- %1$d: calories per serving -->
+    <string name="recipe_detail_kcal">%1$d kcal</string>
+    <string name="recipe_detail_nutrition_title">Nutrition (per serving)</string>
+    <!-- %1$d: grams of protein per serving -->
+    <string name="recipe_detail_nutrition_proteins">Protein: %1$dg</string>
+    <!-- %1$d: grams of carbs per serving -->
+    <string name="recipe_detail_nutrition_carbs">Carbs: %1$dg</string>
+    <!-- %1$d: grams of fat per serving -->
+    <string name="recipe_detail_nutrition_fat">Fat: %1$dg</string>
+    <!-- %1$d: grams of fiber per serving -->
+    <string name="recipe_detail_nutrition_fiber">Fiber: %1$dg</string>
+    <!-- %1$s: grams of salt per serving, formatted with one decimal -->
+    <string name="recipe_detail_nutrition_salt">Salt: %1$sg</string>
 
     <!-- Grocery List -->
     <string name="grocery_list_today">Today</string>

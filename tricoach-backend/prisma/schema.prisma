@@ -471,6 +471,15 @@ model Recipe {
   isActive     Boolean          @default(true) @map("is_active")
   createdAt    DateTime         @default(now()) @map("created_at")
 
+  // Nutrition totals for the whole recipe (all servings), sourced from the
+  // Notion "Recettes" database. Null until filled in there.
+  kcal     Float?
+  proteins Float?
+  carbs    Float?
+  fat      Float?
+  fiber    Float?
+  salt     Float?
+
   ingredients    RecipeIngredient[]
   menuSelections MenuSelection[]
 

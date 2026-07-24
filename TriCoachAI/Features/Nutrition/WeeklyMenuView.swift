@@ -147,6 +147,9 @@ struct WeeklyMenuView: View {
                                 PillBadge(text: MenuSelectionStatus.proposed.label, tint: TCColor.brand)
                             }
                             PillBadge(text: selection.recipe.effortProfile.label, tint: TCColor.color(for: selection.recipe.effortProfile))
+                            if let kcal = selection.recipe.kcalPerServing {
+                                PillBadge(text: "\(kcal) kcal", tint: TCColor.secondaryText)
+                            }
                         }
                     }
                 }
@@ -203,6 +206,9 @@ private struct SuggestionSheet: View {
                                             Text(recipe.title).foregroundStyle(TCColor.primaryText)
                                             Spacer()
                                             PillBadge(text: recipe.effortProfile.label, tint: TCColor.color(for: recipe.effortProfile))
+                                            if let kcal = recipe.kcalPerServing {
+                                                PillBadge(text: "\(kcal) kcal", tint: TCColor.secondaryText)
+                                            }
                                         }
                                     }
                                 }

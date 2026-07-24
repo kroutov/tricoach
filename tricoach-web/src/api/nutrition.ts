@@ -20,6 +20,17 @@ export interface Recipe {
   servings: number;
   instructions: string;
   ingredients: RecipeIngredient[];
+  kcal: number | null;
+  proteins: number | null;
+  carbs: number | null;
+  fat: number | null;
+  fiber: number | null;
+  salt: number | null;
+}
+
+/** Nutrition totals in Recipe are for the whole recipe (all servings) — divide down for a per-portion read. */
+export function kcalPerServing(recipe: Pick<Recipe, 'kcal' | 'servings'>): number | null {
+  return recipe.kcal != null ? Math.round(recipe.kcal / recipe.servings) : null;
 }
 
 export interface RecipeCatalogFilter {

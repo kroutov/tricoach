@@ -116,6 +116,18 @@ struct Recipe: Codable, Identifiable, Equatable, Hashable {
     let servings: Int
     let instructions: String
     let ingredients: [RecipeIngredient]
+    let kcal: Double?
+    let proteins: Double?
+    let carbs: Double?
+    let fat: Double?
+    let fiber: Double?
+    let salt: Double?
+
+    /// Nutrition totals from the API are for the whole recipe (all servings) — divide down for a per-portion read.
+    var kcalPerServing: Int? {
+        guard let kcal, servings > 0 else { return nil }
+        return Int((kcal / Double(servings)).rounded())
+    }
 }
 
 struct SuggestedRecipesResponse: Codable {

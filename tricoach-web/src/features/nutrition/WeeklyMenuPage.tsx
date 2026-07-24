@@ -6,6 +6,7 @@ import {
   deleteMenuSelection,
   getMenuSelections,
   getSuggestedRecipes,
+  kcalPerServing,
   setMenuSelection,
   type MenuSelection,
   type Recipe,
@@ -53,17 +54,23 @@ function SuggestionModal({ pending, onClose, onPicked }: { pending: PendingCell;
             </p>
           )}
           <div className="space-y-2">
-            {(data?.recipes ?? []).map((recipe) => (
-              <button
-                key={recipe.id}
-                type="button"
-                onClick={() => onPicked(recipe)}
-                className="flex w-full items-center justify-between rounded-control bg-background p-3 text-left"
-              >
-                <span className="font-medium text-primary-text">{recipe.title}</span>
-                <PillBadge text={effortProfileLabel[recipe.effortProfile]} tint={effortProfileColorVar[recipe.effortProfile]} />
-              </button>
-            ))}
+            {(data?.recipes ?? []).map((recipe) => {
+              const kcal = kcalPerServing(recipe);
+              return (
+                <button
+                  key={recipe.id}
+                  type="button"
+                  onClick={() => onPicked(recipe)}
+                  className="flex w-full items-center justify-between rounded-control bg-background p-3 text-left"
+                >
+                  <span className="font-medium text-primary-text">{recipe.title}</span>
+                  <div className="flex flex-wrap gap-1">
+                    <PillBadge text={effortProfileLabel[recipe.effortProfile]} tint={effortProfileColorVar[recipe.effortProfile]} />
+                    {kcal != null && <PillBadge text={`${kcal} kcal`} tint="var(--color-secondary-text)" />}
+                  </div>
+                </button>
+              );
+            })}
             {data && data.recipes.length === 0 && <p className="text-sm text-secondary-text">Aucune suggestion pour ce créneau.</p>}
           </div>
           <Link to="/nutrition/recipes" className="block text-center text-sm font-medium text-brand">
@@ -224,10 +231,15 @@ export function WeeklyMenuPage() {
                                 <PillBadge text={menuSelectionStatusLabel.proposed} tint="var(--color-brand)" />
                               )}
                               <p className="text-xs font-medium leading-tight text-primary-text">{selection.recipe.title}</p>
-                              <PillBadge
-                                text={effortProfileLabel[selection.recipe.effortProfile]}
-                                tint={effortProfileColorVar[selection.recipe.effortProfile]}
-                              />
+                              <div className="flex flex-wrap gap-1">
+                                <PillBadge
+                                  text={effortProfileLabel[selection.recipe.effortProfile]}
+                                  tint={effortProfileColorVar[selection.recipe.effortProfile]}
+                                />
+                                {kcalPerServing(selection.recipe) != null && (
+                                  <PillBadge text={`${kcalPerServing(selection.recipe)} kcal`} tint="var(--color-secondary-text)" />
+                                )}
+                              </div>
                             </Card>
                           </button>
                         ) : (
@@ -272,6 +284,9 @@ export function WeeklyMenuPage() {
                 text={effortProfileLabel[viewing.recipe.effortProfile]}
                 tint={effortProfileColorVar[viewing.recipe.effortProfile]}
               />
+              {kcalPerServing(viewing.recipe) != null && (
+                <PillBadge text={`${kcalPerServing(viewing.recipe)} kcal`} tint="var(--color-secondary-text)" />
+              )}
               {viewing.status === 'proposed' && <PillBadge text={menuSelectionStatusLabel.proposed} tint="var(--color-brand)" />}
             </div>
             <div className="flex gap-2">
