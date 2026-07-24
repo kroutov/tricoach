@@ -31,6 +31,13 @@ final class OnboardingFlowUITests: XCTestCase {
 
         app.tabBars.buttons["Profil"].tap()
         XCTAssertTrue(app.navigationBars["Profil"].waitForExistence(timeout: 5))
-        XCTAssertTrue(app.buttons["Se déconnecter"].waitForExistence(timeout: 5))
+
+        // "Se déconnecter" sits below several integration rows — the List doesn't keep
+        // off-screen rows in the accessibility tree, so scroll it into view first.
+        let signOutButton = app.buttons["Se déconnecter"]
+        for _ in 0..<10 where !signOutButton.exists {
+            app.swipeUp()
+        }
+        XCTAssertTrue(signOutButton.waitForExistence(timeout: 5))
     }
 }
