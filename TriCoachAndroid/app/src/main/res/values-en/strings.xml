@@ -158,6 +158,8 @@
 
     <!-- Grocery List -->
     <string name="grocery_list_today">Today</string>
+    <!-- %1$s: start day (or "day month" if crossing a month boundary), %2$s: end "day month" -->
+    <string name="grocery_list_current_week_range">from %1$s to %2$s</string>
     <string name="grocery_list_aisle_other">Other</string>
     <string name="grocery_list_empty_state">No recipe selected this week.</string>
     <!-- %1$s: exception message, not translated -->
@@ -165,6 +167,8 @@
 
     <!-- Weekly Menu -->
     <string name="weekly_menu_today">Today</string>
+    <!-- %1$s: start day (or "day month" if crossing a month boundary), %2$s: end "day month" -->
+    <string name="weekly_menu_current_week_range">from %1$s to %2$s</string>
     <string name="weekly_menu_confirm_all">Confirm all</string>
     <string name="weekly_menu_action_confirm">Confirm</string>
     <string name="weekly_menu_action_change">Change</string>

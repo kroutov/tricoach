@@ -14,7 +14,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -28,8 +27,10 @@ import androidx.compose.ui.unit.dp
 import com.tricoach.android.R
 import com.tricoach.android.app.AppContainer
 import com.tricoach.android.features.shared.CardBox
+import com.tricoach.android.features.shared.DateNavHeader
 import com.tricoach.android.features.shared.addDays
 import com.tricoach.android.features.shared.formatQuantity
+import com.tricoach.android.features.shared.formatWeekRangeParts
 import com.tricoach.android.features.shared.mondayOfWeek
 import com.tricoach.android.models.ShoppingListResponse
 import com.tricoach.android.models.label
@@ -82,21 +83,17 @@ fun GroceryListScreen(container: AppContainer) {
     LaunchedEffect(state.weekStart) { state.load() }
 
     Column(modifier = Modifier.fillMaxSize()) {
-        Row(
-            modifier = Modifier.fillMaxWidth().padding(16.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            TextButton(onClick = { state.goToPreviousWeek() }) { Text("‹") }
-            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                Text(
-                    "${state.weekStart.format(weekRangeDayFormatter)} – ${addDays(state.weekStart, 6).format(weekRangeDayFormatter)}",
-                    style = MaterialTheme.typography.titleMedium,
-                )
-                TextButton(onClick = { state.goToToday() }) { Text(stringResource(R.string.grocery_list_today)) }
-            }
-            TextButton(onClick = { state.goToNextWeek() }) { Text("›") }
-        }
+        val (rangeStartPart, rangeEndPart) = formatWeekRangeParts(state.weekStart, addDays(state.weekStart, 6))
+        DateNavHeader(
+            rangeLabel = "${state.weekStart.format(weekRangeDayFormatter)} – ${addDays(state.weekStart, 6).format(weekRangeDayFormatter)}",
+            todayLabel = stringResource(R.string.grocery_list_today),
+            onPrevious = { state.goToPreviousWeek() },
+            onNext = { state.goToNextWeek() },
+            onToday = { state.goToToday() },
+            isOnToday = state.weekStart == mondayOfWeek(LocalDate.now()),
+            currentPeriodLabel = stringResource(R.string.grocery_list_current_week_range, rangeStartPart, rangeEndPart),
+            modifier = Modifier.padding(vertical = 8.dp),
+        )
 
         Column(
             modifier = Modifier

@@ -19,7 +19,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -32,6 +31,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.tricoach.android.R
 import com.tricoach.android.app.AppContainer
+import com.tricoach.android.features.shared.DateNavHeader
 import com.tricoach.android.features.shared.WorkoutRow
 import com.tricoach.android.features.shared.formatMonthYear
 import com.tricoach.android.models.Microcycle
@@ -97,18 +97,16 @@ fun CalendarScreen(container: AppContainer, onWorkoutClick: (Workout) -> Unit) {
 
 @Composable
 private fun MonthHeader(state: CalendarState, onPrevious: () -> Unit, onNext: () -> Unit, onToday: () -> Unit) {
-    Row(
-        modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        TextButton(onClick = onPrevious, enabled = state.canGoToPreviousMonth) { Text("‹") }
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Text(formatMonthYear(state.displayedMonth), style = MaterialTheme.typography.titleMedium)
-            TextButton(onClick = onToday) { Text(stringResource(R.string.calendar_today), style = MaterialTheme.typography.labelMedium) }
-        }
-        TextButton(onClick = onNext, enabled = state.canGoToNextMonth) { Text("›") }
-    }
+    DateNavHeader(
+        rangeLabel = formatMonthYear(state.displayedMonth),
+        todayLabel = stringResource(R.string.calendar_today),
+        onPrevious = onPrevious,
+        onNext = onNext,
+        onToday = onToday,
+        isOnToday = state.displayedMonth == YearMonth.now(),
+        canGoPrevious = state.canGoToPreviousMonth,
+        canGoNext = state.canGoToNextMonth,
+    )
 }
 
 @Composable

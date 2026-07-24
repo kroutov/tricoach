@@ -1,7 +1,6 @@
 package com.tricoach.android.features.nutrition
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -40,8 +39,10 @@ import com.tricoach.android.core.network.ConfirmWeekRequest
 import com.tricoach.android.core.network.SetMenuSelectionRequest
 import com.tricoach.android.core.network.apiValue
 import com.tricoach.android.features.shared.CardBox
+import com.tricoach.android.features.shared.DateNavHeader
 import com.tricoach.android.features.shared.RecipeRow
 import com.tricoach.android.features.shared.addDays
+import com.tricoach.android.features.shared.formatWeekRangeParts
 import com.tricoach.android.features.shared.formatWeekdayDate
 import com.tricoach.android.features.shared.mondayOfWeek
 import com.tricoach.android.features.shared.parseIsoDate
@@ -147,21 +148,17 @@ fun WeeklyMenuScreen(container: AppContainer) {
     val proposedCount = state.selections.count { it.status == MenuSelectionStatus.PROPOSED }
 
     Column(modifier = Modifier.fillMaxSize()) {
-        Row(
-            modifier = Modifier.fillMaxWidth().padding(16.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            TextButton(onClick = { state.goToPreviousWeek() }) { Text("‹") }
-            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                Text(
-                    "${state.weekStart.format(weekRangeDayFormatter)} – ${addDays(state.weekStart, 6).format(weekRangeDayFormatter)}",
-                    style = MaterialTheme.typography.titleMedium,
-                )
-                TextButton(onClick = { state.goToToday() }) { Text(stringResource(R.string.weekly_menu_today)) }
-            }
-            TextButton(onClick = { state.goToNextWeek() }) { Text("›") }
-        }
+        val (rangeStartPart, rangeEndPart) = formatWeekRangeParts(state.weekStart, addDays(state.weekStart, 6))
+        DateNavHeader(
+            rangeLabel = "${state.weekStart.format(weekRangeDayFormatter)} – ${addDays(state.weekStart, 6).format(weekRangeDayFormatter)}",
+            todayLabel = stringResource(R.string.weekly_menu_today),
+            onPrevious = { state.goToPreviousWeek() },
+            onNext = { state.goToNextWeek() },
+            onToday = { state.goToToday() },
+            isOnToday = state.weekStart == mondayOfWeek(LocalDate.now()),
+            currentPeriodLabel = stringResource(R.string.weekly_menu_current_week_range, rangeStartPart, rangeEndPart),
+            modifier = Modifier.padding(vertical = 8.dp),
+        )
 
         if (proposedCount > 0) {
             CardBox(modifier = Modifier.padding(horizontal = 16.dp)) {

@@ -35,3 +35,15 @@ private val weekdayDateFormatter = DateTimeFormatter.ofPattern("EEEE d MMM", Loc
 
 /** e.g. "lundi 20 juil." / "Monday 20 Jul" — weekday name is locale-aware natively via the EEEE pattern, no string-resource mapping needed. */
 fun formatWeekdayDate(date: LocalDate): String = date.format(weekdayDateFormatter).replaceFirstChar { it.uppercase() }
+
+private val dayOnlyFormatter = DateTimeFormatter.ofPattern("d", Locale.getDefault())
+private val dayFullMonthFormatter = DateTimeFormatter.ofPattern("d MMMM", Locale.getDefault())
+
+/**
+ * Start/end parts for a natural-language week range, e.g. (start=20, end=26 juillet) so callers can build
+ * "du 20 au 26 juillet", or (start=28 juillet, end=3 août) when the week crosses a month boundary.
+ */
+fun formatWeekRangeParts(start: LocalDate, end: LocalDate): Pair<String, String> {
+    val startPart = if (start.month == end.month) start.format(dayOnlyFormatter) else start.format(dayFullMonthFormatter)
+    return startPart to end.format(dayFullMonthFormatter)
+}
