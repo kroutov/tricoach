@@ -55,7 +55,11 @@ final class APIClient {
             url = components.url ?? url
         }
 
-        var request = URLRequest(url: url)
+        // Every endpoint here is authenticated, per-user, frequently-changing app state (menu,
+        // dashboard, calendar...) — none of it should ever be served from HTTP cache. Without this,
+        // URLSession's default .useProtocolCachePolicy can replay a stale response (served locally,
+        // no real round-trip) for a GET whose query string repeats, hiding server-side changes.
+        var request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData)
         request.httpMethod = method.rawValue
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = bodyData

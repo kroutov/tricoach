@@ -177,9 +177,3 @@ enum class GroceryAisle {
     @SerialName("fresh") FRESH,
     @SerialName("frozen") FROZEN,
 }
-
-@Serializable
-enum class MenuSelectionStatus {
-    @SerialName("proposed") PROPOSED,
-    @SerialName("confirmed") CONFIRMED,
-}

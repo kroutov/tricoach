@@ -123,10 +123,6 @@
     <string name="enum_grocery_aisle_fresh">Rayon frais</string>
     <string name="enum_grocery_aisle_frozen">Surgelé</string>
 
-    <!-- MenuSelectionStatus -->
-    <string name="enum_menu_status_proposed">À valider</string>
-    <string name="enum_menu_status_confirmed">Confirmé</string>
-
     <!-- Recipe Catalog -->
     <string name="recipe_catalog_search_label">Rechercher une recette</string>
     <string name="recipe_catalog_filter_meal_type">Repas</string>
@@ -169,8 +165,6 @@
     <string name="weekly_menu_today">Aujourd\'hui</string>
     <!-- %1$s: start day (or "day month" if crossing a month boundary), %2$s: end "day month" -->
     <string name="weekly_menu_current_week_range">du %1$s au %2$s</string>
-    <string name="weekly_menu_confirm_all">Tout valider</string>
-    <string name="weekly_menu_action_confirm">Valider</string>
     <string name="weekly_menu_action_change">Changer</string>
     <string name="weekly_menu_action_remove">Retirer</string>
     <string name="weekly_menu_picker_title">Choisir une recette</string>
@@ -179,7 +173,6 @@
     <string name="weekly_menu_error_load_failed">Impossible de charger le menu : %1$s</string>
     <string name="weekly_menu_error_save_failed">Impossible d\'enregistrer ce choix : %1$s</string>
     <string name="weekly_menu_error_remove_failed">Impossible de retirer ce menu : %1$s</string>
-    <string name="weekly_menu_error_confirm_failed">Impossible de valider la semaine : %1$s</string>
 
     <!-- Nutrition home -->
     <string name="nutrition_nav_label">Nutrition</string>
@@ -404,11 +397,6 @@
     </plurals>
 
     <!-- French plural rule: "one" covers 0 and 1, "other" covers 2+ -->
-    <plurals name="weekly_menu_proposed_count">
-        <item quantity="one">%d recette proposée — à valider</item>
-        <item quantity="other">%d recettes proposées — à valider</item>
-    </plurals>
-
     <!-- Profile -->
     <string name="profile_title">Profil</string>
     <string name="profile_account_title">Compte</string>

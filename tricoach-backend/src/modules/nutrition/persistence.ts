@@ -179,13 +179,7 @@ export async function listMenuSelections(userId: string, from: Date, to: Date) {
   return selections.map(serializeMenuSelection);
 }
 
-/**
- * Aggregates every ingredient from the week's selected recipes into a
- * shopping list grouped by aisle (buildShoppingList). Includes PROPOSED
- * slots, not just CONFIRMED ones — a user planning their shopping trip
- * cares about what's on the menu regardless of whether they've hit
- * "Valider" on every slot yet.
- */
+/** Aggregates every ingredient from the week's selected recipes into a shopping list grouped by aisle (buildShoppingList). */
 export async function getShoppingList(userId: string, from: Date, to: Date) {
   const selections = await prisma.menuSelection.findMany({
     where: { userId, date: { gte: toDateOnly(from), lte: toDateOnly(to) } },
@@ -202,12 +196,7 @@ export async function getShoppingList(userId: string, from: Date, to: Date) {
   }));
 }
 
-/**
- * Any explicit write from the user — picking a recipe for an empty slot,
- * changing one, or hitting "Valider" on an auto-proposed one (same call,
- * same `recipeId`) — always lands as CONFIRMED. Only `proposeWeekForUser`
- * ever writes PROPOSED, so this is the one place that distinction matters.
- */
+/** Any explicit write from the user — picking a recipe for an empty slot or changing one — always lands as CONFIRMED. */
 export async function upsertMenuSelection(userId: string, date: Date, mealType: string, recipeId: string) {
   const dbMealType = mealTypeMap.toDb(mealType as Parameters<typeof mealTypeMap.toDb>[0]);
   const selection = await prisma.menuSelection.upsert({
@@ -217,15 +206,6 @@ export async function upsertMenuSelection(userId: string, date: Date, mealType: 
     include: { recipe: { include: { ingredients: true } } },
   });
   return serializeMenuSelection(selection);
-}
-
-/** Bulk "Tout valider" for a week — one query instead of N sequential upserts. Idempotent. */
-export async function confirmWeek(userId: string, weekStart: Date, weekEnd: Date): Promise<number> {
-  const result = await prisma.menuSelection.updateMany({
-    where: { userId, date: { gte: toDateOnly(weekStart), lte: toDateOnly(weekEnd) }, status: 'PROPOSED' },
-    data: { status: 'CONFIRMED' },
-  });
-  return result.count;
 }
 
 /** Users considered "using" nutrition — proven engagement, not just an unused profile default. */
@@ -263,8 +243,10 @@ async function fetchForecastForUser(userId: string, start: Date, end: Date): Pro
 
 /**
  * Generates and persists next week's breakfast/lunch/dinner proposals for one user
- * (called per-user by the scheduled trigger, plan §3/§4). Skips any slot
- * that already has a CONFIRMED selection; overwrites a stale PROPOSED one.
+ * (called per-user by the scheduled trigger, plan §3/§4), landing directly as
+ * CONFIRMED — no separate validation step. Skips any slot that already has a
+ * CONFIRMED selection (a prior manual pick, or an earlier run's proposal),
+ * so it never overwrites something the user already has on their menu.
  */
 export async function proposeWeekForUser(userId: string, weekStart: Date): Promise<number> {
   const start = toDateOnly(weekStart);
@@ -329,8 +311,8 @@ export async function proposeWeekForUser(userId: string, weekStart: Date): Promi
       const mealType = pick.mealType as MealType;
       return prisma.menuSelection.upsert({
         where: { userId_date_mealType: { userId, date: pick.date, mealType } },
-        update: { recipeId: pick.recipeId, status: 'PROPOSED' },
-        create: { userId, date: pick.date, mealType, recipeId: pick.recipeId, status: 'PROPOSED' },
+        update: { recipeId: pick.recipeId, status: 'CONFIRMED' },
+        create: { userId, date: pick.date, mealType, recipeId: pick.recipeId, status: 'CONFIRMED' },
       });
     })
   );

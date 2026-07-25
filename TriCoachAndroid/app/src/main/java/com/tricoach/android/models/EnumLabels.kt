@@ -217,15 +217,6 @@ fun GroceryAisle.labelResId(): Int = when (this) {
 val GroceryAisle.label: String
     @Composable get() = stringResource(labelResId())
 
-@StringRes
-fun MenuSelectionStatus.labelResId(): Int = when (this) {
-    MenuSelectionStatus.PROPOSED -> R.string.enum_menu_status_proposed
-    MenuSelectionStatus.CONFIRMED -> R.string.enum_menu_status_confirmed
-}
-
-val MenuSelectionStatus.label: String
-    @Composable get() = stringResource(labelResId())
-
 /** Calendar-style weekday numbering (Sunday=1...Saturday=7), ordered Monday-first for display — mirrors iOS's Weekday enum. */
 object Weekday {
     val orderedWeek = listOf(2, 3, 4, 5, 6, 7, 1)

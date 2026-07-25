@@ -1,7 +1,6 @@
 import { Router } from 'express';
 import { z } from 'zod';
 import {
-  confirmWeek,
   deleteMenuSelection,
   findRecipeById,
   findRecipes,
@@ -164,25 +163,6 @@ meRouter.delete('/menu/:date/:mealType', async (req, res, next) => {
     const deleted = await deleteMenuSelection(req.userId!, params.date, params.mealType);
     if (!deleted) throw new ApiError(404, 'menu_selection_not_found');
     res.status(204).send();
-  } catch (err) {
-    if (err instanceof z.ZodError) {
-      res.status(400).json({ error: 'invalid_request', details: err.issues });
-      return;
-    }
-    next(err);
-  }
-});
-
-const confirmWeekSchema = z.object({ weekStart: z.coerce.date() });
-
-/** Bulk "Tout valider" for one week — flips every PROPOSED slot in range to CONFIRMED in a single query. */
-meRouter.post('/menu/confirm-week', async (req, res, next) => {
-  try {
-    const body = confirmWeekSchema.parse(req.body);
-    const start = toDateOnly(body.weekStart);
-    const end = new Date(start.getTime() + 6 * 86_400_000);
-    const confirmed = await confirmWeek(req.userId!, start, end);
-    res.json({ confirmed });
   } catch (err) {
     if (err instanceof z.ZodError) {
       res.status(400).json({ error: 'invalid_request', details: err.issues });

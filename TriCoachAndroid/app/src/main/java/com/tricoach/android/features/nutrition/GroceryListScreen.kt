@@ -75,7 +75,7 @@ class GroceryListState(private val container: AppContainer) {
     }
 }
 
-/** Read-only shopping list grouped by aisle — includes both proposed and confirmed menu selections for the week. Mirrors iOS's GroceryListView. */
+/** Read-only shopping list grouped by aisle for the week's menu selections. Mirrors iOS's GroceryListView. */
 @Composable
 fun GroceryListScreen(container: AppContainer) {
     val state = remember { GroceryListState(container) }

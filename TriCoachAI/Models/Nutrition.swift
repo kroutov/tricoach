@@ -135,23 +135,10 @@ struct SuggestedRecipesResponse: Codable {
     let recipes: [Recipe]
 }
 
-enum MenuSelectionStatus: String, Codable, CaseIterable, Identifiable, Hashable {
-    case proposed, confirmed
-    var id: String { rawValue }
-
-    var label: String {
-        switch self {
-        case .proposed: return "À valider"
-        case .confirmed: return "Confirmé"
-        }
-    }
-}
-
 struct MenuSelection: Codable, Identifiable, Equatable, Hashable {
     let id: UUID
     let date: Date
     let mealType: MealType
-    let status: MenuSelectionStatus
     let recipe: Recipe
 }
 

@@ -14,7 +14,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -29,16 +28,13 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.tricoach.android.R
 import com.tricoach.android.app.AppContainer
-import com.tricoach.android.core.network.ConfirmWeekRequest
 import com.tricoach.android.core.network.SetMenuSelectionRequest
 import com.tricoach.android.core.network.apiValue
-import com.tricoach.android.features.shared.CardBox
 import com.tricoach.android.features.shared.DateNavHeader
 import com.tricoach.android.features.shared.RecipeRow
 import com.tricoach.android.features.shared.addDays
@@ -48,7 +44,6 @@ import com.tricoach.android.features.shared.mondayOfWeek
 import com.tricoach.android.features.shared.parseIsoDate
 import com.tricoach.android.models.MealType
 import com.tricoach.android.models.MenuSelection
-import com.tricoach.android.models.MenuSelectionStatus
 import com.tricoach.android.models.Recipe
 import com.tricoach.android.models.kcalPerServing
 import com.tricoach.android.models.label
@@ -70,8 +65,6 @@ class WeeklyMenuState(private val container: AppContainer) {
     var isLoading by mutableStateOf(true)
         private set
     var errorMessage by mutableStateOf<String?>(null)
-    var isConfirmingWeek by mutableStateOf(false)
-        private set
 
     suspend fun load() {
         isLoading = true
@@ -97,7 +90,6 @@ class WeeklyMenuState(private val container: AppContainer) {
         weekStart = mondayOfWeek(LocalDate.now())
     }
 
-    /** Also used to confirm a single proposed slot: the backend's PUT always forces status=confirmed, so re-sending the same recipeId is how a lone slot gets validated (no dedicated single-slot-confirm endpoint exists). */
     suspend fun assignRecipe(date: LocalDate, mealType: MealType, recipeId: String) {
         errorMessage = null
         try {
@@ -118,18 +110,6 @@ class WeeklyMenuState(private val container: AppContainer) {
         }
     }
 
-    suspend fun confirmWeek() {
-        errorMessage = null
-        isConfirmingWeek = true
-        try {
-            container.nutritionApi.confirmWeek(ConfirmWeekRequest(weekStart.toString()))
-            load()
-        } catch (e: Exception) {
-            errorMessage = container.context.getString(R.string.weekly_menu_error_confirm_failed, e.message)
-        } finally {
-            isConfirmingWeek = false
-        }
-    }
 }
 
 /** 7-day × 4-meal grid for the current week — mirrors iOS's WeeklyMenuView. Empty/change slot picking is a local dialog (see RecipePickerDialog), not a nav push to the Recipes tab. */
@@ -145,7 +125,6 @@ fun WeeklyMenuScreen(container: AppContainer) {
     val selectionsByKey = remember(state.selections) {
         state.selections.associateBy { parseIsoDate(it.date) to it.mealType }
     }
-    val proposedCount = state.selections.count { it.status == MenuSelectionStatus.PROPOSED }
 
     Column(modifier = Modifier.fillMaxSize()) {
         val (rangeStartPart, rangeEndPart) = formatWeekRangeParts(state.weekStart, addDays(state.weekStart, 6))
@@ -159,21 +138,6 @@ fun WeeklyMenuScreen(container: AppContainer) {
             currentPeriodLabel = stringResource(R.string.weekly_menu_current_week_range, rangeStartPart, rangeEndPart),
             modifier = Modifier.padding(vertical = 8.dp),
         )
-
-        if (proposedCount > 0) {
-            CardBox(modifier = Modifier.padding(horizontal = 16.dp)) {
-                Text(pluralStringResource(R.plurals.weekly_menu_proposed_count, proposedCount, proposedCount))
-                Spacer(Modifier.height(8.dp))
-                Button(
-                    onClick = { scope.launch { state.confirmWeek() } },
-                    enabled = !state.isConfirmingWeek,
-                    modifier = Modifier.fillMaxWidth(),
-                ) {
-                    Text(if (state.isConfirmingWeek) "…" else stringResource(R.string.weekly_menu_confirm_all))
-                }
-            }
-            Spacer(Modifier.height(8.dp))
-        }
 
         Column(
             modifier = Modifier
@@ -216,7 +180,6 @@ fun WeeklyMenuScreen(container: AppContainer) {
             SlotDetailDialog(
                 selection = selection,
                 onDismiss = { viewingSlot = null },
-                onConfirm = { scope.launch { state.assignRecipe(slot.date, slot.mealType, selection.recipe.id); viewingSlot = null } },
                 onChange = { viewingSlot = null; pickingSlot = slot },
                 onRemove = { scope.launch { state.removeSelection(slot.date, slot.mealType); viewingSlot = null } },
             )
@@ -246,13 +209,6 @@ private fun FilledSlotRow(selection: MenuSelection, onClick: () -> Unit) {
                 Text("$it kcal", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
         }
-        if (selection.status == MenuSelectionStatus.PROPOSED) {
-            Text(
-                stringResource(R.string.enum_menu_status_proposed),
-                style = MaterialTheme.typography.labelSmall,
-                color = MaterialTheme.colorScheme.primary,
-            )
-        }
     }
 }
 
@@ -276,7 +232,6 @@ private fun EmptySlotRow(mealType: MealType, onClick: () -> Unit) {
 private fun SlotDetailDialog(
     selection: MenuSelection,
     onDismiss: () -> Unit,
-    onConfirm: () -> Unit,
     onChange: () -> Unit,
     onRemove: () -> Unit,
 ) {
@@ -287,14 +242,7 @@ private fun SlotDetailDialog(
             val kcalSuffix = selection.recipe.kcalPerServing()?.let { " · $it kcal" } ?: ""
             Text("${selection.mealType.label} · ${selection.recipe.effortProfile.label}$kcalSuffix")
         },
-        confirmButton = {
-            Row {
-                if (selection.status == MenuSelectionStatus.PROPOSED) {
-                    TextButton(onClick = onConfirm) { Text(stringResource(R.string.weekly_menu_action_confirm)) }
-                }
-                TextButton(onClick = onChange) { Text(stringResource(R.string.weekly_menu_action_change)) }
-            }
-        },
+        confirmButton = { TextButton(onClick = onChange) { Text(stringResource(R.string.weekly_menu_action_change)) } },
         dismissButton = { TextButton(onClick = onRemove) { Text(stringResource(R.string.weekly_menu_action_remove)) } },
     )
 }

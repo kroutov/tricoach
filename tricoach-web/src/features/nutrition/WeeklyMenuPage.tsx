@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import {
-  confirmWeek,
   deleteMenuSelection,
   getMenuSelections,
   getSuggestedRecipes,
@@ -12,14 +11,7 @@ import {
   type Recipe,
 } from '../../api/nutrition';
 import { addDays, mondayOfWeek, toDayString } from '../../lib/dateOnly';
-import {
-  MEAL_TYPE_OPTIONS,
-  effortProfileColorVar,
-  effortProfileLabel,
-  mealTypeLabel,
-  menuSelectionStatusLabel,
-  type MealType,
-} from '../../lib/enumLabels';
+import { MEAL_TYPE_OPTIONS, effortProfileColorVar, effortProfileLabel, mealTypeLabel, type MealType } from '../../lib/enumLabels';
 import { Card } from '../../components/Card';
 import { PillBadge } from '../../components/PillBadge';
 import { Modal } from '../../components/Modal';
@@ -121,24 +113,6 @@ export function WeeklyMenuPage() {
     onError: () => setErrorMessage('Impossible de retirer ce menu.'),
   });
 
-  const validateSlotMutation = useMutation({
-    mutationFn: ({ date, mealType, recipeId }: { date: string; mealType: MealType; recipeId: string }) =>
-      setMenuSelection(date, mealType, recipeId),
-    onSuccess: () => {
-      invalidate();
-      setViewing(null);
-    },
-    onError: () => setErrorMessage('Impossible de valider ce menu.'),
-  });
-
-  const confirmWeekMutation = useMutation({
-    mutationFn: () => confirmWeek(from),
-    onSuccess: invalidate,
-    onError: () => setErrorMessage('Impossible de valider la semaine.'),
-  });
-
-  const proposedCount = (selections ?? []).filter((s) => s.status === 'proposed').length;
-
   return (
     <div className="mx-auto max-w-4xl space-y-4 p-4">
       <h1 className="text-xl font-bold text-primary-text">Menu de la semaine</h1>
@@ -169,25 +143,6 @@ export function WeeklyMenuPage() {
           ›
         </button>
       </div>
-
-      {proposedCount > 0 && (
-        <div className="flex items-center justify-between rounded-control bg-brand/10 px-3 py-2">
-          <p className="text-sm text-primary-text">
-            {proposedCount} recette{proposedCount > 1 ? 's' : ''} proposée{proposedCount > 1 ? 's' : ''} pour cette semaine — à valider
-          </p>
-          <button
-            type="button"
-            onClick={() => {
-              setErrorMessage(null);
-              confirmWeekMutation.mutate();
-            }}
-            disabled={confirmWeekMutation.isPending}
-            className="rounded-control bg-brand px-3 py-1.5 text-sm font-semibold text-white disabled:opacity-60"
-          >
-            Tout valider
-          </button>
-        </div>
-      )}
 
       {isLoading ? (
         <p className="text-secondary-text">Chargement…</p>
@@ -222,14 +177,9 @@ export function WeeklyMenuPage() {
                             type="button"
                             onClick={() => setViewing(selection)}
                             className="block w-full text-left"
-                            aria-label={`${mealTypeLabel[mealType]} du ${dayString} : ${selection.recipe.title}${selection.status === 'proposed' ? ' (à valider)' : ''}`}
+                            aria-label={`${mealTypeLabel[mealType]} du ${dayString} : ${selection.recipe.title}`}
                           >
-                            <Card
-                              className={`space-y-1 p-2 ${selection.status === 'proposed' ? 'border border-dashed border-brand/60' : ''}`}
-                            >
-                              {selection.status === 'proposed' && (
-                                <PillBadge text={menuSelectionStatusLabel.proposed} tint="var(--color-brand)" />
-                              )}
+                            <Card className="space-y-1 p-2">
                               <p className="text-xs font-medium leading-tight text-primary-text">{selection.recipe.title}</p>
                               <div className="flex flex-wrap gap-1">
                                 <PillBadge
@@ -287,21 +237,8 @@ export function WeeklyMenuPage() {
               {kcalPerServing(viewing.recipe) != null && (
                 <PillBadge text={`${kcalPerServing(viewing.recipe)} kcal`} tint="var(--color-secondary-text)" />
               )}
-              {viewing.status === 'proposed' && <PillBadge text={menuSelectionStatusLabel.proposed} tint="var(--color-brand)" />}
             </div>
             <div className="flex gap-2">
-              {viewing.status === 'proposed' && (
-                <button
-                  type="button"
-                  onClick={() => {
-                    setErrorMessage(null);
-                    validateSlotMutation.mutate({ date: viewing.date.slice(0, 10), mealType: viewing.mealType, recipeId: viewing.recipe.id });
-                  }}
-                  className="flex-1 rounded-control bg-brand py-2 text-sm font-semibold text-white"
-                >
-                  Valider
-                </button>
-              )}
               <button
                 type="button"
                 onClick={() => {

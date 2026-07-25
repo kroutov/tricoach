@@ -64,23 +64,7 @@ final class NutritionAPI {
         try await client.sendNoContent(.delete, "me/nutrition/menu/\(day)/\(mealType.rawValue)")
     }
 
-    private struct ConfirmWeekRequest: Encodable {
-        let weekStart: String
-    }
-
-    private struct ConfirmWeekResponse: Decodable {
-        let confirmed: Int
-    }
-
-    /// Bulk-confirms every PROPOSED slot in the week starting `weekStart` — mirrors the web "Tout valider" button.
-    @discardableResult
-    func confirmWeek(weekStart: Date) async throws -> Int {
-        let body = ConfirmWeekRequest(weekStart: nutritionDayFormatter.string(from: weekStart))
-        let response: ConfirmWeekResponse = try await client.send(.post, "me/nutrition/menu/confirm-week", body: body)
-        return response.confirmed
-    }
-
-    /// Ingredients from every selected recipe in [from, to], merged and grouped by aisle — includes PROPOSED slots, not just CONFIRMED.
+    /// Ingredients from every selected recipe in [from, to], merged and grouped by aisle.
     func fetchShoppingList(from: Date, to: Date) async throws -> ShoppingListResponse {
         try await client.get(
             "me/nutrition/menu/shopping-list",

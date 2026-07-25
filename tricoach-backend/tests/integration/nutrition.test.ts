@@ -353,39 +353,6 @@ describe('menu selection', () => {
   });
 });
 
-describe('POST /me/nutrition/menu/confirm-week', () => {
-  it('confirms every proposed slot in the week and is idempotent', async () => {
-    await seedRecipes();
-    const { token, user } = await devLogin(app, { appleUserId: 'confirm-week' });
-    const recipe = await prisma.recipe.findFirstOrThrow({ where: { title: 'Poulet basquaise' } });
-    const weekStart = nextMondayFrom(new Date());
-    const weekStartStr = weekStart.toISOString().slice(0, 10);
-
-    await prisma.menuSelection.create({
-      data: { userId: user.id, date: weekStart, mealType: 'LUNCH', recipeId: recipe.id, status: 'PROPOSED' },
-    });
-
-    const confirmRes = await request(app)
-      .post('/api/v1/me/nutrition/menu/confirm-week')
-      .set('Authorization', `Bearer ${token}`)
-      .send({ weekStart: weekStartStr });
-    expect(confirmRes.status).toBe(200);
-    expect(confirmRes.body.confirmed).toBe(1);
-
-    const weekEndStr = new Date(weekStart.getTime() + 6 * 86_400_000).toISOString().slice(0, 10);
-    const menu = await request(app)
-      .get(`/api/v1/me/nutrition/menu?from=${weekStartStr}&to=${weekEndStr}`)
-      .set('Authorization', `Bearer ${token}`);
-    expect(menu.body[0].status).toBe('confirmed');
-
-    const secondConfirm = await request(app)
-      .post('/api/v1/me/nutrition/menu/confirm-week')
-      .set('Authorization', `Bearer ${token}`)
-      .send({ weekStart: weekStartStr });
-    expect(secondConfirm.body.confirmed).toBe(0);
-  });
-});
-
 describe('GET /me/nutrition/menu/shopping-list', () => {
   it('aggregates ingredients across the week, merging same name+unit and grouping by aisle', async () => {
     await seedRecipes();
@@ -457,7 +424,7 @@ describe('POST /internal/nutrition/propose-week', () => {
     expect(wrongSecret.status).toBe(401);
   });
 
-  it('proposes next week breakfast+lunch+dinner for onboarded users, skipping already-confirmed slots', async () => {
+  it('confirms next week breakfast+lunch+dinner for onboarded users, skipping already-confirmed slots', async () => {
     await seedRecipes();
     const { token: eligibleToken, user: eligibleUser } = await devLogin(app, { appleUserId: 'propose-week-eligible' });
     const { token: freshToken } = await devLogin(app, { appleUserId: 'propose-week-fresh' });
@@ -485,16 +452,13 @@ describe('POST /internal/nutrition/propose-week', () => {
       .get(`/api/v1/me/nutrition/menu?from=${weekStartStr}&to=${weekEndStr}`)
       .set('Authorization', `Bearer ${eligibleToken}`);
 
-    // 7 days x (breakfast + lunch + dinner) = 21 slots, 1 already confirmed -> 20 freshly proposed.
+    // 7 days x (breakfast + lunch + dinner) = 21 slots, all confirmed (1 was already, 20 freshly by the job).
     expect(menu.body).toHaveLength(21);
+    expect(menu.body.every((s: any) => s.status === 'confirmed')).toBe(true);
     const monday = menu.body.filter((s: any) => s.date.slice(0, 10) === weekStartStr);
     const mondayDinner = monday.find((s: any) => s.mealType === 'dinner');
-    expect(mondayDinner.status).toBe('confirmed');
     expect(mondayDinner.recipe.title).toBe('Bowl léger');
-    const mondayLunch = monday.find((s: any) => s.mealType === 'lunch');
-    expect(mondayLunch.status).toBe('proposed');
     const mondayBreakfast = monday.find((s: any) => s.mealType === 'breakfast');
-    expect(mondayBreakfast.status).toBe('proposed');
     expect(mondayBreakfast.recipe.title).toBe('Porridge avoine');
 
     // Never completed onboarding -> excluded from the run entirely.

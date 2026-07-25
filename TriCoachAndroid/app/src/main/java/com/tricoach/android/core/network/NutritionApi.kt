@@ -11,18 +11,11 @@ import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.PUT
-import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
 
 @Serializable
 data class SetMenuSelectionRequest(val recipeId: String)
-
-@Serializable
-data class ConfirmWeekRequest(val weekStart: String)
-
-@Serializable
-data class ConfirmWeekResponse(val confirmed: Int)
 
 /**
  * Retrofit @Query/@Path parameters serialize via toString(), not through the
@@ -83,9 +76,6 @@ interface NutritionApi {
 
     @DELETE("me/nutrition/menu/{date}/{mealType}")
     suspend fun deleteMenuSelection(@Path("date") date: String, @Path("mealType") mealType: String)
-
-    @POST("me/nutrition/menu/confirm-week")
-    suspend fun confirmWeek(@Body body: ConfirmWeekRequest): ConfirmWeekResponse
 
     @GET("me/nutrition/menu/shopping-list")
     suspend fun fetchShoppingList(@Query("from") from: String, @Query("to") to: String): ShoppingListResponse

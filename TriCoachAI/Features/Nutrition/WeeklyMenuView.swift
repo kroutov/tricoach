@@ -38,21 +38,6 @@ struct WeeklyMenuView: View {
 
     var body: some View {
         List {
-            if viewModel.proposedCount > 0 {
-                Section {
-                    HStack {
-                        Text("\(viewModel.proposedCount) recette\(viewModel.proposedCount > 1 ? "s" : "") proposée\(viewModel.proposedCount > 1 ? "s" : "") — à valider")
-                            .font(TCFont.caption)
-                            .foregroundStyle(TCColor.primaryText)
-                        Spacer()
-                        Button("Tout valider") {
-                            Task { await viewModel.confirmWeek() }
-                        }
-                        .font(TCFont.caption.weight(.semibold))
-                    }
-                }
-            }
-
             ForEach(viewModel.days, id: \.self) { day in
                 Section(dayHeaderFormatter.string(from: day).capitalized) {
                     ForEach(MealType.allCases) { mealType in
@@ -117,12 +102,6 @@ struct WeeklyMenuView: View {
         }) { selection in
             ViewingSlotSheet(
                 selection: selection,
-                onValidate: selection.status == .proposed ? {
-                    Task {
-                        await viewModel.pick(selection.recipe, date: selection.date, mealType: selection.mealType)
-                        viewingSelection = nil
-                    }
-                } : nil,
                 onChange: {
                     slotToOpenAfterDismiss = MenuSlot(date: selection.date, mealType: selection.mealType)
                     viewingSelection = nil
@@ -149,9 +128,6 @@ struct WeeklyMenuView: View {
                     VStack(alignment: .trailing, spacing: TCSpacing.xs) {
                         Text(selection.recipe.title).foregroundStyle(TCColor.primaryText)
                         HStack(spacing: TCSpacing.xs) {
-                            if selection.status == .proposed {
-                                PillBadge(text: MenuSelectionStatus.proposed.label, tint: TCColor.brand)
-                            }
                             PillBadge(text: selection.recipe.effortProfile.label, tint: TCColor.color(for: selection.recipe.effortProfile))
                             if let kcal = selection.recipe.kcalPerServing {
                                 PillBadge(text: "\(kcal) kcal", tint: TCColor.secondaryText)
@@ -251,7 +227,6 @@ private struct SuggestionSheet: View {
 
 private struct ViewingSlotSheet: View {
     let selection: MenuSelection
-    var onValidate: (() -> Void)?
     var onChange: () -> Void
     var onRemove: () -> Void
     @Environment(\.dismiss) private var dismiss
@@ -262,9 +237,6 @@ private struct ViewingSlotSheet: View {
                 RecipeDetailSections(recipe: selection.recipe)
 
                 Section {
-                    if let onValidate {
-                        Button("Valider", action: onValidate)
-                    }
                     Button("Changer", action: onChange)
                     Button("Retirer", role: .destructive, action: onRemove)
                 }
