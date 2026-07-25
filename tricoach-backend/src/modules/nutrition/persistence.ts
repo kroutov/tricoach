@@ -229,13 +229,19 @@ export async function confirmWeek(userId: string, weekStart: Date, weekEnd: Date
 }
 
 /** Users considered "using" nutrition — proven engagement, not just an unused profile default. */
-export async function listUserIdsWithMenuHistory(): Promise<string[]> {
-  const rows = await prisma.menuSelection.findMany({ distinct: ['userId'], select: { userId: true } });
-  return rows.map((r) => r.userId);
+/**
+ * Users eligible for the Saturday auto-proposal — anyone who has finished
+ * onboarding, not just users who already have menu history. Gating on prior
+ * history was a bootstrap gap: a first-time user could never get an initial
+ * proposal, since there was nothing to consider them "engaged" from yet.
+ */
+export async function listUserIdsForWeeklyProposal(): Promise<string[]> {
+  const rows = await prisma.user.findMany({ where: { hasCompletedOnboarding: true }, select: { id: true } });
+  return rows.map((r) => r.id);
 }
 
 const RECENT_USE_LOOKBACK_DAYS = 28;
-const PROPOSAL_MEAL_TYPES: Array<Parameters<typeof mealTypeMap.toDb>[0]> = ['lunch', 'dinner'];
+const PROPOSAL_MEAL_TYPES: Array<Parameters<typeof mealTypeMap.toDb>[0]> = ['breakfast', 'lunch', 'dinner'];
 
 /**
  * Best-effort daily max-temp forecast for a user's saved location, keyed by
@@ -256,7 +262,7 @@ async function fetchForecastForUser(userId: string, start: Date, end: Date): Pro
 }
 
 /**
- * Generates and persists next week's lunch/dinner proposals for one user
+ * Generates and persists next week's breakfast/lunch/dinner proposals for one user
  * (called per-user by the scheduled trigger, plan §3/§4). Skips any slot
  * that already has a CONFIRMED selection; overwrites a stale PROPOSED one.
  */

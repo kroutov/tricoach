@@ -74,6 +74,18 @@ async function seedRecipes() {
       ingredients: { create: [{ name: 'Quinoa', amount: 150, unit: 'g', aisle: 'GROCERY' }] },
     },
   });
+  await prisma.recipe.create({
+    data: {
+      title: 'Porridge avoine',
+      mealTypes: ['BREAKFAST'],
+      categories: ['VEGETARIAN'],
+      dietaryTags: ['VEGETARIAN', 'CHICKEN_ONLY', 'PESCATARIAN', 'OMNIVORE'],
+      effortProfile: 'CARB_LOAD',
+      prepTime: 'UNDER_15',
+      instructions: "Cuire les flocons d'avoine dans du lait.",
+      ingredients: { create: [{ name: "Flocons d'avoine", amount: 60, unit: 'g', aisle: 'GROCERY' }] },
+    },
+  });
 }
 
 /** Minimal ACTIVE plan with one controllable workout, for effort-profile-dependent tests. */
@@ -158,7 +170,12 @@ describe('GET /nutrition/recipes', () => {
     const pescatarian = await request(app)
       .get('/api/v1/nutrition/recipes?dietaryTag=pescatarian')
       .set('Authorization', `Bearer ${token}`);
-    expect(pescatarian.body.map((r: any) => r.title).sort()).toEqual(['Bowl léger', 'Pâtes riches en glucides', 'Salade de quinoa']);
+    expect(pescatarian.body.map((r: any) => r.title).sort()).toEqual([
+      'Bowl léger',
+      'Porridge avoine',
+      'Pâtes riches en glucides',
+      'Salade de quinoa',
+    ]);
 
     const baked = await request(app).get('/api/v1/nutrition/recipes?category=ovenBaked').set('Authorization', `Bearer ${token}`);
     expect(baked.body).toHaveLength(1);
@@ -440,19 +457,14 @@ describe('POST /internal/nutrition/propose-week', () => {
     expect(wrongSecret.status).toBe(401);
   });
 
-  it('proposes next week lunch+dinner only for users with prior menu history, skipping already-confirmed slots', async () => {
+  it('proposes next week breakfast+lunch+dinner for onboarded users, skipping already-confirmed slots', async () => {
     await seedRecipes();
     const { token: eligibleToken, user: eligibleUser } = await devLogin(app, { appleUserId: 'propose-week-eligible' });
     const { token: freshToken } = await devLogin(app, { appleUserId: 'propose-week-fresh' });
-    void eligibleUser;
 
-    const today = new Date().toISOString().slice(0, 10);
-    const chicken = await prisma.recipe.findFirstOrThrow({ where: { title: 'Poulet basquaise' } });
-    // One manual pick makes this user "eligible" (proven menu history).
-    await request(app)
-      .put(`/api/v1/me/nutrition/menu/${today}/lunch`)
-      .set('Authorization', `Bearer ${eligibleToken}`)
-      .send({ recipeId: chicken.id });
+    // Completing onboarding makes this user eligible, even with zero prior menu picks
+    // (the bootstrap gap: a first-time user must be seeded, not just returning ones).
+    await prisma.user.update({ where: { id: eligibleUser.id }, data: { hasCompletedOnboarding: true } });
 
     const weekStart = nextMondayFrom(new Date());
     const weekStartStr = weekStart.toISOString().slice(0, 10);
@@ -473,15 +485,19 @@ describe('POST /internal/nutrition/propose-week', () => {
       .get(`/api/v1/me/nutrition/menu?from=${weekStartStr}&to=${weekEndStr}`)
       .set('Authorization', `Bearer ${eligibleToken}`);
 
-    // 7 days x (lunch + dinner) = 14 slots, 1 already confirmed -> 13 freshly proposed.
-    expect(menu.body).toHaveLength(14);
+    // 7 days x (breakfast + lunch + dinner) = 21 slots, 1 already confirmed -> 20 freshly proposed.
+    expect(menu.body).toHaveLength(21);
     const monday = menu.body.filter((s: any) => s.date.slice(0, 10) === weekStartStr);
     const mondayDinner = monday.find((s: any) => s.mealType === 'dinner');
     expect(mondayDinner.status).toBe('confirmed');
     expect(mondayDinner.recipe.title).toBe('Bowl léger');
     const mondayLunch = monday.find((s: any) => s.mealType === 'lunch');
     expect(mondayLunch.status).toBe('proposed');
+    const mondayBreakfast = monday.find((s: any) => s.mealType === 'breakfast');
+    expect(mondayBreakfast.status).toBe('proposed');
+    expect(mondayBreakfast.recipe.title).toBe('Porridge avoine');
 
+    // Never completed onboarding -> excluded from the run entirely.
     const freshUserMenu = await request(app)
       .get(`/api/v1/me/nutrition/menu?from=${weekStartStr}&to=${weekEndStr}`)
       .set('Authorization', `Bearer ${freshToken}`);
@@ -492,14 +508,8 @@ describe('POST /internal/nutrition/propose-week', () => {
     await seedRecipes();
     const { token, user } = await devLogin(app, { appleUserId: 'propose-week-weather' });
 
-    // One manual pick makes this user eligible; a location makes the forecast fetch fire.
-    const chicken = await prisma.recipe.findFirstOrThrow({ where: { title: 'Poulet basquaise' } });
-    const today = new Date().toISOString().slice(0, 10);
-    await request(app)
-      .put(`/api/v1/me/nutrition/menu/${today}/dinner`)
-      .set('Authorization', `Bearer ${token}`)
-      .send({ recipeId: chicken.id });
-    await prisma.user.update({ where: { id: user.id }, data: { latitude: 45.75, longitude: 4.85 } });
+    // Onboarding makes this user eligible; a location makes the forecast fetch fire.
+    await prisma.user.update({ where: { id: user.id }, data: { hasCompletedOnboarding: true, latitude: 45.75, longitude: 4.85 } });
 
     const weekStart = nextMondayFrom(new Date());
     const weekStartStr = weekStart.toISOString().slice(0, 10);

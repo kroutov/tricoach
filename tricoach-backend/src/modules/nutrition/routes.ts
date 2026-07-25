@@ -9,7 +9,7 @@ import {
   getDietaryPreference,
   getShoppingList,
   listMenuSelections,
-  listUserIdsWithMenuHistory,
+  listUserIdsForWeeklyProposal,
   proposeWeekForUser,
   serializeRecipe,
   setDietaryPreference,
@@ -208,7 +208,7 @@ function nextMonday(from: Date): Date {
 internalRouter.post('/propose-week', async (req, res, next) => {
   try {
     const weekStart = nextMonday(toDateOnly(new Date()));
-    const userIds = await listUserIdsWithMenuHistory();
+    const userIds = await listUserIdsForWeeklyProposal();
     let selectionsProposed = 0;
     for (const userId of userIds) {
       selectionsProposed += await proposeWeekForUser(userId, weekStart);
