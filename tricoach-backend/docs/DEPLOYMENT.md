@@ -2,7 +2,8 @@
 
 ## Déploiement réel actuel
 
-- **Backend** : Render (Web Service + PostgreSQL managé, plans gratuits) — `https://tricoach-9ob8.onrender.com`. ⚠️ Le Postgres gratuit de Render expire après 30 jours ; il faudra upgrader ou reprovisionner + remigrer avant l'expiration.
+- **Backend** : Render (Web Service, plan gratuit) — `https://tricoach-9ob8.onrender.com`.
+- **Base de données** : Neon (Postgres serverless, plan gratuit permanent — pas d'expiration après 30 jours contrairement au Postgres géré par Render, qui a servi jusqu'à son expiration). Compute en scale-to-zero après inactivité (données conservées, juste un cold-start de ~1-2s à la reconnexion) ; limites du plan gratuit : 0.5 Go de stockage, 100 heures de calcul/mois, 5 Go d'egress/mois.
 - **Web** : Vercel — `https://tricoach-ten.vercel.app`.
 - **Dépôt** : `https://github.com/kroutov/tricoach` (branche `main`).
 - Vérifié de bout en bout dans un vrai navigateur contre les deux services réels : inscription → onboarding complet → génération réelle d'un plan 12 semaines → dashboard/calendrier/profil, CORS entre les deux domaines confirmé, flux ICS calendrier généré avec le vrai token.
@@ -59,7 +60,7 @@ Le `--include=dev` force l'installation malgré `NODE_ENV=production` ; référe
 ### 4. Après le premier déploiement
 
 - **Vérifier** : `GET https://<host>/health` → `{"status":"ok"}`.
-- **`DATABASE_URL` malformée** : si Prisma refuse de démarrer avec `Error validating datasource` / `P1012` (l'URL ne commence pas par `postgresql://`), la variable d'environnement est vide ou mal collée — sur Render, copier l'**Internal Database URL** depuis l'onglet Connect de l'instance Postgres (pas l'External, qui exige `sslmode=require` en plus).
+- **`DATABASE_URL` malformée** : si Prisma refuse de démarrer avec `Error validating datasource` / `P1012` (l'URL ne commence pas par `postgresql://`), la variable d'environnement est vide ou mal collée — sur Render, coller la chaîne de connexion **pooled** copiée depuis l'onglet Connect du projet Neon (`?sslmode=require&channel_binding=require`), pas la connexion directe.
 - **Enregistrer le webhook Strava** (une fois, maintenant que l'URL est publique) :
   ```bash
   curl -X POST https://www.strava.com/api/v3/push_subscriptions \
